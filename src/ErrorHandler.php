@@ -7,7 +7,6 @@
 
 namespace yii\console;
 
-use Yii;
 use yii\console\exceptions\UnknownCommandException;
 use yii\exceptions\ErrorException;
 use yii\exceptions\UserException;
@@ -79,8 +78,8 @@ class ErrorHandler extends \yii\base\ErrorHandler
     {
         $stream = (PHP_SAPI === 'cli') ? \STDERR : \STDOUT;
         // try controller first to allow check for --color switch
-        if (Yii::$app->controller instanceof \yii\console\Controller && Yii::$app->controller->isColorEnabled($stream)
-            || Yii::$app instanceof \yii\console\Application && Console::streamSupportsAnsiColors($stream)) {
+        if ($this->app->controller instanceof Controller && $this->app->controller->isColorEnabled($stream)
+            || $this->app instanceof Application && Console::streamSupportsAnsiColors($stream)) {
             $message = Console::ansiFormat($message, $format);
         }
 
