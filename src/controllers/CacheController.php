@@ -143,7 +143,7 @@ class CacheController extends Controller
      * @param string $db id connection component
      * @return int exit code
      * @throws Exception
-     * @throws \yii\base\InvalidConfigException
+     * @throws \yii\exceptions\InvalidConfigException
      *
      * @since 2.0.1
      */

@@ -5,8 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console;
+namespace yii\console\exceptions;
 
+use yii\console\Application;
 use yii\console\controllers\HelpController;
 
 /**

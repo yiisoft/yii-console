@@ -7,7 +7,7 @@
 
 namespace yii\console;
 
-use yii\base\UserException;
+use yii\exceptions\UserException;
 
 /**
  * Exception represents an exception caused by incorrect usage of a console command.

@@ -8,8 +8,8 @@
 namespace yii\console\controllers;
 
 use Yii;
-use yii\base\InvalidConfigException;
-use yii\base\InvalidArgumentException;
+use yii\exceptions\InvalidConfigException;
+use yii\exceptions\InvalidArgumentException;
 use yii\console\Controller;
 use yii\console\Exception;
 use yii\console\ExitCode;

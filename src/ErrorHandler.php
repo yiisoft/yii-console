@@ -8,8 +8,9 @@
 namespace yii\console;
 
 use Yii;
-use yii\base\ErrorException;
-use yii\base\UserException;
+use yii\console\exceptions\UnknownCommandException;
+use yii\exceptions\ErrorException;
+use yii\exceptions\UserException;
 use yii\helpers\Console;
 
 /**

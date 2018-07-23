@@ -8,7 +8,8 @@
 namespace yii\console;
 
 use Yii;
-use yii\base\InvalidRouteException;
+use yii\console\exceptions\UnknownCommandException;
+use yii\exceptions\InvalidRouteException;
 
 // define STDIN, STDOUT and STDERR if the PHP SAPI did not define them (e.g. creating console application in web env)
 // http://php.net/manual/en/features.commandline.io-streams.php

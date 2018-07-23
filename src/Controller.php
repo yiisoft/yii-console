@@ -10,7 +10,7 @@ namespace yii\console;
 use Yii;
 use yii\base\Action;
 use yii\base\InlineAction;
-use yii\base\InvalidRouteException;
+use yii\exceptions\InvalidRouteException;
 use yii\helpers\Console;
 use yii\helpers\Inflector;
 
