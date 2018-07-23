@@ -65,6 +65,12 @@
     "require": {
         "yiisoft/core": "^3.0 || dev-master"
     },
+    "require-dev": {
+        "hiqdev/composer-config-plugin": "3.0.x-dev",
+        "yiisoft/di": "^1.0 || dev-master",
+        "yiisoft/log": "^1.0 || dev-master",
+        "yiisoft/cache": "^1.0 || dev-master"
+    },
     "autoload": {
         "psr-4": {
             "yii\\console\\": "src"
