@@ -7,7 +7,6 @@
 
 namespace yii\console;
 
-use Yii;
 use yii\console\exceptions\UnknownCommandException;
 use yii\exceptions\InvalidRouteException;
 
@@ -91,7 +90,7 @@ class Application extends \yii\base\Application
             foreach ($_SERVER['argv'] as $param) {
                 if (strpos($param, $option) !== false) {
                     $path = substr($param, strlen($option));
-                    if (!empty($path) && is_file($file = Yii::getAlias($path))) {
+                    if (!empty($path) && is_file($file = $this->app->getAlias($path))) {
                         return require $file;
                     }
 
