@@ -7,12 +7,12 @@
 
 namespace yii\console\controllers;
 
-use Yii;
 use yii\base\Application;
 use yii\console\Controller;
 use yii\console\Exception;
 use yii\helpers\Console;
 use yii\helpers\Inflector;
+use yii\helpers\Yii;
 
 /**
  * Provides help information about console commands.
@@ -49,7 +49,7 @@ class HelpController extends Controller
     public function actionIndex($command = null)
     {
         if ($command !== null) {
-            $result = Yii::$app->createController($command);
+            $result = $this->app->createController($command);
             if ($result === false) {
                 $name = $this->ansiFormat($command, Console::FG_YELLOW);
                 throw new Exception("No help for unknown command \"$name\".");
@@ -76,7 +76,7 @@ class HelpController extends Controller
     public function actionList()
     {
         foreach ($this->getCommandDescriptions() as $command => $description) {
-            $result = Yii::$app->createController($command);
+            $result = $this->app->createController($command);
             if ($result === false || !($result[0] instanceof Controller)) {
                 continue;
             }
@@ -102,7 +102,7 @@ class HelpController extends Controller
      */
     public function actionListActionOptions($action)
     {
-        $result = Yii::$app->createController($action);
+        $result = $this->app->createController($action);
 
         if ($result === false || !($result[0] instanceof Controller)) {
             return;
@@ -135,7 +135,7 @@ class HelpController extends Controller
      */
     public function actionUsage($action)
     {
-        $result = Yii::$app->createController($action);
+        $result = $this->app->createController($action);
 
         if ($result === false || !($result[0] instanceof Controller)) {
             return;
@@ -172,7 +172,7 @@ class HelpController extends Controller
      */
     public function getCommands()
     {
-        $commands = $this->getModuleCommands(Yii::$app);
+        $commands = $this->getModuleCommands($this->app);
         sort($commands);
         return array_unique($commands);
     }
@@ -187,7 +187,7 @@ class HelpController extends Controller
         foreach ($this->getCommands() as $command) {
             $description = '';
 
-            $result = Yii::$app->createController($command);
+            $result = $this->app->createController($command);
             if ($result !== false && $result[0] instanceof Controller) {
                 [$controller, $actionID] = $result;
                 /** @var Controller $controller */
@@ -296,7 +296,7 @@ class HelpController extends Controller
             $this->stdout("\nThe following commands are available:\n\n", Console::BOLD);
             $len = 0;
             foreach ($commands as $command => $description) {
-                $result = Yii::$app->createController($command);
+                $result = $this->app->createController($command);
                 if ($result !== false && $result[0] instanceof Controller) {
                     /** @var $controller Controller */
                     [$controller, $actionID] = $result;
@@ -323,7 +323,7 @@ class HelpController extends Controller
                 $this->stdout(Console::wrapText($description, $len + 4 + 2), Console::BOLD);
                 $this->stdout("\n");
 
-                $result = Yii::$app->createController($command);
+                $result = $this->app->createController($command);
                 if ($result !== false && $result[0] instanceof Controller) {
                     [$controller, $actionID] = $result;
                     $actions = $this->getActions($controller);
@@ -545,7 +545,7 @@ class HelpController extends Controller
      */
     protected function getScriptName()
     {
-        return basename(Yii::$app->request->scriptFile);
+        return basename($this->app->request->scriptFile);
     }
 
     /**
@@ -555,6 +555,6 @@ class HelpController extends Controller
      */
     protected function getDefaultHelpHeader()
     {
-        return "\nThis is Yii version " . \Yii::getVersion() . ".\n";
+        return "\nThis is Yii version " . Yii::getVersion() . ".\n";
     }
 }
