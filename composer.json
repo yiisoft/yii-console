@@ -70,6 +70,11 @@
             "yii\\console\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "yiiunit\\console\\": "tests"
+        }
+    },
     "extra": {
         "config-plugin": {
             "params": "src/config/params.php",
