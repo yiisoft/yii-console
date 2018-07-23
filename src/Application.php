@@ -71,24 +71,10 @@ class Application extends \yii\base\Application
      */
     public $defaultRoute = 'help';
     /**
-     * @var bool whether to enable the commands provided by the core framework.
-     * Defaults to true.
-     */
-    public $enableCoreCommands = true;
-    /**
      * @var Controller the currently active controller instance
      */
     public $controller;
 
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __construct($config = [])
-    {
-        $config = $this->loadConfig($config);
-        parent::__construct($config);
-    }
 
     /**
      * Loads the configuration.
@@ -115,25 +101,6 @@ class Application extends \yii\base\Application
         }
 
         return $config;
-    }
-
-    /**
-     * Initialize the application.
-     */
-    public function init()
-    {
-        parent::init();
-        if ($this->enableCoreCommands) {
-            foreach ($this->coreCommands() as $id => $command) {
-                if (!isset($this->controllerMap[$id])) {
-                    $this->controllerMap[$id] = $command;
-                }
-            }
-        }
-        // ensure we have the 'help' command so that we can list the available commands
-        if (!isset($this->controllerMap['help'])) {
-            $this->controllerMap['help'] = controllers\HelpController::class;
-        }
     }
 
     /**
@@ -186,23 +153,6 @@ class Application extends \yii\base\Application
     }
 
     /**
-     * Returns the configuration of the built-in commands.
-     * @return array the configuration of the built-in commands.
-     */
-    public function coreCommands()
-    {
-        return [
-            'asset' => controllers\AssetController::class,
-            'cache' => controllers\CacheController::class,
-            'fixture' => controllers\FixtureController::class,
-            'help' => controllers\HelpController::class,
-            'message' => controllers\MessageController::class,
-            'migrate' => controllers\MigrateController::class,
-            'serve' => controllers\ServeController::class,
-        ];
-    }
-
-    /**
      * Returns the error handler component.
      * @return ErrorHandler the error handler application component.
      */
@@ -227,17 +177,5 @@ class Application extends \yii\base\Application
     public function getResponse()
     {
         return $this->get('response');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function coreComponents()
-    {
-        return array_merge(parent::coreComponents(), [
-            'request' => ['__class' => Request::class],
-            'response' => ['__class' => Response::class],
-            'errorHandler' => ['__class' => ErrorHandler::class],
-        ]);
     }
 }
