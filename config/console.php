@@ -3,6 +3,7 @@
 return [
     'app' => [
         '__class' => yii\console\Application::class,
+        'controllerNamespace' => yii\console\controllers::class,
         'controllerMap' => [
             'asset'     => yii\console\controllers\AssetController::class,
             'cache'     => yii\console\controllers\CacheController::class,
