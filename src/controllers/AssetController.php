@@ -11,6 +11,7 @@ use Yii;
 use yii\console\Controller;
 use yii\console\Exception;
 use yii\console\ExitCode;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;
 use yii\helpers\VarDumper;
@@ -785,7 +786,7 @@ EOD;
      */
     private function composeBundleConfig($bundle)
     {
-        $config = Yii::getObjectVars($bundle);
+        $config = ArrayHelper::getObjectVars($bundle);
         $config['__class'] = get_class($bundle);
         return $config;
     }
