@@ -1,10 +1,12 @@
 <p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
+    <a href="http://www.yiiframework.com/" target="_blank">
+        <img src="https://www.yiiframework.com/files/logo/yii.png" width="400" alt="Yii Framework" />
     </a>
     <h1 align="center">Yii Framework Console Extension</h1>
     <br>
 </p>
+
+[Yii Framework] is a modern framework designed to be a solid foundation for your PHP application.
 
 This [Yii Framework] extension allows easy creation of console applications.
 
