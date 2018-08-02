@@ -5,10 +5,10 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console;
+namespace yii\console\tests;
 
 use yii\console\widgets\Table;
-use yiiunit\TestCase;
+use yii\tests\TestCase;
 
 /**
  * @group console

@@ -5,13 +5,13 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console\controllers;
+namespace yii\console\tests\controllers;
 
 use Yii;
 use yii\console\controllers\MigrateController;
 use yii\db\Migration;
 use yii\db\Query;
-use yiiunit\TestCase;
+use yii\tests\TestCase;
 
 /**
  * Unit test for [[\yii\console\controllers\MigrateController]].
@@ -59,7 +59,7 @@ class MigrateControllerTest extends TestCase
 
     public function assertFileContent($expectedFile, $class, $table)
     {
-        $expected = include Yii::getAlias("@yiiunit/data/console/migrate_create/$expectedFile.php");
+        $expected = include Yii::getAlias("@yii/tests/data/console/migrate_create/$expectedFile.php");
         $expected = str_replace('{table}', $table, $expected);
         $this->assertEqualsWithoutLE($expected, $this->parseNameClassMigration($class, $table));
     }

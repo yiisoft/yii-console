@@ -6,7 +6,7 @@
  */
 
 use yii\console\Request;
-use yiiunit\TestCase;
+use yii\tests\TestCase;
 
 /**
  * @group console

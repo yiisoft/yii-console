@@ -5,11 +5,11 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console\controllers;
+namespace yii\console\tests\controllers;
 
 use yii\console\controllers\HelpController;
 use yii\helpers\Console;
-use yiiunit\TestCase;
+use yii\tests\TestCase;
 
 /**
  * Unit test for [[\yii\console\controllers\HelpController]].
@@ -58,7 +58,7 @@ class HelpControllerTest extends TestCase
         $this->mockApplication([
             'enableCoreCommands' => false,
             'modules' => [
-                'magic' => 'yiiunit\data\modules\magic\Module',
+                'magic' => 'yii\tests\data\modules\magic\Module',
             ],
         ]);
         $result = Console::stripAnsiFormat($this->runControllerAction('list'));

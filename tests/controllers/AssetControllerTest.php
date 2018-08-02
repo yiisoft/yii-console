@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console\controllers;
+namespace yii\console\tests\controllers;
 
 use Yii;
 use yii\console\controllers\AssetController;
@@ -13,7 +13,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
 use yii\helpers\VarDumper;
-use yiiunit\TestCase;
+use yii\tests\TestCase;
 
 /**
  * Unit test for [[\yii\console\controllers\AssetController]].
@@ -35,7 +35,7 @@ class AssetControllerTest extends TestCase
     public function setUp()
     {
         $this->mockApplication();
-        $this->testFilePath = Yii::getAlias('@yiiunit/runtime') . DIRECTORY_SEPARATOR . str_replace('\\', '_', get_class($this)) . uniqid();
+        $this->testFilePath = Yii::getAlias('@yii/tests/runtime') . DIRECTORY_SEPARATOR . str_replace('\\', '_', get_class($this)) . uniqid();
         $this->createDir($this->testFilePath);
         $this->testAssetsBasePath = $this->testFilePath . DIRECTORY_SEPARATOR . 'assets';
         $this->createDir($this->testAssetsBasePath);

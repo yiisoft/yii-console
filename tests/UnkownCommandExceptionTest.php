@@ -5,12 +5,12 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console;
+namespace yii\console\tests;
 
 use Yii;
 use yii\console\Application;
 use yii\console\UnknownCommandException;
-use yiiunit\TestCase;
+use yii\tests\TestCase;
 
 /**
  * @group console

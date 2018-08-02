@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console\controllers;
+namespace yii\console\tests\controllers;
 
 use Yii;
 use yii\console\ExitCode;
@@ -32,7 +32,7 @@ class DbMessageControllerTest extends BaseMessageControllerTest
         if (Yii::$app === null) {
             new \yii\console\Application([
                 'id' => 'Migrator',
-                'basePath' => '@yiiunit',
+                'basePath' => '@yii/tests',
                 'controllerMap' => [
                     'migrate' => EchoMigrateController::class,
                 ],

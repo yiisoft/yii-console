@@ -5,12 +5,12 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console\controllers;
+namespace yii\console\tests\controllers;
 
 use Yii;
 use yii\console\controllers\FixtureController;
-use yiiunit\data\console\controllers\fixtures\FixtureStorage;
-use yiiunit\TestCase;
+use yii\tests\data\console\controllers\fixtures\FixtureStorage;
+use yii\tests\TestCase;
 
 /**
  * Unit test for [[\yii\console\controllers\FixtureController]].
@@ -21,7 +21,7 @@ use yiiunit\TestCase;
 class FixtureControllerTest extends TestCase
 {
     /**
-     * @var \yiiunit\framework\console\controllers\FixtureConsoledController
+     * @var \yii\console\tests\controllers\FixtureConsoledController
      */
     private $_fixtureController;
 
@@ -30,10 +30,10 @@ class FixtureControllerTest extends TestCase
         parent::setUp();
 
         $this->_fixtureController = Yii::createObject([
-            '__class' => \yiiunit\framework\console\controllers\FixtureConsoledController::class,
+            '__class' => \yii\console\tests\controllers\FixtureConsoledController::class,
             'interactive' => false,
             'globalFixtures' => [],
-            'namespace' => 'yiiunit\data\console\controllers\fixtures',
+            'namespace' => 'yii\tests\data\console\controllers\fixtures',
         ], [null, null]); //id and module are null
     }
 
@@ -48,7 +48,7 @@ class FixtureControllerTest extends TestCase
     public function testLoadGlobalFixture()
     {
         $this->_fixtureController->globalFixtures = [
-            '\yiiunit\data\console\controllers\fixtures\Global',
+            '\yii\tests\data\console\controllers\fixtures\Global',
         ];
 
         $this->_fixtureController->actionLoad(['First']);
@@ -60,7 +60,7 @@ class FixtureControllerTest extends TestCase
     public function testLoadGlobalFixtureWithFixture()
     {
         $this->_fixtureController->globalFixtures = [
-            '\yiiunit\data\console\controllers\fixtures\GlobalFixture',
+            '\yii\tests\data\console\controllers\fixtures\GlobalFixture',
         ];
 
         $this->_fixtureController->actionLoad(['First']);
@@ -72,7 +72,7 @@ class FixtureControllerTest extends TestCase
     public function testUnloadGlobalFixture()
     {
         $this->_fixtureController->globalFixtures = [
-            '\yiiunit\data\console\controllers\fixtures\Global',
+            '\yii\tests\data\console\controllers\fixtures\Global',
         ];
 
         FixtureStorage::$globalFixturesData[] = 'some seeded global fixture data';

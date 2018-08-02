@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console\controllers;
+namespace yii\console\tests\controllers;
 
 use Yii;
 use yii\helpers\FileHelper;
@@ -21,7 +21,7 @@ class PHPMessageControllerTest extends BaseMessageControllerTest
     public function setUp()
     {
         parent::setUp();
-        $this->messagePath = Yii::getAlias('@yiiunit/runtime/test_messages');
+        $this->messagePath = Yii::getAlias('@yii/tests/runtime/test_messages');
         FileHelper::createDirectory($this->messagePath, 0777);
     }
 

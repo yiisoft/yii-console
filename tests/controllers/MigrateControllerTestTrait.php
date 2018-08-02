@@ -5,13 +5,13 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console\controllers;
+namespace yii\console\tests\controllers;
 
 use Yii;
 use yii\console\controllers\BaseMigrateController;
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
-use yiiunit\TestCase;
+use yii\tests\TestCase;
 
 /**
  * This trait provides unit tests shared by the different migration controllers implementations.
@@ -41,8 +41,8 @@ trait MigrateControllerTestTrait
 
     public function setUpMigrationPath()
     {
-        $this->migrationNamespace = 'yiiunit\runtime\test_migrations';
-        $this->migrationPath = Yii::getAlias('@yiiunit/runtime/test_migrations');
+        $this->migrationNamespace = 'yii\tests\runtime\test_migrations';
+        $this->migrationPath = Yii::getAlias('@yii/tests/runtime/test_migrations');
         FileHelper::createDirectory($this->migrationPath);
         if (!file_exists($this->migrationPath)) {
             $this->markTestIncomplete('Unit tests runtime directory should have writable permissions!');
@@ -52,8 +52,8 @@ trait MigrateControllerTestTrait
     public function tearDownMigrationPath()
     {
         FileHelper::removeDirectory($this->migrationPath);
-        FileHelper::removeDirectory(Yii::getAlias('@yiiunit/runtime/app_migrations'));
-        FileHelper::removeDirectory(Yii::getAlias('@yiiunit/runtime/extension_migrations'));
+        FileHelper::removeDirectory(Yii::getAlias('@yii/tests/runtime/app_migrations'));
+        FileHelper::removeDirectory(Yii::getAlias('@yii/tests/runtime/extension_migrations'));
     }
 
     /**
@@ -496,10 +496,10 @@ CODE;
      */
     public function testCombinedMigrationProcess()
     {
-        FileHelper::createDirectory(Yii::getAlias('@yiiunit/runtime/app_migrations'));
-        FileHelper::createDirectory(Yii::getAlias('@yiiunit/runtime/extension_migrations'));
+        FileHelper::createDirectory(Yii::getAlias('@yii/tests/runtime/app_migrations'));
+        FileHelper::createDirectory(Yii::getAlias('@yii/tests/runtime/extension_migrations'));
         $controllerConfig = [
-            'migrationPath' => [$appPath = '@yiiunit/runtime/app_migrations', $extensionPath = '@yiiunit/runtime/extension_migrations'],
+            'migrationPath' => [$appPath = '@yii/tests/runtime/app_migrations', $extensionPath = '@yii/tests/runtime/extension_migrations'],
             'migrationNamespaces' => [$this->migrationNamespace],
         ];
 

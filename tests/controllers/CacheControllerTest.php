@@ -5,12 +5,12 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console\controllers;
+namespace yii\console\tests\controllers;
 
 use Yii;
 use yii\caching\ArrayCache;
 use yii\console\controllers\CacheController;
-use yiiunit\TestCase;
+use yii\tests\TestCase;
 
 /**
  * Unit test for [[\yii\console\controllers\CacheController]].
@@ -34,7 +34,7 @@ class CacheControllerTest extends TestCase
         parent::setUp();
 
         $this->_cacheController = Yii::createObject([
-            '__class' => \yiiunit\framework\console\controllers\SilencedCacheController::class,
+            '__class' => \yii\console\tests\controllers\SilencedCacheController::class,
             'interactive' => false,
         ], [null, null]); //id and module are null
 

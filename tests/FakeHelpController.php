@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console;
+namespace yii\console\tests;
 
 use yii\console\controllers\HelpController;
 

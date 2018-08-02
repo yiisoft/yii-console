@@ -1,6 +1,6 @@
 {
     "name": "yiisoft/yii-console",
-    "description": "Yii Console",
+    "description": "Yii Framework Console Extension",
     "keywords": [
         "yii",
         "console"
@@ -78,7 +78,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "yiiunit\\console\\": "tests"
+            "yii\\console\\tests\\": "tests"
         }
     },
     "extra": {

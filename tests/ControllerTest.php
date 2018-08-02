@@ -5,12 +5,12 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yiiunit\framework\console;
+namespace yii\console\tests;
 
 use Yii;
 use yii\base\Module;
 use yii\console\Request;
-use yiiunit\TestCase;
+use yii\tests\TestCase;
 
 /**
  * @group console
@@ -22,8 +22,8 @@ class ControllerTest extends TestCase
         parent::setUp();
         $this->mockApplication();
         Yii::$app->controllerMap = [
-            'fake' => 'yiiunit\framework\console\FakeController',
-            'help' => 'yiiunit\framework\console\FakeHelpController',
+            'fake' => yii\console\tests\FakeController::class,
+            'help' => yii\console\tests\FakeHelpController::class,
         ];
     }
 

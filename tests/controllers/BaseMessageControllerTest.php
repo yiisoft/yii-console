@@ -1,11 +1,11 @@
 <?php
-namespace yiiunit\framework\console\controllers;
+namespace yii\console\tests\controllers;
 
 use Yii;
 use yii\base\Module;
 use yii\helpers\FileHelper;
 use yii\helpers\VarDumper;
-use yiiunit\TestCase;
+use yii\tests\TestCase;
 use yii\console\controllers\MessageController;
 
 /**
@@ -21,12 +21,12 @@ abstract class BaseMessageControllerTest extends TestCase
     public function setUp()
     {
         $this->mockApplication();
-        $this->sourcePath = Yii::getAlias('@yiiunit/runtime/test_source');
+        $this->sourcePath = Yii::getAlias('@yii/tests/runtime/test_source');
         FileHelper::createDirectory($this->sourcePath, 0777);
         if (!file_exists($this->sourcePath)) {
             $this->markTestIncomplete('Unit tests runtime directory should have writable permissions!');
         }
-        $this->configFileName = Yii::getAlias('@yiiunit/runtime/message_controller_test_config.php');
+        $this->configFileName = Yii::getAlias('@yii/tests/runtime/message_controller_test_config.php');
     }
 
     public function tearDown()
