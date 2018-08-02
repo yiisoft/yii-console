@@ -81,6 +81,9 @@
             "yii\\console\\tests\\": "tests"
         }
     },
+    "bin": [
+        "bin/yii"
+    ],
     "extra": {
         "config-plugin": {
             "params": "config/params.php",
