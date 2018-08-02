@@ -84,10 +84,7 @@
     "extra": {
         "config-plugin": {
             "params": "config/params.php",
-            "console": [
-                "$common",
-                "config/console.php"
-            ]
+            "console": "config/console.php"
         }
     }
 }
