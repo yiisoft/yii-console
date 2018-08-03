@@ -6,11 +6,24 @@ use yii\di\Container;
 use yii\helpers\Yii;
 
 (function () {
-    require_once __DIR__ . '/../vendor/autoload.php';
-    require_once Builder::path('defines');
+    $paths = [
+        __DIR__ . '/../../../autoload.php',
+        __DIR__ . '/../vendor/autoload.php',
+    ];
+    $autloadPath = null;
+    foreach ($paths as $path) {
+        if (file_exists($path)) {
+            $autoloadPath = $path;
+            break;
+        }
+    }
 
-    $config = require Builder::path('console');
-    $container = new Container($config);
+    if (empty($autoloadPath)) {
+        die("You need to set up the project dependencies with Composer\n");
+    }
+    require_once $autoloadPath;
+
+    $container = new Container(require Builder::path('console'));
     Yii::setContainer($container);
 
     $container->get('app')->run();
