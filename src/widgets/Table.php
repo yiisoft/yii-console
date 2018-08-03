@@ -7,7 +7,6 @@
 
 namespace yii\console\widgets;
 
-use Yii;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Console;
@@ -245,19 +244,19 @@ class Table extends Widget
                             $arrayPointer[$index] = 0;
                         }
                     } else {
-                        $start = mb_strwidth($finalChunk[$index], Yii::$app->charset);
+                        $start = mb_strwidth($finalChunk[$index], $this->app->charset);
                     }
-                    $chunk = mb_substr($cell[$arrayPointer[$index]], $start, $cellSize - 4, Yii::$app->charset);
+                    $chunk = mb_substr($cell[$arrayPointer[$index]], $start, $cellSize - 4, $this->app->charset);
                     $finalChunk[$index] .= $chunk;
                     if (isset($cell[$arrayPointer[$index] + 1]) && $finalChunk[$index] === $cell[$arrayPointer[$index]]) {
                         $arrayPointer[$index]++;
                         $finalChunk[$index] = '';
                     }
                 } else {
-                    $chunk = mb_substr($cell, ($cellSize * $i) - ($i * 2), $cellSize - 2, Yii::$app->charset);
+                    $chunk = mb_substr($cell, ($cellSize * $i) - ($i * 2), $cellSize - 2, $this->app->charset);
                 }
                 $chunk = $prefix . $chunk;
-                $repeat = $cellSize - mb_strwidth($chunk, Yii::$app->charset) - 1;
+                $repeat = $cellSize - mb_strwidth($chunk, $this->app->charset) - 1;
                 $buffer .= $chunk;
                 if ($repeat >= 0) {
                     $buffer .= str_repeat(' ', $repeat);
@@ -311,11 +310,11 @@ class Table extends Widget
         foreach ($columns as $column) {
             $columnWidth = max(array_map(function ($val) {
                 if (is_array($val)) {
-                    $encodings = array_fill(0, count($val), Yii::$app->charset);
-                    return max(array_map('mb_strwidth', $val, $encodings)) + mb_strwidth($this->_listPrefix, Yii::$app->charset);
+                    $encodings = array_fill(0, count($val), $this->app->charset);
+                    return max(array_map('mb_strwidth', $val, $encodings)) + mb_strwidth($this->_listPrefix, $this->app->charset);
                 }
 
-                return mb_strwidth($val, Yii::$app->charset);
+                return mb_strwidth($val, $this->app->charset);
             }, $column)) + 2;
             $this->_columnWidths[] = $columnWidth;
             $totalWidth += $columnWidth;
@@ -356,11 +355,11 @@ class Table extends Widget
             return ceil($columnWidth / ($size - 2));
         }, $this->_columnWidths, array_map(function ($val) {
             if (is_array($val)) {
-                $encodings = array_fill(0, count($val), Yii::$app->charset);
+                $encodings = array_fill(0, count($val), $this->app->charset);
                 return array_map('mb_strwidth', $val, $encodings);
             }
 
-            return mb_strwidth($val, Yii::$app->charset);
+            return mb_strwidth($val, $this->app->charset);
         }, $row)
         );
 

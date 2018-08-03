@@ -7,7 +7,6 @@
 
 namespace yii\console\controllers;
 
-use Yii;
 use yii\exceptions\InvalidConfigException;
 use yii\exceptions\InvalidArgumentException;
 use yii\console\Controller;
@@ -240,7 +239,7 @@ class FixtureController extends Controller
     private function notifyLoaded($fixtures)
     {
         $this->stdout("Fixtures were successfully loaded from namespace:\n", Console::FG_YELLOW);
-        $this->stdout("\t\"" . Yii::getAlias($this->namespace) . "\"\n\n", Console::FG_GREEN);
+        $this->stdout("\t\"" . $this->app->getAlias($this->namespace) . "\"\n\n", Console::FG_GREEN);
         $this->outputList($fixtures);
     }
 
@@ -295,7 +294,7 @@ class FixtureController extends Controller
     private function notifyUnloaded($fixtures)
     {
         $this->stdout("\nFixtures were successfully unloaded from namespace: ", Console::FG_YELLOW);
-        $this->stdout(Yii::getAlias($this->namespace) . "\"\n\n", Console::FG_GREEN);
+        $this->stdout($this->app->getAlias($this->namespace) . "\"\n\n", Console::FG_GREEN);
         $this->outputList($fixtures);
     }
 
@@ -515,7 +514,7 @@ class FixtureController extends Controller
     private function getFixturePath()
     {
         try {
-            return Yii::getAlias('@' . str_replace('\\', '/', $this->namespace));
+            return $this->app->getAlias('@' . str_replace('\\', '/', $this->namespace));
         } catch (InvalidArgumentException $e) {
             throw new InvalidConfigException('Invalid fixture namespace: "' . $this->namespace . '". Please, check your FixtureController::namespace parameter');
         }

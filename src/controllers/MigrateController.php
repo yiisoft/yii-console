@@ -7,7 +7,6 @@
 
 namespace yii\console\controllers;
 
-use Yii;
 use yii\db\Connection;
 use yii\db\Query;
 use yii\di\Instance;
@@ -195,7 +194,7 @@ class MigrateController extends BaseMigrateController
     {
         $this->includeMigrationFile($class);
 
-        return Yii::createObject([
+        return $this->app->createObject([
             '__class' => $class,
             'db' => $this->db,
             'compact' => $this->compact,
@@ -439,7 +438,7 @@ class MigrateController extends BaseMigrateController
             ];
         }
 
-        return $this->renderFile(Yii::getAlias($templateFile), array_merge($params, [
+        return $this->renderFile($this->app->getAlias($templateFile), array_merge($params, [
             'table' => $this->generateTableName($table),
             'fields' => $fields,
             'foreignKeys' => $foreignKeys,

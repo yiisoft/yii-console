@@ -7,7 +7,6 @@
 
 namespace yii\console\controllers;
 
-use Yii;
 use yii\console\Exception;
 use yii\console\ExitCode;
 use yii\db\Connection;
@@ -217,7 +216,7 @@ class MessageController extends \yii\console\Controller
      */
     public function actionConfig($filePath)
     {
-        $filePath = Yii::getAlias($filePath);
+        $filePath = $this->app->getAlias($filePath);
         if (file_exists($filePath)) {
             if (!$this->confirm("File '{$filePath}' already exists. Do you wish to overwrite it?")) {
                 return ExitCode::OK;
@@ -263,7 +262,7 @@ EOD;
      */
     public function actionConfigTemplate($filePath)
     {
-        $filePath = Yii::getAlias($filePath);
+        $filePath = $this->app->getAlias($filePath);
 
         if (file_exists($filePath)) {
             if (!$this->confirm("File '{$filePath}' already exists. Do you wish to overwrite it?")) {
@@ -271,7 +270,7 @@ EOD;
             }
         }
 
-        if (!copy(Yii::getAlias('@yii/views/messageConfig.php'), $filePath)) {
+        if (!copy($this->app->getAlias('@yii/views/messageConfig.php'), $filePath)) {
             $this->stdout("Configuration file template was NOT created at '{$filePath}'.\n\n", Console::FG_RED);
             return ExitCode::UNSPECIFIED_ERROR;
         }
@@ -885,7 +884,7 @@ EOD;
     {
         $configFileContent = [];
         if ($configFile !== null) {
-            $configFile = Yii::getAlias($configFile);
+            $configFile = $this->app->getAlias($configFile);
             if (!is_file($configFile)) {
                 throw new Exception("The configuration file does not exist: $configFile");
             }
@@ -897,8 +896,8 @@ EOD;
             $configFileContent,
             $this->getPassedOptionValues()
         );
-        $this->config['sourcePath'] = Yii::getAlias($this->config['sourcePath']);
-        $this->config['messagePath'] = Yii::getAlias($this->config['messagePath']);
+        $this->config['sourcePath'] = $this->app->getAlias($this->config['sourcePath']);
+        $this->config['messagePath'] = $this->app->getAlias($this->config['messagePath']);
 
         if (!isset($this->config['sourcePath'], $this->config['languages'])) {
             throw new Exception('The configuration file must specify "sourcePath" and "languages".');

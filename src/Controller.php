@@ -7,9 +7,9 @@
 
 namespace yii\console;
 
-use Yii;
 use yii\base\Action;
 use yii\base\InlineAction;
+use yii\console\exceptions\Exception;
 use yii\exceptions\InvalidRouteException;
 use yii\helpers\Console;
 use yii\helpers\Inflector;
@@ -96,7 +96,7 @@ class Controller extends \yii\base\Controller
                     if (array_key_exists($name, $optionAliases)) {
                         $params[$optionAliases[$name]] = $value;
                     } else {
-                        throw new Exception(Yii::t('yii', 'Unknown alias: -{name}', ['name' => $name]));
+                        throw new Exception($this->app->t('yii', 'Unknown alias: -{name}', ['name' => $name]));
                     }
                 }
                 unset($params['_aliases']);
@@ -127,13 +127,13 @@ class Controller extends \yii\base\Controller
                         unset($params[$kebabName]);
                     }
                 } elseif (!is_int($name)) {
-                    throw new Exception(Yii::t('yii', 'Unknown option: --{name}', ['name' => $name]));
+                    throw new Exception($this->app->t('yii', 'Unknown option: --{name}', ['name' => $name]));
                 }
             }
         }
         if ($this->help) {
             $route = $this->getUniqueId() . '/' . $id;
-            return Yii::$app->runAction('help', [$route]);
+            return $this->app->runAction('help', [$route]);
         }
 
         return parent::runAction($id, $params);
@@ -174,7 +174,7 @@ class Controller extends \yii\base\Controller
         }
 
         if (!empty($missing)) {
-            throw new Exception(Yii::t('yii', 'Missing required arguments: {params}', ['params' => implode(', ', $missing)]));
+            throw new Exception($this->app->t('yii', 'Missing required arguments: {params}', ['params' => implode(', ', $missing)]));
         }
 
         return $args;

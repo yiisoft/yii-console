@@ -7,7 +7,6 @@
 
 namespace yii\console\controllers;
 
-use Yii;
 use yii\console\Controller;
 use yii\helpers\Console;
 
@@ -51,7 +50,7 @@ class ServeController extends Controller
      */
     public function actionIndex($address = 'localhost')
     {
-        $documentRoot = Yii::getAlias($this->docroot);
+        $documentRoot = $this->app->getAlias($this->docroot);
 
         if (strpos($address, ':') === false) {
             $address = $address . ':' . $this->port;

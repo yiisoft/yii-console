@@ -132,7 +132,7 @@ class Application extends \yii\base\Application
      * code should be used:
      *
      * ```php
-     * \Yii::$app->runAction('controller/test', ['option' => 'value', $a, $b]);
+     * $this->app->runAction('controller/test', ['option' => 'value', $a, $b]);
      * ```
      *
      * @param string $route the route that specifies the action.

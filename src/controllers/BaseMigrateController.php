@@ -7,7 +7,6 @@
 
 namespace yii\console\controllers;
 
-use Yii;
 use yii\base\BaseObject;
 use yii\exceptions\InvalidConfigException;
 use yii\exceptions\NotSupportedException;
@@ -17,6 +16,7 @@ use yii\console\ExitCode;
 use yii\db\MigrationInterface;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;
+use yii\helpers\Yii;
 
 /**
  * BaseMigrateController is the base class for migrate controllers.
@@ -60,7 +60,7 @@ abstract class BaseMigrateController extends Controller
      * @var array list of namespaces containing the migration classes.
      *
      * Migration namespaces should be resolvable as a [path alias](guide:concept-aliases) if prefixed with `@`, e.g. if you specify
-     * the namespace `app\migrations`, the code `Yii::getAlias('@app/migrations')` should be able to return
+     * the namespace `app\migrations`, the code `$this->app->getAlias('@app/migrations')` should be able to return
      * the file path to the directory this namespace refers to.
      * This corresponds with the [autoloading conventions](guide:concept-autoloading) of Yii.
      *
@@ -124,10 +124,10 @@ abstract class BaseMigrateController extends Controller
 
             if (is_array($this->migrationPath)) {
                 foreach ($this->migrationPath as $i => $path) {
-                    $this->migrationPath[$i] = Yii::getAlias($path);
+                    $this->migrationPath[$i] = $this->app->getAlias($path);
                 }
             } elseif ($this->migrationPath !== null) {
-                $path = Yii::getAlias($this->migrationPath);
+                $path = $this->app->getAlias($this->migrationPath);
                 if (!is_dir($path)) {
                     if ($action->id !== 'create') {
                         throw new InvalidConfigException("Migration failed. Directory specified in migrationPath doesn't exist: {$this->migrationPath}");
@@ -705,7 +705,7 @@ abstract class BaseMigrateController extends Controller
      */
     private function getNamespacePath($namespace)
     {
-        return str_replace('/', DIRECTORY_SEPARATOR, Yii::getAlias('@' . str_replace('\\', '/', $namespace)));
+        return str_replace('/', DIRECTORY_SEPARATOR, $this->app->getAlias('@' . str_replace('\\', '/', $namespace)));
     }
 
     /**
@@ -774,7 +774,7 @@ abstract class BaseMigrateController extends Controller
         $this->includeMigrationFile($class);
 
         /** @var MigrationInterface $migration */
-        $migration = Yii::createObject($class);
+        $migration = $this->app->createObject($class);
         if ($migration instanceof BaseObject && $migration->canSetProperty('compact')) {
             $migration->compact = $this->compact;
         }
@@ -931,7 +931,7 @@ abstract class BaseMigrateController extends Controller
      */
     protected function generateMigrationSourceCode($params)
     {
-        return $this->renderFile(Yii::getAlias($this->templateFile), $params);
+        return $this->renderFile($this->app->getAlias($this->templateFile), $params);
     }
 
     /**

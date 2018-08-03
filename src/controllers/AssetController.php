@@ -7,7 +7,6 @@
 
 namespace yii\console\controllers;
 
-use Yii;
 use yii\console\Controller;
 use yii\console\Exception;
 use yii\console\ExitCode;
@@ -161,7 +160,7 @@ class AssetController extends Controller
                 $options['forceCopy'] = true;
             }
 
-            $this->_assetManager = Yii::createObject($options);
+            $this->_assetManager = $this->app->createObject($options);
         }
 
         return $this->_assetManager;
@@ -331,7 +330,7 @@ class AssetController extends Controller
             if (!isset($target['__class'])) {
                 $target['__class'] = $name;
             }
-            $targets[$name] = Yii::createObject($target);
+            $targets[$name] = $this->app->createObject($target);
         }
 
         return $targets;
@@ -702,8 +701,8 @@ EOD;
  */
 
 // In the console environment, some path aliases may not exist. Please define these:
-// Yii::setAlias('@webroot', __DIR__ . '/../web');
-// Yii::setAlias('@web', '/');
+// $this->app->setAlias('@webroot', __DIR__ . '/../web');
+// $this->app->setAlias('@web', '/');
 
 return [
     // Adjust command/callback for JavaScript files compressing:

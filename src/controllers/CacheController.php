@@ -8,7 +8,6 @@
 namespace yii\console\controllers;
 
 use Psr\SimpleCache\CacheInterface;
-use Yii;
 use yii\caching\ApcCache;
 use yii\caching\Cache;
 use yii\console\Controller;
@@ -101,7 +100,7 @@ class CacheController extends Controller
             $cachesInfo[] = [
                 'name' => $name,
                 'class' => $class,
-                'is_flushed' => $this->canBeCleared($class) ? Yii::$app->get($name)->clear() : false,
+                'is_flushed' => $this->canBeCleared($class) ? $this->app->get($name)->clear() : false,
             ];
         }
 
@@ -125,7 +124,7 @@ class CacheController extends Controller
             $cachesInfo[] = [
                 'name' => $name,
                 'class' => $class,
-                'is_flushed' => $this->canBeCleared($class) ? Yii::$app->get($name)->clear() : false,
+                'is_flushed' => $this->canBeCleared($class) ? $this->app->get($name)->clear() : false,
             ];
         }
 
@@ -149,7 +148,7 @@ class CacheController extends Controller
      */
     public function actionClearSchema($db = 'db')
     {
-        $connection = Yii::$app->get($db, false);
+        $connection = $this->app->get($db, false);
         if ($connection === null) {
             $this->stdout("Unknown component \"$db\".\n", Console::FG_RED);
             return ExitCode::UNSPECIFIED_ERROR;
@@ -257,7 +256,7 @@ class CacheController extends Controller
     private function findCaches(array $cachesNames = [])
     {
         $caches = [];
-        $components = Yii::$app->getComponents();
+        $components = $this->app->getComponents();
         $findAll = ($cachesNames === []);
 
         foreach ($components as $name => $component) {
@@ -272,7 +271,7 @@ class CacheController extends Controller
             } elseif (is_string($component) && $this->isCacheClass($component)) {
                 $caches[$name] = $component;
             } elseif ($component instanceof \Closure) {
-                $cache = Yii::$app->get($name);
+                $cache = $this->app->get($name);
                 if ($this->isCacheClass($cache)) {
                     $cacheClass = get_class($cache);
                     $caches[$name] = $cacheClass;
