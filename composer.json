@@ -63,13 +63,13 @@
         "source": "https://github.com/yiisoft/yii-console"
     },
     "require": {
-        "yiisoft/core": "^3.0 || dev-master"
+        "yiisoft/core": "^3.0@dev"
     },
     "require-dev": {
         "hiqdev/composer-config-plugin": "3.0.x-dev",
-        "yiisoft/di": "^1.0 || dev-master",
-        "yiisoft/log": "^1.0 || dev-master",
-        "yiisoft/cache": "^1.0 || dev-master"
+        "yiisoft/di": "^1.0",
+        "yiisoft/log": "^1.0",
+        "yiisoft/cache": "^1.0"
     },
     "autoload": {
         "psr-4": {
