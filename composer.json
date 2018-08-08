@@ -1,12 +1,12 @@
 {
     "name": "yiisoft/yii-console",
+    "type": "library",
     "description": "Yii Framework Console Extension",
     "keywords": [
         "yii",
         "console"
     ],
     "homepage": "http://www.yiiframework.com/",
-    "type": "library",
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -56,20 +56,20 @@
         }
     ],
     "support": {
+        "source": "https://github.com/yiisoft/yii-console",
         "issues": "https://github.com/yiisoft/yii-console",
         "forum": "http://www.yiiframework.com/forum/",
         "wiki": "http://www.yiiframework.com/wiki/",
-        "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii-console"
+        "irc": "irc://irc.freenode.net/yii"
     },
     "require": {
         "yiisoft/core": "^3.0@dev"
     },
     "require-dev": {
-        "hiqdev/composer-config-plugin": "3.0.x-dev",
-        "yiisoft/di": "^1.0",
-        "yiisoft/log": "^1.0",
-        "yiisoft/cache": "^1.0"
+        "yiisoft/di": "^3.0@dev",
+        "yiisoft/log": "^3.0@dev",
+        "yiisoft/cache": "^3.0@dev",
+        "hiqdev/composer-config-plugin": "^1.0@dev"
     },
     "autoload": {
         "psr-4": {
@@ -85,6 +85,9 @@
         "bin/yii"
     ],
     "extra": {
+        "branch-alias": {
+            "dev-master": "3.0.x-dev"
+        },
         "config-plugin": {
             "params": "config/params.php",
             "console": "config/console.php"
