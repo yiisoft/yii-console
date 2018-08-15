@@ -8,6 +8,7 @@
 namespace yii\console\controllers;
 
 use yii\base\BaseObject;
+use yii\base\Action;
 use yii\exceptions\InvalidConfigException;
 use yii\exceptions\NotSupportedException;
 use yii\console\Controller;
@@ -111,7 +112,7 @@ abstract class BaseMigrateController extends Controller
      * @throws InvalidConfigException if directory specified in migrationPath doesn't exist and action isn't "create".
      * @return bool whether the action should continue to be executed.
      */
-    public function beforeAction($action)
+    public function beforeAction(Action $action): bool
     {
         if (parent::beforeAction($action)) {
             if (empty($this->migrationNamespaces) && empty($this->migrationPath)) {
