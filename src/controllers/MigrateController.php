@@ -7,6 +7,7 @@
 
 namespace yii\console\controllers;
 
+use yii\base\Action;
 use yii\db\Connection;
 use yii\db\Query;
 use yii\di\Instance;
@@ -175,7 +176,7 @@ class MigrateController extends BaseMigrateController
      * @param \yii\base\Action $action the action to be executed.
      * @return bool whether the action should continue to be executed.
      */
-    public function beforeAction($action)
+    public function beforeAction(Action $action): bool
     {
         if (parent::beforeAction($action)) {
             $this->db = Instance::ensure($this->db, Connection::class);
