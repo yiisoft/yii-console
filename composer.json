@@ -57,13 +57,13 @@
     ],
     "support": {
         "source": "https://github.com/yiisoft/yii-console",
-        "issues": "https://github.com/yiisoft/yii-console",
+        "issues": "https://github.com/yiisoft/yii-console/issues",
         "forum": "http://www.yiiframework.com/forum/",
         "wiki": "http://www.yiiframework.com/wiki/",
         "irc": "irc://irc.freenode.net/yii"
     },
     "require": {
-        "yiisoft/core": "^3.0@dev"
+        "yiisoft/yii-core": "^3.0@dev"
     },
     "require-dev": {
         "yiisoft/di": "^3.0@dev",
