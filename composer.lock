@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ad8cbfd67a357b18168c4a8b6938de0",
+    "content-hash": "dc657d8332ea94ef5b4c2db0bf342e62",
     "packages": [
         {
             "name": "psr/container",
@@ -156,12 +156,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/cache.git",
-                "reference": "5d36f0cede4aca6148baf41f341f1c6f00abb79e"
+                "reference": "b2a540826e7639102544c1f9e3471ab0da3b2e0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/cache/zipball/5d36f0cede4aca6148baf41f341f1c6f00abb79e",
-                "reference": "5d36f0cede4aca6148baf41f341f1c6f00abb79e",
+                "url": "https://api.github.com/repos/yiisoft/cache/zipball/b2a540826e7639102544c1f9e3471ab0da3b2e0e",
+                "reference": "b2a540826e7639102544c1f9e3471ab0da3b2e0e",
                 "shasum": ""
             },
             "require": {
@@ -169,6 +169,15 @@
             },
             "provide": {
                 "psr/simple-cache-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "hiqdev/composer-config-plugin": "^1.0@dev",
+                "yiisoft/db": "^3.0@dev",
+                "yiisoft/di": "^3.0@dev",
+                "yiisoft/log": "^3.0@dev",
+                "yiisoft/view": "^3.0@dev",
+                "yiisoft/yii-core": "^3.0@dev",
+                "yiisoft/yii-web": "^3.0@dev"
             },
             "type": "library",
             "extra": {
@@ -182,7 +191,8 @@
             },
             "autoload": {
                 "psr-4": {
-                    "yiiunit\\cache\\": "tests"
+                    "yii\\cache\\": "src",
+                    "yii\\cache\\tests\\": "tests"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -242,20 +252,189 @@
                 "cache",
                 "yii"
             ],
-            "time": "2018-08-08T15:18:50+00:00"
+            "time": "2018-08-25T08:57:14+00:00"
         },
         {
-            "name": "yiisoft/core",
+            "name": "yiisoft/di",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/yiisoft/core.git",
-                "reference": "6a075220ae9396df3c4b0e7b208865894929480f"
+                "url": "https://github.com/yiisoft/di.git",
+                "reference": "351502d835d97ab21b4ffd729feb14981aaf06bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/core/zipball/6a075220ae9396df3c4b0e7b208865894929480f",
-                "reference": "6a075220ae9396df3c4b0e7b208865894929480f",
+                "url": "https://api.github.com/repos/yiisoft/di/zipball/351502d835d97ab21b4ffd729feb14981aaf06bc",
+                "reference": "351502d835d97ab21b4ffd729feb14981aaf06bc",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.0",
+                "psr/container": "1.0.0"
+            },
+            "provide": {
+                "psr/container-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.2",
+                "squizlabs/php_codesniffer": "^3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\di\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/",
+                    "role": "Core framework development"
+                }
+            ],
+            "description": "Yii DI container",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "Autowiring",
+                "PSR-11",
+                "container",
+                "dependency",
+                "di",
+                "injection",
+                "injector"
+            ],
+            "time": "2018-08-25T07:27:05+00:00"
+        },
+        {
+            "name": "yiisoft/log",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/log.git",
+                "reference": "2a5e0c49eb357a439815d712b8f809c0f3bc95d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/log/zipball/2a5e0c49eb357a439815d712b8f809c0f3bc95d9",
+                "reference": "2a5e0c49eb357a439815d712b8f809c0f3bc95d9",
+                "shasum": ""
+            },
+            "require": {
+                "psr/log": "~1.0.2"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "hiqdev/composer-config-plugin": "^1.0@dev",
+                "yiisoft/cache": "^3.0@dev",
+                "yiisoft/db": "^3.0@dev",
+                "yiisoft/di": "^3.0@dev",
+                "yiisoft/view": "^3.0@dev",
+                "yiisoft/yii-core": "^3.0@dev",
+                "yiisoft/yii-web": "^3.0@dev"
+            },
+            "suggest": {
+                "yiisoft/db": "version ^3.0 for saving logs to data base"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                },
+                "config-plugin": {
+                    "params": "config/params.php",
+                    "common": "config/common.php"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\log\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+                },
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Maurizio Domba",
+                    "homepage": "http://mdomba.info/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc",
+                    "homepage": "http://cebe.cc/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Timur Ruziev",
+                    "email": "resurtm@gmail.com",
+                    "homepage": "http://resurtm.com/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Dmitry Naumenko",
+                    "email": "d.naumenko.a@gmail.com",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Boudewijn Vahrmeijer",
+                    "email": "info@dynasource.eu",
+                    "homepage": "http://dynasource.eu",
+                    "role": "Core framework development"
+                }
+            ],
+            "description": "Yii Logging Library",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "framework",
+                "log",
+                "logger",
+                "yii"
+            ],
+            "time": "2018-08-25T08:47:15+00:00"
+        },
+        {
+            "name": "yiisoft/yii-core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii-core.git",
+                "reference": "dfe7d7f4b31ec2c26c3255b1d1625afdd9823055"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii-core/zipball/dfe7d7f4b31ec2c26c3255b1d1625afdd9823055",
+                "reference": "dfe7d7f4b31ec2c26c3255b1d1625afdd9823055",
                 "shasum": ""
             },
             "require": {
@@ -272,13 +451,14 @@
             },
             "require-dev": {
                 "ezyang/htmlpurifier": "^4.6",
-                "hiqdev/composer-config-plugin": "1.0.x-dev",
+                "hiqdev/composer-config-plugin": "^1.0@dev",
                 "phpunit/phpunit": "^7.2",
-                "yiisoft/cache": "dev-master",
-                "yiisoft/di": "dev-master",
-                "yiisoft/log": "dev-master",
-                "yiisoft/yii-console": "dev-master",
-                "yiisoft/yii-web": "dev-master"
+                "yiisoft/cache": "^3.0@dev",
+                "yiisoft/di": "^3.0@dev",
+                "yiisoft/log": "^3.0@dev",
+                "yiisoft/view": "^3.0@dev",
+                "yiisoft/yii-console": "^3.0@dev",
+                "yiisoft/yii-web": "^3.0@dev"
             },
             "suggest": {
                 "ezyang/htmlpurifier": "version '^4.6' required at 'yii\\helpers\\HtmlPurifier' for 'html' data format support (e.g. 'yii\\i18n\\Formatter:asHtml()' and 'yii\\helpers\\StringHelper::truncateHtml()')",
@@ -366,167 +546,7 @@
                 "framework",
                 "yii"
             ],
-            "time": "2018-08-08T13:09:06+00:00"
-        },
-        {
-            "name": "yiisoft/di",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/di.git",
-                "reference": "d30f2a082dcbf55435d3cf9a54d8fc301ca559d4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/di/zipball/d30f2a082dcbf55435d3cf9a54d8fc301ca559d4",
-                "reference": "d30f2a082dcbf55435d3cf9a54d8fc301ca559d4",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.0",
-                "psr/container": "1.0.0"
-            },
-            "provide": {
-                "psr/container-implementation": "1.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.2",
-                "squizlabs/php_codesniffer": "^3.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\di\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Makarov",
-                    "email": "sam@rmcreative.ru",
-                    "homepage": "http://rmcreative.ru/",
-                    "role": "Core framework development"
-                }
-            ],
-            "description": "Yii DI container",
-            "homepage": "http://www.yiiframework.com/",
-            "keywords": [
-                "Autowiring",
-                "PSR-11",
-                "container",
-                "dependency",
-                "di",
-                "injection",
-                "injector"
-            ],
-            "time": "2018-08-08T15:14:27+00:00"
-        },
-        {
-            "name": "yiisoft/log",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/log.git",
-                "reference": "4d84a5d19a5324d5f8836e315a339a75e21a6011"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/log/zipball/4d84a5d19a5324d5f8836e315a339a75e21a6011",
-                "reference": "4d84a5d19a5324d5f8836e315a339a75e21a6011",
-                "shasum": ""
-            },
-            "require": {
-                "psr/log": "~1.0.2"
-            },
-            "provide": {
-                "psr/log-implementation": "1.0.0"
-            },
-            "suggest": {
-                "yiisoft/db": "version ^3.0 for saving logs to data base"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev"
-                },
-                "config-plugin": {
-                    "params": "config/params.php",
-                    "common": "config/common.php"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\log\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com",
-                    "homepage": "http://www.yiiframework.com/",
-                    "role": "Founder and project lead"
-                },
-                {
-                    "name": "Alexander Makarov",
-                    "email": "sam@rmcreative.ru",
-                    "homepage": "http://rmcreative.ru/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Maurizio Domba",
-                    "homepage": "http://mdomba.info/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Carsten Brandt",
-                    "email": "mail@cebe.cc",
-                    "homepage": "http://cebe.cc/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Timur Ruziev",
-                    "email": "resurtm@gmail.com",
-                    "homepage": "http://resurtm.com/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Paul Klimov",
-                    "email": "klimov.paul@gmail.com",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Dmitry Naumenko",
-                    "email": "d.naumenko.a@gmail.com",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Boudewijn Vahrmeijer",
-                    "email": "info@dynasource.eu",
-                    "homepage": "http://dynasource.eu",
-                    "role": "Core framework development"
-                }
-            ],
-            "description": "Yii Logging Library",
-            "homepage": "http://www.yiiframework.com/",
-            "keywords": [
-                "framework",
-                "log",
-                "logger",
-                "yii"
-            ],
-            "time": "2018-08-08T15:17:24+00:00"
+            "time": "2018-08-25T07:58:59+00:00"
         }
     ],
     "packages-dev": [
@@ -536,12 +556,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hiqdev/composer-config-plugin.git",
-                "reference": "8ba86d9dec1716dede7cfb3f9cd4532375fa25ef"
+                "reference": "34cfa360cd17f244483b77f93af5b176740310bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hiqdev/composer-config-plugin/zipball/8ba86d9dec1716dede7cfb3f9cd4532375fa25ef",
-                "reference": "8ba86d9dec1716dede7cfb3f9cd4532375fa25ef",
+                "url": "https://api.github.com/repos/hiqdev/composer-config-plugin/zipball/34cfa360cd17f244483b77f93af5b176740310bd",
+                "reference": "34cfa360cd17f244483b77f93af5b176740310bd",
                 "shasum": ""
             },
             "require": {
@@ -604,13 +624,13 @@
                 "config",
                 "plugin"
             ],
-            "time": "2018-08-08T16:33:08+00:00"
+            "time": "2018-08-24T08:14:16+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "yiisoft/core": 20,
+        "yiisoft/yii-core": 20,
         "yiisoft/di": 20,
         "yiisoft/log": 20,
         "yiisoft/cache": 20,
