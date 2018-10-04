@@ -244,19 +244,19 @@ class Table extends Widget
                             $arrayPointer[$index] = 0;
                         }
                     } else {
-                        $start = mb_strwidth($finalChunk[$index], $this->app->charset);
+                        $start = mb_strwidth($finalChunk[$index], $this->app->encoding);
                     }
-                    $chunk = mb_substr($cell[$arrayPointer[$index]], $start, $cellSize - 4, $this->app->charset);
+                    $chunk = mb_substr($cell[$arrayPointer[$index]], $start, $cellSize - 4, $this->app->encoding);
                     $finalChunk[$index] .= $chunk;
                     if (isset($cell[$arrayPointer[$index] + 1]) && $finalChunk[$index] === $cell[$arrayPointer[$index]]) {
                         $arrayPointer[$index]++;
                         $finalChunk[$index] = '';
                     }
                 } else {
-                    $chunk = mb_substr($cell, ($cellSize * $i) - ($i * 2), $cellSize - 2, $this->app->charset);
+                    $chunk = mb_substr($cell, ($cellSize * $i) - ($i * 2), $cellSize - 2, $this->app->encoding);
                 }
                 $chunk = $prefix . $chunk;
-                $repeat = $cellSize - mb_strwidth($chunk, $this->app->charset) - 1;
+                $repeat = $cellSize - mb_strwidth($chunk, $this->app->encoding) - 1;
                 $buffer .= $chunk;
                 if ($repeat >= 0) {
                     $buffer .= str_repeat(' ', $repeat);
@@ -310,11 +310,11 @@ class Table extends Widget
         foreach ($columns as $column) {
             $columnWidth = max(array_map(function ($val) {
                 if (is_array($val)) {
-                    $encodings = array_fill(0, count($val), $this->app->charset);
-                    return max(array_map('mb_strwidth', $val, $encodings)) + mb_strwidth($this->_listPrefix, $this->app->charset);
+                    $encodings = array_fill(0, count($val), $this->app->encoding);
+                    return max(array_map('mb_strwidth', $val, $encodings)) + mb_strwidth($this->_listPrefix, $this->app->encoding);
                 }
 
-                return mb_strwidth($val, $this->app->charset);
+                return mb_strwidth($val, $this->app->encoding);
             }, $column)) + 2;
             $this->_columnWidths[] = $columnWidth;
             $totalWidth += $columnWidth;
@@ -355,11 +355,11 @@ class Table extends Widget
             return ceil($columnWidth / ($size - 2));
         }, $this->_columnWidths, array_map(function ($val) {
             if (is_array($val)) {
-                $encodings = array_fill(0, count($val), $this->app->charset);
+                $encodings = array_fill(0, count($val), $this->app->encoding);
                 return array_map('mb_strwidth', $val, $encodings);
             }
 
-            return mb_strwidth($val, $this->app->charset);
+            return mb_strwidth($val, $this->app->encoding);
         }, $row)
         );
 
