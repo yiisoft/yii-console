@@ -7,10 +7,10 @@
 
 namespace yii\console\tests\controllers;
 
-use Yii;
 use yii\console\controllers\BaseMigrateController;
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
+use yii\helpers\Yii;
 use yii\tests\TestCase;
 
 /**

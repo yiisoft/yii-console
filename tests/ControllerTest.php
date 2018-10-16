@@ -7,7 +7,7 @@
 
 namespace yii\console\tests;
 
-use Yii;
+use yii\helpers\Yii;
 use yii\base\Module;
 use yii\console\Request;
 use yii\tests\TestCase;

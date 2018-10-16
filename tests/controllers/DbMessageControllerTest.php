@@ -7,7 +7,7 @@
 
 namespace yii\console\tests\controllers;
 
-use Yii;
+use yii\helpers\Yii;
 use yii\console\ExitCode;
 use yii\db\Connection;
 

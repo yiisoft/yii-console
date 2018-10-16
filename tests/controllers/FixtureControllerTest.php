@@ -7,7 +7,7 @@
 
 namespace yii\console\tests\controllers;
 
-use Yii;
+use yii\helpers\Yii;
 use yii\console\controllers\FixtureController;
 use yii\tests\data\console\controllers\fixtures\FixtureStorage;
 use yii\tests\TestCase;

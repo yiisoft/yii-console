@@ -7,7 +7,7 @@
 
 namespace yii\console\tests\controllers;
 
-use Yii;
+use yii\helpers\Yii;
 use yii\console\controllers\AssetController;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;

@@ -7,7 +7,7 @@
 
 namespace yii\console\tests\controllers;
 
-use Yii;
+use yii\helpers\Yii;
 use yii\caching\ArrayCache;
 use yii\console\controllers\CacheController;
 use yii\tests\TestCase;

@@ -7,7 +7,7 @@
 
 namespace yii\console\tests\controllers;
 
-use Yii;
+use yii\helpers\Yii;
 use yii\console\controllers\MigrateController;
 use yii\db\Migration;
 use yii\db\Query;

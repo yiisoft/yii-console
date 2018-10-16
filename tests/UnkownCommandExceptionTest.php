@@ -7,7 +7,7 @@
 
 namespace yii\console\tests;
 
-use Yii;
+use yii\helpers\Yii;
 use yii\console\Application;
 use yii\console\UnknownCommandException;
 use yii\tests\TestCase;

@@ -7,7 +7,7 @@
 
 namespace yii\console\tests\controllers;
 
-use Yii;
+use yii\helpers\Yii;
 use yii\helpers\FileHelper;
 use yii\helpers\VarDumper;
 
