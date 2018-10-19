@@ -94,7 +94,11 @@ class Controller extends \yii\base\Controller
                 $optionAliases = $this->optionAliases();
                 foreach ($params['_aliases'] as $name => $value) {
                     if (array_key_exists($name, $optionAliases)) {
-                        $params[$optionAliases[$name]] = $value;
+                        if (is_array($optionAliases[$name])) {
+                            $params[array_shift($optionAliases[$name])] = array_shift($optionAliases[$name]);
+                        } else {
+                            $params[$optionAliases[$name]] = $value;
+                        }
                     } else {
                         throw new Exception($this->app->t('yii', 'Unknown alias: -{name}', ['name' => $name]));
                     }
@@ -358,6 +362,9 @@ class Controller extends \yii\base\Controller
      *
      * @return array the options alias names valid for the action
      * where the keys is alias name for option and value is option name.
+     * @since 3.0.0 the value can be a two-element array. In this array
+     * the first element value is option name and the second element value is a value of option
+     * for example: `return ['y' => ['-interactive', 0]];` is represent reflect `-y` to `--interactive=0`
      *
      * @since 2.0.8
      * @see options()
