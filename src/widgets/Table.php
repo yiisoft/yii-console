@@ -7,7 +7,7 @@
 
 namespace yii\console\widgets;
 
-use yii\base\Widget;
+use yii\widgets\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Console;
 

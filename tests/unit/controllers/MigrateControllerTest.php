@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console\tests\controllers;
+namespace yii\console\tests\unit\controllers;
 
 use yii\helpers\Yii;
 use yii\console\controllers\MigrateController;
@@ -29,12 +29,11 @@ class MigrateControllerTest extends TestCase
         $this->migrateControllerClass = EchoMigrateController::class;
         $this->migrationBaseClass = Migration::class;
 
-        $this->mockApplication([
-            'components' => [
-                'db' => [
-                    '__class' => \yii\db\Connection::class,
-                    'dsn' => 'sqlite::memory:',
-                ],
+        $this->mockApplication();
+        $this->container->setAll([
+            'db' => [
+                '__class' => \yii\db\Connection::class,
+                'dsn' => 'sqlite::memory:',
             ],
         ]);
 
@@ -59,7 +58,7 @@ class MigrateControllerTest extends TestCase
 
     public function assertFileContent($expectedFile, $class, $table)
     {
-        $expected = include Yii::getAlias("@yii/tests/data/console/migrate_create/$expectedFile.php");
+        $expected = include $this->app->getAlias("@yii/tests/data/console/migrate_create/$expectedFile.php");
         $expected = str_replace('{table}', $table, $expected);
         $this->assertEqualsWithoutLE($expected, $this->parseNameClassMigration($class, $table));
     }
@@ -156,7 +155,7 @@ class MigrateControllerTest extends TestCase
 
     public function testNamedMigrationWithCustomLimit()
     {
-        Yii::$app->db->createCommand()->createTable('migration', [
+        $this->app->db->createCommand()->createTable('migration', [
             'version' => 'varchar(255) NOT NULL PRIMARY KEY', // varchar(255) is longer than the default of 180
             'apply_time' => 'integer',
         ])->execute();
@@ -279,12 +278,12 @@ class MigrateControllerTest extends TestCase
      */
     public function testRefreshMigration()
     {
-        Yii::$app->db->createCommand('create table hall_of_fame(id int, string varchar(255))')
+        $this->app->db->createCommand('create table hall_of_fame(id int, string varchar(255))')
             ->execute();
 
-        Yii::$app->db->createCommand("insert into hall_of_fame values(1, 'Qiang Xue');")
+        $this->app->db->createCommand("insert into hall_of_fame values(1, 'Qiang Xue');")
             ->execute();
-        Yii::$app->db->createCommand("insert into hall_of_fame values(2, 'Alexander Makarov');")
+        $this->app->db->createCommand("insert into hall_of_fame values(2, 'Alexander Makarov');")
             ->execute();
 
         $result = $this->runMigrateControllerAction('fresh');
@@ -308,9 +307,9 @@ class MigrateControllerTest extends TestCase
         $this->runMigrateControllerAction('history', [], $controllerConfig);
 
         $controller = $this->createMigrateController($controllerConfig);
-        $controller->db = Yii::$app->db;
+        $controller->db = $this->app->db;
 
-        Yii::$app->db->createCommand()
+        $this->app->db->createCommand()
             ->batchInsert(
                 'migration',
                 ['version', 'apply_time'],

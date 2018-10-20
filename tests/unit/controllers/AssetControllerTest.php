@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console\tests\controllers;
+namespace yii\console\tests\unit\controllers;
 
 use yii\helpers\Yii;
 use yii\console\controllers\AssetController;
@@ -72,9 +72,9 @@ class AssetControllerTest extends TestCase
      */
     protected function createAssetController()
     {
-        $module = $this->getMockBuilder('yii\\base\\Module')
+        $module = $this->getMockBuilder(\yii\base\Module::class)
+            ->setConstructorArgs(['console', $this->app])
             ->setMethods(['fake'])
-            ->setConstructorArgs(['console'])
             ->getMock();
         $assetController = new AssetControllerMock('asset', $module);
         $assetController->interactive = false;
@@ -444,7 +444,7 @@ EOL;
 
         // Assert :
         $expectedExceptionMessage = ": {$namespace}\AssetA -> {$namespace}\AssetB -> {$namespace}\AssetC -> {$namespace}\AssetA";
-        $this->expectException('yii\console\Exception');
+        $this->expectException(\yii\console\exceptions\Exception::class);
         $this->expectExceptionMessage($expectedExceptionMessage);
 
         // When :

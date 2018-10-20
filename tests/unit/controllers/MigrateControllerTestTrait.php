@@ -5,8 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console\tests\controllers;
+namespace yii\console\tests\unit\controllers;
 
+use yii\base\Module;
 use yii\console\controllers\BaseMigrateController;
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
@@ -68,9 +69,9 @@ trait MigrateControllerTestTrait
      */
     protected function createMigrateController(array $config = [])
     {
-        $module = $this->getMockBuilder('yii\\base\\Module')
+        $module = $this->getMockBuilder(Module::class)
+            ->setConstructorArgs(['console', $this->app])
             ->setMethods(['fake'])
-            ->setConstructorArgs(['console'])
             ->getMock();
         $class = $this->migrateControllerClass;
         $migrateController = new $class('migrate', $module);

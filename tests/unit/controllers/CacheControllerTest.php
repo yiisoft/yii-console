@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console\tests\controllers;
+namespace yii\console\tests\unit\controllers;
 
 use yii\helpers\Yii;
 use yii\caching\ArrayCache;
@@ -33,10 +33,12 @@ class CacheControllerTest extends TestCase
     {
         parent::setUp();
 
+        $this->mockApplication();
+
         $this->_cacheController = Yii::createObject([
-            '__class' => \yii\console\tests\controllers\SilencedCacheController::class,
+            '__class' => \yii\console\tests\unit\controllers\SilencedCacheController::class,
             'interactive' => false,
-        ], [null, null]); //id and module are null
+        ], [null, $this->app]); //id and module are null
 
         $databases = self::getParam('databases');
         $config = $databases[$this->driverName];

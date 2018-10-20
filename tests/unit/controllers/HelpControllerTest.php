@@ -5,8 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console\tests\controllers;
+namespace yii\console\tests\unit\controllers;
 
+use yii\base\Module;
 use yii\console\controllers\HelpController;
 use yii\helpers\Console;
 use yii\tests\TestCase;
@@ -32,9 +33,9 @@ class HelpControllerTest extends TestCase
      */
     protected function createController()
     {
-        $module = $this->getMockBuilder('yii\\base\\Module')
+        $module = $this->getMockBuilder(Module::class)
+            ->setConstructorArgs(['console', $this->app])
             ->setMethods(['fake'])
-            ->setConstructorArgs(['console'])
             ->getMock();
         return new BufferedHelpController('help', $module);
     }
@@ -56,7 +57,6 @@ class HelpControllerTest extends TestCase
     public function testModuleControllersList()
     {
         $this->mockApplication([
-            'enableCoreCommands' => false,
             'modules' => [
                 'magic' => 'yii\tests\data\modules\magic\Module',
             ],
@@ -81,7 +81,6 @@ STRING
     public function testActionList()
     {
         $this->mockApplication([
-            'enableCoreCommands' => false,
             'controllerMap' => [
                 'migrate' => 'yii\console\controllers\MigrateController',
                 'cache' => 'yii\console\controllers\CacheController',
@@ -117,7 +116,6 @@ STRING
     public function testActionListActionOptions()
     {
         $this->mockApplication([
-            'enableCoreCommands' => false,
             'controllerMap' => [
                 'migrate' => 'yii\console\controllers\MigrateController',
                 'cache' => 'yii\console\controllers\CacheController',
@@ -138,7 +136,6 @@ STRING
     public function testActionUsage()
     {
         $this->mockApplication([
-            'enableCoreCommands' => false,
             'controllerMap' => [
                 'migrate' => 'yii\console\controllers\MigrateController',
                 'cache' => 'yii\console\controllers\CacheController',

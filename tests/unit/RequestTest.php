@@ -5,6 +5,8 @@
  * @license http://www.yiiframework.com/license/
  */
 
+namespace yii\console\tests\unit;
+
 use yii\console\Request;
 use yii\tests\TestCase;
 
@@ -13,6 +15,11 @@ use yii\tests\TestCase;
  */
 class RequestTest extends TestCase
 {
+    public function setUp()
+    {
+        $this->mockApplication();
+    }
+
     public function provider()
     {
         return [
@@ -171,7 +178,7 @@ class RequestTest extends TestCase
                 ],
                 'expected' => [],
                 'exception' => [
-                    '\yii\console\Exception',
+                    \yii\console\exceptions\Exception::class,
                     'Parameter "0" is not valid',
                 ],
             ],
@@ -191,7 +198,7 @@ class RequestTest extends TestCase
             $this->expectExceptionMessage($expectedException[1]);
         }
 
-        $request = new Request();
+        $request = new Request($this->app);
 
         $request->setParams($params);
         [$route, $params] = $request->resolve();

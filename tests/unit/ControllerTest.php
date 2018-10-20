@@ -5,11 +5,11 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console\tests;
+namespace yii\console\tests\unit;
 
-use yii\helpers\Yii;
 use yii\base\Module;
 use yii\console\Request;
+use yii\console\Response;
 use yii\tests\TestCase;
 
 /**
@@ -21,15 +21,15 @@ class ControllerTest extends TestCase
     {
         parent::setUp();
         $this->mockApplication();
-        Yii::$app->controllerMap = [
-            'fake' => yii\console\tests\FakeController::class,
-            'help' => yii\console\tests\FakeHelpController::class,
+        $this->app->controllerMap = [
+            'fake' => FakeController::class,
+            'help' => FakeHelpController::class,
         ];
     }
 
     public function testBindActionParams()
     {
-        $controller = new FakeController('fake', Yii::$app);
+        $controller = new FakeController('fake', $this->app);
 
         $params = ['from params'];
         [$fromParam, $other] = $controller->run('aksi1', $params);
@@ -68,23 +68,23 @@ class ControllerTest extends TestCase
         $this->assertEquals('notdefault', $other);
 
         $params = ['avaliable'];
-        $message = Yii::t('yii', 'Missing required arguments: {params}', ['params' => implode(', ', ['missing'])]);
-        $this->expectException('yii\console\Exception');
+        $message = $this->app->t('yii', 'Missing required arguments: {params}', ['params' => implode(', ', ['missing'])]);
+        $this->expectException(\yii\console\exceptions\Exception::class);
         $this->expectExceptionMessage($message);
         $result = $controller->runAction('aksi3', $params);
     }
 
     public function assertResponseStatus($status, $response)
     {
-        $this->assertInstanceOf('yii\console\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
         $this->assertSame($status, $response->exitStatus);
     }
 
     public function runRequest($route, $args = 0)
     {
-        $request = new Request();
+        $request = new Request($this->app);
         $request->setParams(func_get_args());
-        return Yii::$app->handleRequest($request);
+        return $this->app->handleRequest($request);
     }
 
     public function testResponse()
@@ -109,7 +109,7 @@ class ControllerTest extends TestCase
      */
     public function testHelpOptionNotSet()
     {
-        $controller = new FakeController('posts', Yii::$app);
+        $controller = new FakeController('posts', $this->app);
         $controller->runAction('index');
 
         $this->assertTrue(FakeController::getWasActionIndexCalled());
@@ -121,7 +121,7 @@ class ControllerTest extends TestCase
      */
     public function testHelpOption()
     {
-        $controller = new FakeController('posts', Yii::$app);
+        $controller = new FakeController('posts', $this->app);
         $controller->help = true;
         $controller->runAction('index');
 
@@ -134,7 +134,7 @@ class ControllerTest extends TestCase
      */
     public function testHelpOptionWithModule()
     {
-        $controller = new FakeController('posts', new Module('news'));
+        $controller = new FakeController('posts', new Module('news', $this->app));
         $controller->help = true;
         $controller->runAction('index');
 
@@ -149,7 +149,7 @@ class ControllerTest extends TestCase
      */
     public function testHelpSkipsTypeHintedArguments()
     {
-        $controller = new FakeController('fake', Yii::$app);
+        $controller = new FakeController('fake', $this->app);
         $help = $controller->getActionArgsHelp($controller->createAction('with-complex-type-hint'));
 
         $this->assertArrayNotHasKey('typedArgument', $help);

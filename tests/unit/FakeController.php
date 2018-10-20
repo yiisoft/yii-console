@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console\tests;
+namespace yii\console\tests\unit;
 
 use yii\console\Controller;
 use yii\console\Response;
@@ -96,7 +96,7 @@ class FakeController extends Controller
 
     public function actionResponse($status = 0)
     {
-        $response = new Response();
+        $response = new Response($this->app);
         $response->exitStatus = (int) $status;
         return $response;
     }

@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console\tests\controllers;
+namespace yii\console\tests\unit\controllers;
 
 /**
  * StdOutBufferControllerTrait is a trait, which can be applied to [[yii\console\Controller]],

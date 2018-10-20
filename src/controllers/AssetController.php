@@ -701,8 +701,8 @@ EOD;
  */
 
 // In the console environment, some path aliases may not exist. Please define these:
-// $this->app->setAlias('@webroot', __DIR__ . '/../web');
-// $this->app->setAlias('@web', '/');
+// \$this->app->setAlias('@webroot', __DIR__ . '/../web');
+// \$this->app->setAlias('@web', '/');
 
 return [
     // Adjust command/callback for JavaScript files compressing:

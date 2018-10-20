@@ -5,12 +5,12 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console\tests\controllers;
+namespace yii\console\tests\unit\controllers;
 
-use yii\helpers\Yii;
 use yii\console\controllers\FixtureController;
 use yii\tests\data\console\controllers\fixtures\FixtureStorage;
 use yii\tests\TestCase;
+use yii\console\exceptions\Exception;
 
 /**
  * Unit test for [[\yii\console\controllers\FixtureController]].
@@ -21,20 +21,21 @@ use yii\tests\TestCase;
 class FixtureControllerTest extends TestCase
 {
     /**
-     * @var \yii\console\tests\controllers\FixtureConsoledController
+     * @var \yii\console\tests\unit\controllers\FixtureConsoledController
      */
     private $_fixtureController;
 
     protected function setUp()
     {
         parent::setUp();
+        $this->mockApplication();
 
-        $this->_fixtureController = Yii::createObject([
-            '__class' => \yii\console\tests\controllers\FixtureConsoledController::class,
+        $this->_fixtureController = $this->factory->create([
+            '__class' => \yii\console\tests\unit\controllers\FixtureConsoledController::class,
             'interactive' => false,
             'globalFixtures' => [],
             'namespace' => 'yii\tests\data\console\controllers\fixtures',
-        ], [null, null]); //id and module are null
+        ], [null, $this->app]); //id and module are null
     }
 
     protected function tearDown()
@@ -207,7 +208,7 @@ class FixtureControllerTest extends TestCase
     }
 
     /**
-     * @expectedException \yii\console\Exception
+     * @expectedException Exception
      */
     public function testNoFixturesWereFoundInLoad()
     {
@@ -215,7 +216,7 @@ class FixtureControllerTest extends TestCase
     }
 
     /**
-     * @expectedException \yii\console\Exception
+     * @expectedException Exception
      */
     public function testNoFixturesWereFoundInUnload()
     {
