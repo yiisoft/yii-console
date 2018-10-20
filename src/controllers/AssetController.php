@@ -8,7 +8,7 @@
 namespace yii\console\controllers;
 
 use yii\console\Controller;
-use yii\console\Exception;
+use yii\console\exceptions\Exception;
 use yii\console\ExitCode;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Console;
@@ -139,8 +139,8 @@ class AssetController extends Controller
 
     /**
      * Returns the asset manager instance.
-     * @throws \yii\console\Exception on invalid configuration.
-     * @return \yii\web\AssetManager asset manager instance.
+     * @throws Exception on invalid configuration.
+     * @return AssetManager asset manager instance.
      */
     public function getAssetManager()
     {
@@ -213,7 +213,7 @@ class AssetController extends Controller
     /**
      * Applies configuration from the given file to self instance.
      * @param string $configFile configuration file name.
-     * @throws \yii\console\Exception on failure.
+     * @throws Exception on failure.
      */
     protected function loadConfiguration($configFile)
     {
@@ -455,7 +455,7 @@ class AssetController extends Controller
      * Saves new asset bundles configuration.
      * @param \yii\web\AssetBundle[] $targets list of asset bundles to be saved.
      * @param string $bundleFile output file name.
-     * @throws \yii\console\Exception on failure.
+     * @throws Exception on failure.
      */
     protected function saveTargets($targets, $bundleFile)
     {
@@ -505,7 +505,7 @@ EOD;
      * Compresses given JavaScript files and combines them into the single one.
      * @param array $inputFiles list of source file names.
      * @param string $outputFile output file name.
-     * @throws \yii\console\Exception on failure
+     * @throws Exception on failure
      */
     protected function compressJsFiles($inputFiles, $outputFile)
     {
@@ -534,7 +534,7 @@ EOD;
      * Compresses given CSS files and combines them into the single one.
      * @param array $inputFiles list of source file names.
      * @param string $outputFile output file name.
-     * @throws \yii\console\Exception on failure
+     * @throws Exception on failure
      */
     protected function compressCssFiles($inputFiles, $outputFile)
     {
@@ -563,7 +563,7 @@ EOD;
      * Combines JavaScript files into a single one.
      * @param array $inputFiles source file names.
      * @param string $outputFile output file name.
-     * @throws \yii\console\Exception on failure.
+     * @throws Exception on failure.
      */
     public function combineJsFiles($inputFiles, $outputFile)
     {
@@ -588,7 +588,7 @@ EOD;
      * Combines CSS files into a single one.
      * @param array $inputFiles source file names.
      * @param string $outputFile output file name.
-     * @throws \yii\console\Exception on failure.
+     * @throws Exception on failure.
      */
     public function combineCssFiles($inputFiles, $outputFile)
     {
@@ -687,7 +687,7 @@ EOD;
      * Creates template of configuration file for [[actionCompress]].
      * @param string $configFile output file name.
      * @return int CLI exit code
-     * @throws \yii\console\Exception on failure.
+     * @throws Exception on failure.
      */
     public function actionTemplate($configFile)
     {

@@ -46,7 +46,7 @@ class TableTest extends TestCase
      */
     public function testTable($headers, $rows)
     {
-        $table = new Table();
+        $table = new Table($this->app);
 
         $expected = <<<'EXPECTED'
 ╔═══════════════╤═══════════════╤═══════════════╗
@@ -69,7 +69,7 @@ EXPECTED;
 
     public function testTableWithFullwidthChars()
     {
-        $table = new Table();
+        $table = new Table($this->app);
 
         // test fullwidth chars
         // @see https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms
@@ -94,7 +94,7 @@ EXPECTED;
 
     public function testLists()
     {
-        $table = new Table();
+        $table = new Table($this->app);
 
         $expected = <<<'EXPECTED'
 ╔═══════════════╤═══════════════╤══════════════╗
@@ -118,7 +118,7 @@ EXPECTED;
 
     public function testListPrefix()
     {
-        $table = new Table();
+        $table = new Table($this->app);
 
         $expected = <<<'EXPECTED'
 ╔═══════════════╤═══════════════╤══════════════╗
@@ -142,7 +142,7 @@ EXPECTED;
 
     public function testCustomChars()
     {
-        $table = new Table();
+        $table = new Table($this->app);
 
         $expected = <<<'EXPECTED'
 *++++++++++++++++*+++++++++++++++++*++++++++++++++++++*
@@ -197,7 +197,7 @@ EXPECTED;
 
     public function testShortRow()
     {
-        $table = new Table();
+        $table = new Table($this->app);
 
         $expected = <<<'EXPECTED'
 ╔═══════════════╤═══════════════╤═══════════════╗
@@ -229,7 +229,7 @@ EXPECTED;
 
     public function testEmptyRow()
     {
-        $table = new Table();
+        $table = new Table($this->app);
 
         $expected = <<<'EXPECTED'
 ╔═══════╤═══════╤═══════╗

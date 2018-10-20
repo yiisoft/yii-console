@@ -9,6 +9,7 @@ namespace yii\console\tests\unit\controllers;
 
 use yii\base\Module;
 use yii\console\controllers\BaseMigrateController;
+use yii\di\AbstractContainer;
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
 use yii\helpers\Yii;
@@ -77,7 +78,7 @@ trait MigrateControllerTestTrait
         $migrateController = new $class('migrate', $module);
         $migrateController->interactive = false;
         $migrateController->migrationPath = $this->migrationPath;
-        return Yii::configure($migrateController, $config);
+        return AbstractContainer::configure($migrateController, $config);
     }
 
     /**

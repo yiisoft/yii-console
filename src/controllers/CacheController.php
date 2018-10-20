@@ -11,7 +11,7 @@ use Psr\SimpleCache\CacheInterface;
 use yii\caching\ApcCache;
 use yii\caching\Cache;
 use yii\console\Controller;
-use yii\console\Exception;
+use yii\console\exceptions\Exception;
 use yii\console\ExitCode;
 use yii\helpers\Console;
 

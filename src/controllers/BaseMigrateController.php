@@ -12,7 +12,7 @@ use yii\base\Action;
 use yii\exceptions\InvalidConfigException;
 use yii\exceptions\NotSupportedException;
 use yii\console\Controller;
-use yii\console\Exception;
+use yii\console\exceptions\Exception;
 use yii\console\ExitCode;
 use yii\db\MigrationInterface;
 use yii\helpers\Console;
@@ -514,7 +514,7 @@ abstract class BaseMigrateController extends Controller
      *
      * @param int|string $limit the maximum number of migrations to be displayed.
      * If it is "all", the whole migration history will be displayed.
-     * @throws \yii\console\Exception if invalid limit value passed
+     * @throws Exception if invalid limit value passed
      */
     public function actionHistory($limit = 10)
     {
@@ -558,7 +558,7 @@ abstract class BaseMigrateController extends Controller
      *
      * @param int|string $limit the maximum number of new migrations to be displayed.
      * If it is `all`, all available new migrations will be displayed.
-     * @throws \yii\console\Exception if invalid limit value passed
+     * @throws Exception if invalid limit value passed
      */
     public function actionNew($limit = 10)
     {

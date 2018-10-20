@@ -86,7 +86,7 @@ class MigrateController extends BaseMigrateController
     /**
      * {@inheritdoc}
      */
-    public $templateFile = '@yii/views/migration.php';
+    public $templateFile = '@yii/console/views/migration.php';
     /**
      * @var array a set of template paths for generating migration code automatically.
      *
@@ -100,11 +100,11 @@ class MigrateController extends BaseMigrateController
      * @since 2.0.7
      */
     public $generatorTemplateFiles = [
-        'create_table' => '@yii/views/createTableMigration.php',
-        'drop_table' => '@yii/views/dropTableMigration.php',
-        'add_column' => '@yii/views/addColumnMigration.php',
-        'drop_column' => '@yii/views/dropColumnMigration.php',
-        'create_junction' => '@yii/views/createTableMigration.php',
+        'create_table'      => '@yii/console/views/createTableMigration.php',
+        'drop_table'        => '@yii/console/views/dropTableMigration.php',
+        'add_column'        => '@yii/console/views/addColumnMigration.php',
+        'drop_column'       => '@yii/console/views/dropColumnMigration.php',
+        'create_junction'   => '@yii/console/views/createTableMigration.php',
     ];
     /**
      * @var bool indicates whether the table names generated should consider

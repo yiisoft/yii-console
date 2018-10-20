@@ -10,7 +10,7 @@ namespace yii\console\controllers;
 use yii\exceptions\InvalidConfigException;
 use yii\exceptions\InvalidArgumentException;
 use yii\console\Controller;
-use yii\console\Exception;
+use yii\console\exceptions\Exception;
 use yii\console\ExitCode;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;

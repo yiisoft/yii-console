@@ -7,7 +7,7 @@
 
 namespace yii\console\controllers;
 
-use yii\console\Exception;
+use yii\console\exceptions\Exception;
 use yii\console\ExitCode;
 use yii\db\Connection;
 use yii\db\Query;
@@ -270,7 +270,7 @@ EOD;
             }
         }
 
-        if (!copy($this->app->getAlias('@yii/views/messageConfig.php'), $filePath)) {
+        if (!copy($this->app->getAlias('@yii/console/views/messageConfig.php'), $filePath)) {
             $this->stdout("Configuration file template was NOT created at '{$filePath}'.\n\n", Console::FG_RED);
             return ExitCode::UNSPECIFIED_ERROR;
         }

@@ -9,7 +9,7 @@ namespace yii\console\controllers;
 
 use yii\base\Application;
 use yii\console\Controller;
-use yii\console\Exception;
+use yii\console\exceptions\Exception;
 use yii\helpers\Console;
 use yii\helpers\Inflector;
 use yii\helpers\Yii;
