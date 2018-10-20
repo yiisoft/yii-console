@@ -71,6 +71,9 @@
         "yiisoft/log": "^3.0@dev",
         "yiisoft/cache": "^3.0@dev",
         "yiisoft/view": "^3.0@dev",
+        "yiisoft/db": "^3.0@dev",
+        "yiisoft/db-mysql": "^3.0@dev",
+        "yiisoft/db-sqlite": "^3.0@dev",
         "cebe/markdown": "^1.2",
         "hiqdev/composer-config-plugin": "^1.0@dev"
     },

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f751dc0b6e83d8e07b69fcffa361b4c",
+    "content-hash": "771afd9d7fbb5db0a11d3658748ce706",
     "packages": [
         {
             "name": "psr/container",
@@ -744,6 +744,311 @@
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
+            "name": "yiisoft/db",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/db.git",
+                "reference": "f694133195c0fc00e28b153daa02b715bf1a4bff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/db/zipball/f694133195c0fc00e28b153daa02b715bf1a4bff",
+                "reference": "f694133195c0fc00e28b153daa02b715bf1a4bff",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/db": "^3.0@dev"
+            },
+            "require-dev": {
+                "hiqdev/composer-config-plugin": "^1.0@dev",
+                "yiisoft/cache": "^3.0@dev",
+                "yiisoft/di": "^3.0@dev",
+                "yiisoft/log": "^3.0@dev",
+                "yiisoft/view": "^3.0@dev",
+                "yiisoft/yii-console": "^3.0@dev",
+                "yiisoft/yii-core": "^3.0@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                },
+                "config-plugin": {
+                    "params": "config/params.php",
+                    "common": "config/common.php"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\db\\": "src",
+                    "yii\\db\\tests\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+                },
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Maurizio Domba",
+                    "homepage": "http://mdomba.info/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc",
+                    "homepage": "http://cebe.cc/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Timur Ruziev",
+                    "email": "resurtm@gmail.com",
+                    "homepage": "http://resurtm.com/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Dmitry Naumenko",
+                    "email": "d.naumenko.a@gmail.com",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Boudewijn Vahrmeijer",
+                    "email": "info@dynasource.eu",
+                    "homepage": "http://dynasource.eu",
+                    "role": "Core framework development"
+                }
+            ],
+            "description": "Yii DataBase Library",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "database",
+                "yii"
+            ],
+            "time": "2018-10-16T15:01:22+00:00"
+        },
+        {
+            "name": "yiisoft/db-mysql",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/db-mysql.git",
+                "reference": "d65b4b0f64c94088406aeb1a184f39e11460f383"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/db-mysql/zipball/d65b4b0f64c94088406aeb1a184f39e11460f383",
+                "reference": "d65b4b0f64c94088406aeb1a184f39e11460f383",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/db": "^3.0@dev"
+            },
+            "require-dev": {
+                "hiqdev/composer-config-plugin": "^1.0@dev",
+                "yiisoft/di": "^3.0@dev",
+                "yiisoft/log": "^3.0@dev",
+                "yiisoft/view": "^3.0@dev",
+                "yiisoft/yii-core": "^3.0@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                },
+                "config-plugin": {
+                    "params": "config/params.php",
+                    "common": "config/common.php"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\db\\mysql\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+                },
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Maurizio Domba",
+                    "homepage": "http://mdomba.info/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc",
+                    "homepage": "http://cebe.cc/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Timur Ruziev",
+                    "email": "resurtm@gmail.com",
+                    "homepage": "http://resurtm.com/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Dmitry Naumenko",
+                    "email": "d.naumenko.a@gmail.com",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Boudewijn Vahrmeijer",
+                    "email": "info@dynasource.eu",
+                    "homepage": "http://dynasource.eu",
+                    "role": "Core framework development"
+                }
+            ],
+            "description": "Yii DataBase MySQL Extension",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "mysql",
+                "yii"
+            ],
+            "time": "2018-09-10T09:53:11+00:00"
+        },
+        {
+            "name": "yiisoft/db-sqlite",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/db-sqlite.git",
+                "reference": "e3e1209f5ea7b1dddb02f6677feae9a29797c281"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/db-sqlite/zipball/e3e1209f5ea7b1dddb02f6677feae9a29797c281",
+                "reference": "e3e1209f5ea7b1dddb02f6677feae9a29797c281",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/db": "^3.0@dev"
+            },
+            "require-dev": {
+                "hiqdev/composer-config-plugin": "^1.0@dev",
+                "yiisoft/active-record": "^3.0@dev",
+                "yiisoft/cache": "^3.0@dev",
+                "yiisoft/di": "^3.0@dev",
+                "yiisoft/log": "^3.0@dev",
+                "yiisoft/view": "^3.0@dev",
+                "yiisoft/yii-console": "^3.0@dev",
+                "yiisoft/yii-core": "^3.0@dev",
+                "yiisoft/yii-web": "^3.0@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                },
+                "config-plugin": {
+                    "params": "config/params.php",
+                    "common": "config/common.php",
+                    "tests": [
+                        "$common",
+                        "config/tests.php"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\db\\sqlite\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+                },
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Maurizio Domba",
+                    "homepage": "http://mdomba.info/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc",
+                    "homepage": "http://cebe.cc/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Timur Ruziev",
+                    "email": "resurtm@gmail.com",
+                    "homepage": "http://resurtm.com/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Dmitry Naumenko",
+                    "email": "d.naumenko.a@gmail.com",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Boudewijn Vahrmeijer",
+                    "email": "info@dynasource.eu",
+                    "homepage": "http://dynasource.eu",
+                    "role": "Core framework development"
+                }
+            ],
+            "description": "Yii DataBase SQLite Extension",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "sqlite",
+                "yii"
+            ],
+            "time": "2018-10-16T15:02:28+00:00"
+        },
+        {
             "name": "yiisoft/view",
             "version": "dev-master",
             "source": {
@@ -969,6 +1274,9 @@
         "yiisoft/log": 20,
         "yiisoft/cache": 20,
         "yiisoft/view": 20,
+        "yiisoft/db": 20,
+        "yiisoft/db-mysql": 20,
+        "yiisoft/db-sqlite": 20,
         "hiqdev/composer-config-plugin": 20
     },
     "prefer-stable": false,
