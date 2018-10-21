@@ -9,6 +9,7 @@ namespace yii\console\tests\unit\controllers;
 
 use yii\helpers\Yii;
 use yii\console\controllers\MigrateController;
+use yii\db\Connection;
 use yii\db\Migration;
 use yii\db\Query;
 use yii\tests\TestCase;
@@ -32,7 +33,7 @@ class MigrateControllerTest extends TestCase
         $this->mockApplication();
         $this->container->setAll([
             'db' => [
-                '__class' => \yii\db\Connection::class,
+                '__class' => Connection::class,
                 'dsn' => 'sqlite::memory:',
             ],
         ]);

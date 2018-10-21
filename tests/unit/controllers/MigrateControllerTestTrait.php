@@ -12,7 +12,6 @@ use yii\console\controllers\BaseMigrateController;
 use yii\di\AbstractContainer;
 use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
-use yii\helpers\Yii;
 use yii\tests\TestCase;
 
 /**
@@ -44,7 +43,7 @@ trait MigrateControllerTestTrait
     public function setUpMigrationPath()
     {
         $this->migrationNamespace = 'yii\tests\runtime\test_migrations';
-        $this->migrationPath = Yii::getAlias('@yii/tests/runtime/test_migrations');
+        $this->migrationPath = $this->app->getAlias('@yii/tests/runtime/test_migrations');
         FileHelper::createDirectory($this->migrationPath);
         if (!file_exists($this->migrationPath)) {
             $this->markTestIncomplete('Unit tests runtime directory should have writable permissions!');
@@ -54,8 +53,8 @@ trait MigrateControllerTestTrait
     public function tearDownMigrationPath()
     {
         FileHelper::removeDirectory($this->migrationPath);
-        FileHelper::removeDirectory(Yii::getAlias('@yii/tests/runtime/app_migrations'));
-        FileHelper::removeDirectory(Yii::getAlias('@yii/tests/runtime/extension_migrations'));
+        FileHelper::removeDirectory($this->app->getAlias('@yii/tests/runtime/app_migrations'));
+        FileHelper::removeDirectory($this->app->getAlias('@yii/tests/runtime/extension_migrations'));
     }
 
     /**
@@ -126,7 +125,7 @@ class {$class} extends {$baseClass}
     }
 }
 CODE;
-        file_put_contents(($path ? Yii::getAlias($path) : $this->migrationPath) . DIRECTORY_SEPARATOR . $class . '.php', $code);
+        file_put_contents(($path ? $this->app->getAlias($path) : $this->migrationPath) . DIRECTORY_SEPARATOR . $class . '.php', $code);
         return $class;
     }
 
@@ -498,8 +497,8 @@ CODE;
      */
     public function testCombinedMigrationProcess()
     {
-        FileHelper::createDirectory(Yii::getAlias('@yii/tests/runtime/app_migrations'));
-        FileHelper::createDirectory(Yii::getAlias('@yii/tests/runtime/extension_migrations'));
+        FileHelper::createDirectory($this->app->getAlias('@yii/tests/runtime/app_migrations'));
+        FileHelper::createDirectory($this->app->getAlias('@yii/tests/runtime/extension_migrations'));
         $controllerConfig = [
             'migrationPath' => [$appPath = '@yii/tests/runtime/app_migrations', $extensionPath = '@yii/tests/runtime/extension_migrations'],
             'migrationNamespaces' => [$this->migrationNamespace],
@@ -602,6 +601,6 @@ CODE;
             $this->migrationNamespace . '\\M010101000004NsMigration',
             'm*_app_migration3',
         ]);
-        $this->assertCount(1, FileHelper::findFiles(Yii::getAlias($appPath), ['only' => ['m*_app_migration3.php']]));
+        $this->assertCount(1, FileHelper::findFiles($this->app->getAlias($appPath), ['only' => ['m*_app_migration3.php']]));
     }
 }
