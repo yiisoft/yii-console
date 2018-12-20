@@ -302,10 +302,16 @@ class Table extends Widget
         $totalWidth = 0;
         $screenWidth = $this->getScreenWidth() - self::CONSOLE_SCROLLBAR_OFFSET;
 
-        for ($i = 0, $count = count($this->_headers); $i < $count; $i++) {
+        $numberOfColumns = count($this->_headers);
+
+        for ($i = 0, $count = $numberOfColumns; $i < $count; $i++) {
             $columns[] = ArrayHelper::getColumn($this->_rows, $i);
             $columns[$i][] = $this->_headers[$i];
         }
+
+        $screenWidthForInfo = $screenWidth;
+        $bordersAndPaddings = 2 /*number of external table borders*/ + $numberOfColumns * 3 + 1 /* number of internal cell borders and padding */;
+        $screenWidthForInfo -= $bordersAndPaddings;
 
         foreach ($columns as $column) {
             $columnWidth = max(array_map(function ($val) {
@@ -315,16 +321,16 @@ class Table extends Widget
                 }
 
                 return mb_strwidth($val, $this->app->encoding);
-            }, $column)) + 2;
+            }, $column));
             $this->_columnWidths[] = $columnWidth;
             $totalWidth += $columnWidth;
         }
 
-        $relativeWidth = $screenWidth / $totalWidth;
+        $relativeWidth = $screenWidthForInfo / $totalWidth;
 
-        if ($totalWidth > $screenWidth) {
+        if ($totalWidth + $bordersAndPaddings > $screenWidth) {
             foreach ($this->_columnWidths as $j => $width) {
-                $this->_columnWidths[$j] = (int) ($width * $relativeWidth);
+                $this->_columnWidths[$j] = round($width * $relativeWidth) + 2;
                 if ($j === count($this->_columnWidths)) {
                     $this->_columnWidths = $totalWidth;
                 }
