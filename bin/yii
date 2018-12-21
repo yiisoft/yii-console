@@ -10,7 +10,7 @@ use yii\helpers\Yii;
         __DIR__ . '/../../../autoload.php',
         __DIR__ . '/../vendor/autoload.php',
     ];
-    $autloadPath = null;
+    $autoloadPath = null;
     foreach ($paths as $path) {
         if (file_exists($path)) {
             $autoloadPath = $path;
