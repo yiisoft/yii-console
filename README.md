@@ -14,5 +14,5 @@ This [Yii Framework] extension allows easy creation of console applications.
 
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii-console/v/stable.png)](https://packagist.org/packages/yiisoft/yii-console)
 [![Total Downloads](https://poser.pugx.org/yiisoft/yii-console/downloads.png)](https://packagist.org/packages/yiisoft/yii-console)
-[![Build Status](https://travis-ci.org/yiisoft/yii-console.svg?branch=master)](https://travis-ci.org/yiisoft/yii-console)
+[![Build Status](https://travis-ci.com/yiisoft/yii-console.svg?branch=master)](https://travis-ci.com/yiisoft/yii-console)
 
