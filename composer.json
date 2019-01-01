@@ -80,11 +80,7 @@
     },
     "autoload": {
         "psr-4": {
-            "yii\\console\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
+            "yii\\console\\": "src",
             "yii\\console\\tests\\": "tests"
         }
     },
