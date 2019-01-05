@@ -29,7 +29,7 @@ class DbMessageControllerTest extends BaseMessageControllerTest
 
     protected static function runConsoleAction($route, $params = [])
     {
-        if (Yii::$app === null) {
+        if (Yii::getApp() === null) {
             new \yii\console\Application([
                 'id' => 'Migrator',
                 'basePath' => '@yii/tests',
@@ -43,7 +43,7 @@ class DbMessageControllerTest extends BaseMessageControllerTest
         }
 
         ob_start();
-        $result = Yii::$app->runAction($route, $params);
+        $result = Yii::getApp()->runAction($route, $params);
         echo 'Result is ' . $result;
         if ($result !== ExitCode::OK) {
             ob_end_flush();
