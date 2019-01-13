@@ -94,7 +94,7 @@
         "config-plugin": {
             "params": "config/params.php",
             "console": "config/console.php",
-            "tests": ["$console"]
+            "tests": "config/tests.php"
         }
     }
 }

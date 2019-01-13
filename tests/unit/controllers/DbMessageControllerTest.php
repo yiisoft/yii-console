@@ -29,21 +29,22 @@ class DbMessageControllerTest extends BaseMessageControllerTest
 
     protected static function runConsoleAction($route, $params = [])
     {
-        if (Yii::$app === null) {
-            new \yii\console\Application([
-                'id' => 'Migrator',
-                'basePath' => '@yii/tests',
-                'controllerMap' => [
-                    'migrate' => EchoMigrateController::class,
+        if (Yii::getApp() === null) {
+            Yii::getContainer()->setAll([
+                'app' => [
+                    '__class' => \yii\console\Application::class,
+                    'id' => 'Migrator',
+                    'basePath' => '@yii/tests',
+                    'controllerMap' => [
+                        'migrate' => EchoMigrateController::class,
+                    ],
                 ],
-                'components' => [
-                    'db' => static::getConnection(),
-                ],
+                'db' => static::getConnection(),
             ]);
         }
 
         ob_start();
-        $result = Yii::$app->runAction($route, $params);
+        $result = Yii::getApp()->runAction($route, $params);
         echo 'Result is ' . $result;
         if ($result !== ExitCode::OK) {
             ob_end_flush();
@@ -59,6 +60,8 @@ class DbMessageControllerTest extends BaseMessageControllerTest
         static::$database = $databases[static::$driverName];
         $pdo_database = 'pdo_' . static::$driverName;
 
+        Yii::getContainer()->set('db', static::getConnection());
+
         if (!extension_loaded('pdo') || !extension_loaded($pdo_database)) {
             static::markTestSkipped('pdo and ' . $pdo_database . ' extension are required.');
         }
@@ -72,14 +75,14 @@ class DbMessageControllerTest extends BaseMessageControllerTest
         if (static::$db) {
             static::$db->close();
         }
-        Yii::$app = null;
+        Yii::getContainer()->set('app', null);
         parent::tearDownAfterClass();
     }
 
     public function tearDown()
     {
         parent::tearDown();
-        Yii::$app = null;
+        Yii::getContainer()->set('app', null);
     }
 
     /**

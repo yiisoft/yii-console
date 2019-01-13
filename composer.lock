@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ddab20972951cadeb0b6c0e67039f219",
+    "content-hash": "b72b621379c3b25ea7af8e704bbc0b0b",
     "packages": [
         {
             "name": "psr/container",
@@ -156,12 +156,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/cache.git",
-                "reference": "201fcf789da4f7c136f4909f89b308fc6c4e8cc2"
+                "reference": "f9aa30ca51df0ce0e314e18ef47b1624df8092ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/cache/zipball/201fcf789da4f7c136f4909f89b308fc6c4e8cc2",
-                "reference": "201fcf789da4f7c136f4909f89b308fc6c4e8cc2",
+                "url": "https://api.github.com/repos/yiisoft/cache/zipball/f9aa30ca51df0ce0e314e18ef47b1624df8092ee",
+                "reference": "f9aa30ca51df0ce0e314e18ef47b1624df8092ee",
                 "shasum": ""
             },
             "require": {
@@ -177,6 +177,7 @@
                 "hiqdev/composer-config-plugin": "^1.0@dev",
                 "phpunit/phpunit": "^7.2",
                 "yiisoft/db": "^3.0@dev",
+                "yiisoft/db-mysql": "^3.0@dev",
                 "yiisoft/db-sqlite": "^3.0@dev",
                 "yiisoft/di": "^3.0@dev",
                 "yiisoft/log": "^3.0@dev",
@@ -257,7 +258,7 @@
                 "cache",
                 "yii"
             ],
-            "time": "2018-12-03T14:52:56+00:00"
+            "time": "2019-01-04T09:19:40+00:00"
         },
         {
             "name": "yiisoft/di",
@@ -265,12 +266,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/di.git",
-                "reference": "37dcddb8935aeb88f12dadcbc86a01da7a80117d"
+                "reference": "ea2196ec7931c1ebc3bcead0f49d9b313af8df2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/di/zipball/37dcddb8935aeb88f12dadcbc86a01da7a80117d",
-                "reference": "37dcddb8935aeb88f12dadcbc86a01da7a80117d",
+                "url": "https://api.github.com/repos/yiisoft/di/zipball/ea2196ec7931c1ebc3bcead0f49d9b313af8df2b",
+                "reference": "ea2196ec7931c1ebc3bcead0f49d9b313af8df2b",
                 "shasum": ""
             },
             "require": {
@@ -318,7 +319,7 @@
                 "injection",
                 "injector"
             ],
-            "time": "2018-12-20T08:57:19+00:00"
+            "time": "2019-01-11T10:59:39+00:00"
         },
         {
             "name": "yiisoft/log",
@@ -326,12 +327,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/log.git",
-                "reference": "0a90d1b85543bbee711a1d0a7c081216054b5926"
+                "reference": "30d24a57ebce472930de4e2cedc5e84b324ee4ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/log/zipball/0a90d1b85543bbee711a1d0a7c081216054b5926",
-                "reference": "0a90d1b85543bbee711a1d0a7c081216054b5926",
+                "url": "https://api.github.com/repos/yiisoft/log/zipball/30d24a57ebce472930de4e2cedc5e84b324ee4ed",
+                "reference": "30d24a57ebce472930de4e2cedc5e84b324ee4ed",
                 "shasum": ""
             },
             "require": {
@@ -342,10 +343,15 @@
             },
             "require-dev": {
                 "hiqdev/composer-config-plugin": "^1.0@dev",
+                "phpunit/phpunit": "^7.3",
                 "yiisoft/cache": "^3.0@dev",
                 "yiisoft/db": "^3.0@dev",
+                "yiisoft/db-mysql": "^3.0@dev",
+                "yiisoft/db-pgsql": "^3.0@dev",
                 "yiisoft/di": "^3.0@dev",
+                "yiisoft/rbac": "^3.0@dev",
                 "yiisoft/view": "^3.0@dev",
+                "yiisoft/yii-console": "^3.0@dev",
                 "yiisoft/yii-core": "^3.0@dev",
                 "yiisoft/yii-web": "^3.0@dev"
             },
@@ -426,7 +432,7 @@
                 "logger",
                 "yii"
             ],
-            "time": "2018-10-14T17:43:25+00:00"
+            "time": "2019-01-12T18:12:04+00:00"
         },
         {
             "name": "yiisoft/yii-core",
@@ -434,12 +440,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-core.git",
-                "reference": "a3b416fca3aba00e0fc6dcd0100f6aae723b6563"
+                "reference": "8f7ba13b5b4352f246ca9ad0d3b3c40831213f3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-core/zipball/a3b416fca3aba00e0fc6dcd0100f6aae723b6563",
-                "reference": "a3b416fca3aba00e0fc6dcd0100f6aae723b6563",
+                "url": "https://api.github.com/repos/yiisoft/yii-core/zipball/8f7ba13b5b4352f246ca9ad0d3b3c40831213f3a",
+                "reference": "8f7ba13b5b4352f246ca9ad0d3b3c40831213f3a",
                 "shasum": ""
             },
             "require": {
@@ -459,18 +465,21 @@
                 "ezyang/htmlpurifier": "^4.6",
                 "hiqdev/composer-config-plugin": "^1.0@dev",
                 "phpunit/phpunit": "^7.2",
+                "yiisoft/active-record": "^3.0@dev",
                 "yiisoft/cache": "^3.0@dev",
                 "yiisoft/db": "^3.0@dev",
+                "yiisoft/db-mysql": "^3.0@dev",
                 "yiisoft/db-sqlite": "^3.0@dev",
                 "yiisoft/di": "^3.0@dev",
                 "yiisoft/log": "^3.0@dev",
+                "yiisoft/rbac": "^3.0@dev",
                 "yiisoft/view": "^3.0@dev",
                 "yiisoft/yii-console": "^3.0@dev",
                 "yiisoft/yii-web": "^3.0@dev"
             },
             "suggest": {
                 "ext-intl": "Required for advanced i18n",
-                "ezyang/htmlpurifier": "Version '^4.6' is required at 'yii\\helpers\\HtmlPurifier' for 'html' data format support (e.g. 'yii\\i18n\\Formatter:asHtml()' and 'yii\\helpers\\StringHelper::truncateHtml()')",
+                "ezyang/htmlpurifier": "Version '^4.6' is required at 'yii\\helpers\\HtmlPurifier' and for 'html' data format support (e.g. 'yii\\i18n\\Formatter:asHtml()')",
                 "yiisoft/cache": "Caching implementation",
                 "yiisoft/db": "Required for i18n DbMessageSource",
                 "yiisoft/di": "DI container implementation",
@@ -556,7 +565,7 @@
                 "framework",
                 "yii"
             ],
-            "time": "2018-12-25T16:56:12+00:00"
+            "time": "2019-01-13T00:06:52+00:00"
         }
     ],
     "packages-dev": [
@@ -680,12 +689,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hiqdev/composer-config-plugin.git",
-                "reference": "0c8c8214be3e8789e41737495424216ff5b92070"
+                "reference": "9f61a782084ee2fa0f68ef4662cb9858752246f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hiqdev/composer-config-plugin/zipball/0c8c8214be3e8789e41737495424216ff5b92070",
-                "reference": "0c8c8214be3e8789e41737495424216ff5b92070",
+                "url": "https://api.github.com/repos/hiqdev/composer-config-plugin/zipball/9f61a782084ee2fa0f68ef4662cb9858752246f4",
+                "reference": "9f61a782084ee2fa0f68ef4662cb9858752246f4",
                 "shasum": ""
             },
             "require": {
@@ -749,7 +758,7 @@
                 "config",
                 "plugin"
             ],
-            "time": "2018-12-20T10:28:13+00:00"
+            "time": "2019-01-11T18:05:01+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2220,12 +2229,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/db.git",
-                "reference": "2e89da5e17d522ea8ba48533317204fa3666b11d"
+                "reference": "e93aa758802befc85550e934d71c058f6dca0f7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/db/zipball/2e89da5e17d522ea8ba48533317204fa3666b11d",
-                "reference": "2e89da5e17d522ea8ba48533317204fa3666b11d",
+                "url": "https://api.github.com/repos/yiisoft/db/zipball/e93aa758802befc85550e934d71c058f6dca0f7a",
+                "reference": "e93aa758802befc85550e934d71c058f6dca0f7a",
                 "shasum": ""
             },
             "require": {
@@ -2236,6 +2245,7 @@
                 "phpunit/phpunit": "^7.2",
                 "yiisoft/active-record": "^3.0@dev",
                 "yiisoft/cache": "^3.0@dev",
+                "yiisoft/db-mysql": "^3.0@dev",
                 "yiisoft/db-sqlite": "^3.0@dev",
                 "yiisoft/di": "^3.0@dev",
                 "yiisoft/log": "^3.0@dev",
@@ -2317,7 +2327,7 @@
                 "database",
                 "yii"
             ],
-            "time": "2018-12-04T14:32:01+00:00"
+            "time": "2019-01-10T08:56:19+00:00"
         },
         {
             "name": "yiisoft/db-mysql",
@@ -2325,12 +2335,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/db-mysql.git",
-                "reference": "d65b4b0f64c94088406aeb1a184f39e11460f383"
+                "reference": "4a71bdf2b4dea877e32040f675123dac69a8ebe4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/db-mysql/zipball/d65b4b0f64c94088406aeb1a184f39e11460f383",
-                "reference": "d65b4b0f64c94088406aeb1a184f39e11460f383",
+                "url": "https://api.github.com/repos/yiisoft/db-mysql/zipball/4a71bdf2b4dea877e32040f675123dac69a8ebe4",
+                "reference": "4a71bdf2b4dea877e32040f675123dac69a8ebe4",
                 "shasum": ""
             },
             "require": {
@@ -2338,10 +2348,15 @@
             },
             "require-dev": {
                 "hiqdev/composer-config-plugin": "^1.0@dev",
+                "phpunit/phpunit": "^7.3",
+                "yiisoft/active-record": "^3.0@dev",
+                "yiisoft/cache": "^3.0@dev",
                 "yiisoft/di": "^3.0@dev",
                 "yiisoft/log": "^3.0@dev",
                 "yiisoft/view": "^3.0@dev",
-                "yiisoft/yii-core": "^3.0@dev"
+                "yiisoft/yii-console": "^3.0@dev",
+                "yiisoft/yii-core": "^3.0@dev",
+                "yiisoft/yii-web": "^3.0@dev"
             },
             "type": "library",
             "extra": {
@@ -2350,7 +2365,8 @@
                 },
                 "config-plugin": {
                     "params": "config/params.php",
-                    "common": "config/common.php"
+                    "common": "config/common.php",
+                    "tests": "config/tests.php"
                 }
             },
             "autoload": {
@@ -2415,20 +2431,20 @@
                 "mysql",
                 "yii"
             ],
-            "time": "2018-09-10T09:53:11+00:00"
+            "time": "2019-01-08T15:06:26+00:00"
         },
         {
-            "name": "yiisoft/db-sqlite",
+            "name": "yiisoft/db-pgsql",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/yiisoft/db-sqlite.git",
-                "reference": "8423aac33e0effe237889cf42641365d49d960a7"
+                "url": "https://github.com/yiisoft/db-pgsql.git",
+                "reference": "2a0d268b9359896c1c81b852ac2066e6246529b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/db-sqlite/zipball/8423aac33e0effe237889cf42641365d49d960a7",
-                "reference": "8423aac33e0effe237889cf42641365d49d960a7",
+                "url": "https://api.github.com/repos/yiisoft/db-pgsql/zipball/2a0d268b9359896c1c81b852ac2066e6246529b8",
+                "reference": "2a0d268b9359896c1c81b852ac2066e6246529b8",
                 "shasum": ""
             },
             "require": {
@@ -2436,6 +2452,111 @@
             },
             "require-dev": {
                 "hiqdev/composer-config-plugin": "^1.0@dev",
+                "phpunit/phpunit": "^7.3",
+                "yiisoft/active-record": "^3.0@dev",
+                "yiisoft/cache": "^3.0@dev",
+                "yiisoft/di": "^3.0@dev",
+                "yiisoft/log": "^3.0@dev",
+                "yiisoft/view": "^3.0@dev",
+                "yiisoft/yii-console": "^3.0@dev",
+                "yiisoft/yii-core": "^3.0@dev",
+                "yiisoft/yii-web": "^3.0@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                },
+                "config-plugin": {
+                    "params": "config/params.php",
+                    "common": "config/common.php",
+                    "tests": "config/tests.php"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\db\\pgsql\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and project lead"
+                },
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Maurizio Domba",
+                    "homepage": "http://mdomba.info/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc",
+                    "homepage": "http://cebe.cc/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Timur Ruziev",
+                    "email": "resurtm@gmail.com",
+                    "homepage": "http://resurtm.com/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Dmitry Naumenko",
+                    "email": "d.naumenko.a@gmail.com",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Boudewijn Vahrmeijer",
+                    "email": "info@dynasource.eu",
+                    "homepage": "http://dynasource.eu",
+                    "role": "Core framework development"
+                }
+            ],
+            "description": "Yii DataBase PostgreSQL Extension",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "pgsql",
+                "yii"
+            ],
+            "time": "2019-01-11T09:11:07+00:00"
+        },
+        {
+            "name": "yiisoft/db-sqlite",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/db-sqlite.git",
+                "reference": "c2a08143c0fc7528e0ac36c568a870c7be93cd01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/db-sqlite/zipball/c2a08143c0fc7528e0ac36c568a870c7be93cd01",
+                "reference": "c2a08143c0fc7528e0ac36c568a870c7be93cd01",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/db": "^3.0@dev"
+            },
+            "require-dev": {
+                "hiqdev/composer-config-plugin": "^1.0@dev",
+                "phpunit/phpunit": "^7.3",
                 "yiisoft/active-record": "^3.0@dev",
                 "yiisoft/cache": "^3.0@dev",
                 "yiisoft/di": "^3.0@dev",
@@ -2521,7 +2642,7 @@
                 "sqlite",
                 "yii"
             ],
-            "time": "2018-11-25T20:44:51+00:00"
+            "time": "2019-01-01T22:43:23+00:00"
         },
         {
             "name": "yiisoft/view",
@@ -2529,12 +2650,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/view.git",
-                "reference": "4249c091615997924b7f23139669a68352f7afd9"
+                "reference": "58a2fa131865f81e5351cb933098ccdf1d718b50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/view/zipball/4249c091615997924b7f23139669a68352f7afd9",
-                "reference": "4249c091615997924b7f23139669a68352f7afd9",
+                "url": "https://api.github.com/repos/yiisoft/view/zipball/58a2fa131865f81e5351cb933098ccdf1d718b50",
+                "reference": "58a2fa131865f81e5351cb933098ccdf1d718b50",
                 "shasum": ""
             },
             "require-dev": {
@@ -2626,7 +2747,7 @@
                 "view",
                 "yii"
             ],
-            "time": "2018-12-10T13:52:10+00:00"
+            "time": "2019-01-07T11:35:19+00:00"
         },
         {
             "name": "yiisoft/yii-web",
@@ -2634,12 +2755,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-web.git",
-                "reference": "3c315b59843a2923bf8c5b365ff02c92ba39111c"
+                "reference": "70018261b5892c74a0638b0d7dc79fe2c5a05089"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-web/zipball/3c315b59843a2923bf8c5b365ff02c92ba39111c",
-                "reference": "3c315b59843a2923bf8c5b365ff02c92ba39111c",
+                "url": "https://api.github.com/repos/yiisoft/yii-web/zipball/70018261b5892c74a0638b0d7dc79fe2c5a05089",
+                "reference": "70018261b5892c74a0638b0d7dc79fe2c5a05089",
                 "shasum": ""
             },
             "require": {
@@ -2738,7 +2859,7 @@
                 "framework",
                 "yii"
             ],
-            "time": "2018-11-28T13:30:30+00:00"
+            "time": "2019-01-11T17:53:06+00:00"
         }
     ],
     "aliases": [],
@@ -2753,6 +2874,7 @@
         "yiisoft/db": 20,
         "yiisoft/db-mysql": 20,
         "yiisoft/db-sqlite": 20,
+        "yiisoft/db-pgsql": 20,
         "hiqdev/composer-config-plugin": 20
     },
     "prefer-stable": false,

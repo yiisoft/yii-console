@@ -8,12 +8,13 @@
 namespace yii\console\controllers;
 
 use Psr\SimpleCache\CacheInterface;
-use yii\caching\ApcCache;
-use yii\caching\Cache;
+use yii\cache\ApcCache;
+use yii\cache\Cache;
 use yii\console\Controller;
 use yii\console\exceptions\Exception;
 use yii\console\ExitCode;
 use yii\helpers\Console;
+use yii\helpers\Yii;
 
 /**
  * Allows you to clear cache.
@@ -256,7 +257,7 @@ class CacheController extends Controller
     private function findCaches(array $cachesNames = []): array
     {
         $caches = [];
-        $components = $this->app->getComponents();
+        $components = Yii::getContainer()->getInstances();
         $findAll = ($cachesNames === []);
 
         foreach ($components as $name => $component) {

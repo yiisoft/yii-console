@@ -7,7 +7,7 @@
 
 namespace yii\console;
 
-use yii\exceptions\Exception;
+use yii\console\exceptions\Exception;
 
 /**
  * The console Request represents the environment information for a console application.
