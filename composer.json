@@ -96,13 +96,5 @@
             "console": "config/console.php",
             "tests": "config/tests.php"
         }
-    },
-    "repositories": [
-        {
-            "type" : "path",
-            "url" : "../yii-core"
-        }
-    ]
-
-    
+    }
 }
