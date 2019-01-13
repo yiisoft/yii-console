@@ -46,7 +46,7 @@ class HelpController extends Controller
      * @return int the exit status
      * @throws Exception if the command for help is unknown
      */
-    public function actionIndex($command = null)
+    public function actionIndex(string $command = null): int
     {
         if ($command !== null) {
             $result = $this->app->createController($command);
@@ -58,7 +58,7 @@ class HelpController extends Controller
             [$controller, $actionID] = $result;
 
             $actions = $this->getActions($controller);
-            if ($actionID !== '' || count($actions) === 1 && $actions[0] === $controller->defaultAction) {
+            if ($actionID !== '' || (count($actions) === 1 && $actions[0] === $controller->defaultAction)) {
                 $this->getSubCommandHelp($controller, $actionID);
             } else {
                 $this->getCommandHelp($controller);
@@ -100,7 +100,7 @@ class HelpController extends Controller
      * @param string $action route to action
      * @since 2.0.11
      */
-    public function actionListActionOptions($action)
+    public function actionListActionOptions(string $action)
     {
         $result = $this->app->createController($action);
 
@@ -133,7 +133,7 @@ class HelpController extends Controller
      * @param string $action route to action
      * @since 2.0.11
      */
-    public function actionUsage($action)
+    public function actionUsage(string $action)
     {
         $result = $this->app->createController($action);
 
@@ -170,7 +170,7 @@ class HelpController extends Controller
      * Returns all available command names.
      * @return array all available command names
      */
-    public function getCommands()
+    public function getCommands(): array
     {
         $commands = $this->getModuleCommands($this->app);
         sort($commands);
@@ -181,7 +181,7 @@ class HelpController extends Controller
      * Returns an array of commands an their descriptions.
      * @return array all available commands as keys and their description as values.
      */
-    protected function getCommandDescriptions()
+    protected function getCommandDescriptions(): array
     {
         $descriptions = [];
         foreach ($this->getCommands() as $command) {
@@ -205,7 +205,7 @@ class HelpController extends Controller
      * @param Controller $controller the controller instance
      * @return array all available action IDs.
      */
-    public function getActions($controller)
+    public function getActions(Controller $controller): array
     {
         $actions = array_keys($controller->actions());
         $class = new \ReflectionClass($controller);
@@ -225,7 +225,7 @@ class HelpController extends Controller
      * @param \yii\base\Module $module the module instance
      * @return array the available command names
      */
-    protected function getModuleCommands($module)
+    protected function getModuleCommands(Module $module): array
     {
         $prefix = $module instanceof Application ? '' : $module->getUniqueId() . '/';
 
@@ -275,7 +275,7 @@ class HelpController extends Controller
      * @param string $controllerClass
      * @return bool
      */
-    protected function validateControllerClass($controllerClass)
+    protected function validateControllerClass(string $controllerClass): bool
     {
         if (class_exists($controllerClass)) {
             $class = new \ReflectionClass($controllerClass);
@@ -360,7 +360,7 @@ class HelpController extends Controller
      * Displays the overall information of the command.
      * @param Controller $controller the controller instance
      */
-    protected function getCommandHelp($controller)
+    protected function getCommandHelp(Controller $controller)
     {
         $controller->color = $this->color;
 
@@ -408,7 +408,7 @@ class HelpController extends Controller
      * @param string $actionID action ID
      * @throws Exception if the action does not exist
      */
-    protected function getSubCommandHelp($controller, $actionID)
+    protected function getSubCommandHelp(Controller $controller, string $actionID)
     {
         $action = $controller->createAction($actionID);
         if ($action === null) {
@@ -486,7 +486,7 @@ class HelpController extends Controller
      * @param string $comment comment about the option or argument
      * @return string the formatted string for the argument or option
      */
-    protected function formatOptionHelp($name, $required, $type, $defaultValue, $comment)
+    protected function formatOptionHelp(string $name, bool $required, ?string $type, $defaultValue, string $comment): string
     {
         $comment = trim($comment);
         $type = trim($type);
@@ -498,11 +498,11 @@ class HelpController extends Controller
             if ($type === null) {
                 $type = gettype($defaultValue);
             }
-            if (is_bool($defaultValue)) {
+            if (\is_bool($defaultValue)) {
                 // show as integer to avoid confusion
                 $defaultValue = (int)$defaultValue;
             }
-            if (is_string($defaultValue)) {
+            if (\is_string($defaultValue)) {
                 $defaultValue = "'" . $defaultValue . "'";
             } else {
                 $defaultValue = var_export($defaultValue, true);
@@ -529,7 +529,7 @@ class HelpController extends Controller
      * @return string the formatted string for the alias argument or option
      * @since 2.0.8
      */
-    protected function formatOptionAliases($controller, $option)
+    protected function formatOptionAliases(Controller $controller, string $option): string
     {
         foreach ($controller->optionAliases() as $name => $value) {
             if ($value === $option) {
@@ -543,7 +543,7 @@ class HelpController extends Controller
     /**
      * @return string the name of the cli script currently running.
      */
-    protected function getScriptName()
+    protected function getScriptName(): string
     {
         return basename($this->app->request->scriptFile);
     }
@@ -553,7 +553,7 @@ class HelpController extends Controller
      * @return string default help header.
      * @since 2.0.11
      */
-    protected function getDefaultHelpHeader()
+    protected function getDefaultHelpHeader(): string
     {
         return "\nThis is Yii version " . Yii::getVersion() . ".\n";
     }

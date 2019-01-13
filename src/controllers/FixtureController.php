@@ -66,7 +66,7 @@ class FixtureController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function options($actionID)
+    public function options(string $actionID): array
     {
         return array_merge(parent::options($actionID), [
             'namespace', 'globalFixtures',
@@ -77,7 +77,7 @@ class FixtureController extends Controller
      * {@inheritdoc}
      * @since 2.0.8
      */
-    public function optionAliases()
+    public function optionAliases(): array
     {
         return array_merge(parent::optionAliases(), [
             'g' => 'globalFixtures',
@@ -106,7 +106,7 @@ class FixtureController extends Controller
      * @return int return code
      * @throws Exception if the specified fixture does not exist.
      */
-    public function actionLoad(array $fixturesInput = [])
+    public function actionLoad(array $fixturesInput = []): int
     {
         if ($fixturesInput === []) {
             $this->stdout($this->getHelpSummary() . "\n");
@@ -186,7 +186,7 @@ class FixtureController extends Controller
      * @return int return code
      * @throws Exception if the specified fixture does not exist.
      */
-    public function actionUnload(array $fixturesInput = [])
+    public function actionUnload(array $fixturesInput = []): int
     {
         $filtered = $this->filterFixtures($fixturesInput);
         $except = $filtered['except'];
@@ -236,7 +236,7 @@ class FixtureController extends Controller
      * Notifies user that fixtures were successfully loaded.
      * @param array $fixtures
      */
-    private function notifyLoaded($fixtures)
+    private function notifyLoaded(array $fixtures)
     {
         $this->stdout("Fixtures were successfully loaded from namespace:\n", Console::FG_YELLOW);
         $this->stdout("\t\"" . $this->app->getAlias($this->namespace) . "\"\n\n", Console::FG_GREEN);
@@ -248,7 +248,7 @@ class FixtureController extends Controller
      * @param array $foundFixtures array of found fixtures
      * @param array $except array of names of fixtures that should not be loaded
      */
-    public function notifyNothingToLoad($foundFixtures, $except)
+    public function notifyNothingToLoad(array $foundFixtures, array $except)
     {
         $this->stdout("Fixtures to load could not be found according given conditions:\n\n", Console::FG_RED);
         $this->stdout("Fixtures namespace is: \n", Console::FG_YELLOW);
@@ -270,7 +270,7 @@ class FixtureController extends Controller
      * @param array $foundFixtures array of found fixtures
      * @param array $except array of names of fixtures that should not be loaded
      */
-    public function notifyNothingToUnload($foundFixtures, $except)
+    public function notifyNothingToUnload(array $foundFixtures, array $except)
     {
         $this->stdout("Fixtures to unload could not be found according to given conditions:\n\n", Console::FG_RED);
         $this->stdout("Fixtures namespace is: \n", Console::FG_YELLOW);
@@ -291,7 +291,7 @@ class FixtureController extends Controller
      * Notifies user that fixtures were successfully unloaded.
      * @param array $fixtures
      */
-    private function notifyUnloaded($fixtures)
+    private function notifyUnloaded(array $fixtures)
     {
         $this->stdout("\nFixtures were successfully unloaded from namespace: ", Console::FG_YELLOW);
         $this->stdout($this->app->getAlias($this->namespace) . "\"\n\n", Console::FG_GREEN);
@@ -302,7 +302,7 @@ class FixtureController extends Controller
      * Notifies user that fixtures were not found under fixtures path.
      * @param array $fixtures
      */
-    private function notifyNotFound($fixtures)
+    private function notifyNotFound(array $fixtures)
     {
         $this->stdout("Some fixtures were not found under path:\n", Console::BG_RED);
         $this->stdout("\t" . $this->getFixturePath() . "\n\n", Console::FG_GREEN);
@@ -317,7 +317,7 @@ class FixtureController extends Controller
      * @param array $except
      * @return bool
      */
-    private function confirmLoad($fixtures, $except)
+    private function confirmLoad(array $fixtures, array $except)
     {
         $this->stdout("Fixtures namespace is: \n", Console::FG_YELLOW);
         $this->stdout("\t" . $this->namespace . "\n\n", Console::FG_GREEN);
@@ -349,7 +349,7 @@ class FixtureController extends Controller
      * @param array $except
      * @return bool
      */
-    private function confirmUnload($fixtures, $except)
+    private function confirmUnload(array $fixtures, array $except)
     {
         $this->stdout("Fixtures namespace is: \n", Console::FG_YELLOW);
         $this->stdout("\t" . $this->namespace . "\n\n", Console::FG_GREEN);
@@ -376,7 +376,7 @@ class FixtureController extends Controller
      * Outputs data to the console as a list.
      * @param array $data
      */
-    private function outputList($data)
+    private function outputList(array $data)
     {
         foreach ($data as $index => $item) {
             $this->stdout("\t" . ($index + 1) . ". {$item}\n", Console::FG_GREEN);
@@ -388,7 +388,7 @@ class FixtureController extends Controller
      * @param string $fixture
      * @return bool
      */
-    public function needToApplyAll($fixture)
+    public function needToApplyAll(string $fixture): bool
     {
         return $fixture === '*';
     }
@@ -399,7 +399,7 @@ class FixtureController extends Controller
      * @param array $fixtures fixtures to be loaded
      * @return array Array of found fixtures. These may differ from input parameter as not all fixtures may exists.
      */
-    private function findFixtures(array $fixtures = [])
+    private function findFixtures(array $fixtures = []): array
     {
         $fixturesPath = $this->getFixturePath();
 
@@ -431,13 +431,13 @@ class FixtureController extends Controller
      * @param string $fullFixturePath Full fixture path
      * @return string Relative fixture name
      */
-    private function getFixtureRelativeName($fullFixturePath)
+    private function getFixtureRelativeName(string $fullFixturePath): string
     {
         $fixturesPath = FileHelper::normalizePath($this->getFixturePath());
         $fullFixturePath = FileHelper::normalizePath($fullFixturePath);
 
-        $relativeName = substr($fullFixturePath, strlen($fixturesPath) + 1);
-        $relativeDir = dirname($relativeName) === '.' ? '' : dirname($relativeName) . DIRECTORY_SEPARATOR;
+        $relativeName = substr($fullFixturePath, \strlen($fixturesPath) + 1);
+        $relativeDir = \dirname($relativeName) === '.' ? '' : \dirname($relativeName) . DIRECTORY_SEPARATOR;
 
         return $relativeDir . basename($fullFixturePath, 'Fixture.php');
     }
@@ -447,7 +447,7 @@ class FixtureController extends Controller
      * @param array $fixtures fixtures to configure
      * @return array
      */
-    private function getFixturesConfig($fixtures)
+    private function getFixturesConfig(array $fixtures): array
     {
         $config = [];
 
@@ -488,7 +488,7 @@ class FixtureController extends Controller
      * @param array $fixtures
      * @return array fixtures array with 'apply' and 'except' elements.
      */
-    private function filterFixtures($fixtures)
+    private function filterFixtures(array $fixtures): array
     {
         $filtered = [
             'apply' => [],
@@ -511,7 +511,7 @@ class FixtureController extends Controller
      * @throws InvalidConfigException if fixture namespace is invalid
      * @return string fixture path
      */
-    private function getFixturePath()
+    private function getFixturePath(): string
     {
         try {
             return $this->app->getAlias('@' . str_replace('\\', '/', $this->namespace));

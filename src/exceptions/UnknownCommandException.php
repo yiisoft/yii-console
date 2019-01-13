@@ -37,7 +37,7 @@ class UnknownCommandException extends Exception
      * @param int $code the Exception code.
      * @param \Exception $previous the previous exception used for the exception chaining.
      */
-    public function __construct($route, $application, $code = 0, \Exception $previous = null)
+    public function __construct(string $route, Application $application, int $code = 0, \Exception $previous = null)
     {
         $this->command = $route;
         $this->application = $application;
@@ -47,7 +47,7 @@ class UnknownCommandException extends Exception
     /**
      * @return string the user-friendly name of this exception
      */
-    public function getName()
+    public function getName(): string
     {
         return 'Unknown command';
     }
@@ -65,7 +65,7 @@ class UnknownCommandException extends Exception
      * @see http://php.net/manual/en/function.levenshtein.php
      * @return array a list of suggested alternatives sorted by similarity.
      */
-    public function getSuggestedAlternatives()
+    public function getSuggestedAlternatives(): array
     {
         $help = $this->application->createController('help');
         if ($help === false || $this->command === '') {
@@ -113,7 +113,7 @@ class UnknownCommandException extends Exception
      * @param string $command the command to compare to.
      * @return array a list of suggested alternatives sorted by similarity.
      */
-    private function filterBySimilarity($actions, $command)
+    private function filterBySimilarity(array $actions, string $command): array
     {
         $alternatives = [];
 
@@ -126,8 +126,8 @@ class UnknownCommandException extends Exception
 
         // calculate the Levenshtein distance between the unknown command and all available commands.
         $distances = array_map(function ($action) use ($command) {
-            $action = strlen($action) > 255 ? substr($action, 0, 255) : $action;
-            $command = strlen($command) > 255 ? substr($command, 0, 255) : $command;
+            $action = \strlen($action) > 255 ? substr($action, 0, 255) : $action;
+            $command = \strlen($command) > 255 ? substr($command, 0, 255) : $command;
             return levenshtein($action, $command);
         }, array_combine($actions, $actions));
 

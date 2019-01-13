@@ -47,23 +47,23 @@ use yii\helpers\Console;
  */
 class Table extends Widget
 {
-    const DEFAULT_CONSOLE_SCREEN_WIDTH = 120;
-    const CONSOLE_SCROLLBAR_OFFSET = 3;
-    const CHAR_TOP = 'top';
-    const CHAR_TOP_MID = 'top-mid';
-    const CHAR_TOP_LEFT = 'top-left';
-    const CHAR_TOP_RIGHT = 'top-right';
-    const CHAR_BOTTOM = 'bottom';
-    const CHAR_BOTTOM_MID = 'bottom-mid';
-    const CHAR_BOTTOM_LEFT = 'bottom-left';
-    const CHAR_BOTTOM_RIGHT = 'bottom-right';
-    const CHAR_LEFT = 'left';
-    const CHAR_LEFT_MID = 'left-mid';
-    const CHAR_MID = 'mid';
-    const CHAR_MID_MID = 'mid-mid';
-    const CHAR_RIGHT = 'right';
-    const CHAR_RIGHT_MID = 'right-mid';
-    const CHAR_MIDDLE = 'middle';
+    private const DEFAULT_CONSOLE_SCREEN_WIDTH = 120;
+    private const CONSOLE_SCROLLBAR_OFFSET = 3;
+    public const CHAR_TOP = 'top';
+    public const CHAR_TOP_MID = 'top-mid';
+    public const CHAR_TOP_LEFT = 'top-left';
+    public const CHAR_TOP_RIGHT = 'top-right';
+    public const CHAR_BOTTOM = 'bottom';
+    public const CHAR_BOTTOM_MID = 'bottom-mid';
+    public const CHAR_BOTTOM_LEFT = 'bottom-left';
+    public const CHAR_BOTTOM_RIGHT = 'bottom-right';
+    public const CHAR_LEFT = 'left';
+    public const CHAR_LEFT_MID = 'left-mid';
+    public const CHAR_MID = 'mid';
+    public const CHAR_MID_MID = 'mid-mid';
+    public const CHAR_RIGHT = 'right';
+    public const CHAR_RIGHT_MID = 'right-mid';
+    public const CHAR_MIDDLE = 'middle';
 
     /**
      * @var array table headers
@@ -113,7 +113,7 @@ class Table extends Widget
      * @param array $headers table headers
      * @return $this
      */
-    public function setHeaders(array $headers)
+    public function setHeaders(array $headers): self
     {
         $this->_headers = array_values($headers);
         return $this;
@@ -125,7 +125,7 @@ class Table extends Widget
      * @param array $rows table rows
      * @return $this
      */
-    public function setRows(array $rows)
+    public function setRows(array $rows): self
     {
         $this->_rows = array_map('array_values', $rows);
         return $this;
@@ -137,7 +137,7 @@ class Table extends Widget
      * @param array $chars table chars
      * @return $this
      */
-    public function setChars(array $chars)
+    public function setChars(array $chars): self
     {
         $this->_chars = $chars;
         return $this;
@@ -149,7 +149,7 @@ class Table extends Widget
      * @param int $width screen width
      * @return $this
      */
-    public function setScreenWidth($width)
+    public function setScreenWidth(int $width): self
     {
         $this->_screenWidth = $width;
         return $this;
@@ -161,7 +161,7 @@ class Table extends Widget
      * @param string $listPrefix list prefix
      * @return $this
      */
-    public function setListPrefix($listPrefix)
+    public function setListPrefix(string $listPrefix): self
     {
         $this->_listPrefix = $listPrefix;
         return $this;
@@ -170,7 +170,7 @@ class Table extends Widget
     /**
      * @return string the rendered table
      */
-    public function run()
+    public function run(): string
     {
         $this->calculateRowsSize();
         $buffer = $this->renderSeparator(
@@ -220,7 +220,7 @@ class Table extends Widget
      * @return string
      * @see \yii\console\widgets\Table::render()
      */
-    protected function renderRow(array $row, $spanLeft, $spanMiddle, $spanRight)
+    protected function renderRow(array $row, string $spanLeft, string $spanMiddle, string$spanRight): string
     {
         $size = $this->_columnWidths;
 
@@ -278,7 +278,7 @@ class Table extends Widget
      * @return string the generated separator row
      * @see \yii\console\widgets\Table::render()
      */
-    protected function renderSeparator($spanLeft, $spanMid, $spanMidMid, $spanRight)
+    protected function renderSeparator(string $spanLeft, string $spanMid, string $spanMidMid, string $spanRight): string
     {
         $separator = $spanLeft;
         foreach ($this->_columnWidths as $index => $rowSize) {
@@ -296,7 +296,7 @@ class Table extends Widget
      *
      * @see \yii\console\widgets\Table::render()
      */
-    protected function calculateRowsSize()
+    protected function calculateRowsSize(): void
     {
         $this->_columnWidths = $columns = [];
         $totalWidth = 0;
@@ -340,10 +340,10 @@ class Table extends Widget
      * @return int maximum row per cell
      * @see \yii\console\widgets\Table::render()
      */
-    protected function calculateRowHeight($row)
+    protected function calculateRowHeight(array $row): int
     {
         $rowsPerCell = array_map(function ($size, $columnWidth) {
-            if (is_array($columnWidth)) {
+            if (\is_array($columnWidth)) {
                 $rows = 0;
                 foreach ($columnWidth as $width) {
                     $rows += ceil($width / ($size - 2));
@@ -353,13 +353,13 @@ class Table extends Widget
             }
 
             return ceil($columnWidth / ($size - 2));
-        }, $this->_columnWidths, array_map(function ($val) {
-            if (is_array($val)) {
-                $encodings = array_fill(0, count($val), $this->app->encoding);
-                return array_map('mb_strwidth', $val, $encodings);
+        }, $this->_columnWidths, array_map(function ($value) {
+            if (\is_array($value)) {
+                $encodings = array_fill(0, count($value), $this->app->encoding);
+                return array_map('mb_strwidth', $value, $encodings);
             }
 
-            return mb_strwidth($val, $this->app->encoding);
+            return mb_strwidth($value, $this->app->encoding);
         }, $row)
         );
 
@@ -372,7 +372,7 @@ class Table extends Widget
      *
      * @return int screen width
      */
-    protected function getScreenWidth()
+    protected function getScreenWidth(): int
     {
         if (!$this->_screenWidth) {
             $size = Console::getScreenSize();

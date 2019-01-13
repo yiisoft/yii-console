@@ -48,7 +48,7 @@ class Markdown extends \cebe\markdown\Parser
      * @param array $block
      * @return string
      */
-    protected function renderCode($block)
+    protected function renderCode(array $block): string
     {
         return Console::ansiFormat($block['content'], [Console::NEGATIVE]) . "\n\n";
     }
@@ -56,10 +56,10 @@ class Markdown extends \cebe\markdown\Parser
     /**
      * Render a paragraph block.
      *
-     * @param string $block
+     * @param array $block
      * @return string
      */
-    protected function renderParagraph($block)
+    protected function renderParagraph(array $block): string
     {
         return rtrim($this->renderAbsy($block['content'])) . "\n\n";
     }
@@ -69,7 +69,7 @@ class Markdown extends \cebe\markdown\Parser
      * @param array $element
      * @return string
      */
-    protected function renderInlineCode($element)
+    protected function renderInlineCode(array $element): string
     {
         return Console::ansiFormat($element[1], [Console::UNDERLINE]);
     }
@@ -79,7 +79,7 @@ class Markdown extends \cebe\markdown\Parser
      * @param array $element
      * @return string
      */
-    protected function renderEmph($element)
+    protected function renderEmph(array $element): string
     {
         return Console::ansiFormat($this->renderAbsy($element[1]), [Console::ITALIC]);
     }
@@ -89,7 +89,7 @@ class Markdown extends \cebe\markdown\Parser
      * @param array $element
      * @return string
      */
-    protected function renderStrong($element)
+    protected function renderStrong(array $element): string
     {
         return Console::ansiFormat($this->renderAbsy($element[1]), [Console::BOLD]);
     }
@@ -99,7 +99,7 @@ class Markdown extends \cebe\markdown\Parser
      * @param array $element
      * @return string
      */
-    protected function renderStrike($element)
+    protected function renderStrike(array $element): string
     {
         return Console::ansiFormat($this->parseInline($this->renderAbsy($element[1])), [Console::CROSSED_OUT]);
     }

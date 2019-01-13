@@ -48,7 +48,7 @@ class ServeController extends Controller
      *
      * @return int
      */
-    public function actionIndex($address = 'localhost')
+    public function actionIndex(string $address = 'localhost'): int
     {
         $documentRoot = $this->app->getAlias($this->docroot);
 
@@ -84,7 +84,7 @@ class ServeController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function options($actionID)
+    public function options(string $actionID): array
     {
         return array_merge(parent::options($actionID), [
             'docroot',
@@ -97,7 +97,7 @@ class ServeController extends Controller
      * {@inheritdoc}
      * @since 2.0.8
      */
-    public function optionAliases()
+    public function optionAliases(): array
     {
         return array_merge(parent::optionAliases(), [
             't' => 'docroot',
@@ -110,7 +110,7 @@ class ServeController extends Controller
      * @param string $address server address
      * @return bool if address is already in use
      */
-    protected function isAddressTaken($address)
+    protected function isAddressTaken(string $address): bool
     {
         [$hostname, $port] = explode(':', $address);
         $fp = @fsockopen($hostname, $port, $errno, $errstr, 3);

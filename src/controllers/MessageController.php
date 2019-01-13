@@ -155,7 +155,7 @@ class MessageController extends \yii\console\Controller
     /**
      * {@inheritdoc}
      */
-    public function options($actionID)
+    public function options(string $actionID): array
     {
         return array_merge(parent::options($actionID), [
             'sourcePath',
@@ -183,7 +183,7 @@ class MessageController extends \yii\console\Controller
      * {@inheritdoc}
      * @since 2.0.8
      */
-    public function optionAliases()
+    public function optionAliases(): array
     {
         return array_merge(parent::optionAliases(), [
             'c' => 'catalog',
@@ -214,7 +214,7 @@ class MessageController extends \yii\console\Controller
      * @return int CLI exit code
      * @throws Exception on failure.
      */
-    public function actionConfig($filePath)
+    public function actionConfig(string $filePath): int
     {
         $filePath = $this->app->getAlias($filePath);
         if (file_exists($filePath)) {
@@ -260,7 +260,7 @@ EOD;
      * @return int CLI exit code
      * @throws Exception on failure.
      */
-    public function actionConfigTemplate($filePath)
+    public function actionConfigTemplate(string $filePath): int
     {
         $filePath = $this->app->getAlias($filePath);
 
@@ -290,7 +290,7 @@ EOD;
      * this file and then customize it for your needs.
      * @throws Exception on failure.
      */
-    public function actionExtract($configFile = null)
+    public function actionExtract(string $configFile = null)
     {
         $this->initConfig($configFile);
 
@@ -303,7 +303,7 @@ EOD;
 
         $catalog = isset($this->config['catalog']) ? $this->config['catalog'] : 'messages';
 
-        if (in_array($this->config['format'], ['php', 'po'])) {
+        if (\in_array($this->config['format'], ['php', 'po'])) {
             foreach ($this->config['languages'] as $language) {
                 $dir = $this->config['messagePath'] . DIRECTORY_SEPARATOR . $language;
                 if (!is_dir($dir) && !@mkdir($dir)) {
@@ -345,7 +345,7 @@ EOD;
      * @param array $languages
      * @param bool $markUnused
      */
-    protected function saveMessagesToDb($messages, $db, $sourceMessageTable, $messageTable, $removeUnused, $languages, $markUnused)
+    protected function saveMessagesToDb(array $messages, Connection $db, string $sourceMessageTable, string $messageTable, bool $removeUnused, array $languages, bool $markUnused)
     {
         $currentMessages = [];
         $rows = (new Query())->select(['id', 'category', 'message'])->from($sourceMessageTable)->all($db);
@@ -465,7 +465,7 @@ EOD;
      * This parameter is available since version 2.0.4.
      * @return array
      */
-    protected function extractMessages($fileName, $translator, $ignoreCategories = [])
+    protected function extractMessages(string $fileName, string $translator, array $ignoreCategories = []): array
     {
         $this->stdout('Extracting messages from ');
         $this->stdout($fileName, Console::FG_CYAN);
@@ -492,7 +492,7 @@ EOD;
      * @param array $ignoreCategories message categories to ignore.
      * @return array messages.
      */
-    protected function extractMessagesFromTokens(array $tokens, array $translatorTokens, array $ignoreCategories)
+    protected function extractMessagesFromTokens(array $tokens, array $translatorTokens, array $ignoreCategories): array
     {
         $messages = [];
         $translatorTokensCount = count($translatorTokens);
@@ -582,10 +582,10 @@ EOD;
      * @return bool
      * @since 2.0.7
      */
-    protected function isCategoryIgnored($category, array $ignoreCategories)
+    protected function isCategoryIgnored(string $category, array $ignoreCategories): bool
     {
         if (!empty($ignoreCategories)) {
-            if (in_array($category, $ignoreCategories, true)) {
+            if (\in_array($category, $ignoreCategories, true)) {
                 return true;
             }
             foreach ($ignoreCategories as $pattern) {
@@ -606,9 +606,9 @@ EOD;
      * @return bool
      * @since 2.0.1
      */
-    protected function tokensEqual($a, $b)
+    protected function tokensEqual($a, $b): bool
     {
-        if (is_string($a) && is_string($b)) {
+        if (\is_string($a) && \is_string($b)) {
             return $a === $b;
         }
         if (isset($a[0], $a[1], $b[0], $b[1])) {
@@ -625,7 +625,7 @@ EOD;
      * @return int|string
      * @since 2.0.1
      */
-    protected function getLine($tokens)
+    protected function getLine(array $tokens)
     {
         foreach ($tokens as $token) {
             if (isset($token[2])) {
@@ -646,7 +646,7 @@ EOD;
      * @param bool $sort if translations should be sorted
      * @param bool $markUnused if obsolete translations should be marked
      */
-    protected function saveMessagesToPHP($messages, $dirName, $overwrite, $removeUnused, $sort, $markUnused)
+    protected function saveMessagesToPHP(array $messages, string $dirName, bool $overwrite, bool $removeUnused, bool $sort, bool $markUnused)
     {
         foreach ($messages as $category => $msgs) {
             $file = str_replace('\\', '/', "$dirName/$category.php");
@@ -671,7 +671,7 @@ EOD;
      * @param bool $markUnused if obsolete translations should be marked
      * @return int exit code
      */
-    protected function saveMessagesCategoryToPHP($messages, $fileName, $overwrite, $removeUnused, $sort, $category, $markUnused)
+    protected function saveMessagesCategoryToPHP(array $messages, string $fileName, bool $overwrite, bool $removeUnused, bool $sort, string $category, bool $markUnused): int
     {
         if (is_file($fileName)) {
             $rawExistingMessages = require $fileName;
@@ -752,10 +752,10 @@ EOD;
      * @param string $catalog message catalog
      * @param bool $markUnused if obsolete translations should be marked
      */
-    protected function saveMessagesToPO($messages, $dirName, $overwrite, $removeUnused, $sort, $catalog, $markUnused)
+    protected function saveMessagesToPO(array $messages, string $dirName, bool $overwrite, bool $removeUnused, bool $sort, string $catalog, bool $markUnused)
     {
         $file = str_replace('\\', '/', "$dirName/$catalog.po");
-        FileHelper::createDirectory(dirname($file));
+        FileHelper::createDirectory(\dirname($file));
         $this->stdout("Saving messages to $file...\n");
 
         $poFile = new GettextPoFile();
@@ -845,7 +845,7 @@ EOD;
      * @param string $catalog message catalog
      * @since 2.0.6
      */
-    protected function saveMessagesToPOT($messages, $dirName, $catalog)
+    protected function saveMessagesToPOT(array $messages, string $dirName, string $catalog)
     {
         $file = str_replace('\\', '/', "$dirName/$catalog.pot");
         FileHelper::createDirectory(dirname($file));
@@ -880,7 +880,7 @@ EOD;
      * @throws Exception If configuration file does not exists.
      * @since 2.0.13
      */
-    protected function initConfig($configFile)
+    protected function initConfig(string $configFile)
     {
         $configFileContent = [];
         if ($configFile !== null) {
@@ -908,7 +908,7 @@ EOD;
         if (empty($this->config['format']) || !in_array($this->config['format'], ['php', 'po', 'pot', 'db'])) {
             throw new Exception('Format should be either "php", "po", "pot" or "db".');
         }
-        if (in_array($this->config['format'], ['php', 'po', 'pot'])) {
+        if (\in_array($this->config['format'], ['php', 'po', 'pot'])) {
             if (!isset($this->config['messagePath'])) {
                 throw new Exception('The configuration file must specify "messagePath".');
             }

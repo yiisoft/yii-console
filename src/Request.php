@@ -7,6 +7,8 @@
 
 namespace yii\console;
 
+use yii\exceptions\Exception;
+
 /**
  * The console Request represents the environment information for a console application.
  *
@@ -27,7 +29,7 @@ class Request extends \yii\base\Request
      * Returns the command line arguments.
      * @return array the command line arguments. It does not include the entry script name.
      */
-    public function getParams()
+    public function getParams(): array
     {
         if ($this->_params === null) {
             if (isset($_SERVER['argv'])) {
@@ -45,7 +47,7 @@ class Request extends \yii\base\Request
      * Sets the command line arguments.
      * @param array $params the command line arguments
      */
-    public function setParams($params)
+    public function setParams(array $params): void
     {
         $this->_params = $params;
     }
@@ -55,7 +57,7 @@ class Request extends \yii\base\Request
      * @return array the first element is the route, and the second is the associated parameters.
      * @throws Exception when parameter is wrong and can not be resolved
      */
-    public function resolve()
+    public function resolve(): array
     {
         $rawParams = $this->getParams();
         $endOfOptionsFound = false;
@@ -79,7 +81,7 @@ class Request extends \yii\base\Request
                 $endOfOptionsFound = true;
             } elseif (preg_match('/^--([\w-]+)(?:=(.*))?$/', $param, $matches)) {
                 $name = $matches[1];
-                if (is_numeric(substr($name, 0, 1))) {
+                if (is_numeric($name[0])) {
                     throw new Exception('Parameter "' . $name . '" is not valid');
                 }
 

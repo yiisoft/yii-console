@@ -96,7 +96,7 @@ abstract class BaseMigrateController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function options($actionID)
+    public function options(string $actionID): array
     {
         return array_merge(
             parent::options($actionID),
@@ -123,7 +123,7 @@ abstract class BaseMigrateController extends Controller
                 $this->migrationNamespaces[$key] = trim($value, '\\');
             }
 
-            if (is_array($this->migrationPath)) {
+            if (\is_array($this->migrationPath)) {
                 foreach ($this->migrationPath as $i => $path) {
                     $this->migrationPath[$i] = $this->app->getAlias($path);
                 }
@@ -162,7 +162,7 @@ abstract class BaseMigrateController extends Controller
      *
      * @return int the status of the action execution. 0 means normal, other values mean abnormal.
      */
-    public function actionUp($limit = 0)
+    public function actionUp(int $limit = 0): int
     {
         $migrations = $this->getNewMigrations();
         if (empty($migrations)) {
@@ -228,7 +228,7 @@ abstract class BaseMigrateController extends Controller
      *
      * @return int the status of the action execution. 0 means normal, other values mean abnormal.
      */
-    public function actionDown($limit = 1)
+    public function actionDown($limit = 1): int
     {
         if ($limit === 'all') {
             $limit = null;
@@ -290,7 +290,7 @@ abstract class BaseMigrateController extends Controller
      *
      * @return int the status of the action execution. 0 means normal, other values mean abnormal.
      */
-    public function actionRedo($limit = 1)
+    public function actionRedo($limit = 1): int
     {
         if ($limit === 'all') {
             $limit = null;
@@ -362,7 +362,7 @@ abstract class BaseMigrateController extends Controller
      * string.
      * @throws Exception if the version argument is invalid.
      */
-    public function actionTo($version)
+    public function actionTo(string $version): int
     {
         if (($namespaceVersion = $this->extractNamespaceMigrationVersion($version)) !== false) {
             $this->migrateToVersion($namespaceVersion);
@@ -396,7 +396,7 @@ abstract class BaseMigrateController extends Controller
      * @return int CLI exit code
      * @throws Exception if the version argument is invalid or the version cannot be found.
      */
-    public function actionMark($version)
+    public function actionMark(string $version): int
     {
         $originalVersion = $version;
         if (($namespaceVersion = $this->extractNamespaceMigrationVersion($version)) !== false) {
@@ -454,7 +454,7 @@ abstract class BaseMigrateController extends Controller
      *
      * @since 2.0.13
      */
-    public function actionFresh()
+    public function actionFresh(): int
     {
         if (YII_ENV_PROD) {
             $this->stdout("YII_ENV is set to 'prod'.\nRefreshing migrations is not possible on production systems.\n");
@@ -476,7 +476,7 @@ abstract class BaseMigrateController extends Controller
      * @return string|false actual migration version, `false` - if not match.
      * @since 2.0.10
      */
-    private function extractNamespaceMigrationVersion($rawVersion)
+    private function extractNamespaceMigrationVersion(string $rawVersion)
     {
         if (preg_match('/^\\\\?([\w_]+\\\\)+m(\d{6}_?\d{6})(\D.*)?$/is', $rawVersion, $matches)) {
             return trim($rawVersion, '\\');
@@ -491,7 +491,7 @@ abstract class BaseMigrateController extends Controller
      * @return string|false actual migration version, `false` - if not match.
      * @since 2.0.10
      */
-    private function extractMigrationVersion($rawVersion)
+    private function extractMigrationVersion(string $rawVersion)
     {
         if (preg_match('/^m?(\d{6}_?\d{6})(\D.*)?$/is', $rawVersion, $matches)) {
             return 'm' . $matches[1];
@@ -621,7 +621,7 @@ abstract class BaseMigrateController extends Controller
      *
      * @throws Exception if the name argument is invalid.
      */
-    public function actionCreate($name)
+    public function actionCreate(string $name)
     {
         if (!preg_match('/^[\w\\\\]+$/', $name)) {
             throw new Exception('The migration name should contain letters, digits, underscore and/or backslash characters only.');
@@ -655,18 +655,16 @@ abstract class BaseMigrateController extends Controller
      * @return array list of 2 elements: 'namespace' and 'class base name'
      * @since 2.0.10
      */
-    private function generateClassName($name)
+    private function generateClassName(string $name): array
     {
         $namespace = null;
         $name = trim($name, '\\');
         if (strpos($name, '\\') !== false) {
             $namespace = substr($name, 0, strrpos($name, '\\'));
             $name = substr($name, strrpos($name, '\\') + 1);
-        } else {
-            if ($this->migrationPath === null) {
-                $migrationNamespaces = $this->migrationNamespaces;
-                $namespace = array_shift($migrationNamespaces);
-            }
+        } elseif ($this->migrationPath === null) {
+            $migrationNamespaces = $this->migrationNamespaces;
+            $namespace = array_shift($migrationNamespaces);
         }
 
         if ($namespace === null) {
@@ -685,13 +683,13 @@ abstract class BaseMigrateController extends Controller
      * @throws Exception on failure.
      * @since 2.0.10
      */
-    private function findMigrationPath($namespace)
+    private function findMigrationPath(?string $namespace): string
     {
         if (empty($namespace)) {
-            return is_array($this->migrationPath) ? reset($this->migrationPath) : $this->migrationPath;
+            return \is_array($this->migrationPath) ? reset($this->migrationPath) : $this->migrationPath;
         }
 
-        if (!in_array($namespace, $this->migrationNamespaces, true)) {
+        if (!\in_array($namespace, $this->migrationNamespaces, true)) {
             throw new Exception("Namespace '{$namespace}' not found in `migrationNamespaces`");
         }
 
@@ -704,7 +702,7 @@ abstract class BaseMigrateController extends Controller
      * @return string file path.
      * @since 2.0.10
      */
-    private function getNamespacePath($namespace)
+    private function getNamespacePath(string $namespace): string
     {
         return str_replace('/', DIRECTORY_SEPARATOR, $this->app->getAlias('@' . str_replace('\\', '/', $namespace)));
     }
@@ -714,7 +712,7 @@ abstract class BaseMigrateController extends Controller
      * @param string $class the migration class name
      * @return bool whether the migration is successful
      */
-    protected function migrateUp($class)
+    protected function migrateUp(string $class): bool
     {
         if ($class === self::BASE_MIGRATION) {
             return true;
@@ -742,7 +740,7 @@ abstract class BaseMigrateController extends Controller
      * @param string $class the migration class name
      * @return bool whether the migration is successful
      */
-    protected function migrateDown($class)
+    protected function migrateDown(string $class): bool
     {
         if ($class === self::BASE_MIGRATION) {
             return true;
@@ -770,7 +768,7 @@ abstract class BaseMigrateController extends Controller
      * @param string $class the migration class name
      * @return \yii\db\MigrationInterface the migration instance
      */
-    protected function createMigration($class)
+    protected function createMigration(string $class): MigrationInterface
     {
         $this->includeMigrationFile($class);
 
@@ -792,11 +790,11 @@ abstract class BaseMigrateController extends Controller
      * @param string $class the migration class name.
      * @since 2.0.12
      */
-    protected function includeMigrationFile($class)
+    protected function includeMigrationFile(string $class): void
     {
         $class = trim($class, '\\');
         if (strpos($class, '\\') === false) {
-            if (is_array($this->migrationPath)) {
+            if (\is_array($this->migrationPath)) {
                 foreach ($this->migrationPath as $path) {
                     $file = $path . DIRECTORY_SEPARATOR . $class . '.php';
                     if (is_file($file)) {
@@ -815,7 +813,7 @@ abstract class BaseMigrateController extends Controller
      * Migrates to the specified apply time in the past.
      * @param int $time UNIX timestamp value.
      */
-    protected function migrateToTime($time)
+    protected function migrateToTime(int $time): void
     {
         $count = 0;
         $migrations = array_values($this->getMigrationHistory(null));
@@ -835,7 +833,7 @@ abstract class BaseMigrateController extends Controller
      * @return int CLI exit code
      * @throws Exception if the provided version cannot be found.
      */
-    protected function migrateToVersion($version)
+    protected function migrateToVersion(string $version): int
     {
         $originalVersion = $version;
 
@@ -870,7 +868,7 @@ abstract class BaseMigrateController extends Controller
      * Returns the migrations that are not applied.
      * @return array list of new migrations
      */
-    protected function getNewMigrations()
+    protected function getNewMigrations(): array
     {
         $applied = [];
         foreach ($this->getMigrationHistory(null) as $class => $time) {
@@ -878,7 +876,7 @@ abstract class BaseMigrateController extends Controller
         }
 
         $migrationPaths = [];
-        if (is_array($this->migrationPath)) {
+        if (\is_array($this->migrationPath)) {
             foreach ($this->migrationPath as $path) {
                 $migrationPaths[] = [$path, ''];
             }
@@ -930,7 +928,7 @@ abstract class BaseMigrateController extends Controller
      * @return string generated PHP code.
      * @since 2.0.8
      */
-    protected function generateMigrationSourceCode($params)
+    protected function generateMigrationSourceCode(array $params): string
     {
         return $this->renderFile($this->app->getAlias($this->templateFile), $params);
     }
@@ -941,7 +939,7 @@ abstract class BaseMigrateController extends Controller
      * @throws NotSupportedException if not overridden
      * @since 2.0.13
      */
-    protected function truncateDatabase()
+    protected function truncateDatabase(): void
     {
         throw new NotSupportedException('This command is not implemented in ' . get_class($this));
     }
@@ -953,7 +951,7 @@ abstract class BaseMigrateController extends Controller
      * @return int|null the maximum name length for a migration or `null` if no limit applies.
      * @since 2.0.13
      */
-    protected function getMigrationNameLimit()
+    protected function getMigrationNameLimit(): ?int
     {
         return null;
     }
@@ -963,17 +961,17 @@ abstract class BaseMigrateController extends Controller
      * @param int $limit the maximum number of records in the history to be returned. `null` for "no limit".
      * @return array the migration history
      */
-    abstract protected function getMigrationHistory($limit);
+    abstract protected function getMigrationHistory(int $limit): array;
 
     /**
      * Adds new migration entry to the history.
      * @param string $version migration version name.
      */
-    abstract protected function addMigrationHistory($version);
+    abstract protected function addMigrationHistory(string $version): void;
 
     /**
      * Removes existing migration from the history.
      * @param string $version migration version name.
      */
-    abstract protected function removeMigrationHistory($version);
+    abstract protected function removeMigrationHistory(string $version): void;
 }

@@ -32,7 +32,7 @@ class FakeController extends Controller
         return $wasCalled;
     }
 
-    public function options($actionID)
+    public function options(string $actionID): array
     {
         return array_merge(parent::options($actionID), [
             'test',
@@ -41,7 +41,7 @@ class FakeController extends Controller
         ]);
     }
 
-    public function optionAliases()
+    public function optionAliases(): array
     {
         return [
             't' => 'test',

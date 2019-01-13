@@ -12,9 +12,9 @@ use yii\exceptions\InvalidRouteException;
 
 // define STDIN, STDOUT and STDERR if the PHP SAPI did not define them (e.g. creating console application in web env)
 // http://php.net/manual/en/features.commandline.io-streams.php
-defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
-defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
-defined('STDERR') or define('STDERR', fopen('php://stderr', 'w'));
+\defined('STDIN') or \define('STDIN', fopen('php://stdin', 'r'));
+\defined('STDOUT') or \define('STDOUT', fopen('php://stdout', 'w'));
+\defined('STDERR') or \define('STDERR', fopen('php://stderr', 'w'));
 
 /**
  * Application represents a console application.
@@ -62,7 +62,7 @@ class Application extends \yii\base\Application
     /**
      * The option name for specifying the application configuration file path.
      */
-    const OPTION_APPCONFIG = 'appconfig';
+    public const OPTION_APPCONFIG = 'appconfig';
 
     /**
      * @var string the default route of this application. Defaults to 'help',
@@ -83,13 +83,13 @@ class Application extends \yii\base\Application
      * @param array $config the configuration provided in the constructor.
      * @return array the actual configuration to be used by the application.
      */
-    protected function loadConfig($config)
+    protected function loadConfig(array $config): array
     {
         if (!empty($_SERVER['argv'])) {
             $option = '--' . self::OPTION_APPCONFIG . '=';
             foreach ($_SERVER['argv'] as $param) {
                 if (strpos($param, $option) !== false) {
-                    $path = substr($param, strlen($option));
+                    $path = substr($param, \strlen($option));
                     if (!empty($path) && is_file($file = $this->app->getAlias($path))) {
                         return require $file;
                     }
@@ -107,7 +107,7 @@ class Application extends \yii\base\Application
      * @param Request $request the request to be handled
      * @return Response the resulting response
      */
-    public function handleRequest($request)
+    public function handleRequest(Request $request): Response
     {
         [$route, $params] = $request->resolve();
         $this->requestedRoute = $route;
@@ -141,11 +141,11 @@ class Application extends \yii\base\Application
      * Exit code 0 means normal, and other values mean abnormal. Exit code of `null` is treaded as `0` as well.
      * @throws Exception if the route is invalid
      */
-    public function runAction($route, $params = [])
+    public function runAction(string $route, array $params = [])
     {
         try {
             $res = parent::runAction($route, $params);
-            return is_object($res) ? $res : (int) $res;
+            return \is_object($res) ? $res : (int) $res;
         } catch (InvalidRouteException $e) {
             throw new UnknownCommandException($route, $this, 0, $e);
         }

@@ -9,6 +9,7 @@ namespace yii\console\controllers;
 
 use yii\base\Action;
 use yii\db\Connection;
+use yii\db\MigrationInterface;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Console;
@@ -142,7 +143,7 @@ class MigrateController extends BaseMigrateController
     /**
      * {@inheritdoc}
      */
-    public function options($actionID)
+    public function options(string $actionID): array
     {
         return array_merge(
             parent::options($actionID),
@@ -157,7 +158,7 @@ class MigrateController extends BaseMigrateController
      * {@inheritdoc}
      * @since 2.0.8
      */
-    public function optionAliases()
+    public function optionAliases(): array
     {
         return array_merge(parent::optionAliases(), [
             'C' => 'comment',
@@ -191,7 +192,7 @@ class MigrateController extends BaseMigrateController
      * @param string $class the migration class name
      * @return \yii\db\Migration the migration instance
      */
-    protected function createMigration($class)
+    protected function createMigration(string $class): MigrationInterface
     {
         $this->includeMigrationFile($class);
 
@@ -205,7 +206,7 @@ class MigrateController extends BaseMigrateController
     /**
      * {@inheritdoc}
      */
-    protected function getMigrationHistory($limit)
+    protected function getMigrationHistory(int $limit): array
     {
         if ($this->db->schema->getTableSchema($this->migrationTable, true) === null) {
             $this->createMigrationHistoryTable();
@@ -262,7 +263,7 @@ class MigrateController extends BaseMigrateController
     /**
      * Creates the migration history table.
      */
-    protected function createMigrationHistoryTable()
+    protected function createMigrationHistoryTable(): void
     {
         $tableName = $this->db->schema->getRawTableName($this->migrationTable);
         $this->stdout("Creating migration history table \"$tableName\"...", Console::FG_YELLOW);
@@ -280,7 +281,7 @@ class MigrateController extends BaseMigrateController
     /**
      * {@inheritdoc}
      */
-    protected function addMigrationHistory($version)
+    protected function addMigrationHistory(string $version): void
     {
         $command = $this->db->createCommand();
         $command->insert($this->migrationTable, [
@@ -293,7 +294,7 @@ class MigrateController extends BaseMigrateController
      * {@inheritdoc}
      * @since 2.0.13
      */
-    protected function truncateDatabase()
+    protected function truncateDatabase(): void
     {
         $db = $this->db;
         $schemas = $db->schema->getTableSchemas();
@@ -318,7 +319,7 @@ class MigrateController extends BaseMigrateController
     /**
      * {@inheritdoc}
      */
-    protected function removeMigrationHistory($version)
+    protected function removeMigrationHistory(string $version): void
     {
         $command = $this->db->createCommand();
         $command->delete($this->migrationTable, [
@@ -332,7 +333,7 @@ class MigrateController extends BaseMigrateController
      * {@inheritdoc}
      * @since 2.0.13
      */
-    protected function getMigrationNameLimit()
+    protected function getMigrationNameLimit(): int
     {
         if ($this->_migrationNameLimit !== null) {
             return $this->_migrationNameLimit;
@@ -349,7 +350,7 @@ class MigrateController extends BaseMigrateController
      * {@inheritdoc}
      * @since 2.0.8
      */
-    protected function generateMigrationSourceCode($params)
+    protected function generateMigrationSourceCode(array $params): string
     {
         $parsedFields = $this->parseFields();
         $fields = $parsedFields['fields'];
@@ -455,7 +456,7 @@ class MigrateController extends BaseMigrateController
      * @return string
      * @since 2.0.8
      */
-    protected function generateTableName($tableName)
+    protected function generateTableName(string $tableName): string
     {
         if (!$this->useTablePrefix) {
             return $tableName;
@@ -473,7 +474,7 @@ class MigrateController extends BaseMigrateController
      *
      * @since 2.0.7
      */
-    protected function parseFields()
+    protected function parseFields(): array
     {
         $fields = [];
         $foreignKeys = [];
@@ -518,7 +519,7 @@ class MigrateController extends BaseMigrateController
      * @param array $fields parsed fields
      * @since 2.0.7
      */
-    protected function addDefaultPrimaryKey(&$fields)
+    protected function addDefaultPrimaryKey(array &$fields): void
     {
         foreach ($fields as $field) {
             if (false !== strripos($field['decorators'], 'primarykey()')) {

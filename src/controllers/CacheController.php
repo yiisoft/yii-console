@@ -69,10 +69,8 @@ class CacheController extends Controller
      * yii cache/clear first second third
      * ```
      */
-    public function actionClear()
+    public function actionClear(...$cachesInput)
     {
-        $cachesInput = func_get_args();
-
         if (empty($cachesInput)) {
             throw new Exception('You should specify cache components names');
         }
@@ -157,7 +155,9 @@ class CacheController extends Controller
         if (!$connection instanceof \yii\db\Connection) {
             $this->stdout("\"$db\" component doesn't inherit \\yii\\db\\Connection.\n", Console::FG_RED);
             return ExitCode::UNSPECIFIED_ERROR;
-        } elseif (!$this->confirm("Flush cache schema for \"$db\" connection?")) {
+        }
+
+        if (!$this->confirm("Flush cache schema for \"$db\" connection?")) {
             return ExitCode::OK;
         }
 
@@ -174,7 +174,7 @@ class CacheController extends Controller
      * Notifies user that given caches are found and can be flushed.
      * @param array $caches array of cache component classes
      */
-    private function notifyCachesCanBeCleared($caches)
+    private function notifyCachesCanBeCleared(array $caches)
     {
         $this->stdout("The following caches were found in the system:\n\n", Console::FG_YELLOW);
 
@@ -201,7 +201,7 @@ class CacheController extends Controller
      * Notifies user that given cache components were not found in the system.
      * @param array $cachesNames
      */
-    private function notifyNotFoundCaches($cachesNames)
+    private function notifyNotFoundCaches(array $cachesNames)
     {
         $this->stdout("The following cache components were NOT found:\n\n", Console::FG_RED);
 
@@ -215,7 +215,7 @@ class CacheController extends Controller
     /**
      * @param array $caches
      */
-    private function notifyCleared($caches)
+    private function notifyCleared(array $caches)
     {
         $this->stdout("The following cache components were processed:\n\n", Console::FG_YELLOW);
 
@@ -237,7 +237,7 @@ class CacheController extends Controller
      * @param array $cachesNames
      * @return bool
      */
-    private function confirmClear($cachesNames)
+    private function confirmClear(array $cachesNames): bool
     {
         $this->stdout("The following cache components will be flushed:\n\n", Console::FG_YELLOW);
 
@@ -253,27 +253,27 @@ class CacheController extends Controller
      * @param array $cachesNames caches to be found
      * @return array
      */
-    private function findCaches(array $cachesNames = [])
+    private function findCaches(array $cachesNames = []): array
     {
         $caches = [];
         $components = $this->app->getComponents();
         $findAll = ($cachesNames === []);
 
         foreach ($components as $name => $component) {
-            if (!$findAll && !in_array($name, $cachesNames, true)) {
+            if (!$findAll && !\in_array($name, $cachesNames, true)) {
                 continue;
             }
 
             if ($component instanceof CacheInterface) {
-                $caches[$name] = get_class($component);
-            } elseif (is_array($component) && isset($component['__class']) && $this->isCacheClass($component['__class'])) {
+                $caches[$name] = \get_class($component);
+            } elseif (\is_array($component) && isset($component['__class']) && $this->isCacheClass($component['__class'])) {
                 $caches[$name] = $component['__class'];
-            } elseif (is_string($component) && $this->isCacheClass($component)) {
+            } elseif (\is_string($component) && $this->isCacheClass($component)) {
                 $caches[$name] = $component;
             } elseif ($component instanceof \Closure) {
                 $cache = $this->app->get($name);
                 if ($this->isCacheClass($cache)) {
-                    $cacheClass = get_class($cache);
+                    $cacheClass = \get_class($cache);
                     $caches[$name] = $cacheClass;
                 }
             }
@@ -287,9 +287,9 @@ class CacheController extends Controller
      * @param string $className class name.
      * @return bool
      */
-    private function isCacheClass($className)
+    private function isCacheClass(string $className): bool
     {
-        return is_subclass_of($className, CacheInterface::class);
+        return is_subclass_of($className, CacheInterface::class, true);
     }
 
     /**
@@ -297,7 +297,7 @@ class CacheController extends Controller
      * @param string $className class name.
      * @return bool
      */
-    private function canBeCleared($className)
+    private function canBeCleared(string $className): bool
     {
         return !is_a($className, ApcCache::class, true) || PHP_SAPI !== 'cli';
     }

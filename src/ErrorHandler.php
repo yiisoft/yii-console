@@ -8,6 +8,7 @@
 namespace yii\console;
 
 use yii\console\exceptions\UnknownCommandException;
+use yii\exceptions\Exception;
 use yii\exceptions\ErrorException;
 use yii\exceptions\UserException;
 use yii\helpers\Console;
@@ -27,7 +28,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
      * Renders an exception using ansi format for console output.
      * @param \Exception $exception the exception to be rendered.
      */
-    protected function renderException($exception)
+    protected function renderException(\Exception $exception): void
     {
         if ($exception instanceof UnknownCommandException) {
             // display message and suggest alternatives in case of unknown command
@@ -48,7 +49,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
             } else {
                 $message = $this->formatMessage('Exception');
             }
-            $message .= $this->formatMessage(" '" . get_class($exception) . "'", [Console::BOLD, Console::FG_BLUE])
+            $message .= $this->formatMessage(" '" . \get_class($exception) . "'", [Console::BOLD, Console::FG_BLUE])
                 . ' with message ' . $this->formatMessage("'{$exception->getMessage()}'", [Console::BOLD]) //. "\n"
                 . "\n\nin " . dirname($exception->getFile()) . DIRECTORY_SEPARATOR . $this->formatMessage(basename($exception->getFile()), [Console::BOLD])
                 . ':' . $this->formatMessage($exception->getLine(), [Console::BOLD, Console::FG_YELLOW]) . "\n";
@@ -74,12 +75,12 @@ class ErrorHandler extends \yii\base\ErrorHandler
      * @return string the colorized message.
      * @see Console::ansiFormat() for details on how to specify the message format.
      */
-    protected function formatMessage($message, $format = [Console::FG_RED, Console::BOLD])
+    protected function formatMessage(string $message, array $format = [Console::FG_RED, Console::BOLD]): string
     {
         $stream = (PHP_SAPI === 'cli') ? \STDERR : \STDOUT;
         // try controller first to allow check for --color switch
-        if ($this->app->controller instanceof Controller && $this->app->controller->isColorEnabled($stream)
-            || $this->app instanceof Application && Console::streamSupportsAnsiColors($stream)) {
+        if (($this->app->controller instanceof Controller && $this->app->controller->isColorEnabled($stream))
+            || ($this->app instanceof Application && Console::streamSupportsAnsiColors($stream))) {
             $message = Console::ansiFormat($message, $format);
         }
 

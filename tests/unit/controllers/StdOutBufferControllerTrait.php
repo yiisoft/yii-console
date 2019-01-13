@@ -18,12 +18,12 @@ trait StdOutBufferControllerTrait
      */
     private $stdOutBuffer = '';
 
-    public function stdout($string)
+    public function stdout(string $string): void
     {
         $this->stdOutBuffer .= $string;
     }
 
-    public function flushStdOutBuffer()
+    public function flushStdOutBuffer(): string
     {
         $result = $this->stdOutBuffer;
         $this->stdOutBuffer = '';
