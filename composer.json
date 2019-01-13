@@ -94,7 +94,15 @@
         "config-plugin": {
             "params": "config/params.php",
             "console": "config/console.php",
-            "tests": ["$console", "config/tests.php"]
+            "tests": "config/tests.php"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type" : "path",
+            "url" : "../yii-core"
+        }
+    ]
+
+    
 }

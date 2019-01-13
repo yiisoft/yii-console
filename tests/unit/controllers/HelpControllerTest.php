@@ -58,11 +58,22 @@ class HelpControllerTest extends TestCase
     {
         $this->mockApplication([
             'modules' => [
-                'magic' => 'yii\tests\data\modules\magic\Module',
+                'magic' => \yii\tests\data\modules\magic\Module::class,
             ],
         ]);
         $result = Console::stripAnsiFormat($this->runControllerAction('list'));
         $this->assertEqualsWithoutLE(<<<'STRING'
+asset
+asset/compress
+asset/template
+cache
+cache/clear
+cache/clear-all
+cache/clear-schema
+cache/index
+fixture
+fixture/load
+fixture/unload
 help
 help/index
 help/list
@@ -73,6 +84,22 @@ magic/e-tag/delete
 magic/e-tag/list-e-tags
 magic/subFolder/sub
 magic/subFolder/sub/test
+message
+message/config
+message/config-template
+message/extract
+migrate
+migrate/create
+migrate/down
+migrate/fresh
+migrate/history
+migrate/mark
+migrate/new
+migrate/redo
+migrate/to
+migrate/up
+serve
+serve/index
 
 STRING
             , $result);
@@ -88,16 +115,26 @@ STRING
         ]);
         $result = Console::stripAnsiFormat($this->runControllerAction('list'));
         $this->assertEqualsWithoutLE(<<<'STRING'
+asset
+asset/compress
+asset/template
 cache
 cache/clear
 cache/clear-all
 cache/clear-schema
 cache/index
+fixture
+fixture/load
+fixture/unload
 help
 help/index
 help/list
 help/list-action-options
 help/usage
+message
+message/config
+message/config-template
+message/extract
 migrate
 migrate/create
 migrate/down
@@ -108,6 +145,8 @@ migrate/new
 migrate/redo
 migrate/to
 migrate/up
+serve
+serve/index
 
 STRING
         , $result);
