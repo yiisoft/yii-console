@@ -93,8 +93,10 @@
         },
         "config-plugin": {
             "params": "config/params.php",
-            "console": "config/console.php",
-            "tests": "config/tests.php"
+            "console": "config/console.php"
+        },
+        "config-plugin-dev": {
+            "tests": ["$console", "config/tests.php"]
         }
     }
 }
