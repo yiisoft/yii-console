@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b72b621379c3b25ea7af8e704bbc0b0b",
+    "content-hash": "5ed2276e96f8a0d3e023bfb4e0f5d486",
     "packages": [
         {
             "name": "psr/container",
@@ -440,12 +440,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii-core.git",
-                "reference": "8f7ba13b5b4352f246ca9ad0d3b3c40831213f3a"
+                "reference": "ad5a548a707c48d43c38027decdb0229dcedc4c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii-core/zipball/8f7ba13b5b4352f246ca9ad0d3b3c40831213f3a",
-                "reference": "8f7ba13b5b4352f246ca9ad0d3b3c40831213f3a",
+                "url": "https://api.github.com/repos/yiisoft/yii-core/zipball/ad5a548a707c48d43c38027decdb0229dcedc4c5",
+                "reference": "ad5a548a707c48d43c38027decdb0229dcedc4c5",
                 "shasum": ""
             },
             "require": {
@@ -565,7 +565,7 @@
                 "framework",
                 "yii"
             ],
-            "time": "2019-01-13T00:06:52+00:00"
+            "time": "2019-01-13T10:56:20+00:00"
         }
     ],
     "packages-dev": [
@@ -1379,16 +1379,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.5.1",
+            "version": "7.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c23d78776ad415d5506e0679723cb461d71f488f"
+                "reference": "7c89093bd00f7d5ddf0ab81dee04f801416b4944"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c23d78776ad415d5506e0679723cb461d71f488f",
-                "reference": "c23d78776ad415d5506e0679723cb461d71f488f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7c89093bd00f7d5ddf0ab81dee04f801416b4944",
+                "reference": "7c89093bd00f7d5ddf0ab81dee04f801416b4944",
                 "shasum": ""
             },
             "require": {
@@ -1459,7 +1459,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-12-12T07:20:32+00:00"
+            "time": "2019-01-15T08:19:08+00:00"
         },
         {
             "name": "psr/http-message",
@@ -2434,121 +2434,17 @@
             "time": "2019-01-08T15:06:26+00:00"
         },
         {
-            "name": "yiisoft/db-pgsql",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/db-pgsql.git",
-                "reference": "2a0d268b9359896c1c81b852ac2066e6246529b8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/db-pgsql/zipball/2a0d268b9359896c1c81b852ac2066e6246529b8",
-                "reference": "2a0d268b9359896c1c81b852ac2066e6246529b8",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/db": "^3.0@dev"
-            },
-            "require-dev": {
-                "hiqdev/composer-config-plugin": "^1.0@dev",
-                "phpunit/phpunit": "^7.3",
-                "yiisoft/active-record": "^3.0@dev",
-                "yiisoft/cache": "^3.0@dev",
-                "yiisoft/di": "^3.0@dev",
-                "yiisoft/log": "^3.0@dev",
-                "yiisoft/view": "^3.0@dev",
-                "yiisoft/yii-console": "^3.0@dev",
-                "yiisoft/yii-core": "^3.0@dev",
-                "yiisoft/yii-web": "^3.0@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0.x-dev"
-                },
-                "config-plugin": {
-                    "params": "config/params.php",
-                    "common": "config/common.php",
-                    "tests": "config/tests.php"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\db\\pgsql\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Qiang Xue",
-                    "email": "qiang.xue@gmail.com",
-                    "homepage": "http://www.yiiframework.com/",
-                    "role": "Founder and project lead"
-                },
-                {
-                    "name": "Alexander Makarov",
-                    "email": "sam@rmcreative.ru",
-                    "homepage": "http://rmcreative.ru/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Maurizio Domba",
-                    "homepage": "http://mdomba.info/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Carsten Brandt",
-                    "email": "mail@cebe.cc",
-                    "homepage": "http://cebe.cc/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Timur Ruziev",
-                    "email": "resurtm@gmail.com",
-                    "homepage": "http://resurtm.com/",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Paul Klimov",
-                    "email": "klimov.paul@gmail.com",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Dmitry Naumenko",
-                    "email": "d.naumenko.a@gmail.com",
-                    "role": "Core framework development"
-                },
-                {
-                    "name": "Boudewijn Vahrmeijer",
-                    "email": "info@dynasource.eu",
-                    "homepage": "http://dynasource.eu",
-                    "role": "Core framework development"
-                }
-            ],
-            "description": "Yii DataBase PostgreSQL Extension",
-            "homepage": "http://www.yiiframework.com/",
-            "keywords": [
-                "pgsql",
-                "yii"
-            ],
-            "time": "2019-01-11T09:11:07+00:00"
-        },
-        {
             "name": "yiisoft/db-sqlite",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/db-sqlite.git",
-                "reference": "c2a08143c0fc7528e0ac36c568a870c7be93cd01"
+                "reference": "adeebd6b75b8ddbbd80fdbe92ed2753843546e6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/db-sqlite/zipball/c2a08143c0fc7528e0ac36c568a870c7be93cd01",
-                "reference": "c2a08143c0fc7528e0ac36c568a870c7be93cd01",
+                "url": "https://api.github.com/repos/yiisoft/db-sqlite/zipball/adeebd6b75b8ddbbd80fdbe92ed2753843546e6f",
+                "reference": "adeebd6b75b8ddbbd80fdbe92ed2753843546e6f",
                 "shasum": ""
             },
             "require": {
@@ -2642,7 +2538,7 @@
                 "sqlite",
                 "yii"
             ],
-            "time": "2019-01-01T22:43:23+00:00"
+            "time": "2019-01-13T11:09:15+00:00"
         },
         {
             "name": "yiisoft/view",
@@ -2874,7 +2770,6 @@
         "yiisoft/db": 20,
         "yiisoft/db-mysql": 20,
         "yiisoft/db-sqlite": 20,
-        "yiisoft/db-pgsql": 20,
         "hiqdev/composer-config-plugin": 20
     },
     "prefer-stable": false,
