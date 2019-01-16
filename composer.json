@@ -63,7 +63,8 @@
         "irc": "irc://irc.freenode.net/yii"
     },
     "require": {
-        "yiisoft/yii-core": "^3.0@dev"
+        "yiisoft/yii-core": "^3.0@dev",
+        "cebe/markdown": "^1.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.3",
@@ -75,7 +76,6 @@
         "yiisoft/db": "^3.0@dev",
         "yiisoft/db-mysql": "^3.0@dev",
         "yiisoft/db-sqlite": "^3.0@dev",
-        "cebe/markdown": "^1.2",
         "hiqdev/composer-config-plugin": "^1.0@dev"
     },
     "autoload": {
