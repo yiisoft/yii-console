@@ -171,7 +171,7 @@ class MigrateControllerTest extends TestCase
 
     public function testCreateLongNamedMigration()
     {
-        $this->setOutputCallback(function($output) {
+        $this->setOutputCallback(function ($output) {
             return null;
         });
 
