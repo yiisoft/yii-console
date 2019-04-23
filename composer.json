@@ -62,7 +62,11 @@
         "wiki": "http://www.yiiframework.com/wiki/",
         "irc": "irc://irc.freenode.net/yii"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
+        "yiisoft/arrays": "^3.0@dev",
+        "yiisoft/inflector": "^3.0@dev",
         "yiisoft/yii-core": "^3.0@dev",
         "cebe/markdown": "^1.2"
     },
@@ -72,6 +76,7 @@
         "yiisoft/di": "^3.0@dev",
         "yiisoft/log": "^3.0@dev",
         "yiisoft/cache": "^3.0@dev",
+        "yiisoft/strings": "^3.0@dev",
         "yiisoft/view": "^3.0@dev",
         "yiisoft/db": "^3.0@dev",
         "yiisoft/db-mysql": "^3.0@dev",

@@ -11,8 +11,8 @@ use yii\base\Module;
 use yii\console\controllers\BaseMigrateController;
 use yii\di\AbstractContainer;
 use yii\helpers\FileHelper;
-use yii\helpers\StringHelper;
 use yii\tests\TestCase;
+use Yiisoft\Strings\StringHelper;
 
 /**
  * This trait provides unit tests shared by the different migration controllers implementations.
