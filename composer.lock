@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c78c13cd762bdcb693e597bfd6a758d",
+    "content-hash": "5b24af4766380d213e96333016156491",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -211,6 +211,63 @@
             "time": "2017-10-23T01:57:42+00:00"
         },
         {
+            "name": "yiisoft/arrays",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/arrays.git",
+                "reference": "e7a97d04bb40bd1bf5d0cf7789fc29888f5c5139"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/arrays/zipball/e7a97d04bb40bd1bf5d0cf7789fc29888f5c5139",
+                "reference": "e7a97d04bb40bd1bf5d0cf7789fc29888f5c5139",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2",
+                "yiisoft/strings": "^3.0@dev"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yiisoft\\Arrays\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Korulczyk",
+                    "email": "robert@korulczyk.pl"
+                },
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and former project lead"
+                }
+            ],
+            "description": "Yii - Array Helper",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "array",
+                "helper",
+                "yii"
+            ],
+            "time": "2019-04-23T12:48:01+00:00"
+        },
+        {
             "name": "yiisoft/cache",
             "version": "dev-master",
             "source": {
@@ -382,6 +439,69 @@
             "time": "2019-01-11T10:59:39+00:00"
         },
         {
+            "name": "yiisoft/inflector",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/inflector.git",
+                "reference": "be7220e4108136ef43dda0486f04551a578ef37e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/inflector/zipball/be7220e4108136ef43dda0486f04551a578ef37e",
+                "reference": "be7220e4108136ef43dda0486f04551a578ef37e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.2",
+                "yiisoft/strings": "^3.0@dev"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.2"
+            },
+            "suggest": {
+                "ext-intl": "PHP Internationalization extension"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yiisoft\\Helpers\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Antonio Ramirez",
+                    "email": "amigo.cobos@gmail.com",
+                    "homepage": "http://www.2amigos.us/",
+                    "role": "Core framework development"
+                }
+            ],
+            "description": "Yii - Inflector Helper",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "helper",
+                "inflector",
+                "yii"
+            ],
+            "time": "2019-04-23T11:40:09+00:00"
+        },
+        {
             "name": "yiisoft/log",
             "version": "dev-master",
             "source": {
@@ -493,6 +613,65 @@
                 "yii"
             ],
             "time": "2019-01-12T18:12:04+00:00"
+        },
+        {
+            "name": "yiisoft/strings",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/strings.git",
+                "reference": "b0de6507c20a54b47d61b00d5b2a78f169d60f5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/strings/zipball/b0de6507c20a54b47d61b00d5b2a78f169d60f5b",
+                "reference": "b0de6507c20a54b47d61b00d5b2a78f169d60f5b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Yiisoft\\Strings\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Makarov",
+                    "email": "sam@rmcreative.ru",
+                    "homepage": "http://rmcreative.ru/",
+                    "role": "Core framework development"
+                },
+                {
+                    "name": "Qiang Xue",
+                    "email": "qiang.xue@gmail.com",
+                    "homepage": "http://www.yiiframework.com/",
+                    "role": "Founder and former project lead"
+                }
+            ],
+            "description": "Yii - String Helper",
+            "homepage": "http://www.yiiframework.com/",
+            "keywords": [
+                "helper",
+                "string",
+                "yii"
+            ],
+            "time": "2019-04-23T10:20:45+00:00"
         },
         {
             "name": "yiisoft/yii-core",
@@ -689,12 +868,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hiqdev/composer-config-plugin.git",
-                "reference": "9f61a782084ee2fa0f68ef4662cb9858752246f4"
+                "reference": "4f8d841d57a0015af48bf6451ad3342aa56b9559"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hiqdev/composer-config-plugin/zipball/9f61a782084ee2fa0f68ef4662cb9858752246f4",
-                "reference": "9f61a782084ee2fa0f68ef4662cb9858752246f4",
+                "url": "https://api.github.com/repos/hiqdev/composer-config-plugin/zipball/4f8d841d57a0015af48bf6451ad3342aa56b9559",
+                "reference": "4f8d841d57a0015af48bf6451ad3342aa56b9559",
                 "shasum": ""
             },
             "require": {
@@ -758,7 +937,7 @@
                 "config",
                 "plugin"
             ],
-            "time": "2019-01-11T18:05:01+00:00"
+            "time": "2019-04-23T18:54:31+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2759,20 +2938,23 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
+        "yiisoft/arrays": 20,
+        "yiisoft/inflector": 20,
         "yiisoft/yii-core": 20,
         "yiisoft/yii-web": 20,
         "yiisoft/di": 20,
         "yiisoft/log": 20,
         "yiisoft/cache": 20,
+        "yiisoft/strings": 20,
         "yiisoft/view": 20,
         "yiisoft/db": 20,
         "yiisoft/db-mysql": 20,
         "yiisoft/db-sqlite": 20,
         "hiqdev/composer-config-plugin": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": []

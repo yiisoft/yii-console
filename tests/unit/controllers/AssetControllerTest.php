@@ -7,13 +7,13 @@
 
 namespace yii\console\tests\unit\controllers;
 
-use yii\helpers\Yii;
 use yii\console\controllers\AssetController;
-use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
-use yii\helpers\StringHelper;
 use yii\helpers\VarDumper;
+use yii\helpers\Yii;
 use yii\tests\TestCase;
+use Yiisoft\Arrays\ArrayHelper;
+use Yiisoft\Strings\StringHelper;
 
 /**
  * Unit test for [[\yii\console\controllers\AssetController]].

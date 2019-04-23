@@ -10,9 +10,9 @@ namespace yii\console\controllers;
 use yii\base\Action;
 use yii\db\Connection;
 use yii\db\Query;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Console;
 use yii\helpers\Yii;
+use Yiisoft\Arrays\ArrayHelper;
 
 /**
  * Manages application migrations.
