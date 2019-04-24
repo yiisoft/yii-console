@@ -2,10 +2,9 @@
 
 return [
     'response' => [
-        '__class' => \yii\console\Response::class,
-        'formatters' => new \yii\helpers\UnsetArrayValue(),
+        'formatters' => new \Yiisoft\Arrays\UnsetArrayValue(),
     ],
     'request' => [
-        'cookieValidationKey' => new \yii\helpers\UnsetArrayValue(),
+       'cookieValidationKey' => new \Yiisoft\Arrays\UnsetArrayValue(),
     ],
 ];
