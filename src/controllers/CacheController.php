@@ -8,8 +8,8 @@
 namespace yii\console\controllers;
 
 use Psr\SimpleCache\CacheInterface;
-use yii\cache\ApcCache;
-use yii\cache\Cache;
+use Yiisoft\Cache\ApcCache;
+use Yiisoft\Cache\Cache;
 use yii\console\Controller;
 use yii\console\exceptions\Exception;
 use yii\console\ExitCode;

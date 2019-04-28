@@ -8,7 +8,7 @@
 namespace yii\console\tests\unit\controllers;
 
 use yii\helpers\Yii;
-use yii\cache\ArrayCache;
+use Yiisoft\Cache\ArrayCache;
 use yii\console\controllers\CacheController;
 use yii\tests\TestCase;
 
@@ -50,7 +50,7 @@ class CacheControllerTest extends TestCase
 
 
         $this->container->setAll([
-            'firstCache' => \yii\cache\ArrayCache::class,
+            'firstCache' => \Yiisoft\Cache\ArrayCache::class,
             'secondCache' => function () {
                 return new ArrayCache();
             },
