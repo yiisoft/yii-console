@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console;
+namespace Yiisoft\Yii\Console;
 
 use cebe\markdown\block\FencedCodeTrait;
 use cebe\markdown\inline\CodeTrait;

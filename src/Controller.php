@@ -5,11 +5,11 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console;
+namespace Yiisoft\Yii\Console;
 
 use yii\base\Action;
 use yii\base\InlineAction;
-use yii\console\exceptions\Exception;
+use Yiisoft\Yii\Console\Exceptions\Exception;
 use yii\exceptions\InvalidRouteException;
 use yii\helpers\Console;
 use Yiisoft\Helpers\InflectorHelper;

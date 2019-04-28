@@ -5,9 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console;
+namespace Yiisoft\Yii\Console;
 
-use yii\console\exceptions\UnknownCommandException;
+use Yiisoft\Yii\Console\Exceptions\UnknownCommandException;
 use yii\exceptions\InvalidRouteException;
 
 // define STDIN, STDOUT and STDERR if the PHP SAPI did not define them (e.g. creating console application in web env)
@@ -24,7 +24,7 @@ defined('STDERR') or define('STDERR', fopen('php://stderr', 'w'));
  * through a command-based approach:
  *
  * - A console application consists of one or several possible user commands;
- * - Each user command is implemented as a class extending [[\yii\console\Controller]];
+ * - Each user command is implemented as a class extending [[\Yiisoft\Yii\Console\Controller]];
  * - User specifies which command to run on the command line;
  * - The command processes the user request with the specified parameters.
  *

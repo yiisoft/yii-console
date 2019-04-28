@@ -12,7 +12,7 @@
     printerClass="yii\tests\ResultPrinter">
     <testsuites>
         <testsuite name="Yii Console unit tests">
-            <directory>./tests/unit</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 

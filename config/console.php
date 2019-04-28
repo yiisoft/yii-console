@@ -2,40 +2,40 @@
 
 return [
     'app' => [
-        '__class' => \yii\console\Application::class,
-        'controllerNamespace' => \yii\console\controllers::class,
+        '__class' => \Yiisoft\Yii\Console\Application::class,
+        'controllerNamespace' => \Yiisoft\Yii\Console\Controllers::class,
         'controllerMap' => [
             'asset' => [
-                '__class' => \yii\console\controllers\AssetController::class,
+                '__class' => \Yiisoft\Yii\Console\Controllers\AssetController::class,
             ],
             'cache' => [
-                '__class' => \yii\console\controllers\CacheController::class,
+                '__class' => \Yiisoft\Yii\Console\Controllers\CacheController::class,
             ],
             'fixture' => [
-                '__class' => \yii\console\controllers\FixtureController::class,
+                '__class' => \Yiisoft\Yii\Console\Controllers\FixtureController::class,
             ],
             'help' => [
-                '__class' => \yii\console\controllers\HelpController::class,
+                '__class' => \Yiisoft\Yii\Console\Controllers\HelpController::class,
             ],
             'message' => [
-                '__class' => \yii\console\controllers\MessageController::class,
+                '__class' => \Yiisoft\Yii\Console\Controllers\MessageController::class,
             ],
             'migrate' => [
-                '__class' => \yii\console\controllers\MigrateController::class,
+                '__class' => \Yiisoft\Yii\Console\Controllers\MigrateController::class,
             ],
             'serve' => [
-                '__class' => \yii\console\controllers\ServeController::class,
+                '__class' => \Yiisoft\Yii\Console\Controllers\ServeController::class,
             ],
         ],
     ],
 
     'request' => [
-        '__class' => \yii\console\Request::class,
+        '__class' => \Yiisoft\Yii\Console\Request::class,
     ],
     'response' => [
-        '__class' => \yii\console\Response::class,
+        '__class' => \Yiisoft\Yii\Console\Response::class,
     ],
     'errorHandler' => [
-        '__class' => \yii\console\ErrorHandler::class,
+        '__class' => \Yiisoft\Yii\Console\ErrorHandler::class,
     ],
 ];
