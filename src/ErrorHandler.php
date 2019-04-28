@@ -5,9 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console;
+namespace Yiisoft\Yii\Console;
 
-use yii\console\exceptions\UnknownCommandException;
+use Yiisoft\Yii\Console\Exceptions\UnknownCommandException;
 use yii\exceptions\ErrorException;
 use yii\exceptions\UserException;
 use yii\helpers\Console;

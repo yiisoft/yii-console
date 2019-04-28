@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console;
+namespace Yiisoft\Yii\Console;
 
 /**
  * This class provides constants for defining console command exit codes.

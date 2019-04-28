@@ -5,7 +5,7 @@ use hiqdev\composer\config\Builder;
 use yii\di\Container;
 use yii\helpers\Yii;
 
-(function () {
+(static function () {
     $paths = [
         __DIR__ . '/../../../autoload.php',
         __DIR__ . '/../vendor/autoload.php',

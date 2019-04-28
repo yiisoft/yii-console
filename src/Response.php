@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console;
+namespace Yiisoft\Yii\Console;
 
 /**
  * The console Response represents the result of a console application.

@@ -85,8 +85,12 @@
     },
     "autoload": {
         "psr-4": {
-            "yii\\console\\": "src",
-            "yii\\console\\tests\\": "tests"
+            "Yiisoft\\Yii\\Console\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Yiisoft\\Yii\\Console\\Tests\\": "tests"
         }
     },
     "bin": [

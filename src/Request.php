@@ -5,9 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace yii\console;
+namespace Yiisoft\Yii\Console;
 
-use yii\console\exceptions\Exception;
+use Yiisoft\Yii\Console\Exceptions\Exception;
 
 /**
  * The console Request represents the environment information for a console application.
