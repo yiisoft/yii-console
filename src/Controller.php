@@ -12,7 +12,7 @@ use yii\base\InlineAction;
 use Yiisoft\Yii\Console\Exceptions\Exception;
 use yii\exceptions\InvalidRouteException;
 use yii\helpers\Console;
-use Yiisoft\Helpers\InflectorHelper;
+use Yiisoft\Inflector\InflectorHelper;
 
 /**
  * Controller is the base class of console command classes.

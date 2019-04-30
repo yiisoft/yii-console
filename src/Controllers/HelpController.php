@@ -11,7 +11,7 @@ use yii\base\Application;
 use Yiisoft\Yii\Console\Controller;
 use Yiisoft\Yii\Console\Exceptions\Exception;
 use yii\helpers\Console;
-use Yiisoft\Helpers\InflectorHelper;
+use Yiisoft\Inflector\InflectorHelper;
 use yii\helpers\Yii;
 
 /**
