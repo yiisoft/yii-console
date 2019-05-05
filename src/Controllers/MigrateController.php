@@ -8,8 +8,8 @@
 namespace Yiisoft\Yii\Console\Controllers;
 
 use yii\base\Action;
-use yii\db\Connection;
-use yii\db\Query;
+use Yiisoft\Db\Connection;
+use Yiisoft\Db\Query;
 use yii\helpers\Console;
 use yii\helpers\Yii;
 use Yiisoft\Arrays\ArrayHelper;
@@ -189,7 +189,7 @@ class MigrateController extends BaseMigrateController
     /**
      * Creates a new migration instance.
      * @param string $class the migration class name
-     * @return \yii\db\Migration the migration instance
+     * @return \Yiisoft\Db\Migration the migration instance
      */
     protected function createMigration($class)
     {

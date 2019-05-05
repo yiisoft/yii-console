@@ -9,8 +9,8 @@ namespace Yiisoft\Yii\Console\Controllers;
 
 use Yiisoft\Yii\Console\Exceptions\Exception;
 use Yiisoft\Yii\Console\ExitCode;
-use yii\db\Connection;
-use yii\db\Query;
+use Yiisoft\Db\Connection;
+use Yiisoft\Db\Query;
 use yii\helpers\Yii;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;

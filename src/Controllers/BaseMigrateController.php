@@ -14,7 +14,7 @@ use yii\exceptions\NotSupportedException;
 use Yiisoft\Yii\Console\Controller;
 use Yiisoft\Yii\Console\Exceptions\Exception;
 use Yiisoft\Yii\Console\ExitCode;
-use yii\db\MigrationInterface;
+use Yiisoft\Db\MigrationInterface;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;
 use yii\helpers\Yii;
@@ -768,7 +768,7 @@ abstract class BaseMigrateController extends Controller
     /**
      * Creates a new migration instance.
      * @param string $class the migration class name
-     * @return \yii\db\MigrationInterface the migration instance
+     * @return \Yiisoft\Db\MigrationInterface the migration instance
      */
     protected function createMigration($class)
     {

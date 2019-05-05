@@ -155,8 +155,8 @@ class CacheController extends Controller
             return ExitCode::UNSPECIFIED_ERROR;
         }
 
-        if (!$connection instanceof \yii\db\Connection) {
-            $this->stdout("\"$db\" component doesn't inherit \\yii\\db\\Connection.\n", Console::FG_RED);
+        if (!$connection instanceof \Yiisoft\Db\Connection) {
+            $this->stdout("\"$db\" component doesn't inherit \\Yiisoft\\Db\\Connection.\n", Console::FG_RED);
             return ExitCode::UNSPECIFIED_ERROR;
         } elseif (!$this->confirm("Flush cache schema for \"$db\" connection?")) {
             return ExitCode::OK;

@@ -10,7 +10,7 @@ namespace Yiisoft\Yii\Console\Tests\Controllers;
 use yii\helpers\Yii;
 use Yiisoft\Arrays\ArrayHelper;
 use Yiisoft\Yii\Console\ExitCode;
-use yii\db\Connection;
+use Yiisoft\Db\Connection;
 
 /**
  * Tests that [[\Yiisoft\Yii\Console\Controllers\MessageController]] works as expected with DB message format.
@@ -87,9 +87,9 @@ class DbMessageControllerTest extends BaseMessageControllerTest
     }
 
     /**
-     * @throws \yii\db\Exception
+     * @throws \Yiisoft\Db\Exception
      * @throws \yii\base\InvalidConfigException
-     * @return \yii\db\Connection
+     * @return \Yiisoft\Db\Connection
      */
     public static function getConnection()
     {
@@ -153,11 +153,11 @@ class DbMessageControllerTest extends BaseMessageControllerTest
      */
     protected function loadMessages($category)
     {
-        return ArrayHelper::map((new \yii\db\Query())
+        return ArrayHelper::map((new \Yiisoft\Db\Query())
             ->select(['message' => 't1.message', 'translation' => 't2.translation'])
             ->from(['t1' => 'source_message', 't2' => 'message'])
             ->where([
-                't1.id' => new \yii\db\Expression('[[t2.id]]'),
+                't1.id' => new \Yiisoft\Db\Expression('[[t2.id]]'),
                 't1.category' => $category,
                 't2.language' => $this->language,
             ])->all(static::$db), 'message', 'translation');

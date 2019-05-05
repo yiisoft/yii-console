@@ -15,7 +15,7 @@ if (!empty($namespace)) {
 }
 ?>
 
-use yii\db\Migration;
+use Yiisoft\Db\Migration;
 
 /**
  * Handles the dropping of table `<?= $table ?>`.

@@ -9,9 +9,9 @@ namespace Yiisoft\Yii\Console\Tests\Controllers;
 
 use yii\helpers\Yii;
 use Yiisoft\Yii\Console\Controllers\MigrateController;
-use yii\db\Connection;
-use yii\db\Migration;
-use yii\db\Query;
+use Yiisoft\Db\Connection;
+use Yiisoft\Db\Migration;
+use Yiisoft\Db\Query;
 use yii\tests\TestCase;
 
 /**

@@ -56,7 +56,7 @@ class CacheControllerTest extends TestCase
             },
             'session' => \yii\web\CacheSession::class, // should be ignored at `actionFlushAll()`
             'db' => [
-                '__class' => $config['__class'] ?? \yii\db\Connection::class,
+                '__class' => $config['__class'] ?? \Yiisoft\Db\Connection::class,
                 'dsn' => $config['dsn'],
                 'username' => $config['username'] ?? null,
                 'password' => $config['password'] ?? null,
