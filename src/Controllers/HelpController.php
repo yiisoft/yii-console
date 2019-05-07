@@ -11,7 +11,7 @@ use yii\base\Application;
 use Yiisoft\Yii\Console\Controller;
 use Yiisoft\Yii\Console\Exceptions\Exception;
 use yii\helpers\Console;
-use Yiisoft\Inflector\InflectorHelper;
+use Yiisoft\Strings\Inflector;
 use yii\helpers\Yii;
 
 /**
@@ -212,7 +212,7 @@ class HelpController extends Controller
         foreach ($class->getMethods() as $method) {
             $name = $method->getName();
             if ($name !== 'actions' && $method->isPublic() && !$method->isStatic() && strncmp($name, 'action', 6) === 0) {
-                $actions[] = InflectorHelper::camel2id(substr($name, 6), '-', true);
+                $actions[] = Inflector::camel2id(substr($name, 6), '-', true);
             }
         }
         sort($actions);
@@ -258,7 +258,7 @@ class HelpController extends Controller
                 if ($this->validateControllerClass($controllerClass)) {
                     $dir = ltrim(pathinfo($relativePath, PATHINFO_DIRNAME), '\\/');
 
-                    $command = InflectorHelper::camel2id(substr(basename($file), 0, -14), '-', true);
+                    $command = Inflector::camel2id(substr(basename($file), 0, -14), '-', true);
                     if (!empty($dir)) {
                         $command = $dir . '/' . $command;
                     }

@@ -12,7 +12,7 @@ use yii\base\InlineAction;
 use Yiisoft\Yii\Console\Exceptions\Exception;
 use yii\exceptions\InvalidRouteException;
 use yii\helpers\Console;
-use Yiisoft\Inflector\InflectorHelper;
+use Yiisoft\Strings\Inflector;
 
 /**
  * Controller is the base class of console command classes.
@@ -105,7 +105,7 @@ class Controller extends \yii\base\Controller
                 // Allow camelCase options to be entered in kebab-case
                 if (!in_array($name, $options, true) && strpos($name, '-') !== false) {
                     $kebabName = $name;
-                    $altName = lcfirst(InflectorHelper::id2camel($kebabName));
+                    $altName = lcfirst(Inflector::id2camel($kebabName));
                     if (in_array($altName, $options, true)) {
                         $name = $altName;
                     }
@@ -550,7 +550,7 @@ class Controller extends \yii\base\Controller
             $tags = $this->parseDocCommentTags($property);
 
             // Display camelCase options in kebab-case
-            $name = InflectorHelper::camel2id($name, '-', true);
+            $name = Inflector::camel2id($name, '-', true);
 
             if (isset($tags['var']) || isset($tags['property'])) {
                 $doc = $tags['var'] ?? $tags['property'];
