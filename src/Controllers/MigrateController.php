@@ -131,13 +131,24 @@ class MigrateController extends BaseMigrateController
      * when applying migrations. Starting from version 2.0.3, this can also be a configuration array
      * for creating the object.
      */
-    public $db = 'db';
+    protected $db;
     /**
      * @var string the comment for the table being created.
      * @since 2.0.14
      */
     public $comment = '';
 
+
+    /**
+     * @param string $id the ID of this controller.
+     * @param Module $module the module that this controller belongs to.
+     * @param Connection $db
+     */
+    public function __construct($id, $module, Connection $db)
+    {
+        $this->db = $db;
+        parent::__construct($id, $module);
+    }
 
     /**
      * {@inheritdoc}
@@ -168,22 +179,6 @@ class MigrateController extends BaseMigrateController
             'P' => 'useTablePrefix',
             'c' => 'compact',
         ]);
-    }
-
-    /**
-     * This method is invoked right before an action is to be executed (after all possible filters.)
-     * It checks the existence of the [[migrationPath]].
-     * @param \yii\base\Action $action the action to be executed.
-     * @return bool whether the action should continue to be executed.
-     */
-    public function beforeAction(Action $action): bool
-    {
-        if (parent::beforeAction($action)) {
-            $this->db = Yii::ensureObject($this->db, Connection::class);
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -415,7 +410,6 @@ class MigrateController extends BaseMigrateController
             if ($relatedColumn === null) {
                 $relatedColumn = 'id';
                 try {
-                    $this->db = Yii::ensureObject($this->db, Connection::class);
                     $relatedTableSchema = $this->db->getTableSchema($relatedTable);
                     if ($relatedTableSchema !== null) {
                         $primaryKeyCount = count($relatedTableSchema->primaryKey);
