@@ -6,20 +6,26 @@ use yii\di\Container;
 use yii\helpers\Yii;
 
 (static function () {
-    $paths = [
-        __DIR__ . '/../../../autoload.php',
+    $possibleAutoloadPaths = [
+        // local dev repository
         __DIR__ . '/../vendor/autoload.php',
+        // dependency
+        __DIR__ . '/../../../vendor/autoload.php',
     ];
     $autoloadPath = null;
-    foreach ($paths as $path) {
-        if (file_exists($path)) {
-            $autoloadPath = $path;
+    foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
+        if (file_exists($possibleAutoloadPath)) {
+            $autoloadPath = $possibleAutoloadPath;
             break;
         }
     }
 
-    if (empty($autoloadPath)) {
-        die("You need to set up the project dependencies with Composer\n");
+    if ($autoloadPath === null) {
+        $message = "Unable to find vendor/autoload.php in the following paths:\n\n";
+        $message .= implode("\n", $possibleAutoloadPaths) . "\n\n";
+        $message .= "Please install yiisoft/console via Composer.\n";
+        fwrite(STDERR, $message);
+        exit(1);
     }
     require_once $autoloadPath;
 
