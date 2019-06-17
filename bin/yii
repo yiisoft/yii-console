@@ -8,9 +8,9 @@ use yii\helpers\Yii;
 (static function () {
     $possibleAutoloadPaths = [
         // local dev repository
-        __DIR__ . '/../vendor/autoload.php',
+        dirname(__DIR__) . '/vendor/autoload.php',
         // dependency
-        __DIR__ . '/../../../vendor/autoload.php',
+        dirname(__DIR__, 4) . '/vendor/autoload.php',
     ];
     $autoloadPath = null;
     foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
