@@ -6,11 +6,17 @@ use yii\di\Container;
 use yii\helpers\Yii;
 
 (static function () {
+    $cwd = getcwd();
+
     $possibleAutoloadPaths = [
         // local dev repository
         dirname(__DIR__) . '/vendor/autoload.php',
         // dependency
         dirname(__DIR__, 4) . '/vendor/autoload.php',
+        // running from project root
+        $cwd . '/vendor/autoload.php',
+        // running from project bin
+        dirname($cwd) . '/autoload.php',
     ];
     $autoloadPath = null;
     foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
@@ -22,8 +28,10 @@ use yii\helpers\Yii;
 
     if ($autoloadPath === null) {
         $message = "Unable to find vendor/autoload.php in the following paths:\n\n";
-        $message .= implode("\n", $possibleAutoloadPaths) . "\n\n";
-        $message .= "Please install yiisoft/console via Composer.\n";
+        $message .= '- ' . implode("\n- ", $possibleAutoloadPaths) . "\n\n";
+        $message .= "Possible fixes:\n";
+        $message .= "- Install yiisoft/console via Composer.\n";
+        $message .= "- Run ./yii either from project root or from vendor/bin.\n";
         fwrite(STDERR, $message);
         exit(1);
     }
