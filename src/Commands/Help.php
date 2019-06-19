@@ -557,16 +557,13 @@ class Help implements Command
 
     public function description(): string
     {
-
     }
 
     public function help(): string
     {
-
     }
 
     public function run(Input $input, Output $output)
     {
-
     }
 }

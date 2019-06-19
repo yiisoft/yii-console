@@ -10,11 +10,9 @@ class ArgvInput implements Input
 
     public function option(string $name)
     {
-
     }
 
     public function parameters(): array
     {
-
     }
 }
