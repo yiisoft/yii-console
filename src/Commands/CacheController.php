@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace Yiisoft\Yii\Console\Controllers;
+namespace Yiisoft\Yii\Console\Commands;
 
 use Psr\SimpleCache\CacheInterface;
 use Yiisoft\Cache\ApcCache;

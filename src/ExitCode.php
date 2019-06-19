@@ -1,10 +1,4 @@
 <?php
-/**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
-
 namespace Yiisoft\Yii\Console;
 
 /**
@@ -27,11 +21,7 @@ namespace Yiisoft\Yii\Console;
  *     return ExitCode::OK;
  * }
  * ```
- *
- * @author Tom Worster <fsb@thefsb.org>
- * @author Alexander Makarov <sam@rmcreative.ru>
  * @see http://man.openbsd.org/sysexits
- * @since 2.0.13
  */
 class ExitCode
 {

@@ -1,18 +1,15 @@
 <?php
-/**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
-
-namespace Yiisoft\Yii\Console\Controllers;
+namespace Yiisoft\Yii\Console\Commands;
 
 use yii\base\Application;
+use Yiisoft\Yii\Console\Command;
 use Yiisoft\Yii\Console\Controller;
 use Yiisoft\Yii\Console\Exceptions\Exception;
 use yii\helpers\Console;
 use Yiisoft\Strings\Inflector;
 use yii\helpers\Yii;
+use Yiisoft\Yii\Console\Input;
+use Yiisoft\Yii\Console\Output;
 
 /**
  * Provides help information about console commands.
@@ -29,13 +26,8 @@ use yii\helpers\Yii;
  *
  * In the above, if the command name is not provided, all
  * available commands will be displayed.
- *
- * @property array $commands All available command names. This property is read-only.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
  */
-class HelpController extends Controller
+class Help implements Command
 {
     /**
      * Displays available commands or the detailed information
@@ -556,5 +548,25 @@ class HelpController extends Controller
     protected function getDefaultHelpHeader()
     {
         return "\nThis is Yii version " . Yii::getVersion() . ".\n";
+    }
+
+    public function isInteractive(): bool
+    {
+        // TODO: Implement isInteractive() method.
+    }
+
+    public function description(): string
+    {
+
+    }
+
+    public function help(): string
+    {
+
+    }
+
+    public function run(Input $input, Output $output)
+    {
+
     }
 }

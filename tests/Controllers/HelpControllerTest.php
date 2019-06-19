@@ -14,7 +14,7 @@ use yii\tests\TestCase;
 
 /**
  * Unit test for [[\Yiisoft\Yii\Console\Controllers\HelpController]].
- * @see HelpController
+ * @see Help
  * @group console
  */
 class HelpControllerTest extends TestCase

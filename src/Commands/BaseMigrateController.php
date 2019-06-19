@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace Yiisoft\Yii\Console\Controllers;
+namespace Yiisoft\Yii\Console\Commands;
 
 use yii\base\BaseObject;
 use yii\base\Action;

@@ -7,14 +7,9 @@
 
 namespace Yiisoft\Yii\Console;
 
+use Yiisoft\Yii\Console\Commands\Help;
 use Yiisoft\Yii\Console\Exceptions\UnknownCommandException;
 use yii\exceptions\InvalidRouteException;
-
-// define STDIN, STDOUT and STDERR if the PHP SAPI did not define them (e.g. creating console application in web env)
-// http://php.net/manual/en/features.commandline.io-streams.php
-defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
-defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
-defined('STDERR') or define('STDERR', fopen('php://stderr', 'w'));
 
 /**
  * Application represents a console application.
@@ -49,105 +44,26 @@ defined('STDERR') or define('STDERR', fopen('php://stderr', 'w'));
  * ```
  * yii help
  * ```
- *
- * @property ErrorHandler $errorHandler The error handler application component. This property is read-only.
- * @property Request $request The request component. This property is read-only.
- * @property Response $response The response component. This property is read-only.
- *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
  */
-class Application extends \yii\base\Application
+class Application
 {
-    /**
-     * The option name for specifying the application configuration file path.
-     */
-    const OPTION_APPCONFIG = 'appconfig';
+    private $commands = [
+        'help' => Help::class,
+    ];
 
-    /**
-     * @var string the default route of this application. Defaults to 'help',
-     * meaning the `help` command.
-     */
-    public $defaultRoute = 'help';
-    /**
-     * @var Controller the currently active controller instance
-     */
-    public $controller;
-
-
-    /**
-     * Loads the configuration.
-     * This method will check if the command line option [[OPTION_APPCONFIG]] is specified.
-     * If so, the corresponding file will be loaded as the application configuration.
-     * Otherwise, the configuration provided as the parameter will be returned back.
-     * @param array $config the configuration provided in the constructor.
-     * @return array the actual configuration to be used by the application.
-     */
-    protected function loadConfig($config)
+    public function addCommand(Command $command): void
     {
-        if (!empty($_SERVER['argv'])) {
-            $option = '--' . self::OPTION_APPCONFIG . '=';
-            foreach ($_SERVER['argv'] as $param) {
-                if (strpos($param, $option) !== false) {
-                    $path = substr($param, strlen($option));
-                    if (!empty($path) && is_file($file = $this->app->getAlias($path))) {
-                        return require $file;
-                    }
-
-                    exit("The configuration file does not exist: $path\n");
-                }
-            }
-        }
-
-        return $config;
+        $this->commands[] = $command;
     }
 
-    /**
-     * Handles the specified request.
-     * @param Request $request the request to be handled
-     * @return Response the resulting response
-     */
-    public function handleRequest($request)
+    public function run(Input $input, Output $output): int
     {
-        [$route, $params] = $request->resolve();
-        $this->requestedRoute = $route;
-        $result = $this->runAction($route, $params);
-        if ($result instanceof Response) {
-            return $result;
+        $commandName = $input->commandName() ?? 'help';
+        if (!isset($this->commands[$commandName])) {
+            throw new UnknownCommandException($commandName, $this);
         }
 
-        $response = $this->getResponse();
-        $response->exitStatus = $result;
-
-        return $response;
-    }
-
-    /**
-     * Runs a controller action specified by a route.
-     * This method parses the specified route and creates the corresponding child module(s), controller and action
-     * instances. It then calls [[Controller::runAction()]] to run the action with the given parameters.
-     * If the route is empty, the method will use [[defaultRoute]].
-     *
-     * For example, to run `public function actionTest($a, $b)` assuming that the controller has options the following
-     * code should be used:
-     *
-     * ```php
-     * $this->app->runAction('controller/test', ['option' => 'value', $a, $b]);
-     * ```
-     *
-     * @param string $route the route that specifies the action.
-     * @param array $params the parameters to be passed to the action
-     * @return int|Response the result of the action. This can be either an exit code or Response object.
-     * Exit code 0 means normal, and other values mean abnormal. Exit code of `null` is treaded as `0` as well.
-     * @throws Exception if the route is invalid
-     */
-    public function runAction($route, $params = [])
-    {
-        try {
-            $res = parent::runAction($route, $params);
-            return is_object($res) ? $res : (int) $res;
-        } catch (InvalidRouteException $e) {
-            throw new UnknownCommandException($route, $this, 0, $e);
-        }
+        // TODO: execute via DI to support constructor injection
+        return (new $commandName($input, $output))->run();
     }
 }
