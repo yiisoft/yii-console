@@ -1,10 +1,4 @@
 <?php
-/**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
-
 namespace Yiisoft\Yii\Console\Commands;
 
 use Yiisoft\Yii\Console\Controller;
@@ -46,7 +40,7 @@ use Yiisoft\Arrays\ArrayHelper;
  * @author Paul Klimov <klimov.paul@gmail.com>
  * @since 2.0
  */
-class AssetController extends Controller
+class Asset extends Controller
 {
     /**
      * @var string controller default action ID.

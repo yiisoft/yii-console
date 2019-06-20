@@ -46,10 +46,17 @@ defined('STDERR') or define('STDERR', fopen('php://stderr', 'w'));
     require_once $autoloadPath;
 
     $container = new Container(require Builder::path('console'));
-    Yii::setContainer($container);
+    //Yii::setContainer($container);
 
-    $input = new ArgvInput();
-    $output = new ConsoleOutput();
+    $container->set('serve', \Yiisoft\Yii\Console\Command\Serve::class);
 
-    exit($container->get('app')->run($input, $output));
+    //$container->get('app')->run();
+
+    $app = new \Symfony\Component\Console\Application('Yii Console', '1.0');
+    $loader = new \Symfony\Component\Console\CommandLoader\ContainerCommandLoader($container, [
+        'serve' => 'serve',
+        //'server' => 'serve', //TODO: why doesn't it work?
+    ]);
+    $app->setCommandLoader($loader);
+    $app->run();
 })();
