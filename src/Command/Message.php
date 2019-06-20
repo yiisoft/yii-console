@@ -37,7 +37,7 @@ use yii\i18n\GettextPoFile;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class MessageController extends \Yiisoft\Yii\Console\Controller
+class Message extends \Yiisoft\Yii\Console\Controller
 {
     /**
      * @var string controller default action ID.

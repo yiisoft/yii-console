@@ -71,7 +71,7 @@ use Yiisoft\Arrays\ArrayHelper;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class MigrateController extends BaseMigrateController
+class Migrate extends BaseMigrateController
 {
     /**
      * Maximum length of a migration name.

@@ -45,7 +45,7 @@ use yii\helpers\Yii;
  * @author Mark Jebri <mark.github@yandex.ru>
  * @since 2.0
  */
-class CacheController extends Controller
+class Cache extends Controller
 {
     /**
      * Lists the caches that can be cleared.
