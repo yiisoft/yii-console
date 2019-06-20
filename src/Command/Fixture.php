@@ -1,10 +1,4 @@
 <?php
-/**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
-
 namespace Yiisoft\Yii\Console\Commands;
 
 use yii\exceptions\InvalidConfigException;
@@ -38,11 +32,8 @@ use yii\test\InitDbFixture;
  * ```
  *
  * The `unload` sub-command can be used similarly to unload fixtures.
- *
- * @author Mark Jebri <mark.github@yandex.ru>
- * @since 2.0
  */
-class FixtureController extends Controller
+class Fixture extends Controller
 {
     use FixtureTrait;
 
