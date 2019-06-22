@@ -42,7 +42,7 @@ class Serve extends Command
         $documentRoot = getcwd() . '/' . $docroot; // TODO: can we do it better?
 
         if (strpos($address, ':') === false) {
-            $address .= $port . ':';
+            $address .= ':' . $port;
         }
 
         if (!is_dir($documentRoot)) {
