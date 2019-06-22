@@ -1,10 +1,4 @@
 <?php
-/**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
-
 namespace Yiisoft\Yii\Console;
 
 /**
@@ -15,7 +9,7 @@ namespace Yiisoft\Yii\Console;
  * These constants can be used in console controllers for example like this:
  *
  * ```php
- * public function actionIndex()
+ * protected function execute(InputInterface $input, OutputInterface $output)
  * {
  *     if (!$this->isAllowedToPerformAction()) {
  *          $this->stderr('Error: ' . ExitCode::getReason(ExitCode::NOPERM));
@@ -28,10 +22,7 @@ namespace Yiisoft\Yii\Console;
  * }
  * ```
  *
- * @author Tom Worster <fsb@thefsb.org>
- * @author Alexander Makarov <sam@rmcreative.ru>
  * @see http://man.openbsd.org/sysexits
- * @since 2.0.13
  */
 class ExitCode
 {
