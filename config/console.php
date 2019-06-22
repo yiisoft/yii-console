@@ -10,8 +10,7 @@ return [
         '__class' => Application::class,
         'setCommandLoader()' => Reference::to(CommandLoaderInterface::class),
     ],
-    CommandLoaderInterface::class => function (ContainerInterface $container)
-    {
+    CommandLoaderInterface::class => function (ContainerInterface $container) {
         return new ContainerCommandLoader($container, [
             'serve' => 'serve',
         ]);
