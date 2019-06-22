@@ -1,13 +1,20 @@
 <?php
+use Psr\Container\ContainerInterface;
+use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
+use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use yii\di\Reference;
+use Yiisoft\Yii\Console\Application;
 
 return [
-    'app' => function (\Psr\Container\ContainerInterface $container) {
-        $app = new \Yiisoft\Yii\Console\Application();
-        $loader = new \Symfony\Component\Console\CommandLoader\ContainerCommandLoader($container, [
+    'app' => [
+        '__class' => Application::class,
+        'setCommandLoader()' => Reference::to(CommandLoaderInterface::class),
+    ],
+    CommandLoaderInterface::class => function (ContainerInterface $container)
+    {
+        return new ContainerCommandLoader($container, [
             'serve' => 'serve',
         ]);
-        $app->setCommandLoader($loader);
-        return $app;
     },
 
     // commands
