@@ -2,8 +2,8 @@
 <?php
 
 use hiqdev\composer\config\Builder;
-use yii\di\Container;
 use yii\helpers\Yii;
+use Yiisoft\Di\Container;
 
 (static function () {
     $cwd = getcwd();
