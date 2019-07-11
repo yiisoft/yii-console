@@ -2,7 +2,6 @@
 <?php
 
 use hiqdev\composer\config\Builder;
-use yii\helpers\Yii;
 use Yiisoft\Di\Container;
 
 (static function () {
@@ -38,7 +37,6 @@ use Yiisoft\Di\Container;
     require_once $autoloadPath;
 
     $container = new Container(require Builder::path('console'));
-    Yii::setContainer($container);
 
     $container->get('app')->run();
 })();
