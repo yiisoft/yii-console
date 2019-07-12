@@ -3,6 +3,7 @@
 
 use hiqdev\composer\config\Builder;
 use Yiisoft\Di\Container;
+use Yiisoft\Yii\Console\Application;
 
 (static function () {
     $cwd = getcwd();
@@ -38,5 +39,5 @@ use Yiisoft\Di\Container;
 
     $container = new Container(require Builder::path('console'));
 
-    $container->get('app')->run();
+    $container->get(Application::class)->run();
 })();
