@@ -1,16 +1,14 @@
 <?php
+use Yiisoft\Yii\Console\Application;
 
 return [
-    \Yiisoft\Yii\Console\Application::class => function (\Psr\Container\ContainerInterface $container) {
+    Application::class => function (\Psr\Container\ContainerInterface $container) use ($params) {
         $app = new \Yiisoft\Yii\Console\Application();
         $loader = new \Symfony\Component\Console\CommandLoader\ContainerCommandLoader(
             $container,
-            $container->get('commands')
+            $params['commands']
         );
         $app->setCommandLoader($loader);
         return $app;
     },
-    'commands' => [
-        'serve' => \Yiisoft\Yii\Console\Command\Serve::class,
-    ],
 ];
