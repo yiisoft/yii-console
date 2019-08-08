@@ -11,4 +11,7 @@ return [
         $app->setCommandLoader($loader);
         return $app;
     },
+    'commands' => new \Yiisoft\Factory\Definitions\ValueDefinition([
+        'serve' => \Yiisoft\Yii\Console\Command\Serve::class,
+    ]),
 ];
