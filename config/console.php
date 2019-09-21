@@ -3,7 +3,6 @@
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Yiisoft\Yii\Console\Application;
-use Yiisoft\Yii\Console\Command\Serve;
 
 return [
     Application::class => function (ContainerInterface $container) use ($params) {
@@ -15,5 +14,4 @@ return [
         $app->setCommandLoader($loader);
         return $app;
     },
-    Serve::class => Serve::class,
 ];
