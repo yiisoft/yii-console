@@ -24,8 +24,7 @@
         "yiisoft/friendly-exception": "@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.3",
-        "yiisoft/di": "^3.0@dev"
+        "phpunit/phpunit": "^8.4"
     },
     "autoload": {
         "psr-4": {
