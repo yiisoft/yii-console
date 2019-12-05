@@ -16,6 +16,4 @@ $_SERVER['SCRIPT_FILENAME'] = __FILE__;
     }
 
     require_once $composerAutoload;
-
-    $container = new Container(require Builder::path('tests'));
 })();
