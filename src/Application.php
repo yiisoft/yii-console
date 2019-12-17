@@ -7,7 +7,7 @@ use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 
 class Application extends \Symfony\Component\Console\Application
 {
-    public const VERSION = '1.0.0';
+    public const VERSION = '3.0.0-dev';
 
     public function __construct(string $name = 'Yii Console', string $version = self::VERSION)
     {
