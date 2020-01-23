@@ -1,4 +1,5 @@
 <?php
+
 namespace Yiisoft\Yii\Console\Command;
 
 use Symfony\Component\Console\Command\Command;

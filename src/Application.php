@@ -1,4 +1,5 @@
 <?php
+
 namespace Yiisoft\Yii\Console;
 
 use Symfony\Component\Console\Output\OutputInterface;
