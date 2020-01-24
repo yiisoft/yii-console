@@ -10,6 +10,13 @@
 
 This [Yii Framework] extension allows easy creation of console applications.
 
+Main usage: `vendor/bin/yii <command>`
+
+To start working with it you must do one of these:
+- `composer require yiisoft/di`
+- Manually create a `container` option in `params` (see [Composer config plugin](https://github.com/hiqdev/composer-config-plugin) to get more info)
+- Use your own binary file instead of `vendor/bin/yii`
+
 [Yii Framework]: https://github.com/yiisoft/core
 
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii-console/v/stable.png)](https://packagist.org/packages/yiisoft/yii-console)
