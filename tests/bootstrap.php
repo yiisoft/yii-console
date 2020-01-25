@@ -1,8 +1,5 @@
 <?php
 
-use hiqdev\composer\config\Builder;
-use Yiisoft\Di\Container;
-
 // ensure we get report on all possible php errors
 error_reporting(E_ALL);
 

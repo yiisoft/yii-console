@@ -2,7 +2,7 @@
 <?php
 
 use hiqdev\composer\config\Builder;
-use Yiisoft\Di\Container;
+use Psr\Container\ContainerInterface;
 use Yiisoft\Yii\Console\Application;
 
 (static function () {
@@ -37,7 +37,10 @@ use Yiisoft\Yii\Console\Application;
     }
     require_once $autoloadPath;
 
-    $container = new Container(require Builder::path('console'));
+    $params = require Builder::path('params');
+
+    /** @var ContainerInterface $container */
+    $container = $params['console']['container']();
 
     $container->get(Application::class)->run();
 })();
