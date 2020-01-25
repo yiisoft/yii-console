@@ -9,9 +9,20 @@ return [
         $app = new Application();
         $loader = new ContainerCommandLoader(
             $container,
-            $params['commands']
+            $params['console']['commands']
         );
         $app->setCommandLoader($loader);
+
+        $name = $params['console']['name'] ?? null;
+        if ($name !== null) {
+            $app->setName($name);
+        }
+
+        $version = $params['console']['version'] ?? null;
+        if ($version !== null) {
+            $app->setVersion($version);
+        }
+
         return $app;
     },
 ];
