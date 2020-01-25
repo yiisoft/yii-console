@@ -40,7 +40,7 @@ use Yiisoft\Yii\Console\Application;
     $params = require Builder::path('params');
 
     /** @var ContainerInterface $container */
-    $container = $params['console.container']();
+    $container = $params['console']['container']();
 
     $container->get(Application::class)->run();
 })();
