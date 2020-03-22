@@ -19,7 +19,7 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.4",
-        "hiqdev/composer-config-plugin": "^1.0@dev",
+        "yiisoft/composer-config-plugin": "^1.0@dev",
         "symfony/console": "^5.0|^4.0",
         "yiisoft/friendly-exception": "@dev",
         "psr/container": "1.0.0",
