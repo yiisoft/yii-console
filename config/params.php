@@ -1,6 +1,6 @@
 <?php
 
-use hiqdev\composer\config\Builder;
+use Yiisoft\Composer\Config\Builder;
 use Psr\Container\ContainerInterface;
 use Yiisoft\Yii\Console\Command\Serve;
 
