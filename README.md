@@ -17,7 +17,7 @@ The binary of the package is available as `vendor/bin/yii <command>`.
 To start working with the package you must do one of these:
 
 - `composer require yiisoft/di`
-- Manually create a `console.container` option in `params` (see [Composer config plugin](https://github.com/hiqdev/composer-config-plugin) to get more info)
+- Manually create a `console.container` option in `params` (see [Composer config plugin](https://github.com/yiisoft/composer-config-plugin) to get more info)
 - Use your own binary file instead of `vendor/bin/yii`
 
 Since the package is based on [Symfony Console component](https://symfony.com/doc/current/components/console.html),
