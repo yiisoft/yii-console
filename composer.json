@@ -21,7 +21,7 @@
         "php": "^7.4",
         "yiisoft/composer-config-plugin": "^1.0@dev",
         "symfony/console": "^5.0|^4.0",
-        "yiisoft/friendly-exception": "@dev",
+        "yiisoft/friendly-exception": "^1.0",
         "psr/container": "1.0.0",
         "psr/container-implementation": "1.0.0"
     },
