@@ -16,10 +16,12 @@ class ConsoleBufferedOutput extends ConsoleOutput
      *
      * @return string
      */
-    public function fetch()
+    public function fetch(bool $clearBuffer = false)
     {
         $content = $this->buffer;
-        $this->buffer = '';
+        if ($clearBuffer) {
+            $this->buffer = '';
+        }
 
         return $content;
     }
