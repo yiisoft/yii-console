@@ -3,6 +3,7 @@
 namespace Yiisoft\Yii\Console;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface as SymfonyEventDispatcherInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\StyleInterface;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
@@ -20,10 +21,15 @@ class Application extends \Symfony\Component\Console\Application
         parent::__construct($name, $version);
     }
 
-    public function setDispatcher(\Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher)
+    public function setDispatcher(SymfonyEventDispatcherInterface $dispatcher): void
     {
         $this->dispatcher = $dispatcher;
         parent::setDispatcher($dispatcher);
+    }
+
+    public function getDispatcher(): EventDispatcherInterface
+    {
+        return $this->dispatcher;
     }
 
     public function start(): void
