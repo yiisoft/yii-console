@@ -9,14 +9,15 @@ use Symfony\Component\Console\Output\ConsoleOutput;
  */
 class ConsoleBufferedOutput extends ConsoleOutput
 {
-    private $buffer = '';
+    private string $buffer = '';
 
     /**
-     * Empties buffer and returns its content.
+     * Returns buffer content optionally clearing it.
      *
+     * @param bool $clearBuffer
      * @return string
      */
-    public function fetch(bool $clearBuffer = false)
+    public function fetch(bool $clearBuffer = false): string
     {
         $content = $this->buffer;
         if ($clearBuffer) {
@@ -26,9 +27,6 @@ class ConsoleBufferedOutput extends ConsoleOutput
         return $content;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function doWrite(string $message, bool $newline)
     {
         $this->buffer .= $message;
