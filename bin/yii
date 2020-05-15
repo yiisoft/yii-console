@@ -1,9 +1,11 @@
 #!/usr/bin/env php
 <?php
 
-use Yiisoft\Composer\Config\Builder;
 use Psr\Container\ContainerInterface;
+use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Yii\Console\Application;
+use Yiisoft\Yii\Console\Config\EventConfigurator;
+use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
 (static function () {
     $cwd = getcwd();
@@ -41,6 +43,17 @@ use Yiisoft\Yii\Console\Application;
 
     /** @var ContainerInterface $container */
     $container = $params['console']['container']();
+    $eventConfigurator = $container->get(EventConfigurator::class);
+    $eventConfigurator->registerListeners(require Builder::path('events-console'));
 
-    $container->get(Application::class)->run();
+    $application = $container->get(Application::class);
+    $exitCode = null;
+
+    try {
+        $application->start();
+        $exitCode = $application->run(null, new ConsoleBufferedOutput());
+    } finally {
+        $application->shutdown($exitCode);
+        exit($exitCode);
+    }
 })();
