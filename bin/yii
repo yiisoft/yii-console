@@ -43,6 +43,8 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
     /** @var ContainerInterface $container */
     $container = $params['console']['container']();
+    $container = $container->get(ContainerInterface::class);
+
     $eventConfigurator = $container->get(EventConfigurator::class);
     $eventConfigurator->registerListeners(require Builder::path('events-console'));
 
