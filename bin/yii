@@ -47,7 +47,7 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
     $eventConfigurator->registerListeners(require Builder::path('events-console'));
 
     $application = $container->get(Application::class);
-    $exitCode = null;
+    $exitCode = 1;
 
     try {
         $application->start();

@@ -37,7 +37,7 @@ class Application extends \Symfony\Component\Console\Application
         $this->dispatcher->dispatch(new ApplicationStartup());
     }
 
-    public function shutdown(?int $exitCode): void
+    public function shutdown(int $exitCode): void
     {
         $this->dispatcher->dispatch(new ApplicationShutdown($exitCode));
     }
