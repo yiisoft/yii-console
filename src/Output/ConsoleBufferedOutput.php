@@ -9,14 +9,14 @@ use Symfony\Component\Console\Output\ConsoleOutput;
  */
 class ConsoleBufferedOutput extends ConsoleOutput
 {
-    private $buffer = '';
+    private string $buffer = '';
 
     /**
      * Empties buffer and returns its content.
      *
      * @return string
      */
-    public function fetch(bool $clearBuffer = false)
+    public function fetch(bool $clearBuffer = false): string
     {
         $content = $this->buffer;
         if ($clearBuffer) {
