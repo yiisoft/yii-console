@@ -18,7 +18,7 @@ return [
                 throw new \RuntimeException($message);
             }
 
-            return new Yiisoft\Di\Container(require Builder::path('console'));
+            return new Yiisoft\Di\Container(require Builder::path('console'), require Builder::path('providers-console'));
         }
     ],
 ];
