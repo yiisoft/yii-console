@@ -6,28 +6,28 @@ use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\SymfonyEventDispatcher;
 
 return [
-    Application::class => function (ContainerInterface $container) use ($params) {
-        $app = new Application();
+    Application::class => static function (ContainerInterface $container) use ($params) {
+        $application = new Application();
 
         $dispatcher = $container->get(SymfonyEventDispatcher::class);
-        $app->setDispatcher($dispatcher);
+        $application->setDispatcher($dispatcher);
 
         $loader = new ContainerCommandLoader(
             $container,
             $params['console']['commands']
         );
-        $app->setCommandLoader($loader);
+        $application->setCommandLoader($loader);
 
         $name = $params['console']['name'] ?? null;
         if ($name !== null) {
-            $app->setName($name);
+            $application->setName($name);
         }
 
         $version = $params['console']['version'] ?? null;
         if ($version !== null) {
-            $app->setVersion($version);
+            $application->setVersion($version);
         }
-        $app->setAutoExit(false);
-        return $app;
+        $application->setAutoExit(false);
+        return $application;
     },
 ];
