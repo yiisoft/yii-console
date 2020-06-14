@@ -6,7 +6,7 @@ use Yiisoft\Yii\Console\Provider\ApplicationProvider;
 use Yiisoft\Yii\Console\Provider\EventDispatcherProvider;
 
 return [
-    'yiisoft/event-dispatcher/eventdispatcher' => EventDispatcherProvider::class,
+    'yiisoft/yii-console/eventdispatcher' => EventDispatcherProvider::class,
     'yiisoft/yii-console/application' => [
         '__class' => ApplicationProvider::class,
         '__construct()' => [

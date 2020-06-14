@@ -46,7 +46,7 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
     require_once $autoloadPath;
 
     // Don't do it in production, assembling takes it's time
-    if (getenv('env') === 'dev') {
+    if (getenv('APP_ENV') === 'dev') {
         Builder::rebuild();
     }
 
