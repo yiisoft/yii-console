@@ -3,15 +3,12 @@
 
 declare(strict_types=1);
 
-defined('YII_ENV') or define('YII_ENV', 'DEV'); // PROD, DEV
-
 use Psr\Container\ContainerInterface;
 use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Config\EventConfigurator;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
-
 
 (static function () {
     $cwd = getcwd();
@@ -49,7 +46,7 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
     require_once $autoloadPath;
 
     // Don't do it in production, assembling takes it's time
-    if (YII_ENV === 'DEV') {
+    if (getenv('env') === 'dev') {
         Builder::rebuild();
     }
 
