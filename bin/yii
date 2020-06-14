@@ -1,11 +1,18 @@
 #!/usr/bin/env php
 <?php
 
+declare(strict_types=1);
+
+defined('YII_ENV') or define('YII_ENV', 'DEV'); // PROD, DEV
+
 use Psr\Container\ContainerInterface;
 use Yiisoft\Composer\Config\Builder;
+use Yiisoft\Composer\Config\Env;
+use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Config\EventConfigurator;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
+
 
 (static function () {
     $cwd = getcwd();
@@ -20,7 +27,9 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
         // dependency
         dirname(__DIR__, 4) . '/vendor/autoload.php',
     ];
+
     $autoloadPath = null;
+
     foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
         if (file_exists($possibleAutoloadPath)) {
             $autoloadPath = $possibleAutoloadPath;
@@ -37,12 +46,23 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
         fwrite(STDERR, $message);
         exit(1);
     }
+
     require_once $autoloadPath;
 
-    $params = require Builder::path('params');
+    // Don't do it in production, assembling takes it's time
+    if (YII_ENV === 'DEV') {
+        Builder::rebuild();
+    }
+
+    $startTime = microtime(true);
+
+    $container = new Container(
+        require Builder::path('console'),
+        require Builder::path('providers-console')
+    );
 
     /** @var ContainerInterface $container */
-    $container = $params['console']['container']();
+    $container = $container->get(ContainerInterface::class);
     $eventConfigurator = $container->get(EventConfigurator::class);
     $eventConfigurator->registerListeners(require Builder::path('events-console'));
 

@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Yiisoft\Yii\Console\ExitCode;
 
 class Serve extends Command
 {
@@ -28,7 +29,8 @@ class Serve extends Command
             ->addArgument('address', InputArgument::OPTIONAL, 'Host to serve at', 'localhost')
             ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', self::DEFAULT_PORT)
             ->addOption('docroot', 't', InputOption::VALUE_OPTIONAL, 'Document root to serve from', self::DEFAULT_DOCROOT)
-            ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script');
+            ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script')
+            ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -39,6 +41,7 @@ class Serve extends Command
         $port = $input->getOption('port');
         $docroot = $input->getOption('docroot');
         $router = $input->getOption('router');
+        $env = $input->getOption('env');
 
         $documentRoot = getcwd() . '/' . $docroot; // TODO: can we do it better?
 
@@ -67,6 +70,10 @@ class Serve extends Command
             $output->writeLn("Routing file is \"$router\"");
         }
         $output->writeLn('Quit the server with CTRL-C or COMMAND-C.');
+
+        if ($env === 'test') {
+            return ExitCode::OK;
+        }
 
         passthru('"' . PHP_BINARY . '"' . " -S {$address} -t \"{$documentRoot}\" $router");
     }
