@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yiisoft\Yii\Console;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -42,6 +44,9 @@ class Application extends \Symfony\Component\Console\Application
         $this->dispatcher->dispatch(new ApplicationShutdown($exitCode));
     }
 
+    /**
+     * @suppress PhanUndeclaredStaticMethod
+     */
     public function doRenderException(\Exception $e, OutputInterface $output)
     {
         parent::doRenderException($e, $output);
