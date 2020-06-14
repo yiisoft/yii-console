@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
-use Yiisoft\Yii\Console\ExitCode;
 
-final class ServeCommandTest extends \PHPUnit\Framework\TestCase
+final class ServeCommandTest extends TestCase
 {
     private ContainerInterface $container;
 
@@ -64,7 +64,7 @@ final class ServeCommandTest extends \PHPUnit\Framework\TestCase
         $commandCreate->setInputs(['yes']);
 
         $commandCreate->execute([
-            '--docroot' => 'tests/data',
+            '--docroot' => 'tests',
             '--env' => 'test'
         ]);
 
