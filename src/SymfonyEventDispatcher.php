@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yiisoft\Yii\Console;
 
 use Psr\EventDispatcher\EventDispatcherInterface as PsrEventDispatcherInterface;

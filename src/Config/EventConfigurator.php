@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yiisoft\Yii\Console\Config;
 
 use Psr\Container\ContainerInterface;
@@ -19,6 +21,9 @@ class EventConfigurator extends AbstractProviderConfigurator
         $this->container = $container;
     }
 
+    /**
+     * @suppress PhanAccessMethodProtected
+     */
     public function registerListeners(array $eventsListeners): void
     {
         foreach ($eventsListeners as $eventName => $listeners) {
