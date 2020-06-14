@@ -44,6 +44,9 @@ class Application extends \Symfony\Component\Console\Application
         $this->dispatcher->dispatch(new ApplicationShutdown($exitCode));
     }
 
+    /**
+     * @suppress PhanUndeclaredStaticMethod
+     */
     public function doRenderException(\Exception $e, OutputInterface $output)
     {
         parent::doRenderException($e, $output);
