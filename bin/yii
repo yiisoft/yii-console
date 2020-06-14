@@ -7,7 +7,6 @@ defined('YII_ENV') or define('YII_ENV', 'DEV'); // PROD, DEV
 
 use Psr\Container\ContainerInterface;
 use Yiisoft\Composer\Config\Builder;
-use Yiisoft\Composer\Config\Env;
 use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Config\EventConfigurator;
