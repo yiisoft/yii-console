@@ -54,6 +54,14 @@ class EventConfigurator extends AbstractProviderConfigurator
             return true;
         }
 
-        return is_array($definition) && array_keys($definition) === [0, 1] && in_array($definition[1], get_class_methods($definition[0]) ?? [], true);
+        return is_array($definition)
+            && array_keys($definition) === [0, 1]
+            && (
+                in_array($definition[1], get_class_methods($definition[0]) ?? [], true)
+                || (
+                    $this->container->has($definition[0])
+                    && method_exists($this->container->get($definition[0]), $definition[1])
+                )
+            );
     }
 }
