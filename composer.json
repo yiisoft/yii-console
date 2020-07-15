@@ -25,7 +25,7 @@
         "symfony/event-dispatcher-contracts": "^2.0",
         "yiisoft/composer-config-plugin": "^1.0@dev",
         "yiisoft/di": "@dev",
-        "yiisoft/event-dispatcher": "^3.0@dev",
+        "yiisoft/yii-event": "^3.0@dev",
         "yiisoft/friendly-exception": "^1.0",
         "yiisoft/injector": "^1.0"
     },

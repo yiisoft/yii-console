@@ -7,7 +7,7 @@ use Psr\Container\ContainerInterface;
 use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
-use Yiisoft\Yii\Console\Config\EventConfigurator;
+use Yiisoft\Yii\Event\EventConfigurator;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
 (static function () {
