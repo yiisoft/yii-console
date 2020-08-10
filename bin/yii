@@ -8,7 +8,6 @@ use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
-use Yiisoft\Yii\Event\EventDispatcherProvider;
 
 (static function () {
     $cwd = getcwd();
@@ -50,16 +49,9 @@ use Yiisoft\Yii\Event\EventDispatcherProvider;
         Builder::rebuild();
     }
 
-    $eventDispatcherProvider = new EventDispatcherProvider(require Builder::path('events-console'));
-
-    $providers = array_merge(
-        ['yiisoft/event-dispatcher/eventdispatcher' => $eventDispatcherProvider],
-        require Builder::path('providers-console')
-    );
-
     $container = new Container(
         require Builder::path('console'),
-        $providers
+        require Builder::path('providers-console')
     );
 
     /** @var ContainerInterface $container */

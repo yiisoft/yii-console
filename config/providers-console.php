@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Yiisoft\Yii\Console\Provider\ApplicationProvider;
+use Yiisoft\Yii\Event\EventDispatcherProvider;
 
 return [
     'yiisoft/yii-console/application' => [
@@ -12,5 +13,9 @@ return [
             $params['yiisoft/yii-console']['name'],
             $params['yiisoft/yii-console']['version']
         ],
+    ],
+    'yiisoft/event-dispatcher/eventdispatcher' => [
+        '__class' => EventDispatcherProvider::class,
+        '__construct()' => [$config['events-console']],
     ],
 ];
