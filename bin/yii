@@ -7,8 +7,8 @@ use Psr\Container\ContainerInterface;
 use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
-use Yiisoft\Yii\Event\EventConfigurator;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
+use Yiisoft\Yii\Event\EventDispatcherProvider;
 
 (static function () {
     $cwd = getcwd();
@@ -50,17 +50,20 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
         Builder::rebuild();
     }
 
-    $startTime = microtime(true);
+    $eventDispatcherProvider = new EventDispatcherProvider(require Builder::path('events-console'));
+
+    $providers = array_merge(
+        ['yiisoft/event-dispatcher/eventdispatcher' => $eventDispatcherProvider],
+        require Builder::path('providers-console')
+    );
 
     $container = new Container(
         require Builder::path('console'),
-        require Builder::path('providers-console')
+        $providers
     );
 
     /** @var ContainerInterface $container */
     $container = $container->get(ContainerInterface::class);
-    $eventConfigurator = $container->get(EventConfigurator::class);
-    $eventConfigurator->registerListeners(require Builder::path('events-console'));
 
     $application = $container->get(Application::class);
     $exitCode = 1;
