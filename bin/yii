@@ -7,7 +7,6 @@ use Psr\Container\ContainerInterface;
 use Yiisoft\Composer\Config\Builder;
 use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
-use Yiisoft\Yii\Event\EventConfigurator;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
 (static function () {
@@ -50,8 +49,6 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
         Builder::rebuild();
     }
 
-    $startTime = microtime(true);
-
     $container = new Container(
         require Builder::path('console'),
         require Builder::path('providers-console')
@@ -59,8 +56,6 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
     /** @var ContainerInterface $container */
     $container = $container->get(ContainerInterface::class);
-    $eventConfigurator = $container->get(EventConfigurator::class);
-    $eventConfigurator->registerListeners(require Builder::path('events-console'));
 
     $application = $container->get(Application::class);
     $exitCode = 1;
