@@ -63,6 +63,8 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
     try {
         $application->start();
         $exitCode = $application->run(null, new ConsoleBufferedOutput());
+    } catch (\Error $error) {
+        $application->renderThrowable($error, new ConsoleBufferedOutput());
     } finally {
         $application->shutdown($exitCode);
         exit($exitCode);
