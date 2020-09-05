@@ -44,12 +44,14 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
     require_once $autoloadPath;
 
-    $params = (require Builder::path('params'))['yiisoft/yii-console'];
+    $paramsConfig = getopt('p:');
+    $paramsConfig = $paramsConfig ? $paramsConfig['p'] : 'params';
+    $params = (require Builder::path($paramsConfig))['yiisoft/yii-console'];
 
     // Don't do it in production, assembling takes it's time
     if ($params['rebuildConfigs']) {
         Builder::rebuild();
-        $params = (require Builder::path('params'))['yiisoft/yii-console'];
+        $params = (require Builder::path($paramsConfig))['yiisoft/yii-console'];
     }
 
     $containerParams = $params['container'];

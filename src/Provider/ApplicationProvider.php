@@ -6,6 +6,7 @@ namespace Yiisoft\Yii\Console\Provider;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use Symfony\Component\Console\Input\InputOption;
 use Yiisoft\Di\Container;
 use Yiisoft\Di\Support\ServiceProvider;
 use Yiisoft\Yii\Console\Application;
@@ -41,6 +42,10 @@ final class ApplicationProvider extends ServiceProvider
             );
 
             $application->setCommandLoader($loader);
+
+            $application->getDefinition()->addOption(
+                new InputOption('params', 'p', InputOption::VALUE_OPTIONAL, 'Set params config name'),
+            );
 
             if ($this->name !== '') {
                 $application->setName($this->name);
