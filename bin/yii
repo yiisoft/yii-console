@@ -49,9 +49,12 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
         Builder::rebuild();
     }
 
+    $params = (require Builder::path('params'))['yiisoft/yii-console'];
+    $containerParams = $params['container'];
+
     $container = new Container(
-        require Builder::path('console'),
-        require Builder::path('providers-console')
+        require Builder::path($containerParams['definitionsConfig']),
+        require Builder::path($containerParams['providersConfig'])
     );
 
     /** @var ContainerInterface $container */

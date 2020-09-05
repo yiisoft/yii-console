@@ -11,6 +11,10 @@ return [
         'commands' => [
             'serve' => Serve::class,
         ],
-        'version' => '3.0'
+        'version' => '3.0',
+        'container' => [
+            'definitionsConfig' => 'console',
+            'providersConfig' => 'providers-console',
+        ],
     ],
 ];
