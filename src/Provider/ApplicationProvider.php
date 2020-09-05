@@ -44,7 +44,7 @@ final class ApplicationProvider extends ServiceProvider
             $application->setCommandLoader($loader);
 
             $application->getDefinition()->addOption(
-                new InputOption('params', 'p', InputOption::VALUE_OPTIONAL, 'Set params config name'),
+                new InputOption('config-dir', 'c', InputOption::VALUE_OPTIONAL, 'Set configs directory'),
             );
 
             if ($this->name !== '') {

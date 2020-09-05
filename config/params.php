@@ -13,9 +13,5 @@ return [
         ],
         'version' => '3.0',
         'rebuildConfigs' => getenv('APP_ENV') === 'dev',
-        'container' => [
-            'definitionsConfig' => 'console',
-            'providersConfig' => 'providers-console',
-        ],
     ],
 ];
