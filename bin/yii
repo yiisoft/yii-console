@@ -49,10 +49,10 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
     $params = (require Builder::path($configsDir . 'params'))['yiisoft/yii-console'];
 
-    $rebuildConfigs = $params['rebuildConfigs'] instanceof Closure ?
-        $params['rebuildConfigs']() :
-        $params['rebuildConfigs'];
-    if ($rebuildConfigs) {
+    $rebuildConfig = $params['rebuildConfig'] instanceof Closure ?
+        $params['rebuildConfig']() :
+        $params['rebuildConfig'];
+    if ($rebuildConfig) {
         // Don't do it in production, assembling takes it's time
         Builder::rebuild();
     }
