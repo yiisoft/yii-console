@@ -44,14 +44,23 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
     require_once $autoloadPath;
 
-    $configsDir = getopt('c:');
-    $configsDir = $configsDir ? $configsDir['c'] . '/' : '';
+    $cliOptions = getopt('c:r', ['config:', 'rebuild-config']);
+
+    $configsDir = '';
+    if (array_key_exists('config', $cliOptions)) {
+        $configsDir = $cliOptions['config'] . '/';
+    } elseif (array_key_exists('c', $cliOptions)) {
+        $configsDir = $cliOptions['c'] . '/';
+    }
 
     $params = (require Builder::path($configsDir . 'params'))['yiisoft/yii-console'];
 
-    $rebuildConfig = $params['rebuildConfig'] instanceof Closure ?
-        $params['rebuildConfig']() :
-        $params['rebuildConfig'];
+    $rebuildConfig = array_key_exists('r', $cliOptions) || array_key_exists('rebuild-config', $cliOptions);
+    if (!$rebuildConfig) {
+        $rebuildConfig = $params['rebuildConfig'] instanceof Closure ?
+            $params['rebuildConfig']() :
+            $params['rebuildConfig'];
+    }
     if ($rebuildConfig) {
         // Don't do it in production, assembling takes it's time
         Builder::rebuild();

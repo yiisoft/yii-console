@@ -43,9 +43,10 @@ final class ApplicationProvider extends ServiceProvider
 
             $application->setCommandLoader($loader);
 
-            $application->getDefinition()->addOption(
-                new InputOption('config-dir', 'c', InputOption::VALUE_OPTIONAL, 'Set configs directory'),
-            );
+            $application->getDefinition()->addOptions([
+                new InputOption('config', 'c', InputOption::VALUE_REQUIRED, 'Set alternative configuration name'),
+                new InputOption('rebuild-config', 'r', InputOption::VALUE_NONE, 'Force rebuild configuration'),
+            ]);
 
             if ($this->name !== '') {
                 $application->setName($this->name);
