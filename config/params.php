@@ -12,6 +12,6 @@ return [
             'serve' => Serve::class,
         ],
         'version' => '3.0',
-        'rebuildConfigs' => getenv('APP_ENV') === 'dev',
+        'rebuildConfigs' => static fn() => getenv('APP_ENV') === 'dev',
     ],
 ];

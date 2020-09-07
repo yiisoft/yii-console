@@ -49,12 +49,14 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
     $params = (require Builder::path($configsDir . 'params'))['yiisoft/yii-console'];
 
-    // Don't do it in production, assembling takes it's time
-    if ($params['rebuildConfigs']) {
+    $rebuildConfigs = $params['rebuildConfigs'] instanceof Closure ?
+        $params['rebuildConfigs']() :
+        $params['rebuildConfigs'];
+    if ($rebuildConfigs) {
+        // Don't do it in production, assembling takes it's time
         Builder::rebuild();
     }
 
-    $containerParams = $params['container'];
     $container = new Container(
         require Builder::path($configsDir . 'console'),
         require Builder::path($configsDir . 'providers-console')
