@@ -57,9 +57,9 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
     $rebuildConfig = array_key_exists('r', $cliOptions) || array_key_exists('rebuild-config', $cliOptions);
     if (!$rebuildConfig) {
-        $rebuildConfig = $params['rebuildConfig'] instanceof Closure ?
-            $params['rebuildConfig']() :
-            $params['rebuildConfig'];
+        $rebuildConfig = $params['rebuildConfig'] instanceof Closure
+            ? $params['rebuildConfig']()
+            : $params['rebuildConfig'];
     }
     if ($rebuildConfig) {
         // Don't do it in production, assembling takes it's time
