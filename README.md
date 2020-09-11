@@ -38,6 +38,34 @@ vendor\bin\yii --config=test
 For more info about alternative sets of configurations and usage see its 
 [documentation](https://github.com/yiisoft/composer-config-plugin/blob/master/docs/en/alternatives.md).
 
+### Parameters of console
+
+##### rebuildConfig
+ 
+Type: `bool|\Closure`
+
+Default Value: 
+```php
+static fn() => getenv('APP_ENV') === 'dev'
+```
+
+Force rebuild configuration before each run console.
+
+Don't do it in production, assembling takes it's time.
+
+#### Override parameters
+
+You can override this params via `config/params.php` in your application. For example:
+
+```php
+return [
+    'yiisoft/yii-console' => [
+        'rebuildConfig' => true,
+    ],
+];
+```
+
+
 ### Unit testing
 
 The package is tested with [PHPUnit](https://phpunit.de/). To run tests:
