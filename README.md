@@ -26,6 +26,45 @@ To start working with the package you must do one of these:
 Since the package is based on [Symfony Console component](https://symfony.com/doc/current/components/console.html),
 refer to its documentation for details on how to use the binary and create your own commands.
 
+### Using alternative set of configurations 
+
+Use option `--config` (`-c`) for set name of alterntaive configuration:
+
+```
+vendor\bin\yii -ctest
+vendor\bin\yii --config=test
+``` 
+
+For more info about alternative configuration sets their and usage see its  
+[documentation](https://github.com/yiisoft/composer-config-plugin/blob/master/docs/en/alternatives.md).
+
+### Console parameters
+
+##### rebuildConfig
+ 
+Type: `bool|\Closure`
+
+Default Value: 
+```php
+static fn() => getenv('APP_ENV') === 'dev'
+```
+
+Force rebuild configuration before each run.
+
+Don't do it in production, assembling takes it's time.
+
+#### Override parameters
+
+You can override this params via `config/params.php` in your application. For example:
+
+```php
+return [
+    'yiisoft/yii-console' => [
+        'rebuildConfig' => true,
+    ],
+];
+```
+
 ### Unit testing
 
 The package is tested with [PHPUnit](https://phpunit.de/). To run tests:

@@ -44,14 +44,29 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
     require_once $autoloadPath;
 
-    // Don't do it in production, assembling takes it's time
-    if (getenv('APP_ENV') === 'dev') {
+    $cliOptions = getopt('c:', ['config:']);
+
+    $configsDir = '';
+    if (array_key_exists('config', $cliOptions)) {
+        $configsDir = $cliOptions['config'] . '/';
+    } elseif (array_key_exists('c', $cliOptions)) {
+        $configsDir = $cliOptions['c'] . '/';
+    }
+
+    $params = (require Builder::path($configsDir . 'params'))['yiisoft/yii-console'];
+
+    $rebuildConfig = $params['rebuildConfig'] instanceof Closure
+        ? $params['rebuildConfig']()
+        : $params['rebuildConfig'];
+
+    if ($rebuildConfig) {
+        // Don't do it in production, assembling takes it's time
         Builder::rebuild();
     }
 
     $container = new Container(
-        require Builder::path('console'),
-        require Builder::path('providers-console')
+        require Builder::path($configsDir . 'console'),
+        require Builder::path($configsDir . 'providers-console')
     );
 
     /** @var ContainerInterface $container */
