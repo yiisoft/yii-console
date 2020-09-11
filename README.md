@@ -26,6 +26,18 @@ To start working with the package you must do one of these:
 Since the package is based on [Symfony Console component](https://symfony.com/doc/current/components/console.html),
 refer to its documentation for details on how to use the binary and create your own commands.
 
+### Using alternative sets of configurations 
+
+Use option `--config` (`-c`) for set name of alterntaive configuration:
+
+```
+vendor\bin\yii -ctest
+vendor\bin\yii --config=test
+``` 
+
+For more info about alternative sets of configurations and usage see its 
+[documentation](https://github.com/yiisoft/composer-config-plugin/blob/master/docs/en/alternatives.md).
+
 ### Unit testing
 
 The package is tested with [PHPUnit](https://phpunit.de/). To run tests:
