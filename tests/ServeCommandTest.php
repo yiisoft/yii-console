@@ -25,7 +25,7 @@ final class ServeCommandTest extends TestCase
         );
     }
 
-    protected function tearDowm(): void
+    protected function tearDown(): void
     {
         parent::tearDown();
 
