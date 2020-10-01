@@ -64,7 +64,7 @@ class Serve extends Command
             return self::EXIT_CODE_NO_ROUTING_FILE;
         }
 
-        $output->writeLn("Server started on http://{$address}/");
+        $output->writeLn("Server started on <href=http://{$address}/>http://{$address}/</>");
         $output->writeLn("Document root is \"{$documentRoot}\"");
         if ($router) {
             $output->writeLn("Routing file is \"$router\"");
