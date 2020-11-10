@@ -8,6 +8,7 @@ return [
     'yiisoft/yii-console' => [
         'id' => 'yii-console',
         'name' => 'Yii Console',
+        'autoExit' => false,
         'commands' => [
             'serve' => Serve::class,
         ],
