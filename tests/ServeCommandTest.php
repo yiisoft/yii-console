@@ -2,39 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit;
+namespace Yiisoft\Yii\Console\Tests;
 
-use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Tester\CommandTester;
-use Yiisoft\Composer\Config\Builder;
-use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
 
 final class ServeCommandTest extends TestCase
 {
-    private ContainerInterface $container;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        $this->container = new Container(
-            require Builder::path('console'),
-            require Builder::path('providers-console')
-        );
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        unset($this->container);
-    }
-
     public function testServeCommandExecuteWithoutArguments(): void
     {
         $application = $this->container->get(Application::class);
+
         $command = $application->find('serve');
 
         $commandCreate = new CommandTester($command);
@@ -57,6 +35,7 @@ final class ServeCommandTest extends TestCase
     public function testServeCommandExecuteWithDocRoot(): void
     {
         $application = $this->container->get(Application::class);
+
         $command = $application->find('serve');
 
         $commandCreate = new CommandTester($command);

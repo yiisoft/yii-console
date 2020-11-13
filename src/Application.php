@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console;
 
+use Exception;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface as SymfonyEventDispatcherInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\StyleInterface;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
@@ -44,10 +46,7 @@ class Application extends \Symfony\Component\Console\Application
         $this->dispatcher->dispatch(new ApplicationShutdown($exitCode));
     }
 
-    /**
-     * @suppress PhanUndeclaredStaticMethod
-     */
-    public function doRenderException(\Exception $e, OutputInterface $output)
+    public function doRenderException(Exception $e, OutputInterface $output): void
     {
         parent::doRenderException($e, $output);
         // Friendly Exception support
@@ -64,5 +63,10 @@ class Application extends \Symfony\Component\Console\Application
                 ]);
             }
         }
+    }
+
+    public function addOptions(InputOption $options): void
+    {
+        $this->getDefinition()->addOption($options);
     }
 }
