@@ -88,7 +88,7 @@ class Serve extends Command
     private function isAddressTaken(string $address): bool
     {
         [$hostname, $port] = explode(':', $address);
-        $fp = @fsockopen($hostname, $port, $errno, $errstr, 3);
+        $fp = @fsockopen($hostname, (int)$port, $errno, $errstr, 3);
         if ($fp === false) {
             return false;
         }
