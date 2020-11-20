@@ -139,12 +139,13 @@ class ExitCode
         self::CONFIG => 'Configuration error',
     ];
 
-
     /**
      * Returns a short reason text for the given exit code.
      *
      * This method uses [[$reasons]] to determine the reason for an exit code.
+     *
      * @param int $exitCode one of the constants defined in this class.
+     *
      * @return string the reason text, or `"Unknown exit code"` if the code is not listed in [[$reasons]].
      */
     public static function getReason($exitCode)

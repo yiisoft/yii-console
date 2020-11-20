@@ -10,12 +10,12 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Symfony\Component\Console\Input\InputOption;
-use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Di\Container;
 use Yiisoft\EventDispatcher\Dispatcher\Dispatcher;
 use Yiisoft\EventDispatcher\Provider\Provider;
 use Yiisoft\Factory\Definitions\Reference;
 use Yiisoft\Yii\Console\Application;
+use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\SymfonyEventDispatcher;
 
 class TestCase extends AbstractTestCase
@@ -51,8 +51,8 @@ class TestCase extends AbstractTestCase
             ContainerCommandLoader::class => [
                 '__class' => ContainerCommandLoader::class,
                 '__construct()' => [
-                    'commandMap' => $params['yiisoft/yii-console']['commands']
-                ]
+                    'commandMap' => $params['yiisoft/yii-console']['commands'],
+                ],
             ],
 
             Application::class => [
@@ -67,8 +67,8 @@ class TestCase extends AbstractTestCase
                 )],
                 'setName()' => [$params['yiisoft/yii-console']['name']],
                 'setVersion()' => [$params['yiisoft/yii-console']['version']],
-                'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']]
-            ]
+                'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']],
+            ],
         ];
     }
 

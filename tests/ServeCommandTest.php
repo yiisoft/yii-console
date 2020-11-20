@@ -44,7 +44,7 @@ final class ServeCommandTest extends TestCase
 
         $commandCreate->execute([
             '--docroot' => 'tests',
-            '--env' => 'test'
+            '--env' => 'test',
         ]);
 
         $output = $commandCreate->getDisplay(true);
