@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Symfony\Component\Console\Input\InputOption;
-use Yiisoft\Yii\Console\SymfonyEventDispatcher;
-use Yiisoft\Yii\Console\Application;
 use Yiisoft\Factory\Definitions\Reference;
+use Yiisoft\Yii\Console\Application;
+use Yiisoft\Yii\Console\SymfonyEventDispatcher;
 
 /** @var array $params */
 
@@ -14,8 +14,8 @@ return [
     ContainerCommandLoader::class => [
         '__class' => ContainerCommandLoader::class,
         '__construct()' => [
-            'commandMap' => $params['yiisoft/yii-console']['commands']
-        ]
+            'commandMap' => $params['yiisoft/yii-console']['commands'],
+        ],
     ],
 
     Application::class => [
@@ -30,6 +30,6 @@ return [
         )],
         'setName()' => [$params['yiisoft/yii-console']['name']],
         'setVersion()' => [$params['yiisoft/yii-console']['version']],
-        'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']]
-    ]
+        'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']],
+    ],
 ];
