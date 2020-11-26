@@ -44,6 +44,10 @@ class Serve extends Command
         $port = $input->getOption('port');
         $docroot = $input->getOption('docroot');
         $router = $input->getOption('router');
+        if (!file_exists(self::DEFAULT_ROUTER)) {
+            $router = null;
+        }
+
         $env = $input->getOption('env');
 
         $documentRoot = getcwd() . '/' . $docroot; // TODO: can we do it better?
