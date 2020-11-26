@@ -20,6 +20,7 @@ class Serve extends Command
 
     private const DEFAULT_PORT = 8080;
     private const DEFAULT_DOCROOT = 'public';
+    private const DEFAULT_ROUTER = 'public/index.php';
 
     protected static $defaultName = 'serve';
 
@@ -31,7 +32,7 @@ class Serve extends Command
             ->addArgument('address', InputArgument::OPTIONAL, 'Host to serve at', 'localhost')
             ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', self::DEFAULT_PORT)
             ->addOption('docroot', 't', InputOption::VALUE_OPTIONAL, 'Document root to serve from', self::DEFAULT_DOCROOT)
-            ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script')
+            ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script', self::DEFAULT_ROUTER)
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.');
     }
 
