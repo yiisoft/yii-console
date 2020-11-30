@@ -21,7 +21,7 @@
         "php": "^7.4|^8.0",
         "psr/container": "1.0.0",
         "psr/container-implementation": "1.0.0",
-        "symfony/console": "^5.1.8",
+        "symfony/console": "^5.2.0",
         "symfony/event-dispatcher-contracts": "^2.2",
         "yiisoft/di": "@dev",
         "yiisoft/friendly-exception": "^1.0",
