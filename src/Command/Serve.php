@@ -36,14 +36,22 @@ class Serve extends Command
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
+        /** @var string $address */
         $address = $input->getArgument('address');
 
-        $port = $input->getOption('port');
-        $docroot = $input->getOption('docroot');
+        /** @var string $router */
         $router = $input->getOption('router');
+
+        /** @var string $port */
+        $port = $input->getOption('port');
+
+        /** @var string $docroot */
+        $docroot = $input->getOption('docroot');
+
         if (!file_exists(self::DEFAULT_ROUTER)) {
             $router = null;
         }
@@ -83,6 +91,8 @@ class Serve extends Command
         }
 
         passthru('"' . PHP_BINARY . '"' . " -S {$address} -t \"{$documentRoot}\" $router");
+
+        return ExitCode::OK;
     }
 
     /**
