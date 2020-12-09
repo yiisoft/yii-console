@@ -64,4 +64,28 @@ final class ServeCommandTest extends TestCase
             $output
         );
     }
+
+    public function testServeCommandExecuteErrorIsAddressTaken(): void
+    {
+        $application = $this->container->get(Application::class);
+
+        $command = $application->find('serve');
+
+        $commandCreate = new CommandTester($command);
+
+        $commandCreate->setInputs(['yes']);
+
+        $commandCreate->execute([
+            'address' => '127.0.0.1:445',
+            '--docroot' => 'tests',
+            '--env' => 'test',
+        ]);
+
+        $output = $commandCreate->getDisplay(true);
+
+        $this->assertStringContainsString(
+            '[ERROR] http://127.0.0.1:445 is taken by another process.',
+            $output
+        );
+    }
 }
