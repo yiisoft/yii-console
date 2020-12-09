@@ -75,9 +75,11 @@ final class ServeCommandTest extends TestCase
 
         $commandCreate->setInputs(['yes']);
 
+        $socket = socket_create_listen(8080);
+
         if (PHP_OS_FAMILY === 'Windows') {
             $commandCreate->execute([
-                'address' => '127.0.0.1:445',
+                'address' => '127.0.0.1:8080',
                 '--docroot' => 'tests',
                 '--env' => 'test',
             ]);
@@ -85,12 +87,12 @@ final class ServeCommandTest extends TestCase
             $output = $commandCreate->getDisplay(true);
 
             $this->assertStringContainsString(
-                '[ERROR] http://127.0.0.1:445 is taken by another process.',
+                '[ERROR] http://127.0.0.1:8080 is taken by another process.',
                 $output
             );
         } else {
             $commandCreate->execute([
-                'address' => '127.0.0.1:49100',
+                'address' => '127.0.0.1:8080',
                 '--docroot' => 'tests',
                 '--env' => 'test',
             ]);
@@ -98,9 +100,11 @@ final class ServeCommandTest extends TestCase
             $output = $commandCreate->getDisplay(true);
 
             $this->assertStringContainsString(
-                '[ERROR] http://127.0.0.1:49100 is taken by another process.',
+                '[ERROR] http://127.0.0.1:8080 is taken by another process.',
                 $output
             );
         }
+
+        socket_close($socket);
     }
 }
