@@ -75,17 +75,32 @@ final class ServeCommandTest extends TestCase
 
         $commandCreate->setInputs(['yes']);
 
-        $commandCreate->execute([
-            'address' => '127.0.0.1:445',
-            '--docroot' => 'tests',
-            '--env' => 'test',
-        ]);
+        if (PHP_OS_FAMILY === 'Windows') {
+            $commandCreate->execute([
+                'address' => '127.0.0.1:445',
+                '--docroot' => 'tests',
+                '--env' => 'test',
+            ]);
 
-        $output = $commandCreate->getDisplay(true);
+            $output = $commandCreate->getDisplay(true);
 
-        $this->assertStringContainsString(
-            '[ERROR] http://127.0.0.1:445 is taken by another process.',
-            $output
-        );
+            $this->assertStringContainsString(
+                '[ERROR] http://127.0.0.1:445 is taken by another process.',
+                $output
+            );
+        } else {
+            $commandCreate->execute([
+                'address' => '127.0.0.1:53',
+                '--docroot' => 'tests',
+                '--env' => 'test',
+            ]);
+
+            $output = $commandCreate->getDisplay(true);
+
+            $this->assertStringContainsString(
+                '[ERROR] http://127.0.0.1:445 is taken by another process.',
+                $output
+            );
+        }
     }
 }
