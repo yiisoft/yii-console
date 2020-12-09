@@ -90,7 +90,7 @@ final class ServeCommandTest extends TestCase
             );
         } else {
             $commandCreate->execute([
-                'address' => '127.0.0.1:53',
+                'address' => '127.0.0.1:49100',
                 '--docroot' => 'tests',
                 '--env' => 'test',
             ]);
@@ -98,7 +98,7 @@ final class ServeCommandTest extends TestCase
             $output = $commandCreate->getDisplay(true);
 
             $this->assertStringContainsString(
-                '[ERROR] http://127.0.0.1:445 is taken by another process.',
+                '[ERROR] http://127.0.0.1:49100 is taken by another process.',
                 $output
             );
         }
