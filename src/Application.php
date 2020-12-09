@@ -18,6 +18,7 @@ class Application extends \Symfony\Component\Console\Application
 {
     public const VERSION = '3.0.0-dev';
 
+    /** @psalm-suppress PropertyNotSetInConstructor */
     private EventDispatcherInterface $dispatcher;
 
     public function __construct(string $name = 'Yii Console', string $version = self::VERSION)
@@ -48,17 +49,16 @@ class Application extends \Symfony\Component\Console\Application
 
     public function doRenderException(Exception $e, OutputInterface $output): void
     {
-        parent::doRenderException($e, $output);
         // Friendly Exception support
         if ($e instanceof FriendlyExceptionInterface) {
             if ($output instanceof StyleInterface) {
                 $output->title($e->getName());
-                $output->note($e->getSolution());
+                $output->note((string) $e->getSolution());
                 $output->newLine();
             } else {
                 $output->writeln([
                     '<fg=red>' . $e->getName() . '</>',
-                    '<fg=yellow>' . $e->getSolution() . '</>',
+                    '<fg=yellow>' . (string) $e->getSolution() . '</>',
                     '',
                 ]);
             }
