@@ -25,7 +25,7 @@ namespace Yiisoft\Yii\Console;
  * }
  * ```
  *
- * {@see http://man.openbsd.org/sysexits}
+ * @see http://man.openbsd.org/sysexits
  */
 class ExitCode
 {
