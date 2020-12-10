@@ -9,6 +9,7 @@ use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use ReflectionObject;
+use ReflectionException;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Symfony\Component\Console\Input\InputOption;
 use Yiisoft\Di\Container;
@@ -49,7 +50,7 @@ class TestCase extends AbstractTestCase
      *
      * @return mixed
      */
-    protected function invokeMethod($object, $method, $args = [], $revoke = true)
+    protected function invokeMethod(object $object, string $method, array $args = [], bool $revoke = true)
     {
         $reflection = new ReflectionObject($object);
 

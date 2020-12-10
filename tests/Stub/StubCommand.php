@@ -13,6 +13,7 @@ use Yiisoft\Yii\Console\Application;
 
 class StubCommand extends Command
 {
+    private Application $application;
     protected static $defaultName = 'stub';
 
     public function configure(): void

@@ -8,14 +8,14 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
 final class ConsoleBufferedOutputTest extends TestCase
 {
-    public function testFetch(): void
+    public function testFetchIsEmptyByDefault(): void
     {
         $consoleBuffered = new ConsoleBufferedOutput();
 
         $this->assertEmpty($consoleBuffered->fetch());
     }
 
-    public function testFetchClearBuffer(): void
+    public function testFetchClearBufferIsEmptyByDefault(): void
     {
         $consoleBuffered = new ConsoleBufferedOutput();
 

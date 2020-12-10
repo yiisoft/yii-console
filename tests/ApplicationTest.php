@@ -12,26 +12,24 @@ use Yiisoft\Yii\Console\Event\ApplicationShutdown;
 
 final class ApplicationTest extends TestCase
 {
-    public function testGetDispatcher(): void
-    {
-        $this->assertInstanceOf(EventDispatcherInterface::class, $this->application->getDispatcher());
-    }
-
-    public function testDispatcher(): void
+    public function testDispatcherEventApplicationStartup(): void
     {
         $event = new ApplicationStartup();
 
         $dispatcher = $this->application->getDispatcher();
         $result = $dispatcher->dispatch($event);
 
-        $this->assertEquals($event, $result);
+        $this->assertSame($event, $result);
+    }
 
+    public function testDispatcherEventApplicationShutdown(): void
+    {
         $event = new ApplicationShutdown(ExitCode::OK);
 
         $dispatcher = $this->application->getDispatcher();
         $result = $dispatcher->dispatch($event);
 
-        $this->assertEquals($event, $result);
+        $this->assertSame($event, $result);
         $this->assertEquals(ExitCode::OK, $event->getExitCode());
     }
 

@@ -65,7 +65,7 @@ final class ServeCommandTest extends TestCase
         );
     }
 
-    public function testServeCommandExecuteErrorIsAddressTaken(): void
+    public function testErrorWhenAddressIsTaken(): void
     {
         $application = $this->container->get(Application::class);
 
@@ -108,7 +108,7 @@ final class ServeCommandTest extends TestCase
         }
     }
 
-    public function testServeCommandErrorRouter(): void
+    public function testErrorWhenRouterDoesNotExist(): void
     {
         $application = $this->container->get(Application::class);
 
@@ -132,7 +132,7 @@ final class ServeCommandTest extends TestCase
         );
     }
 
-    public function testServeCommandExecuteSuccess(): void
+    public function testSuccess(): void
     {
         $application = $this->container->get(Application::class);
 
