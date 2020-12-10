@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase as AbstractTestCase;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
+use ReflectionObject;
+use ReflectionException;
 use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
 use Symfony\Component\Console\Input\InputOption;
 use Yiisoft\Di\Container;
@@ -17,9 +19,11 @@ use Yiisoft\Factory\Definitions\Reference;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\SymfonyEventDispatcher;
+use Yiisoft\Yii\Console\Tests\Stub\StubCommand;
 
 class TestCase extends AbstractTestCase
 {
+    protected Application $application;
     protected ContainerInterface $container;
 
     protected function setUp(): void
@@ -34,9 +38,39 @@ class TestCase extends AbstractTestCase
         unset($this->container);
     }
 
+    /**
+     * Invokes a inaccessible method.
+     *
+     * @param $object
+     * @param $method
+     * @param array $args
+     * @param bool $revoke whether to make method inaccessible after execution
+     *
+     * @throws ReflectionException
+     *
+     * @return mixed
+     */
+    protected function invokeMethod(object $object, string $method, array $args = [], bool $revoke = true)
+    {
+        $reflection = new ReflectionObject($object);
+
+        $method = $reflection->getMethod($method);
+
+        $method->setAccessible(true);
+
+        $result = $method->invokeArgs($object, $args);
+
+        if ($revoke) {
+            $method->setAccessible(false);
+        }
+
+        return $result;
+    }
+
     protected function configContainer(): void
     {
         $this->container = new Container($this->config());
+        $this->application = $this->container->get(Application::class);
     }
 
     private function config(): array
@@ -81,6 +115,7 @@ class TestCase extends AbstractTestCase
                 'autoExit' => false,
                 'commands' => [
                     'serve' => Serve::class,
+                    'stub' => StubCommand::class,
                 ],
                 'version' => '3.0',
                 'rebuildConfig' => static fn () => getenv('APP_ENV') === 'dev',
