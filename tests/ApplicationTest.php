@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console\Tests;
 
-use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Yiisoft\Yii\Console\ExitCode;
 use Yiisoft\Yii\Console\Event\ApplicationStartup;
