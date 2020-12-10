@@ -52,7 +52,7 @@ class Serve extends Command
         /** @var string $docroot */
         $docroot = $input->getOption('docroot');
 
-        if (!file_exists(self::DEFAULT_ROUTER)) {
+        if ($router === self::DEFAULT_ROUTER && !file_exists(self::DEFAULT_ROUTER)) {
             $router = null;
         }
 
@@ -81,9 +81,11 @@ class Serve extends Command
 
         $output->writeLn("Server started on <href=http://{$address}/>http://{$address}/</>");
         $output->writeLn("Document root is \"{$documentRoot}\"");
+
         if ($router) {
             $output->writeLn("Routing file is \"$router\"");
         }
+
         $output->writeLn('Quit the server with CTRL-C or COMMAND-C.');
 
         if ($env === 'test') {

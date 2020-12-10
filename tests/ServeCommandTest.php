@@ -107,4 +107,57 @@ final class ServeCommandTest extends TestCase
             socket_close($socket);
         }
     }
+
+    public function testServeCommandErrorRouter(): void
+    {
+        $application = $this->container->get(Application::class);
+
+        $command = $application->find('serve');
+
+        $commandCreate = new CommandTester($command);
+
+        $commandCreate->setInputs(['yes']);
+
+        $commandCreate->execute([
+            '--router' => 'index.php',
+            '--docroot' => 'tests',
+            '--env' => 'test',
+        ]);
+
+        $output = $commandCreate->getDisplay(true);
+
+        $this->assertStringContainsString(
+            '[ERROR] Routing file "index.php" does not exist.',
+            $output
+        );
+    }
+
+    public function testServeCommandExecuteSuccess(): void
+    {
+        $application = $this->container->get(Application::class);
+
+        $command = $application->find('serve');
+
+        $commandCreate = new CommandTester($command);
+
+        $commandCreate->setInputs(['yes']);
+
+        $commandCreate->execute([
+            '--router' => 'tests/public/index.php',
+            '--docroot' => 'tests',
+            '--env' => 'test',
+        ]);
+
+        $output = $commandCreate->getDisplay(true);
+
+        $this->assertStringContainsString(
+            'Server started on http://localhost:8080/',
+            $output
+        );
+
+        $this->assertStringContainsString(
+            'Routing file is "tests/public/index.php"',
+            $output
+        );
+    }
 }
