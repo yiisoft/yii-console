@@ -20,7 +20,7 @@ class Serve extends Command
 
     private const DEFAULT_PORT = 8080;
     private const DEFAULT_DOCROOT = 'public';
-    private const DEFAULT_ROUTER = 'public/index.php';
+    private const DEFAULT_ROUTER = 'index.php';
 
     protected static $defaultName = 'serve';
 
