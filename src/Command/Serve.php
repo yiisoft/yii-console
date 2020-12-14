@@ -53,6 +53,7 @@ class Serve extends Command
         $docroot = $input->getOption('docroot');
 
         if ($router === self::DEFAULT_ROUTER && !file_exists(self::DEFAULT_ROUTER)) {
+            $io->warning('Default router "' . self::DEFAULT_ROUTER . '" does not exist. Serving without router. URLs with dots may fail.');
             $router = null;
         }
 
