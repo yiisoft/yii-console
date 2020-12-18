@@ -56,6 +56,5 @@ final class ApplicationTest extends TestCase
             'Test solution',
             $output
         );
-
     }
 }
