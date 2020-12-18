@@ -32,7 +32,7 @@ final class ApplicationTest extends TestCase
         $this->assertEquals(ExitCode::OK, $event->getExitCode());
     }
 
-    public function testDoRenderException(): void
+    public function testDoRenderThrowable(): void
     {
         $command = $this->application->find('stub');
 
@@ -42,7 +42,7 @@ final class ApplicationTest extends TestCase
 
         $this->assertEquals(
             0,
-            $commandCreate->execute([])
+            $commandCreate->execute(['command' => $command->getName()])
         );
 
         $output = $commandCreate->getDisplay(true);
@@ -57,9 +57,5 @@ final class ApplicationTest extends TestCase
             $output
         );
 
-        $this->assertStringContainsString(
-            '! [NOTE] Test solution',
-            $output
-        );
     }
 }

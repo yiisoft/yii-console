@@ -34,11 +34,8 @@ class StubCommand extends Command
         $this->application->start();
 
         $exception = new ConsoleException();
-        $style = new SymfonyStyle($input, $output);
 
-        $this->application->doRenderException($exception, $output);
-
-        $this->application->doRenderException($exception, $style);
+        $this->application->renderThrowable($exception, $output);
 
         $this->application->shutdown(ExitCode::OK);
 
