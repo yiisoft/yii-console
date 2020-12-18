@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console\Tests;
 
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Tester\CommandTester;
 use Yiisoft\Yii\Console\ExitCode;
 use Yiisoft\Yii\Console\Event\ApplicationStartup;
@@ -43,6 +45,29 @@ final class ApplicationTest extends TestCase
         $this->assertEquals(
             0,
             $commandCreate->execute(['command' => $command->getName()])
+        );
+
+        $output = $commandCreate->getDisplay(true);
+
+        $this->assertStringContainsString(
+            'ConsoleException',
+            $output
+        );
+
+        $this->assertStringContainsString(
+            'Test solution',
+            $output
+        );
+    }
+    public function testDoRenderThrowableWithStyledOutput(): void
+    {
+        $command = $this->application->find('stub');
+
+        $commandCreate = new CommandTester($command);
+
+        $this->assertEquals(
+            0,
+            $commandCreate->execute(['command' => $command->getName(), '--styled' => true])
         );
 
         $output = $commandCreate->getDisplay(true);

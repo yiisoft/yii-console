@@ -59,11 +59,11 @@ class Application extends \Symfony\Component\Console\Application
                 }
                 $output->newLine();
             } else {
-                $output->write('<fg=red>' . $e->getName() . '</>', true);
+                $output->writeln('<fg=red>' . $e->getName() . '</>');
                 if ($e->getSolution() !== null) {
-                    $output->write('<fg=yellow>' . $e->getSolution() . '</>', true);
+                    $output->writeln('<fg=yellow>' . $e->getSolution() . '</>');
                 }
-                $output->write('', true);
+                $output->writeln('');
             }
         }
     }
