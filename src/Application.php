@@ -54,16 +54,16 @@ class Application extends \Symfony\Component\Console\Application
         if ($e instanceof FriendlyExceptionInterface) {
             if ($output instanceof StyleInterface) {
                 $output->title($e->getName());
-                $output->note((string) $e->getSolution());
+                if ($e->getSolution() !== null) {
+                    $output->note((string)$e->getSolution());
+                }
                 $output->newLine();
             } else {
-                $output->writeln(
-                    [
-                        '<fg=red>' . $e->getName() . '</>',
-                        '<fg=yellow>' . $e->getSolution() . '</>',
-                        '',
-                    ]
-                );
+                $output->write('<fg=red>' . $e->getName() . '</>', true);
+                if ($e->getSolution() !== null) {
+                    $output->write('<fg=yellow>' . $e->getSolution() . '</>', true);
+                }
+                $output->write('', true);
             }
         }
     }
