@@ -47,6 +47,13 @@ class Application extends \Symfony\Component\Console\Application
         $this->dispatcher->dispatch(new ApplicationShutdown($exitCode));
     }
 
+    public function renderThrowable(Throwable $e, OutputInterface $output): void
+    {
+        $output->writeln('', OutputInterface::VERBOSITY_QUIET);
+
+        $this->doRenderThrowable($e, $output);
+    }
+
     protected function doRenderThrowable(Throwable $e, OutputInterface $output): void
     {
         parent::doRenderThrowable($e, $output);
