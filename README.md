@@ -42,17 +42,6 @@ To start working with the package you must do one of these:
 Since the package is based on [Symfony Console component](https://symfony.com/doc/current/components/console.html),
 refer to its documentation for details on how to use the binary and create your own commands.
 
-### Using alternative set of configurations 
-
-Use option `--config` for set name of alterntaive configuration:
-
-```shell
-vendor\bin\yii --config=test
-``` 
-
-For more info about alternative configuration sets their and usage see its  
-[documentation](https://github.com/yiisoft/composer-config-plugin/blob/master/docs/en/alternatives.md).
-
 ## Console parameters
 
 ##### rebuildConfig
@@ -79,6 +68,17 @@ return [
     ],
 ];
 ```
+
+## Using alternative set of configurations
+
+Use option `--config` for set name of alterntaive configuration:
+
+```shell
+vendor\bin\yii --config=test
+``` 
+
+For more info about alternative configuration sets their and usage see its  
+[documentation](https://github.com/yiisoft/composer-config-plugin/blob/master/docs/en/alternatives.md).
 
 ## Testing
 
