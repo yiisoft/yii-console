@@ -30,10 +30,9 @@ refer to its documentation for details on how to use the binary and create your 
 
 ### Using alternative set of configurations 
 
-Use option `--config` (`-c`) for set name of alterntaive configuration:
+Use option `--config` for set name of alterntaive configuration:
 
-```
-vendor\bin\yii -ctest
+```shell
 vendor\bin\yii --config=test
 ``` 
 
