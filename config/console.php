@@ -24,7 +24,7 @@ return [
         'setCommandLoader()' => [Reference::to(ContainerCommandLoader::class)],
         'addOptions()' => [new InputOption(
             'config',
-            'c',
+            null,
             InputOption::VALUE_REQUIRED,
             'Set alternative configuration name'
         )],
