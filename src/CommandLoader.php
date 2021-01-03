@@ -12,10 +12,14 @@ use Symfony\Component\Console\Exception\CommandNotFoundException;
 final class CommandLoader implements CommandLoaderInterface
 {
     private ContainerInterface $container;
+
+    /**
+     * @var array<string, string>
+     */
     private array $commandMap;
 
     /**
-     * @param array $commandMap An array with command names as keys and service ids as values
+     * @param array<string, string> $commandMap An array with command names as keys and service ids as values
      */
     public function __construct(ContainerInterface $container, array $commandMap)
     {
