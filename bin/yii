@@ -44,13 +44,14 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
     require_once $autoloadPath;
 
-    $cliOptions = getopt('c:', ['config:']);
+    $cliOptions = getopt('', ['config:']);
 
     $configsDir = '';
     if (array_key_exists('config', $cliOptions)) {
-        $configsDir = $cliOptions['config'] . '/';
-    } elseif (array_key_exists('c', $cliOptions)) {
-        $configsDir = $cliOptions['c'] . '/';
+        $configsDir = is_array($cliOptions['config'])
+            ? $cliOptions['config'][array_key_last($cliOptions['config'])]
+            : $cliOptions['config'];
+        $configsDir .= '/';
     }
 
     $params = (require Builder::path($configsDir . 'params'))['yiisoft/yii-console'];
