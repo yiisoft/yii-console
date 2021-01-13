@@ -81,4 +81,16 @@ final class ApplicationTest extends TestCase
             $output
         );
     }
+
+    public function testRenamedCommand(): void
+    {
+        $command = $this->application->find('stub/rename');
+
+        $commandCreate = new CommandTester($command);
+
+        $this->assertEquals(
+            ExitCode::OK,
+            $commandCreate->execute(['command' => $command->getName()])
+        );
+    }
 }
