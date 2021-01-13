@@ -32,7 +32,7 @@ final class ApplicationTest extends TestCase
         $this->assertEquals(ExitCode::OK, $event->getExitCode());
     }
 
-    public function testDoRenderException(): void
+    public function testDoRenderThrowable(): void
     {
         $command = $this->application->find('stub');
 
@@ -42,7 +42,7 @@ final class ApplicationTest extends TestCase
 
         $this->assertEquals(
             0,
-            $commandCreate->execute([])
+            $commandCreate->execute(['command' => $command->getName()])
         );
 
         $output = $commandCreate->getDisplay(true);
@@ -56,10 +56,41 @@ final class ApplicationTest extends TestCase
             'Test solution',
             $output
         );
+    }
+
+    public function testDoRenderThrowableWithStyledOutput(): void
+    {
+        $command = $this->application->find('stub');
+
+        $commandCreate = new CommandTester($command);
+
+        $this->assertEquals(
+            0,
+            $commandCreate->execute(['command' => $command->getName(), '--styled' => true])
+        );
+
+        $output = $commandCreate->getDisplay(true);
 
         $this->assertStringContainsString(
-            '! [NOTE] Test solution',
+            'ConsoleException',
             $output
+        );
+
+        $this->assertStringContainsString(
+            'Test solution',
+            $output
+        );
+    }
+
+    public function testRenamedCommand(): void
+    {
+        $command = $this->application->find('stub/rename');
+
+        $commandCreate = new CommandTester($command);
+
+        $this->assertEquals(
+            ExitCode::OK,
+            $commandCreate->execute(['command' => $command->getName()])
         );
     }
 }
