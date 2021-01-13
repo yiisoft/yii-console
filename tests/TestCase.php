@@ -10,7 +10,7 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use ReflectionObject;
 use ReflectionException;
-use Symfony\Component\Console\CommandLoader\ContainerCommandLoader;
+use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Yiisoft\Di\Container;
 use Yiisoft\EventDispatcher\Dispatcher\Dispatcher;
@@ -18,6 +18,7 @@ use Yiisoft\EventDispatcher\Provider\Provider;
 use Yiisoft\Factory\Definitions\Reference;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Command\Serve;
+use Yiisoft\Yii\Console\CommandLoader;
 use Yiisoft\Yii\Console\SymfonyEventDispatcher;
 use Yiisoft\Yii\Console\Tests\Stub\StubCommand;
 
@@ -82,8 +83,8 @@ class TestCase extends AbstractTestCase
 
             EventDispatcherInterface::class => Dispatcher::class,
 
-            ContainerCommandLoader::class => [
-                '__class' => ContainerCommandLoader::class,
+            CommandLoaderInterface::class => [
+                '__class' => CommandLoader::class,
                 '__construct()' => [
                     'commandMap' => $params['yiisoft/yii-console']['commands'],
                 ],
@@ -92,7 +93,7 @@ class TestCase extends AbstractTestCase
             Application::class => [
                 '__class' => Application::class,
                 'setDispatcher()' => [Reference::to(SymfonyEventDispatcher::class)],
-                'setCommandLoader()' => [Reference::to(ContainerCommandLoader::class)],
+                'setCommandLoader()' => [Reference::to(CommandLoaderInterface::class)],
                 'addOptions()' => [new InputOption(
                     'config',
                     'c',
@@ -116,6 +117,7 @@ class TestCase extends AbstractTestCase
                 'commands' => [
                     'serve' => Serve::class,
                     'stub' => StubCommand::class,
+                    'stub/rename' => StubCommand::class,
                 ],
                 'version' => '3.0',
                 'rebuildConfig' => static fn () => getenv('APP_ENV') === 'dev',
