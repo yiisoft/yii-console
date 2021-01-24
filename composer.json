@@ -53,7 +53,8 @@
         },
         "config-plugin": {
             "params": "config/params.php",
-            "console": "config/console.php"
+            "console": "config/console.php",
+            "providers-console": "config/providers-console.php"
         },
         "config-plugin-dev": {
             "tests": [
