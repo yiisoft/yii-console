@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
-use Yiisoft\Composer\Config\Builder;
+use Yiisoft\Config\Config;
 use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
@@ -44,30 +44,14 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
     require_once $autoloadPath;
 
-    $cliOptions = getopt('', ['config:']);
-
-    $configsDir = '';
-    if (array_key_exists('config', $cliOptions)) {
-        $configsDir = is_array($cliOptions['config'])
-            ? $cliOptions['config'][array_key_last($cliOptions['config'])]
-            : $cliOptions['config'];
-        $configsDir .= '/';
-    }
-
-    $params = (require Builder::path($configsDir . 'params'))['yiisoft/yii-console'];
-
-    $rebuildConfig = $params['rebuildConfig'] instanceof Closure
-        ? $params['rebuildConfig']()
-        : $params['rebuildConfig'];
-
-    if ($rebuildConfig) {
-        // Don't do it in production, assembling takes it's time
-        Builder::rebuild();
-    }
+    $config = new Config(
+        $cwd,
+        '/config/packages',
+    );
 
     $container = new Container(
-        require Builder::path($configsDir . 'console'),
-        require Builder::path($configsDir . 'providers-console')
+        $config->get('console'),
+        $config->get('providers-console')
     );
 
     /** @var ContainerInterface $container */
