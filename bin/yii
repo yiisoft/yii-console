@@ -45,7 +45,7 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
     require_once $autoloadPath;
 
     $config = new Config(
-        $cwd,
+        dirname($autoloadPath, 2),
         '/config/packages',
     );
 
