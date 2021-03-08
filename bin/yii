@@ -10,22 +10,10 @@ use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
 (static function () {
-    $cwd = dirname(__FILE__);
-
-    $possibleAutoloadPaths = [
-        // running from project root
-        $cwd . '/vendor/autoload.php',
-        // running from project bin
-        dirname($cwd) . '/autoload.php',
-        // local dev repository
-        dirname(__DIR__) . '/vendor/autoload.php',
-        // dependency
-        dirname(__DIR__, 4) . '/vendor/autoload.php',
-    ];
-
     $autoloadPath = null;
 
-    foreach ($possibleAutoloadPaths as $possibleAutoloadPath) {
+    for ($x = 5; $x > 0; $x--) {
+        $possibleAutoloadPath = dirname(__FILE__, $x) . '/vendor/autoload.php';
         if (file_exists($possibleAutoloadPath)) {
             $autoloadPath = $possibleAutoloadPath;
             break;
@@ -33,11 +21,10 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
     }
 
     if ($autoloadPath === null) {
-        $message = "Unable to find vendor/autoload.php in the following paths:\n\n";
-        $message .= '- ' . implode("\n- ", $possibleAutoloadPaths) . "\n\n";
+        $message = "Unable to find vendor/autoload.php\n\n";
         $message .= "Possible fixes:\n";
         $message .= "- Install yiisoft/console via Composer.\n";
-        $message .= "- Make sure yii runs from any of the locations mentioned above.\n";
+        $message .= "- Make sure yii runs from inside your installation folder.\n";
         fwrite(STDERR, $message);
         exit(1);
     }
