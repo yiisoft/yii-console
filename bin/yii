@@ -10,7 +10,7 @@ use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
 (static function () {
-    $cwd = getcwd();
+    $cwd = dirname(__FILE__);
 
     $possibleAutoloadPaths = [
         // running from project root
@@ -37,7 +37,7 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
         $message .= '- ' . implode("\n- ", $possibleAutoloadPaths) . "\n\n";
         $message .= "Possible fixes:\n";
         $message .= "- Install yiisoft/console via Composer.\n";
-        $message .= "- Run ./yii either from project root or from vendor/bin.\n";
+        $message .= "- Make sure yii runs from any of the locations mentioned above.\n";
         fwrite(STDERR, $message);
         exit(1);
     }
