@@ -24,7 +24,7 @@ use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
         $message = "Unable to find vendor/autoload.php\n\n";
         $message .= "Possible fixes:\n";
         $message .= "- Install yiisoft/console via Composer.\n";
-        $message .= "- Make sure yii runs from inside your installation folder.\n";
+        $message .= "- Make sure the yii executable is located inside your project folder.\n";
         fwrite(STDERR, $message);
         exit(1);
     }
