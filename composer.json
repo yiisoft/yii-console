@@ -23,6 +23,7 @@
         "psr/container-implementation": "1.0.0",
         "symfony/console": "^5.1.8",
         "symfony/event-dispatcher-contracts": "^2.2",
+        "yiisoft/config": "@dev",
         "yiisoft/di": "@dev",
         "yiisoft/friendly-exception": "^1.0",
         "yiisoft/injector": "^1.0",
