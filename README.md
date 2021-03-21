@@ -31,13 +31,52 @@ composer require yiisoft/yii-console --prefer-dist
 
 ## General usage
 
-The binary of the package is available as `vendor/bin/yii <command>`.
+In case you use one of Yii 3 standard application templates, console could be accessed as `./yii <command>`.
 
-To start working with the package you must do one of these:
+If not create an entry script yourself:
 
-- `composer require yiisoft/di`
-- Manually create a `console.container` option in `params` (see [Composer config plugin](https://github.com/yiisoft/composer-config-plugin) to get more info)
-- Use your own binary file instead of `vendor/bin/yii`
+```php
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Psr\Container\ContainerInterface;
+use Yiisoft\Config\Config;
+use Yiisoft\Di\Container;
+use Yiisoft\Yii\Console\Application;
+use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
+
+define('YII_ENV', getenv('env') ?? 'production');
+
+require_once 'vendor/autoload.php';
+
+$config = new Config(
+    __DIR__,
+    '/config/packages',
+);
+
+$container = new Container(
+    $config->get('console'),
+    $config->get('providers-console')
+);
+
+/** @var ContainerInterface $container */
+$container = $container->get(ContainerInterface::class);
+
+$application = $container->get(Application::class);
+$exitCode = 1;
+
+try {
+    $application->start();
+    $exitCode = $application->run(null, new ConsoleBufferedOutput());
+} catch (\Error $error) {
+    $application->renderThrowable($error, new ConsoleBufferedOutput());
+} finally {
+    $application->shutdown($exitCode);
+    exit($exitCode);
+}
+```
 
 Since the package is based on [Symfony Console component](https://symfony.com/doc/current/components/console.html),
 refer to its documentation for details on how to use the binary and create your own commands.
