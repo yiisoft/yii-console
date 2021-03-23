@@ -47,17 +47,13 @@
         "branch-alias": {
             "dev-master": "3.0.x-dev"
         },
-        "config-plugin": {
-            "params": "config/params.php",
-            "console": "config/console.php",
-            "providers-console": "config/providers-console.php"
+        "config-plugin-options": {
+            "source-directory": "config"
         },
-        "config-plugin-dev": {
-            "tests": [
-                "$console",
-                "$providers-console",
-                "config/tests.php"
-            ]
+        "config-plugin": {
+            "params": "params.php",
+            "console": "console.php",
+            "providers-console": "providers-console.php"
         }
     },
     "config": {
