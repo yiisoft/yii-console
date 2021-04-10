@@ -84,25 +84,29 @@ class TestCase extends AbstractTestCase
             EventDispatcherInterface::class => Dispatcher::class,
 
             CommandLoaderInterface::class => [
-                '__class' => CommandLoader::class,
-                '__construct()' => [
+                'class' => CommandLoader::class,
+                'constructor' => [
                     'commandMap' => $params['yiisoft/yii-console']['commands'],
                 ],
             ],
 
             Application::class => [
-                '__class' => Application::class,
-                'setDispatcher()' => [Reference::to(SymfonyEventDispatcher::class)],
-                'setCommandLoader()' => [Reference::to(CommandLoaderInterface::class)],
-                'addOptions()' => [new InputOption(
-                    'config',
-                    'c',
-                    InputOption::VALUE_REQUIRED,
-                    'Set alternative configuration name'
-                )],
-                'setName()' => [$params['yiisoft/yii-console']['name']],
-                'setVersion()' => [$params['yiisoft/yii-console']['version']],
-                'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']],
+                'class' => Application::class,
+                'callMethods' => [
+                    'setDispatcher' => [Reference::to(SymfonyEventDispatcher::class)],
+                    'setCommandLoader' => [Reference::to(CommandLoaderInterface::class)],
+                    'addOptions' => [
+                        new InputOption(
+                            'config',
+                            'c',
+                            InputOption::VALUE_REQUIRED,
+                            'Set alternative configuration name'
+                        )
+                    ],
+                    'setName' => [$params['yiisoft/yii-console']['name']],
+                    'setVersion' => [$params['yiisoft/yii-console']['version']],
+                    'setAutoExit' => [$params['yiisoft/yii-console']['autoExit']],
+                ],
             ],
         ];
     }
