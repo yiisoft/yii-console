@@ -101,7 +101,7 @@ class TestCase extends AbstractTestCase
                             'c',
                             InputOption::VALUE_REQUIRED,
                             'Set alternative configuration name'
-                        )
+                        ),
                     ],
                     'setName' => [$params['yiisoft/yii-console']['name']],
                     'setVersion' => [$params['yiisoft/yii-console']['version']],
