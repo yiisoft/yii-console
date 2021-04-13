@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Yiisoft\Di\Container;
 use Yiisoft\EventDispatcher\Dispatcher\Dispatcher;
 use Yiisoft\EventDispatcher\Provider\Provider;
-use Yiisoft\Factory\Definitions\Reference;
+use Yiisoft\Factory\Definition\Reference;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\CommandLoader;
@@ -84,22 +84,24 @@ class TestCase extends AbstractTestCase
             EventDispatcherInterface::class => Dispatcher::class,
 
             CommandLoaderInterface::class => [
-                '__class' => CommandLoader::class,
+                'class' => CommandLoader::class,
                 '__construct()' => [
                     'commandMap' => $params['yiisoft/yii-console']['commands'],
                 ],
             ],
 
             Application::class => [
-                '__class' => Application::class,
+                'class' => Application::class,
                 'setDispatcher()' => [Reference::to(SymfonyEventDispatcher::class)],
                 'setCommandLoader()' => [Reference::to(CommandLoaderInterface::class)],
-                'addOptions()' => [new InputOption(
-                    'config',
-                    'c',
-                    InputOption::VALUE_REQUIRED,
-                    'Set alternative configuration name'
-                )],
+                'addOptions()' => [
+                    new InputOption(
+                        'config',
+                        'c',
+                        InputOption::VALUE_REQUIRED,
+                        'Set alternative configuration name'
+                    ),
+                ],
                 'setName()' => [$params['yiisoft/yii-console']['name']],
                 'setVersion()' => [$params['yiisoft/yii-console']['version']],
                 'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']],
