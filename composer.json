@@ -53,6 +53,7 @@
         "config-plugin": {
             "params": "params.php",
             "console": "console.php",
+            "events-console": "events-console.php",
             "providers-console": "providers-console.php"
         }
     },
