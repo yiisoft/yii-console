@@ -23,13 +23,20 @@ final class ErrorListener
     {
         $exception = $event->getError();
         $command = $event->getCommand();
+
+        if ($command !== null && $command->getName() !== null) {
+            $commandName = $command->getName();
+        } else {
+            $commandName = 'unknown';
+        }
+
         $message = sprintf(
             '%s: %s in %s:%s while running console command `%s`',
             get_class($exception),
             $exception->getMessage(),
             $exception->getFile(),
             $exception->getLine(),
-            $command->getName()
+            $commandName
         );
         $this->logger->error($message, ['exception' => $exception]);
     }
