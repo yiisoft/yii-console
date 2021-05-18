@@ -17,7 +17,7 @@ final class ErrorListener
     }
 
     /**
-     * @psalm-suppress InternalMethod
+     * @psalm-suppress PossiblyNullArgument
      */
     public function onError(ConsoleErrorEvent $event): void
     {
