@@ -30,7 +30,7 @@ class Serve extends Command
             ->setDescription('Runs PHP built-in web server')
             ->setHelp('In order to access server from remote machines use 0.0.0.0:8000. That is especially useful when running server in a virtual machine.')
             ->addArgument('address', InputArgument::OPTIONAL, 'Host to serve at', 'localhost')
-            ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', self::DEFAULT_PORT)
+            ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', (string)self::DEFAULT_PORT)
             ->addOption('docroot', 't', InputOption::VALUE_OPTIONAL, 'Document root to serve from', self::DEFAULT_DOCROOT)
             ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script', self::DEFAULT_ROUTER)
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.');
