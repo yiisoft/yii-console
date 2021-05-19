@@ -26,6 +26,7 @@ final class ErrorListenerTest extends TestCase
         $errorListener->onError($consoleErrorEvent);
 
         $this->assertCount(1, $logger->getMessages());
+        $this->assertStringContainsString('serve', $logger->getMessages()[0]['message']);
     }
 
     public function testOnErrorWithoutCommand()
@@ -38,5 +39,6 @@ final class ErrorListenerTest extends TestCase
         $errorListener->onError($consoleErrorEvent);
 
         $this->assertCount(1, $logger->getMessages());
+        $this->assertStringContainsString('unknown', $logger->getMessages()[0]['message']);
     }
 }
