@@ -18,7 +18,7 @@ class Serve extends Command
     public const EXIT_CODE_NO_ROUTING_FILE = 3;
     public const EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS = 5;
 
-    private const DEFAULT_PORT = 8080;
+    private const DEFAULT_PORT = '8080';
     private const DEFAULT_DOCROOT = 'public';
     private const DEFAULT_ROUTER = 'public/index.php';
 
