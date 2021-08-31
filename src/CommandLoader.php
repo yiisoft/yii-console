@@ -28,9 +28,6 @@ final class CommandLoader implements CommandLoaderInterface
         $this->commandMap = $commandMap;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function get(string $name)
     {
         if (!$this->has($name)) {
@@ -45,11 +42,24 @@ final class CommandLoader implements CommandLoaderInterface
             return $this->getCommandInstance($name);
         }
 
+        $aliases = [];
+        $hidden = false;
+        $commandName = $commandClass::getDefaultName();
+
+        if ($commandName !== null) {
+            $aliases = explode('|', $commandName);
+            $primaryName = array_shift($aliases);
+
+            if ($primaryName === '') {
+                $hidden = true;
+            }
+        }
+
         return new LazyCommand(
             $name,
-            [],
+            $aliases,
             $description,
-            false,
+            $hidden,
             function () use ($name) {
                 return $this->getCommandInstance($name);
             }
@@ -67,17 +77,11 @@ final class CommandLoader implements CommandLoaderInterface
         return $command;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function has(string $name)
     {
         return isset($this->commandMap[$name]) && $this->container->has($this->commandMap[$name]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getNames()
     {
         return array_keys($this->commandMap);
