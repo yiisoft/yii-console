@@ -23,11 +23,11 @@ class Serve extends Command
     private const DEFAULT_ROUTER = 'public/index.php';
 
     protected static $defaultName = 'serve';
+    protected static $defaultDescription = 'Runs PHP built-in web server';
 
     public function configure(): void
     {
         $this
-            ->setDescription('Runs PHP built-in web server')
             ->setHelp('In order to access server from remote machines use 0.0.0.0:8000. That is especially useful when running server in a virtual machine.')
             ->addArgument('address', InputArgument::OPTIONAL, 'Host to serve at', 'localhost')
             ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', self::DEFAULT_PORT)

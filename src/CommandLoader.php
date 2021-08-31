@@ -6,6 +6,7 @@ namespace Yiisoft\Yii\Console;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
 
@@ -36,7 +37,23 @@ final class CommandLoader implements CommandLoaderInterface
             throw new CommandNotFoundException(sprintf('Command "%s" does not exist.', $name));
         }
 
-        /** @var Command $command */
+        /** @var Command $commandClass */
+        $commandClass = $this->commandMap[$name];
+        $description = $commandClass::getDefaultDescription() ?? $this->getCommandInstance($name)->getName();
+
+        return new LazyCommand(
+            $commandClass::getDefaultName(),
+            [],
+            $description,
+            false,
+            function () use ($name) {
+                return $this->getCommandInstance($name);
+            }
+        );
+    }
+
+    private function getCommandInstance(string $name): Command
+    {
         $command = $this->container->get($this->commandMap[$name]);
         if ($command->getName() !== $name) {
             $command->setName($name);
