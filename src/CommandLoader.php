@@ -39,7 +39,11 @@ final class CommandLoader implements CommandLoaderInterface
 
         /** @var Command $commandClass */
         $commandClass = $this->commandMap[$name];
-        $description = $commandClass::getDefaultDescription() ?? $this->getCommandInstance($name)->getName() ?? '';
+        $description = $commandClass::getDefaultDescription();
+
+        if ($description === null) {
+            return $this->getCommandInstance($name);
+        }
 
         return new LazyCommand(
             $name,
