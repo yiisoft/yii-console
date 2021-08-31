@@ -42,7 +42,7 @@ final class CommandLoader implements CommandLoaderInterface
         $description = $commandClass::getDefaultDescription() ?? $this->getCommandInstance($name)->getName();
 
         return new LazyCommand(
-            $commandClass::getDefaultName(),
+            $name,
             [],
             $description,
             false,
