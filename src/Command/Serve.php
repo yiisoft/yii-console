@@ -57,6 +57,7 @@ class Serve extends Command
             $router = null;
         }
 
+        /** @var string $env */
         $env = $input->getOption('env');
 
         $documentRoot = getcwd() . '/' . $docroot; // TODO: can we do it better?
