@@ -78,6 +78,23 @@ try {
 }
 ```
 
+To start Console Application `composer.json` should contain minimal configuration for [Yiisoft\Config\Config](https://github.com/yiisoft/config) 
+
+```json    
+    "extra": {
+        "config-plugin-options": {
+            "source-directory": "config",
+            "output-directory": "config/packages"
+        },
+        "config-plugin": {
+            "console": [
+                "$common",
+                "console.php"
+            ]
+        }
+    }
+```
+
 Since the package is based on [Symfony Console component](https://symfony.com/doc/current/components/console.html),
 refer to its documentation for details on how to use the binary and create your own commands.
 
