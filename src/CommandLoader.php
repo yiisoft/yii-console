@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Console;
 
 use Psr\Container\ContainerInterface;
+use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
@@ -16,9 +17,10 @@ final class CommandLoader implements CommandLoaderInterface
 
     /**
      * @psalm-var array<string, array{
-     *         name: string,
-     *         aliases: string[],
+     *         name: non-empty-string,
+     *         aliases: non-empty-string[],
      *         class: class-string<Command>,
+     *         hidden: bool,
      *     }>
      */
     private array $commandMap;
@@ -48,6 +50,7 @@ final class CommandLoader implements CommandLoaderInterface
         $commandName = $this->commandMap[$name]['name'];
         $commandAliases = $this->commandMap[$name]['aliases'];
         $commandClass = $this->commandMap[$name]['class'];
+        $commandHidden = $this->commandMap[$name]['hidden'];
 
         $description = $commandClass::getDefaultDescription();
 
@@ -59,7 +62,7 @@ final class CommandLoader implements CommandLoaderInterface
             $commandName,
             $commandAliases,
             $description,
-            $commandName === '',
+            $commandHidden,
             function () use ($name) {
                 return $this->getCommandInstance($name);
             }
@@ -105,18 +108,42 @@ final class CommandLoader implements CommandLoaderInterface
 
         foreach ($commandMap as $name => $class) {
             $aliases = explode('|', $name);
+
+            $hidden = false;
+            if ($aliases[0] === '') {
+                $hidden = true;
+                array_shift($aliases);
+            }
+
+            $this->validateAliases($aliases);
+
             $primaryName = array_shift($aliases);
 
             $item = [
                 'name' => $primaryName,
                 'aliases' => $aliases,
                 'class' => $class,
+                'hidden' => $hidden,
             ];
 
             $this->commandMap[$primaryName] = $item;
             $this->commandNames[] = $primaryName;
             foreach ($aliases as $alias) {
                 $this->commandMap[$alias] = $item;
+            }
+        }
+    }
+
+    /**
+     * @psalm-param string[] $aliases
+     *
+     * @psalm-assert non-empty-string[] $aliases
+     */
+    private function validateAliases(array $aliases): void
+    {
+        foreach ($aliases as $alias) {
+            if ($alias === '') {
+                throw new RuntimeException('Do not allow empty command name or alias.');
             }
         }
     }
