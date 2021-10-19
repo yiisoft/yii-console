@@ -73,6 +73,8 @@ class Application extends \Symfony\Component\Console\Application
                 $output->writeln('');
             }
         }
+
+        $output->writeln($e->getTraceAsString());
     }
 
     public function addOptions(InputOption $options): void
