@@ -73,7 +73,7 @@ class Application extends \Symfony\Component\Console\Application
                 $output->writeln('');
             }
         }
-        
+
         $output->writeln($e->getTraceAsString());
     }
 
