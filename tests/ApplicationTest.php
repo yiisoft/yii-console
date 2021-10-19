@@ -58,7 +58,7 @@ final class ApplicationTest extends TestCase
         );
 
         $this->assertStringContainsString(
-            'StubCommand->execute()',
+            'StubCommand->execute(',
             $output
         );
     }
@@ -87,7 +87,7 @@ final class ApplicationTest extends TestCase
         );
 
         $this->assertStringContainsString(
-            'StubCommand->execute()',
+            'StubCommand->execute(',
             $output
         );
     }
