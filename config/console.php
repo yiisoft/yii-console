@@ -20,7 +20,6 @@ return [
     ],
 
     Application::class => [
-        'class' => Application::class,
         '__construct()' => [
             Reference::to(SymfonyEventDispatcher::class),
             $params['yiisoft/yii-console']['name'],
