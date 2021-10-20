@@ -6,15 +6,26 @@
         "yii",
         "console"
     ],
-    "homepage": "http://www.yiiframework.com/",
+    "homepage": "https://www.yiiframework.com/",
     "license": "BSD-3-Clause",
     "support": {
-        "source": "https://github.com/yiisoft/yii-console",
-        "issues": "https://github.com/yiisoft/yii-console/issues",
-        "forum": "http://www.yiiframework.com/forum/",
-        "wiki": "http://www.yiiframework.com/wiki/",
-        "irc": "irc://irc.freenode.net/yii"
+        "issues": "https://github.com/yiisoft/yii-console/issues?state=open",
+        "forum": "https://www.yiiframework.com/forum/",
+        "wiki": "https://www.yiiframework.com/wiki/",
+        "irc": "irc://irc.freenode.net/yii",
+        "chat": "https://t.me/yii3en",
+        "source": "https://github.com/yiisoft/yii-console"
     },
+    "funding": [
+        {
+            "type": "opencollective",
+            "url": "https://opencollective.com/yiisoft"
+        },
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/yiisoft"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
@@ -28,11 +39,11 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
-        "roave/infection-static-analysis-plugin": "^1.6",
+        "roave/infection-static-analysis-plugin": "^1.9",
         "spatie/phpunit-watcher": "^1.23",
-        "vimeo/psalm": "^4.3",
+        "vimeo/psalm": "^4.9",
         "yiisoft/di": "@dev",
-        "yiisoft/test-support": "^1.3.0"
+        "yiisoft/test-support": "^1.3"
     },
     "autoload": {
         "psr-4": {
