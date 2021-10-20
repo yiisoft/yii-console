@@ -6,15 +6,12 @@ namespace Yiisoft\Yii\Console\Tests;
 
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\EventDispatcher\ListenerProviderInterface;
 use ReflectionObject;
 use ReflectionException;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Yiisoft\EventDispatcher\Dispatcher\Dispatcher;
-use Yiisoft\EventDispatcher\Provider\ListenerCollection;
-use Yiisoft\EventDispatcher\Provider\Provider;
 use Yiisoft\Test\Support\Container\SimpleContainer;
+use Yiisoft\Test\Support\EventDispatcher\SimpleEventDispatcher;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\CommandLoader;
@@ -103,8 +100,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     private function createContainer(): ContainerInterface
     {
-        $provider = new Provider(new ListenerCollection());
-        $dispatcher = new Dispatcher($provider);
+        $dispatcher = new SimpleEventDispatcher();
 
         $application = new Application(new SymfonyEventDispatcher($dispatcher));
         $application->setAutoExit(false);
@@ -131,7 +127,6 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
         return new SimpleContainer([
             Application::class => $application,
-            ListenerProviderInterface::class => $provider,
             EventDispatcherInterface::class => $dispatcher,
             CommandLoaderInterface::class => $commandLoader,
         ]);
