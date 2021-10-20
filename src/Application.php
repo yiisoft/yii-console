@@ -4,37 +4,33 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console;
 
-use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\StyleInterface;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface as SymfonyEventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Throwable;
 use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 use Yiisoft\Yii\Console\Event\ApplicationShutdown;
 use Yiisoft\Yii\Console\Event\ApplicationStartup;
 
+use function array_slice;
+use function explode;
+use function implode;
+
 class Application extends \Symfony\Component\Console\Application
 {
-    public const VERSION = '3.0.0-dev';
+    public const NAME = 'Yii Console';
+    public const VERSION = '1.0.0-dev';
 
-    /** @psalm-suppress PropertyNotSetInConstructor */
     private EventDispatcherInterface $dispatcher;
 
-    public function __construct(string $name = 'Yii Console', string $version = self::VERSION)
-    {
-        parent::__construct($name, $version);
-    }
-
-    public function setDispatcher(SymfonyEventDispatcherInterface $dispatcher): void
-    {
+    public function __construct(
+        EventDispatcherInterface $dispatcher,
+        string $name = self::NAME,
+        string $version = self::VERSION
+    ) {
         $this->dispatcher = $dispatcher;
-        parent::setDispatcher($dispatcher);
-    }
-
-    public function getDispatcher(): EventDispatcherInterface
-    {
-        return $this->dispatcher;
+        parent::__construct($name, $version);
     }
 
     public function start(): void
@@ -82,10 +78,10 @@ class Application extends \Symfony\Component\Console\Application
         $this->getDefinition()->addOption($options);
     }
 
-    public function extractNamespace(string $name, int $limit = null)
+    public function extractNamespace(string $name, int $limit = null): string
     {
         $parts = explode('/', $name, -1);
 
-        return implode('/', null === $limit ? $parts : \array_slice($parts, 0, $limit));
+        return implode('/', null === $limit ? $parts : array_slice($parts, 0, $limit));
     }
 }

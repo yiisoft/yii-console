@@ -12,7 +12,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Yiisoft\Yii\Console\ExitCode;
 
-class Serve extends Command
+use function explode;
+use function fclose;
+use function file_exists;
+use function fsockopen;
+use function getcwd;
+use function is_dir;
+use function passthru;
+use function strpos;
+
+final class Serve extends Command
 {
     public const EXIT_CODE_NO_DOCUMENT_ROOT = 2;
     public const EXIT_CODE_NO_ROUTING_FILE = 3;
@@ -81,8 +90,8 @@ class Serve extends Command
             return self::EXIT_CODE_NO_ROUTING_FILE;
         }
 
-        $output->writeLn("Server started on <href=http://{$address}/>http://{$address}/</>");
-        $output->writeLn("Document root is \"{$documentRoot}\"");
+        $output->writeLn("Server started on <href=http://$address/>http://$address/</>");
+        $output->writeLn("Document root is \"$documentRoot\"");
 
         if ($router) {
             $output->writeLn("Routing file is \"$router\"");
@@ -94,23 +103,25 @@ class Serve extends Command
             return ExitCode::OK;
         }
 
-        passthru('"' . PHP_BINARY . '"' . " -S {$address} -t \"{$documentRoot}\" $router");
+        passthru('"' . PHP_BINARY . '"' . " -S $address -t \"$documentRoot\" $router");
 
         return ExitCode::OK;
     }
 
     /**
-     * @param string $address server address
+     * @param string $address The server address.
      *
-     * @return bool if address is already in use
+     * @return bool If address is already in use.
      */
     private function isAddressTaken(string $address): bool
     {
         [$hostname, $port] = explode(':', $address);
         $fp = @fsockopen($hostname, (int)$port, $errno, $errstr, 3);
+
         if ($fp === false) {
             return false;
         }
+
         fclose($fp);
         return true;
     }

@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 /**
  * @author Jean-François Simon <contact@jfsimon.fr>
  */
-class ConsoleBufferedOutput extends ConsoleOutput
+final class ConsoleBufferedOutput extends ConsoleOutput
 {
     private string $buffer = '';
 
@@ -23,6 +23,7 @@ class ConsoleBufferedOutput extends ConsoleOutput
     public function fetch(bool $clearBuffer = false): string
     {
         $content = $this->buffer;
+
         if ($clearBuffer) {
             $this->buffer = '';
         }
