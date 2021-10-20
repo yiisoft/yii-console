@@ -122,7 +122,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             ]),
             [
                 'serve' => Serve::class,
-                'stub' => StubCommand::class,
+                'stub|st' => StubCommand::class,
                 'stub/rename' => StubCommand::class,
             ],
         );

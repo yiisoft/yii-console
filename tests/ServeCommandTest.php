@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Console\Tests;
 
 use Symfony\Component\Console\Tester\CommandTester;
+use Yiisoft\Yii\Console\Command\Serve;
+use Yiisoft\Yii\Console\ExitCode;
 
 final class ServeCommandTest extends TestCase
 {
@@ -22,6 +24,8 @@ final class ServeCommandTest extends TestCase
         );
 
         $output = $commandCreate->getDisplay(true);
+
+        $this->assertSame(Serve::EXIT_CODE_NO_DOCUMENT_ROOT, $commandCreate->getStatusCode());
 
         $this->assertStringContainsString(
             '[ERROR] Document root',
@@ -43,6 +47,8 @@ final class ServeCommandTest extends TestCase
         ]);
 
         $output = $commandCreate->getDisplay(true);
+
+        $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
 
         $this->assertStringContainsString(
             'Server started on http://localhost:8080/',
@@ -92,6 +98,8 @@ final class ServeCommandTest extends TestCase
 
             $output = $commandCreate->getDisplay(true);
 
+            $this->assertSame(Serve::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS, $commandCreate->getStatusCode());
+
             $this->assertStringContainsString(
                 '[ERROR] http://127.0.0.1:8080 is taken by another process.',
                 $output
@@ -117,6 +125,8 @@ final class ServeCommandTest extends TestCase
 
         $output = $commandCreate->getDisplay(true);
 
+        $this->assertSame(Serve::EXIT_CODE_NO_ROUTING_FILE, $commandCreate->getStatusCode());
+
         $this->assertStringContainsString(
             '[ERROR] Routing file "index.php" does not exist.',
             $output
@@ -136,6 +146,8 @@ final class ServeCommandTest extends TestCase
             '--docroot' => 'tests',
             '--env' => 'test',
         ]);
+
+        $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
 
         $output = $commandCreate->getDisplay(true);
 
