@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console\Tests;
 
-use PHPUnit\Framework\TestCase as AbstractTestCase;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
@@ -12,118 +11,129 @@ use ReflectionObject;
 use ReflectionException;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Yiisoft\Di\Container;
 use Yiisoft\EventDispatcher\Dispatcher\Dispatcher;
+use Yiisoft\EventDispatcher\Provider\ListenerCollection;
 use Yiisoft\EventDispatcher\Provider\Provider;
-use Yiisoft\Definitions\Reference;
+use Yiisoft\Test\Support\Container\SimpleContainer;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\CommandLoader;
 use Yiisoft\Yii\Console\SymfonyEventDispatcher;
 use Yiisoft\Yii\Console\Tests\Stub\StubCommand;
 
-class TestCase extends AbstractTestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    protected Application $application;
-    protected ContainerInterface $container;
+    private ?ContainerInterface $container = null;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->configContainer();
+        $this->container = $this->createContainer();
     }
 
     protected function tearDown(): void
     {
-        unset($this->container);
+        $this->container = null;
+        $this->application = null;
+
+        parent::tearDown();
+    }
+
+    protected function container(): ContainerInterface
+    {
+        if ($this->container === null) {
+            $this->container = $this->createContainer();
+        }
+
+        return $this->container;
+    }
+
+    protected function application(): Application
+    {
+        return $this->container()->get(Application::class);
     }
 
     /**
-     * Invokes a inaccessible method.
+     * Gets an inaccessible object property.
      *
-     * @param $object
-     * @param $method
+     * @param object $object
+     * @param string $propertyName
+     *
+     * @return mixed
+     */
+    protected function getInaccessibleProperty(object $object, string $propertyName)
+    {
+        $reflection = new ReflectionObject($object);
+
+        while (!$reflection->hasProperty($propertyName)) {
+            $reflection = $reflection->getParentClass();
+        }
+
+        $property = $reflection->getProperty($propertyName);
+        $property->setAccessible(true);
+        $result = $property->getValue($object);
+        $property->setAccessible(false);
+
+        return $result;
+    }
+
+    /**
+     * Invokes an inaccessible method.
+     *
+     * @param object $object
+     * @param string $method
      * @param array $args
-     * @param bool $revoke whether to make method inaccessible after execution
      *
      * @throws ReflectionException
      *
      * @return mixed
      */
-    protected function invokeMethod(object $object, string $method, array $args = [], bool $revoke = true)
+    protected function invokeMethod(object $object, string $method, array $args = [])
     {
         $reflection = new ReflectionObject($object);
 
         $method = $reflection->getMethod($method);
-
         $method->setAccessible(true);
-
         $result = $method->invokeArgs($object, $args);
-
-        if ($revoke) {
-            $method->setAccessible(false);
-        }
+        $method->setAccessible(false);
 
         return $result;
     }
 
-    protected function configContainer(): void
+    private function createContainer(): ContainerInterface
     {
-        $this->container = new Container($this->config());
-        $this->application = $this->container->get(Application::class);
-    }
+        $provider = new Provider(new ListenerCollection());
+        $dispatcher = new Dispatcher($provider);
 
-    private function config(): array
-    {
-        $params = $this->params();
+        $application = new Application(new SymfonyEventDispatcher($dispatcher));
+        $application->setAutoExit(false);
+        $application->addOptions(new InputOption(
+            'config',
+            'c',
+            InputOption::VALUE_REQUIRED,
+            'Set alternative configuration name'
+        ));
 
-        return [
-            ListenerProviderInterface::class => Provider::class,
-
-            EventDispatcherInterface::class => Dispatcher::class,
-
-            CommandLoaderInterface::class => [
-                'class' => CommandLoader::class,
-                '__construct()' => [
-                    'commandMap' => $params['yiisoft/yii-console']['commands'],
-                ],
+        $commandLoader = new CommandLoader(
+            new SimpleContainer([
+                Serve::class => new Serve(),
+                StubCommand::class => new StubCommand($application),
+            ]),
+            [
+                'serve' => Serve::class,
+                'stub' => StubCommand::class,
+                'stub/rename' => StubCommand::class,
             ],
+        );
 
-            Application::class => [
-                'class' => Application::class,
-                'setDispatcher()' => [Reference::to(SymfonyEventDispatcher::class)],
-                'setCommandLoader()' => [Reference::to(CommandLoaderInterface::class)],
-                'addOptions()' => [
-                    new InputOption(
-                        'config',
-                        'c',
-                        InputOption::VALUE_REQUIRED,
-                        'Set alternative configuration name'
-                    ),
-                ],
-                'setName()' => [$params['yiisoft/yii-console']['name']],
-                'setVersion()' => [$params['yiisoft/yii-console']['version']],
-                'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']],
-            ],
-        ];
-    }
+        $application->setCommandLoader($commandLoader);
 
-    private function params(): array
-    {
-        return [
-            'yiisoft/yii-console' => [
-                'id' => 'yii-console',
-                'name' => 'Yii Console',
-                'autoExit' => false,
-                'commands' => [
-                    'serve' => Serve::class,
-                    'stub' => StubCommand::class,
-                    'stub/rename' => StubCommand::class,
-                ],
-                'version' => '3.0',
-                'rebuildConfig' => static fn () => getenv('APP_ENV') === 'dev',
-            ],
-        ];
+        return new SimpleContainer([
+            Application::class => $application,
+            ListenerProviderInterface::class => $provider,
+            EventDispatcherInterface::class => $dispatcher,
+            CommandLoaderInterface::class => $commandLoader,
+        ]);
     }
 }

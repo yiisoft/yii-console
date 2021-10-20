@@ -15,7 +15,7 @@ final class ApplicationTest extends TestCase
     {
         $event = new ApplicationStartup();
 
-        $dispatcher = $this->application->getDispatcher();
+        $dispatcher = $this->getInaccessibleProperty($this->application(), 'dispatcher');
         $result = $dispatcher->dispatch($event);
 
         $this->assertSame($event, $result);
@@ -25,7 +25,7 @@ final class ApplicationTest extends TestCase
     {
         $event = new ApplicationShutdown(ExitCode::OK);
 
-        $dispatcher = $this->application->getDispatcher();
+        $dispatcher = $this->getInaccessibleProperty($this->application(), 'dispatcher');
         $result = $dispatcher->dispatch($event);
 
         $this->assertSame($event, $result);
@@ -34,7 +34,7 @@ final class ApplicationTest extends TestCase
 
     public function testDoRenderThrowable(): void
     {
-        $command = $this->application->find('stub');
+        $command = $this->application()->find('stub');
 
         $commandCreate = new CommandTester($command);
 
@@ -65,7 +65,7 @@ final class ApplicationTest extends TestCase
 
     public function testDoRenderThrowableWithStyledOutput(): void
     {
-        $command = $this->application->find('stub');
+        $command = $this->application()->find('stub');
 
         $commandCreate = new CommandTester($command);
 
@@ -94,7 +94,7 @@ final class ApplicationTest extends TestCase
 
     public function testRenamedCommand(): void
     {
-        $command = $this->application->find('stub/rename');
+        $command = $this->application()->find('stub/rename');
 
         $commandCreate = new CommandTester($command);
 

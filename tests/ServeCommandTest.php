@@ -5,15 +5,12 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Console\Tests;
 
 use Symfony\Component\Console\Tester\CommandTester;
-use Yiisoft\Yii\Console\Application;
 
 final class ServeCommandTest extends TestCase
 {
     public function testServeCommandExecuteWithoutArguments(): void
     {
-        $application = $this->container->get(Application::class);
-
-        $command = $application->find('serve');
+        $command = $this->application()->find('serve');
 
         $commandCreate = new CommandTester($command);
 
@@ -34,9 +31,7 @@ final class ServeCommandTest extends TestCase
 
     public function testServeCommandExecuteWithDocRoot(): void
     {
-        $application = $this->container->get(Application::class);
-
-        $command = $application->find('serve');
+        $command = $this->application()->find('serve');
 
         $commandCreate = new CommandTester($command);
 
@@ -67,9 +62,7 @@ final class ServeCommandTest extends TestCase
 
     public function testErrorWhenAddressIsTaken(): void
     {
-        $application = $this->container->get(Application::class);
-
-        $command = $application->find('serve');
+        $command = $this->application()->find('serve');
 
         $commandCreate = new CommandTester($command);
 
@@ -110,9 +103,7 @@ final class ServeCommandTest extends TestCase
 
     public function testErrorWhenRouterDoesNotExist(): void
     {
-        $application = $this->container->get(Application::class);
-
-        $command = $application->find('serve');
+        $command = $this->application()->find('serve');
 
         $commandCreate = new CommandTester($command);
 
@@ -134,9 +125,7 @@ final class ServeCommandTest extends TestCase
 
     public function testSuccess(): void
     {
-        $application = $this->container->get(Application::class);
-
-        $command = $application->find('serve');
+        $command = $this->application()->find('serve');
 
         $commandCreate = new CommandTester($command);
 
