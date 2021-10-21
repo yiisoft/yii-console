@@ -33,7 +33,6 @@
         "psr/container": "^1.0|^2.0",
         "symfony/console": "^5.1.8",
         "symfony/event-dispatcher-contracts": "^2.2",
-        "yiisoft/yii-event": "^1.0",
         "yiisoft/friendly-exception": "^1.0"
     },
     "require-dev": {
