@@ -9,13 +9,6 @@ nbproject
 .project
 .settings
 
-# sublime text project / workspace files
-*.sublime-project
-*.sublime-workspace
-
-# visual studio code project files
-.vscode
-
 # windows thumbnail cache
 Thumbs.db
 
@@ -24,16 +17,14 @@ Thumbs.db
 
 # composer vendor dir
 /vendor
+# composer lock file
 /composer.lock
-
 # composer itself is not needed
 composer.phar
 
 # phpunit itself is not needed
 phpunit.phar
-
 # local phpunit config
 /phpunit.xml
-
 # phpunit cache
 .phpunit.result.cache

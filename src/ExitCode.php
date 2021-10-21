@@ -25,7 +25,7 @@ namespace Yiisoft\Yii\Console;
  * }
  * ```
  *
- * @see http://man.openbsd.org/sysexits
+ * @see https://man.openbsd.org/sysexits
  */
 class ExitCode
 {
@@ -133,7 +133,7 @@ class ExitCode
     public const CONFIG = 78;
 
     /**
-     * @var array a map of reason descriptions for exit codes.
+     * @var array<int, string> A map of reason descriptions for exit codes.
      */
     public static array $reasons = [
         self::OK => 'Success',
@@ -160,11 +160,9 @@ class ExitCode
      *
      * This method uses {@see $reasons} to determine the reason for an exit code.
      *
-     * @param int $exitCode one of the constants defined in this class.
+     * @param int $exitCode One of the constants defined in this class.
      *
-     * @return string the reason text, or `"Unknown exit code"` if the code is not listed in {@see $reasons}.
-     *
-     * @psalm-suppress MixedInferredReturnType, MixedReturnStatement
+     * @return string The reason text, or `"Unknown exit code"` if the code is not listed in {@see $reasons}.
      */
     public static function getReason(int $exitCode): string
     {

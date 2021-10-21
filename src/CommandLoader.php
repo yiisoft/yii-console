@@ -11,17 +11,20 @@ use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
 
+use function array_shift;
+use function explode;
+
 final class CommandLoader implements CommandLoaderInterface
 {
     private ContainerInterface $container;
 
     /**
      * @psalm-var array<string, array{
-     *         name: non-empty-string,
-     *         aliases: non-empty-string[],
-     *         class: class-string<Command>,
-     *         hidden: bool,
-     *     }>
+     *     name: non-empty-string,
+     *     aliases: non-empty-string[],
+     *     class: class-string<Command>,
+     *     hidden: bool,
+     * }>
      */
     private array $commandMap;
 
@@ -31,7 +34,7 @@ final class CommandLoader implements CommandLoaderInterface
     private array $commandNames;
 
     /**
-     * @param array $commandMap An array with command names as keys and service ids as values
+     * @param array $commandMap An array with command names as keys and service ids as values.
      *
      * @psalm-param array<string, class-string> $commandMap
      */
@@ -63,9 +66,7 @@ final class CommandLoader implements CommandLoaderInterface
             $commandAliases,
             $description,
             $commandHidden,
-            function () use ($name) {
-                return $this->getCommandInstance($name);
-            }
+            fn () => $this->getCommandInstance($name),
         );
     }
 
@@ -91,6 +92,7 @@ final class CommandLoader implements CommandLoaderInterface
         if ($command->getName() !== $commandName) {
             $command->setName($commandName);
         }
+
         if ($command->getAliases() !== $commandAliases) {
             $command->setAliases($commandAliases);
         }
@@ -128,6 +130,7 @@ final class CommandLoader implements CommandLoaderInterface
 
             $this->commandMap[$primaryName] = $item;
             $this->commandNames[] = $primaryName;
+
             foreach ($aliases as $alias) {
                 $this->commandMap[$alias] = $item;
             }

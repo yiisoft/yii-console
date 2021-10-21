@@ -12,16 +12,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\ExitCode;
 
-class StubCommand extends Command
+final class StubCommand extends Command
 {
     private Application $application;
+
     protected static $defaultName = 'stub';
+    protected static $defaultDescription = 'Stub command tests';
 
     public function configure(): void
     {
-        $this
-            ->setDescription('Stub command tests')
-            ->addOption('styled', 's', InputOption::VALUE_OPTIONAL);
+        $this->addOption('styled', 's', InputOption::VALUE_OPTIONAL);
     }
 
     public function __construct(Application $application)

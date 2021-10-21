@@ -15,7 +15,7 @@ final class ApplicationTest extends TestCase
     {
         $event = new ApplicationStartup();
 
-        $dispatcher = $this->application->getDispatcher();
+        $dispatcher = $this->getInaccessibleProperty($this->application(), 'dispatcher');
         $result = $dispatcher->dispatch($event);
 
         $this->assertSame($event, $result);
@@ -25,7 +25,7 @@ final class ApplicationTest extends TestCase
     {
         $event = new ApplicationShutdown(ExitCode::OK);
 
-        $dispatcher = $this->application->getDispatcher();
+        $dispatcher = $this->getInaccessibleProperty($this->application(), 'dispatcher');
         $result = $dispatcher->dispatch($event);
 
         $this->assertSame($event, $result);
@@ -34,7 +34,7 @@ final class ApplicationTest extends TestCase
 
     public function testDoRenderThrowable(): void
     {
-        $command = $this->application->find('stub');
+        $command = $this->application()->find('stub');
 
         $commandCreate = new CommandTester($command);
 
@@ -65,7 +65,7 @@ final class ApplicationTest extends TestCase
 
     public function testDoRenderThrowableWithStyledOutput(): void
     {
-        $command = $this->application->find('stub');
+        $command = $this->application()->find('stub');
 
         $commandCreate = new CommandTester($command);
 
@@ -94,7 +94,7 @@ final class ApplicationTest extends TestCase
 
     public function testRenamedCommand(): void
     {
-        $command = $this->application->find('stub/rename');
+        $command = $this->application()->find('stub/rename');
 
         $commandCreate = new CommandTester($command);
 
@@ -102,5 +102,28 @@ final class ApplicationTest extends TestCase
             ExitCode::OK,
             $commandCreate->execute(['command' => $command->getName()])
         );
+    }
+
+    public function namespaceProvider(): array
+    {
+        return [
+            ['first/second/third', null, 'first/second'],
+            ['first/second/third', 1, 'first'],
+            ['first/second/third', 2, 'first/second'],
+            ['first/second/third', 3, 'first/second'],
+            ['first/second/third', 4, 'first/second'],
+        ];
+    }
+
+    /**
+     * @dataProvider namespaceProvider
+     *
+     * @param string $name
+     * @param int|null $limit
+     * @param string $expected
+     */
+    public function testExtractNamespace(string $name, ?int $limit, string $expected): void
+    {
+        $this->assertSame($expected, $this->application()->extractNamespace($name, $limit));
     }
 }

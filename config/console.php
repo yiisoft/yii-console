@@ -20,8 +20,12 @@ return [
     ],
 
     Application::class => [
-        'class' => Application::class,
-        'setDispatcher()' => [Reference::to(SymfonyEventDispatcher::class)],
+        '__construct()' => [
+            Reference::to(SymfonyEventDispatcher::class),
+            $params['yiisoft/yii-console']['name'],
+            $params['yiisoft/yii-console']['version'],
+        ],
+        'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']],
         'setCommandLoader()' => [Reference::to(CommandLoaderInterface::class)],
         'addOptions()' => [
             new InputOption(
@@ -31,8 +35,5 @@ return [
                 'Set alternative configuration name'
             ),
         ],
-        'setName()' => [$params['yiisoft/yii-console']['name']],
-        'setVersion()' => [$params['yiisoft/yii-console']['version']],
-        'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']],
     ],
 ];
