@@ -21,12 +21,12 @@ return [
 
     Application::class => [
         '__construct()' => [
-            Reference::to(SymfonyEventDispatcher::class),
             $params['yiisoft/yii-console']['name'],
             $params['yiisoft/yii-console']['version'],
         ],
-        'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']],
         'setCommandLoader()' => [Reference::to(CommandLoaderInterface::class)],
+        'setDispatcher()' => [Reference::to(SymfonyEventDispatcher::class)],
+        'setAutoExit()' => [$params['yiisoft/yii-console']['autoExit']],
         'addOptions()' => [
             new InputOption(
                 'config',

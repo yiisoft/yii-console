@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Console\Tests;
 
 use Psr\Container\ContainerInterface;
-use Psr\EventDispatcher\EventDispatcherInterface;
 use ReflectionObject;
 use ReflectionException;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Yiisoft\Test\Support\Container\SimpleContainer;
 use Yiisoft\Test\Support\EventDispatcher\SimpleEventDispatcher;
 use Yiisoft\Yii\Console\Application;
@@ -100,10 +100,11 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     private function createContainer(): ContainerInterface
     {
-        $dispatcher = new SimpleEventDispatcher();
+        $dispatcher = new SymfonyEventDispatcher(new SimpleEventDispatcher());
 
-        $application = new Application(new SymfonyEventDispatcher($dispatcher));
+        $application = new Application();
         $application->setAutoExit(false);
+        $application->setDispatcher($dispatcher);
         $application->addOptions(new InputOption(
             'config',
             'c',

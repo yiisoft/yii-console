@@ -22,25 +22,31 @@ class Application extends \Symfony\Component\Console\Application
     public const NAME = 'Yii Console';
     public const VERSION = '1.0.0-dev';
 
-    private EventDispatcherInterface $dispatcher;
+    private ?EventDispatcherInterface $dispatcher = null;
 
-    public function __construct(
-        EventDispatcherInterface $dispatcher,
-        string $name = self::NAME,
-        string $version = self::VERSION
-    ) {
-        $this->dispatcher = $dispatcher;
+    public function __construct(string $name = self::NAME, string $version = self::VERSION)
+    {
         parent::__construct($name, $version);
+    }
+
+    public function setDispatcher(EventDispatcherInterface $dispatcher): void
+    {
+        $this->dispatcher = $dispatcher;
+        parent::setDispatcher($dispatcher);
     }
 
     public function start(): void
     {
-        $this->dispatcher->dispatch(new ApplicationStartup());
+        if ($this->dispatcher !== null) {
+            $this->dispatcher->dispatch(new ApplicationStartup());
+        }
     }
 
     public function shutdown(int $exitCode): void
     {
-        $this->dispatcher->dispatch(new ApplicationShutdown($exitCode));
+        if ($this->dispatcher !== null) {
+            $this->dispatcher->dispatch(new ApplicationShutdown($exitCode));
+        }
     }
 
     public function renderThrowable(Throwable $e, OutputInterface $output): void
