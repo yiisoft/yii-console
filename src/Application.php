@@ -84,7 +84,7 @@ class Application extends \Symfony\Component\Console\Application
         $this->getDefinition()->addOption($options);
     }
 
-    public function extractNamespace(string $name, int $limit = null)
+    public function extractNamespace(string $name, int $limit = null): string
     {
         $parts = explode('/', $name, -1);
 
