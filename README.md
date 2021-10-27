@@ -6,8 +6,6 @@
     <br>
 </p>
 
-This Yii Framework package adds console into the application.
-
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii-console/v/stable.png)](https://packagist.org/packages/yiisoft/yii-console)
 [![Total Downloads](https://poser.pugx.org/yiisoft/yii-console/downloads.png)](https://packagist.org/packages/yiisoft/yii-console)
 [![Build status](https://github.com/yiisoft/yii-console/workflows/build/badge.svg)](https://github.com/yiisoft/yii-console/actions)
@@ -16,6 +14,8 @@ This Yii Framework package adds console into the application.
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fyiisoft%2Fyii-console%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/yiisoft/yii-console/master)
 [![static analysis](https://github.com/yiisoft/yii-console/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/yii-console/actions?query=workflow%3A%22static+analysis%22)
 [![type-coverage](https://shepherd.dev/github/yiisoft/yii-console/coverage.svg)](https://shepherd.dev/github/yiisoft/yii-console)
+
+This Yii Framework package adds console into the application.
 
 ## Requirements
 
@@ -43,6 +43,7 @@ declare(strict_types=1);
 
 use Psr\Container\ContainerInterface;
 use Yiisoft\Config\Config;
+use Yiisoft\Config\ConfigPaths;
 use Yiisoft\Di\Container;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
@@ -51,10 +52,7 @@ define('YII_ENV', getenv('env') ?: 'production');
 
 require_once 'vendor/autoload.php';
 
-$config = new Config(
-    __DIR__,
-    '/config/packages',
-);
+$config = new Config(new ConfigPaths(__DIR__, 'config'));
 
 $container = new Container(
     $config->get('console'),
@@ -78,25 +76,66 @@ try {
 }
 ```
 
-To start Console Application `composer.json` should contain minimal configuration for [Yiisoft\Config\Config](https://github.com/yiisoft/config) 
+To start Console Application `composer.json` should contain minimal configuration
+for [Yiisoft\Config\Config](https://github.com/yiisoft/config):
 
 ```json    
-    "extra": {
-        "config-plugin-options": {
-            "source-directory": "config",
-            "output-directory": "config/packages"
-        },
-        "config-plugin": {
-            "console": [
-                "$common",
-                "console.php"
-            ]
-        }
+"extra": {
+    "config-plugin-options": {
+        "source-directory": "config",
+    },
+    "config-plugin": {
+        "console": [
+            "$common",
+            "console.php"
+        ]
     }
+}
+```
+
+Since `\Yiisoft\Yii\Console\CommandLoader` uses lazy loading of commands, it is necessary
+to specify the name and description in static properties when creating a command:
+
+```php
+use Symfony\Component\Console\Command\Command;
+
+final class MyCustomCommand implements Command
+{
+    protected static $defaultName = 'my/custom';
+    protected static $defaultDescription = 'Description of my custom command.';
+    
+    protected function configure(): void
+    {
+        // ...
+    }
+    
+    protected function execute(InputInterface $input, OutputInterface $output): in
+    {
+        // ...
+    }
+}
 ```
 
 Since the package is based on [Symfony Console component](https://symfony.com/doc/current/components/console.html),
 refer to its documentation for details on how to use the binary and create your own commands.
+
+### Aliases and hidden commands
+
+For commands always use the names and aliases from configuration of `\Yiisoft\Yii\Console\CommandLoader`.
+Names and aliases from the command class always ignored. The command can be marked as hidden,
+for this you need to specify `|` at the beginning of its name.
+
+Example of parameter configuration:
+
+```php
+'yiisoft/yii-console' => [
+	'commands' => [
+		'hello' => Hello::class, // name: 'hello', aliases: [], hidden: false
+		'start|run|s|r' => Run::class, // name: 'start', aliases: ['run', 's', 'r'], hidden: false
+		'|hack|h' => Hack::class, // name: 'hack', aliases: ['h'], hidden: true
+	],
+],
+```
 
 ## Testing
 
