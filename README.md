@@ -116,6 +116,9 @@ final class MyCustomCommand implements Command
 }
 ```
 
+> When naming commands, a slash `/` should be used as a separator. For example: `user/create`, `user/delete`, etc.
+
+
 Since the package is based on [Symfony Console component](https://symfony.com/doc/current/components/console.html),
 refer to its documentation for details on how to use the binary and create your own commands.
 
