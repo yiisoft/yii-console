@@ -132,11 +132,11 @@ The command can be marked as hidden by prefixing its name with `|`.
 
 ```php
 'yiisoft/yii-console' => [
-	'commands' => [
-		'hello' => Hello::class, // name: 'hello', aliases: [], hidden: false
-		'start|run|s|r' => Run::class, // name: 'start', aliases: ['run', 's', 'r'], hidden: false
-		'|hack|h' => Hack::class, // name: 'hack', aliases: ['h'], hidden: true
-	],
+    'commands' => [
+        'hello' => Hello::class, // name: 'hello', aliases: [], hidden: false
+        'start|run|s|r' => Run::class, // name: 'start', aliases: ['run', 's', 'r'], hidden: false
+        '|hack|h' => Hack::class, // name: 'hack', aliases: ['h'], hidden: true
+    ],
 ],
 ```
 
