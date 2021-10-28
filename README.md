@@ -124,11 +124,11 @@ refer to its documentation for details on how to use the binary and create your 
 
 ### Aliases and hidden commands
 
-For commands always use the names and aliases from configuration of `\Yiisoft\Yii\Console\CommandLoader`.
-Names and aliases from the command class always ignored. The command can be marked as hidden,
-for this you need to specify `|` at the beginning of its name.
+To configure commands, set the names and aliases in `\Yiisoft\Yii\Console\CommandLoader` configuration.
+Names and aliases from the command class itself are always ignored.
 
-Example of parameter configuration:
+The command can be marked as hidden by prefixing its name with `|`.
+
 
 ```php
 'yiisoft/yii-console' => [
