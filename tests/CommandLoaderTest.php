@@ -74,7 +74,7 @@ final class CommandLoaderTest extends TestCase
                 $definition = $reflection->getConstructor()->getParameters()[0]->getType()->getName();
 
                 if (class_exists($definition)) {
-                    return $reflection->newInstanceArgs(new $definition);
+                    return $reflection->newInstanceArgs(new $definition());
                 }
 
                 throw new RuntimeException("Definition class \"$definition\" does not exist.");
