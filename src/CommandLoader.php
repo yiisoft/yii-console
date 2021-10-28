@@ -72,7 +72,7 @@ final class CommandLoader implements CommandLoaderInterface
 
     public function has(string $name): bool
     {
-        return isset($this->commandMap[$name]) && $this->container->has($this->commandMap[$name]['class']);
+        return isset($this->commandMap[$name]);
     }
 
     public function getNames(): array
