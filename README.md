@@ -15,7 +15,7 @@
 [![static analysis](https://github.com/yiisoft/yii-console/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/yii-console/actions?query=workflow%3A%22static+analysis%22)
 [![type-coverage](https://shepherd.dev/github/yiisoft/yii-console/coverage.svg)](https://shepherd.dev/github/yiisoft/yii-console)
 
-This Yii Framework package adds console into the application.
+This Yii Framework package provides a console that could be added to an application.
 
 ## Requirements
 
@@ -33,48 +33,8 @@ composer require yiisoft/yii-console --prefer-dist
 
 In case you use one of Yii 3 standard application templates, console could be accessed as `./yii <command>`.
 
-If not create an entry script yourself:
-
-```php
-#!/usr/bin/env php
-<?php
-
-declare(strict_types=1);
-
-use Psr\Container\ContainerInterface;
-use Yiisoft\Config\Config;
-use Yiisoft\Config\ConfigPaths;
-use Yiisoft\Di\Container;
-use Yiisoft\Yii\Console\Application;
-use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
-
-define('YII_ENV', getenv('env') ?: 'production');
-
-require_once 'vendor/autoload.php';
-
-$config = new Config(new ConfigPaths(__DIR__, 'config'));
-
-$container = new Container(
-    $config->get('console'),
-    $config->get('providers-console')
-);
-
-/** @var ContainerInterface $container */
-$container = $container->get(ContainerInterface::class);
-
-$application = $container->get(Application::class);
-$exitCode = 1;
-
-try {
-    $application->start();
-    $exitCode = $application->run(null, new ConsoleBufferedOutput());
-} catch (\Error $error) {
-    $application->renderThrowable($error, new ConsoleBufferedOutput());
-} finally {
-    $application->shutdown($exitCode);
-    exit($exitCode);
-}
-```
+If not, require [yiisoft/yii-runner-console](https://github.com/yiisoft/yii-runner-console) and create an entry script
+as described in that package readme.
 
 To start Console Application `composer.json` should contain minimal configuration
 for [Yiisoft\Config\Config](https://github.com/yiisoft/config):
