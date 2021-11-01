@@ -15,8 +15,7 @@ final class ApplicationTest extends TestCase
     {
         $event = new ApplicationStartup();
 
-        $dispatcher = $this->getInaccessibleProperty($this->application(), 'dispatcher');
-        $result = $dispatcher->dispatch($event);
+        $result = $this->getInaccessibleProperty($this->application(), 'dispatcher')->dispatch($event);
 
         $this->assertSame($event, $result);
     }
@@ -25,8 +24,7 @@ final class ApplicationTest extends TestCase
     {
         $event = new ApplicationShutdown(ExitCode::OK);
 
-        $dispatcher = $this->getInaccessibleProperty($this->application(), 'dispatcher');
-        $result = $dispatcher->dispatch($event);
+        $result = $this->getInaccessibleProperty($this->application(), 'dispatcher')->dispatch($event);
 
         $this->assertSame($event, $result);
         $this->assertEquals(ExitCode::OK, $event->getExitCode());

@@ -7,7 +7,7 @@ namespace Yiisoft\Yii\Console;
 use Psr\EventDispatcher\EventDispatcherInterface as PsrEventDispatcherInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-class SymfonyEventDispatcher implements EventDispatcherInterface
+final class SymfonyEventDispatcher implements EventDispatcherInterface
 {
     private PsrEventDispatcherInterface $dispatcher;
 
