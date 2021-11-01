@@ -6,9 +6,6 @@ namespace Yiisoft\Yii\Console\Output;
 
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-/**
- * @author Jean-François Simon <contact@jfsimon.fr>
- */
 final class ConsoleBufferedOutput extends ConsoleOutput
 {
     private string $buffer = '';

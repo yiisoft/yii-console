@@ -17,10 +17,10 @@ use function array_slice;
 use function explode;
 use function implode;
 
-class Application extends \Symfony\Component\Console\Application
+final class Application extends \Symfony\Component\Console\Application
 {
     public const NAME = 'Yii Console';
-    public const VERSION = '1.0.0-dev';
+    public const VERSION = '1.0';
 
     private ?EventDispatcherInterface $dispatcher = null;
 
@@ -59,6 +59,7 @@ class Application extends \Symfony\Component\Console\Application
     protected function doRenderThrowable(Throwable $e, OutputInterface $output): void
     {
         parent::doRenderThrowable($e, $output);
+
         // Friendly Exception support
         if ($e instanceof FriendlyExceptionInterface) {
             if ($output instanceof StyleInterface) {
