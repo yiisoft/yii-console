@@ -129,9 +129,10 @@ final class Serve extends Command
         return true;
     }
 
-    private function findFreeAddress(&$address): void
+    private function findFreeAddress(string &$address): void
     {
         [$hostname, $port] = explode(':', $address);
+        $port = (int)$port;
         while ($this->isAddressTaken($address)) {
             $port++;
             $address = $hostname . ':' . $port;
