@@ -80,6 +80,9 @@ final class Serve extends Command
             return self::EXIT_CODE_NO_DOCUMENT_ROOT;
         }
 
+        if ($this->isAddressTaken($address) && $this->isDefaultPort($address)) {
+            $this->findFreeAddress($address);
+        }
         if ($this->isAddressTaken($address)) {
             $io->error("http://$address is taken by another process.");
             return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
@@ -124,5 +127,20 @@ final class Serve extends Command
 
         fclose($fp);
         return true;
+    }
+
+    private function findFreeAddress(&$address)
+    {
+        [$hostname, $port] = explode(':', $address);
+        while ($this->isAddressTaken($address)) {
+            $port++;
+            $address = $hostname . ':' . $port;
+        }
+    }
+
+    private function isDefaultPort(string $address): bool
+    {
+        [, $port] = explode(':', $address);
+        return $port === self::DEFAULT_PORT;
     }
 }
