@@ -88,6 +88,40 @@ final class ServeCommandTest extends TestCase
                 $output
             );
         } else {
+            $socket = socket_create_listen(8000);
+
+            $commandCreate->execute([
+                'address' => '127.0.0.1:8000',
+                '--docroot' => 'tests',
+                '--env' => 'test',
+            ]);
+
+            $output = $commandCreate->getDisplay(true);
+
+            $this->assertSame(Serve::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS, $commandCreate->getStatusCode());
+
+            $this->assertStringContainsString(
+                '[ERROR] http://127.0.0.1:8000 is taken by another process.',
+                $output
+            );
+
+            socket_close($socket);
+        }
+    }
+
+    public function testAutoAddressWhenAddressIsTaken(): void
+    {
+        $command = $this->application()->find('serve');
+
+        $commandCreate = new CommandTester($command);
+
+        $commandCreate->setInputs(['yes']);
+
+        if (PHP_OS_FAMILY === 'Windows') {
+            $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+            socket_bind($socket, "127.0.0.1", 8080);
+            socket_listen($socket);
+        } else {
             $socket = socket_create_listen(8080);
 
             $commandCreate->execute([
@@ -98,15 +132,15 @@ final class ServeCommandTest extends TestCase
 
             $output = $commandCreate->getDisplay(true);
 
-            $this->assertSame(Serve::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS, $commandCreate->getStatusCode());
+            $this->assertSame(Serve::SUCCESS, $commandCreate->getStatusCode());
 
             $this->assertStringContainsString(
-                '[ERROR] http://127.0.0.1:8080 is taken by another process.',
+                'Server started on http://127.0.0.1:8081/',
                 $output
             );
 
-            socket_close($socket);
         }
+        socket_close($socket);
     }
 
     public function testErrorWhenRouterDoesNotExist(): void

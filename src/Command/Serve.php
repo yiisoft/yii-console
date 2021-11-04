@@ -129,7 +129,7 @@ final class Serve extends Command
         return true;
     }
 
-    private function findFreeAddress(&$address)
+    private function findFreeAddress(&$address): void
     {
         [$hostname, $port] = explode(':', $address);
         while ($this->isAddressTaken($address)) {
