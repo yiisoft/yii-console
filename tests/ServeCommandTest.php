@@ -119,7 +119,7 @@ final class ServeCommandTest extends TestCase
 
         if (PHP_OS_FAMILY === 'Windows') {
             $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-            socket_bind($socket, "127.0.0.1", 8080);
+            socket_bind($socket, '127.0.0.1', 8080);
             socket_listen($socket);
         } else {
             $socket = socket_create_listen(8080);
@@ -138,7 +138,6 @@ final class ServeCommandTest extends TestCase
                 'Server started on http://127.0.0.1:8081/',
                 $output
             );
-
         }
         socket_close($socket);
     }
