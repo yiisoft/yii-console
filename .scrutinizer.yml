@@ -6,6 +6,8 @@ filter:
     - "src/*"
 
 build:
+  image: default-bionic
+
   environment:
     php:
       version: 8.0.11
