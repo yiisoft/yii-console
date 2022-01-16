@@ -33,24 +33,29 @@ composer require yiisoft/yii-console --prefer-dist
 
 In case you use one of Yii 3 standard application templates, console could be accessed as `./yii <command>`.
 
-If not, require [yiisoft/yii-runner-console](https://github.com/yiisoft/yii-runner-console) and create an entry script
-as described in that package readme.
+If not, then in the simplest use case in your console entry script do the following:
 
-To start Console Application `composer.json` should contain minimal configuration
-for [Yiisoft\Config\Config](https://github.com/yiisoft/config):
+```php
+#!/usr/bin/env php
+<?php
 
-```json    
-"extra": {
-    "config-plugin-options": {
-        "source-directory": "config",
-    },
-    "config-plugin": {
-        "console": [
-            "$common",
-            "console.php"
-        ]
-    }
-}
+declare(strict_types=1);
+
+use Yiisoft\Yii\Console\Application;
+use Yiisoft\Yii\Console\CommandLoader;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$app = new Yiisoft\Yii\Console\Application();
+
+$app->setCommandLoader(new CommandLoader(
+    // Any container implementing `Psr\Container\ContainerInterface`.
+    new PsrContainer([MyCustomCommand::class => new MyCustomCommand()]),
+    // An array with command names as keys and service ids as values.
+    ['my/custom' => MyCustomCommand::class],
+));
+
+$app->run();
 ```
 
 Since `\Yiisoft\Yii\Console\CommandLoader` uses lazy loading of commands, it is necessary
@@ -59,7 +64,7 @@ to specify the name and description in static properties when creating a command
 ```php
 use Symfony\Component\Console\Command\Command;
 
-final class MyCustomCommand implements Command
+final class MyCustomCommand extends Command
 {
     protected static $defaultName = 'my/custom';
     protected static $defaultDescription = 'Description of my custom command.';
@@ -74,6 +79,12 @@ final class MyCustomCommand implements Command
         // ...
     }
 }
+```
+
+Run the console entry script with your command:
+
+```shell
+your-console-entry-script my/custom
 ```
 
 > When naming commands, a slash `/` should be used as a separator. For example: `user/create`, `user/delete`, etc.
