@@ -52,9 +52,7 @@ $app = new Application();
 
 $app->setCommandLoader(new CommandLoader(
     // Any container implementing `Psr\Container\ContainerInterface` in example:
-    new Container(
-        ContainerConfig::create()->withDefinitions([MyCustomCommand::class => new MyCustomCommand()])
-    ),
+    new Container(ContainerConfig::create()),
     // An array with command names as keys and service ids as values.
     ['my/custom' => MyCustomCommand::class],
 ));
