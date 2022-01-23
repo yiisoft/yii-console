@@ -41,17 +41,19 @@ If not, then in the simplest use case in your console entry script do the follow
 
 declare(strict_types=1);
 
+use Yiisoft\Di\Container;
+use Yiisoft\Di\ContainerConfig;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\CommandLoader;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$app = new Yiisoft\Yii\Console\Application();
+$app = new Application();
 
 $app->setCommandLoader(new CommandLoader(
-    // Any container implementing `Psr\Container\ContainerInterface`.
-    new PsrContainer([MyCustomCommand::class => new MyCustomCommand()]),
-    // An array with command names as keys and service ids as values.
+    // Any container implementing `Psr\Container\ContainerInterface` for example:
+    new Container(ContainerConfig::create()),
+    // An array with command names as keys and service IDs as values:
     ['my/custom' => MyCustomCommand::class],
 ));
 
@@ -63,6 +65,7 @@ to specify the name and description in static properties when creating a command
 
 ```php
 use Symfony\Component\Console\Command\Command;
+use Yiisoft\Yii\Console\ExitCode;
 
 final class MyCustomCommand extends Command
 {
@@ -74,9 +77,10 @@ final class MyCustomCommand extends Command
         // ...
     }
     
-    protected function execute(InputInterface $input, OutputInterface $output): in
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         // ...
+        return ExitCode::OK;
     }
 }
 ```
