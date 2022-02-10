@@ -44,7 +44,7 @@ final class CommandLoader implements CommandLoaderInterface
         $this->setCommandMap($commandMap);
     }
 
-    public function get(string $name)
+    public function get(string $name): Command
     {
         if (!$this->has($name)) {
             throw new CommandNotFoundException(sprintf('Command "%s" does not exist.', $name));
