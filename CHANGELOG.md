@@ -1,5 +1,9 @@
 # Yii Console Change Log
 
+## 1.0.2 under development
+
+- no changes in this release.
+
 ## 1.0.1 February 11, 2022
 
 - Enh #141: Add support for version `^6.0` for `symfony/console` package (devanych)
