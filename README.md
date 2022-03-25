@@ -19,7 +19,7 @@ This Yii Framework package provides a console that could be added to an applicat
 
 ## Requirements
 
-- PHP 7.4 or higher.
+- PHP 8.0 or higher.
 
 ## Installation
 
