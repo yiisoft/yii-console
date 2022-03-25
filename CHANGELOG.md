@@ -1,6 +1,6 @@
 # Yii Console Change Log
 
-## 2.0.0 under development
+## 1.1.0 under development
 
 - Chg #148: Raise the minimum PHP version to 8.0 (rustamwin)
 
