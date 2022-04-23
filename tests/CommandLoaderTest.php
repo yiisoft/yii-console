@@ -10,6 +10,7 @@ use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
 use Symfony\Component\Console\Input\ArgvInput;
+use Yiisoft\Aliases\Aliases;
 use Yiisoft\Test\Support\Container\SimpleContainer;
 use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\CommandLoader;
@@ -55,7 +56,7 @@ final class CommandLoaderTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Do not allow empty command name or alias.');
 
-        new CommandLoader(new SimpleContainer([Serve::class => new Serve()]), ['|' => Serve::class]);
+        new CommandLoader(new SimpleContainer([Serve::class => new Serve(new Aliases(['@root' => getcwd()]))]), ['|' => Serve::class]);
     }
 
     public function testConstructThrowExceptionIfCommandAliasIsNotValid(): void
@@ -63,7 +64,7 @@ final class CommandLoaderTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Do not allow empty command name or alias.');
 
-        new CommandLoader(new SimpleContainer([Serve::class => new Serve()]), ['serve|' => Serve::class]);
+        new CommandLoader(new SimpleContainer([Serve::class => new Serve(new Aliases(['@root' => getcwd()]))]), ['serve|' => Serve::class]);
     }
 
     public function testConstructThrowExceptionIfItIsNotPossibleToCreateCommandObject(): void

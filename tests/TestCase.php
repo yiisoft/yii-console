@@ -115,7 +115,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
         $commandLoader = new CommandLoader(
             new SimpleContainer([
-                Serve::class => new Serve(new Aliases(['@root' => __DIR__])),
+                Serve::class => new Serve(new Aliases(['@root' => getcwd()])),
                 StubCommand::class => new StubCommand($application),
             ]),
             [
