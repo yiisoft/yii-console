@@ -51,7 +51,7 @@ final class ServeCommandTest extends TestCase
         $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
 
         $this->assertStringContainsString(
-            'Server started on http://localhost:8080/',
+            'Server started on http://127.0.0.1:8080/',
             $output
         );
 
@@ -152,7 +152,7 @@ final class ServeCommandTest extends TestCase
         $output = $commandCreate->getDisplay(true);
 
         $this->assertStringContainsString(
-            'Server started on http://localhost:8080/',
+            'Server started on http://127.0.0.1:8080/',
             $output
         );
 

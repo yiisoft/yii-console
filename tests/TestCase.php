@@ -10,6 +10,7 @@ use ReflectionException;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Yiisoft\Aliases\Aliases;
 use Yiisoft\Test\Support\Container\SimpleContainer;
 use Yiisoft\Test\Support\EventDispatcher\SimpleEventDispatcher;
 use Yiisoft\Yii\Console\Application;
@@ -114,7 +115,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
         $commandLoader = new CommandLoader(
             new SimpleContainer([
-                Serve::class => new Serve(),
+                Serve::class => new Serve(new Aliases(['@root' => __DIR__])),
                 StubCommand::class => new StubCommand($application),
             ]),
             [
