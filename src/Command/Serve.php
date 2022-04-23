@@ -58,7 +58,7 @@ final class Serve extends Command
             return;
         }
 
-        $suggestions->suggestOptions(['port', 'docroot', 'router', 'env']);
+        $suggestions->suggestOptions($this->getDefinition()->getOptions());
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
