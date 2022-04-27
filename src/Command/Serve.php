@@ -57,8 +57,6 @@ final class Serve extends Command
             $suggestions->suggestValues(['localhost', '127.0.0.1', '0.0.0.0']);
             return;
         }
-
-        $suggestions->suggestOptions($this->getDefinition()->getOptions());
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -119,7 +117,7 @@ final class Serve extends Command
             return ExitCode::OK;
         }
 
-        passthru('"' . PHP_BINARY . '"' . " -S $address -t $documentRoot $router");
+        passthru('"' . PHP_BINARY . '"' . " -S $address -t \"$documentRoot\" $router");
 
         return ExitCode::OK;
     }
