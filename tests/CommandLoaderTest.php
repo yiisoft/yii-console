@@ -56,7 +56,7 @@ final class CommandLoaderTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Do not allow empty command name or alias.');
 
-        new CommandLoader(new SimpleContainer([Serve::class => new Serve(new Aliases(['@root' => getcwd()]))]), ['|' => Serve::class]);
+        new CommandLoader(new SimpleContainer([Serve::class => new Serve()]), ['|' => Serve::class]);
     }
 
     public function testConstructThrowExceptionIfCommandAliasIsNotValid(): void
@@ -64,7 +64,7 @@ final class CommandLoaderTest extends TestCase
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Do not allow empty command name or alias.');
 
-        new CommandLoader(new SimpleContainer([Serve::class => new Serve(new Aliases(['@root' => getcwd()]))]), ['serve|' => Serve::class]);
+        new CommandLoader(new SimpleContainer([Serve::class => new Serve()]), ['serve|' => Serve::class]);
     }
 
     public function testConstructThrowExceptionIfItIsNotPossibleToCreateCommandObject(): void

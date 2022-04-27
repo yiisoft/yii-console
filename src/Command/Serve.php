@@ -35,7 +35,7 @@ final class Serve extends Command
     protected static $defaultName = 'serve';
     protected static $defaultDescription = 'Runs PHP built-in web server';
 
-    public function __construct(private Aliases $aliases)
+    public function __construct(private ?string $appRootPath = null)
     {
         parent::__construct();
     }
@@ -83,7 +83,7 @@ final class Serve extends Command
         /** @var string $env */
         $env = $input->getOption('env');
 
-        $documentRoot = $this->aliases->get('@root/' . $docroot);
+        $documentRoot = $this->getRootPath() . DIRECTORY_SEPARATOR . $docroot;
 
         if (!str_contains($address, ':')) {
             $address .= ':' . $port;
@@ -138,5 +138,14 @@ final class Serve extends Command
 
         fclose($fp);
         return true;
+    }
+
+    private function getRootPath(): string
+    {
+        if ($this->appRootPath !== null) {
+            return rtrim($this->appRootPath, DIRECTORY_SEPARATOR);
+        }
+
+        return getcwd();
     }
 }
