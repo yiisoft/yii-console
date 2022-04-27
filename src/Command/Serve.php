@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Console\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Completion\CompletionInput;
+use Symfony\Component\Console\Completion\CompletionSuggestions;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -16,10 +18,8 @@ use function explode;
 use function fclose;
 use function file_exists;
 use function fsockopen;
-use function getcwd;
 use function is_dir;
 use function passthru;
-use function strpos;
 
 final class Serve extends Command
 {
@@ -34,15 +34,28 @@ final class Serve extends Command
     protected static $defaultName = 'serve';
     protected static $defaultDescription = 'Runs PHP built-in web server';
 
+    public function __construct(private ?string $appRootPath = null)
+    {
+        parent::__construct();
+    }
+
     public function configure(): void
     {
         $this
             ->setHelp('In order to access server from remote machines use 0.0.0.0:8000. That is especially useful when running server in a virtual machine.')
-            ->addArgument('address', InputArgument::OPTIONAL, 'Host to serve at', 'localhost')
+            ->addArgument('address', InputArgument::OPTIONAL, 'Host to serve at', '127.0.0.1')
             ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', self::DEFAULT_PORT)
             ->addOption('docroot', 't', InputOption::VALUE_OPTIONAL, 'Document root to serve from', self::DEFAULT_DOCROOT)
             ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script', self::DEFAULT_ROUTER)
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.');
+    }
+
+    public function complete(CompletionInput $input, CompletionSuggestions $suggestions): void
+    {
+        if ($input->mustSuggestArgumentValuesFor('address')) {
+            $suggestions->suggestValues(['localhost', '127.0.0.1', '0.0.0.0']);
+            return;
+        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -69,9 +82,9 @@ final class Serve extends Command
         /** @var string $env */
         $env = $input->getOption('env');
 
-        $documentRoot = getcwd() . '/' . $docroot; // TODO: can we do it better?
+        $documentRoot = $this->getRootPath() . DIRECTORY_SEPARATOR . $docroot;
 
-        if (strpos($address, ':') === false) {
+        if (!str_contains($address, ':')) {
             $address .= ':' . $port;
         }
 
@@ -124,5 +137,14 @@ final class Serve extends Command
 
         fclose($fp);
         return true;
+    }
+
+    private function getRootPath(): string
+    {
+        if ($this->appRootPath !== null) {
+            return rtrim($this->appRootPath, DIRECTORY_SEPARATOR);
+        }
+
+        return getcwd();
     }
 }

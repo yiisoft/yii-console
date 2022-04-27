@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console\Tests;
 
+use Symfony\Component\Console\Tester\CommandCompletionTester;
 use Symfony\Component\Console\Tester\CommandTester;
 use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\ExitCode;
@@ -51,7 +52,7 @@ final class ServeCommandTest extends TestCase
         $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
 
         $this->assertStringContainsString(
-            'Server started on http://localhost:8080/',
+            'Server started on http://127.0.0.1:8080/',
             $output
         );
 
@@ -152,7 +153,7 @@ final class ServeCommandTest extends TestCase
         $output = $commandCreate->getDisplay(true);
 
         $this->assertStringContainsString(
-            'Server started on http://localhost:8080/',
+            'Server started on http://127.0.0.1:8080/',
             $output
         );
 
@@ -160,5 +161,27 @@ final class ServeCommandTest extends TestCase
             'Routing file is "tests/public/index.php"',
             $output
         );
+    }
+
+    /**
+     * @dataProvider completionSuggestionsProvider
+     */
+    public function testAutocompletion(array $input, array $suggestions): void
+    {
+        $command = $this->application()->find('serve');
+
+        $commandTester = new CommandCompletionTester($command);
+
+        $this->assertSame($suggestions, $commandTester->complete($input));
+    }
+
+    public function completionSuggestionsProvider(): array
+    {
+        return [
+            'address' => [
+                [''],
+                ['localhost', '127.0.0.1', '0.0.0.0'],
+            ],
+        ];
     }
 }
