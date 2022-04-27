@@ -182,10 +182,6 @@ final class ServeCommandTest extends TestCase
                 [''],
                 ['localhost', '127.0.0.1', '0.0.0.0'],
             ],
-            'address --' => [
-                ['localhost', ''],
-                ['--port', '--docroot', '--router', '--env'],
-            ],
         ];
     }
 }
