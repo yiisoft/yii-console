@@ -3,7 +3,7 @@
 ## 1.1.0 under development
 
 - Chg #148: Raise the minimum PHP version to 8.0 (rustamwin)
-- Enh #149: Add bash completion for `serve` command (rustamwin)
+- Enh #149: Add bash completion for `serve` command, serve at 127.0.0.1 by default (rustamwin)
 
 ## 1.0.1 February 11, 2022
 
