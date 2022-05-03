@@ -1,5 +1,9 @@
 # Yii Console Change Log
 
+## 1.1.1 under development
+
+- no changes in this release.
+
 ## 1.1.0 May 03, 2022
 
 - Chg #148: Raise the minimum PHP version to 8.0 (rustamwin)
