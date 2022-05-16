@@ -3,7 +3,7 @@ checks:
 
 filter:
   paths:
-    - "src/*"
+    - src/*
 
 build:
   image: default-bionic
