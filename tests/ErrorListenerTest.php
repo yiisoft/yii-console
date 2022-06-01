@@ -18,7 +18,9 @@ final class ErrorListenerTest extends TestCase
         $logger = new SimpleLogger();
         $errorListener = new ErrorListener($logger);
 
-        $command = $this->application()->find('serve');
+        $command = $this
+            ->application()
+            ->find('serve');
 
         $consoleErrorEvent = new ConsoleErrorEvent(
             new ArrayInput([]),

@@ -15,7 +15,9 @@ final class ApplicationTest extends TestCase
     {
         $event = new ApplicationStartup();
 
-        $result = $this->getInaccessibleProperty($this->application(), 'dispatcher')->dispatch($event);
+        $result = $this
+            ->getInaccessibleProperty($this->application(), 'dispatcher')
+            ->dispatch($event);
 
         $this->assertSame($event, $result);
     }
@@ -24,7 +26,9 @@ final class ApplicationTest extends TestCase
     {
         $event = new ApplicationShutdown(ExitCode::OK);
 
-        $result = $this->getInaccessibleProperty($this->application(), 'dispatcher')->dispatch($event);
+        $result = $this
+            ->getInaccessibleProperty($this->application(), 'dispatcher')
+            ->dispatch($event);
 
         $this->assertSame($event, $result);
         $this->assertEquals(ExitCode::OK, $event->getExitCode());
@@ -32,7 +36,9 @@ final class ApplicationTest extends TestCase
 
     public function testDoRenderThrowable(): void
     {
-        $command = $this->application()->find('stub');
+        $command = $this
+            ->application()
+            ->find('stub');
 
         $commandCreate = new CommandTester($command);
 
@@ -63,7 +69,9 @@ final class ApplicationTest extends TestCase
 
     public function testDoRenderThrowableWithStyledOutput(): void
     {
-        $command = $this->application()->find('stub');
+        $command = $this
+            ->application()
+            ->find('stub');
 
         $commandCreate = new CommandTester($command);
 
@@ -92,7 +100,9 @@ final class ApplicationTest extends TestCase
 
     public function testRenamedCommand(): void
     {
-        $command = $this->application()->find('stub/rename');
+        $command = $this
+            ->application()
+            ->find('stub/rename');
 
         $commandCreate = new CommandTester($command);
 
@@ -122,6 +132,8 @@ final class ApplicationTest extends TestCase
      */
     public function testExtractNamespace(string $name, ?int $limit, string $expected): void
     {
-        $this->assertSame($expected, $this->application()->extractNamespace($name, $limit));
+        $this->assertSame($expected, $this
+            ->application()
+            ->extractNamespace($name, $limit));
     }
 }
