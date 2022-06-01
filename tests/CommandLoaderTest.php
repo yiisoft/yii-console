@@ -26,7 +26,9 @@ final class CommandLoaderTest extends TestCase
     {
         parent::setUp();
 
-        $this->loader = $this->container()->get(CommandLoaderInterface::class);
+        $this->loader = $this
+            ->container()
+            ->get(CommandLoaderInterface::class);
     }
 
     public function testGetNames(): void
@@ -36,10 +38,18 @@ final class CommandLoaderTest extends TestCase
 
     public function testGetAlias(): void
     {
-        $this->assertSame([], $this->loader->get('serve')->getAliases());
-        $this->assertSame(['st'], $this->loader->get('st')->getAliases());
-        $this->assertSame(['st'], $this->loader->get('stub')->getAliases());
-        $this->assertSame([], $this->loader->get('stub/rename')->getAliases());
+        $this->assertSame([], $this->loader
+            ->get('serve')
+            ->getAliases());
+        $this->assertSame(['st'], $this->loader
+            ->get('st')
+            ->getAliases());
+        $this->assertSame(['st'], $this->loader
+            ->get('stub')
+            ->getAliases());
+        $this->assertSame([], $this->loader
+            ->get('stub/rename')
+            ->getAliases());
     }
 
     public function testGetThrowExceptionIfCommandDoesNotExist(): void
@@ -71,7 +81,11 @@ final class CommandLoaderTest extends TestCase
         $loader = new CommandLoader(
             new SimpleContainer([], static function () {
                 $reflection = new ReflectionClass(ErrorCommand::class);
-                $definition = $reflection->getConstructor()->getParameters()[0]->getType()->getName();
+                $definition = $reflection
+                    ->getConstructor()
+                    ->getParameters()[0]
+                    ->getType()
+                    ->getName();
 
                 if (class_exists($definition)) {
                     return $reflection->newInstanceArgs(new $definition());

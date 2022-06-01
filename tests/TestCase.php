@@ -48,7 +48,9 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     protected function application(): Application
     {
-        return $this->container()->get(Application::class);
+        return $this
+            ->container()
+            ->get(Application::class);
     }
 
     /**

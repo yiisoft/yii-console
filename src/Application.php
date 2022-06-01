@@ -82,7 +82,9 @@ final class Application extends \Symfony\Component\Console\Application
 
     public function addOptions(InputOption $options): void
     {
-        $this->getDefinition()->addOption($options);
+        $this
+            ->getDefinition()
+            ->addOption($options);
     }
 
     public function extractNamespace(string $name, int $limit = null): string

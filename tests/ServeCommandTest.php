@@ -13,7 +13,9 @@ final class ServeCommandTest extends TestCase
 {
     public function testServeCommandExecuteWithoutArguments(): void
     {
-        $command = $this->application()->find('serve');
+        $command = $this
+            ->application()
+            ->find('serve');
 
         $commandCreate = new CommandTester($command);
 
@@ -36,7 +38,9 @@ final class ServeCommandTest extends TestCase
 
     public function testServeCommandExecuteWithDocRoot(): void
     {
-        $command = $this->application()->find('serve');
+        $command = $this
+            ->application()
+            ->find('serve');
 
         $commandCreate = new CommandTester($command);
 
@@ -69,7 +73,9 @@ final class ServeCommandTest extends TestCase
 
     public function testErrorWhenAddressIsTaken(): void
     {
-        $command = $this->application()->find('serve');
+        $command = $this
+            ->application()
+            ->find('serve');
 
         $commandCreate = new CommandTester($command);
 
@@ -112,7 +118,9 @@ final class ServeCommandTest extends TestCase
 
     public function testErrorWhenRouterDoesNotExist(): void
     {
-        $command = $this->application()->find('serve');
+        $command = $this
+            ->application()
+            ->find('serve');
 
         $commandCreate = new CommandTester($command);
 
@@ -136,7 +144,9 @@ final class ServeCommandTest extends TestCase
 
     public function testSuccess(): void
     {
-        $command = $this->application()->find('serve');
+        $command = $this
+            ->application()
+            ->find('serve');
 
         $commandCreate = new CommandTester($command);
 
@@ -168,7 +178,9 @@ final class ServeCommandTest extends TestCase
      */
     public function testAutocompletion(array $input, array $suggestions): void
     {
-        $command = $this->application()->find('serve');
+        $command = $this
+            ->application()
+            ->find('serve');
 
         $commandTester = new CommandCompletionTester($command);
 
