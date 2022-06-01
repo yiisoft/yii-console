@@ -83,7 +83,9 @@ final class CommandLoaderTest extends TestCase
                 $reflection = new ReflectionClass(ErrorCommand::class);
                 $definition = $reflection
                     ->getConstructor()
-                    ->getParameters()[0]->getType()->getName();
+                    ->getParameters()[0]
+                    ->getType()
+                    ->getName();
 
                 if (class_exists($definition)) {
                     return $reflection->newInstanceArgs(new $definition());
