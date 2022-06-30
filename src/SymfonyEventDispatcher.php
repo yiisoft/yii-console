@@ -16,8 +16,16 @@ final class SymfonyEventDispatcher implements EventDispatcherInterface
         $this->dispatcher = $dispatcher;
     }
 
+    /**
+     * Dispatches an event to all registered listeners.
+     *
+     * @psalm-template T as object
+     * @psalm-param T $event
+     * @psalm-return T
+     */
     public function dispatch(object $event, string $eventName = null): object
     {
+        /** @psalm-var T */
         return $this->dispatcher->dispatch($event);
     }
 }
