@@ -2,7 +2,7 @@
 
 ## 1.1.1 under development
 
-- Enh #156: Add support `symfony/event-dispatcher-contracts` version `^3.0` (@vjik)
+- Enh #156: Add support for `symfony/event-dispatcher-contracts` of version `^3.0` (@vjik)
 
 ## 1.1.0 May 03, 2022
 
