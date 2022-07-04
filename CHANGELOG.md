@@ -1,6 +1,6 @@
 # Yii Console Change Log
 
-## 1.1.1 under development
+## 1.1.1 July 04, 2022
 
 - Enh #156: Add support for `symfony/event-dispatcher-contracts` of version `^3.0` (@vjik)
 
