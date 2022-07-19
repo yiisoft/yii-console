@@ -115,6 +115,32 @@ The command can be marked as hidden by prefixing its name with `|`.
 ],
 ```
 
+### Runs PHP built-in web server
+
+You can start local built-in web development server using the command:
+```
+./yii serve
+```
+Your application will be accessible in your web browser at http://localhost:8080 by default.
+To configure default settings, set the options in `\Yiisoft\Yii\Console\CommandLoader` configuration.
+
+```php
+'yiisoft/yii-console' => [
+    'serve' => [
+        'appRootPath' => null,
+        'options' => [
+            'address' => '127.0.0.1',
+            'port' => '8080',
+            'docroot' => 'public',
+            'router' => 'public/index.php',
+        ],
+    ],
+],
+```
+
+Alternatively, you can pass the settings through the console options. To see the available options, run
+`./yii serve --help`
+
 ## Testing
 
 ### Unit testing
