@@ -27,15 +27,31 @@ final class Serve extends Command
     public const EXIT_CODE_NO_ROUTING_FILE = 3;
     public const EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS = 5;
 
-    private const DEFAULT_PORT = '8080';
-    private const DEFAULT_DOCROOT = 'public';
-    private const DEFAULT_ROUTER = 'public/index.php';
+    private string $defaultAddress;
+    private string $defaultPort;
+    private string $defaultDocroot;
+    private string $defaultRouter;
 
     protected static $defaultName = 'serve';
     protected static $defaultDescription = 'Runs PHP built-in web server';
 
-    public function __construct(private ?string $appRootPath = null)
+    /**
+     * @param string|null $appRootPath
+     * @param array|null $options
+     * @psalm-param array{
+     *     address?:non-empty-string,
+     *     port?:non-empty-string,
+     *     docroot?:string,
+     *     router?:string
+     * } $options
+     */
+    public function __construct(private ?string $appRootPath = null, ?array $options = [])
     {
+        $this->defaultAddress = $options['address'] ?? '127.0.0.1';
+        $this->defaultPort = $options['port'] ?? '8080';
+        $this->defaultDocroot = $options['docroot'] ?? 'public';
+        $this->defaultRouter = $options['router'] ?? 'public/index.php';
+
         parent::__construct();
     }
 
@@ -43,10 +59,10 @@ final class Serve extends Command
     {
         $this
             ->setHelp('In order to access server from remote machines use 0.0.0.0:8000. That is especially useful when running server in a virtual machine.')
-            ->addArgument('address', InputArgument::OPTIONAL, 'Host to serve at', '127.0.0.1')
-            ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', self::DEFAULT_PORT)
-            ->addOption('docroot', 't', InputOption::VALUE_OPTIONAL, 'Document root to serve from', self::DEFAULT_DOCROOT)
-            ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script', self::DEFAULT_ROUTER)
+            ->addArgument('address', InputArgument::OPTIONAL, 'Host to serve at', $this->defaultAddress)
+            ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', $this->defaultPort)
+            ->addOption('docroot', 't', InputOption::VALUE_OPTIONAL, 'Document root to serve from', $this->defaultDocroot)
+            ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script', $this->defaultRouter)
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.');
     }
 
@@ -74,8 +90,8 @@ final class Serve extends Command
         /** @var string $docroot */
         $docroot = $input->getOption('docroot');
 
-        if ($router === self::DEFAULT_ROUTER && !file_exists(self::DEFAULT_ROUTER)) {
-            $io->warning('Default router "' . self::DEFAULT_ROUTER . '" does not exist. Serving without router. URLs with dots may fail.');
+        if ($router === $this->defaultRouter && !file_exists($this->defaultRouter)) {
+            $io->warning('Default router "' . $this->defaultRouter . '" does not exist. Serving without router. URLs with dots may fail.');
             $router = null;
         }
 

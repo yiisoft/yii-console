@@ -71,6 +71,43 @@ final class ServeCommandTest extends TestCase
         );
     }
 
+    public function testServeCommandExecuteWithConfig(): void
+    {
+        $command = new Serve(null, [
+            'address' => '127.0.0.2',
+            'port' => '8081',
+            'docroot' => 'tests',
+            'router' => 'public/index.php',
+        ]);
+
+        $commandCreate = new CommandTester($command);
+
+        $commandCreate->setInputs(['yes']);
+
+        $commandCreate->execute([
+            '--env' => 'test',
+        ]);
+
+        $output = $commandCreate->getDisplay(true);
+
+        $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
+
+        $this->assertStringContainsString(
+            'Server started on http://127.0.0.2:8081/',
+            $output
+        );
+
+        $this->assertStringContainsString(
+            'Document root is',
+            $output
+        );
+
+        $this->assertStringContainsString(
+            'Quit the server with CTRL-C or COMMAND-C.',
+            $output
+        );
+    }
+
     public function testErrorWhenAddressIsTaken(): void
     {
         $command = $this

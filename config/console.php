@@ -6,6 +6,7 @@ use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Yiisoft\Definitions\Reference;
 use Yiisoft\Yii\Console\Application;
+use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\CommandLoader;
 use Yiisoft\Yii\Console\SymfonyEventDispatcher;
 
@@ -16,6 +17,14 @@ return [
         'class' => CommandLoader::class,
         '__construct()' => [
             'commandMap' => $params['yiisoft/yii-console']['commands'],
+        ],
+    ],
+
+    Serve::class => [
+        'class' => Serve::class,
+        '__construct()' => [
+            'appRootPath' => $params['yiisoft/yii-console']['serve']['appRootPath'],
+            'options' => $params['yiisoft/yii-console']['serve']['options'],
         ],
     ],
 
