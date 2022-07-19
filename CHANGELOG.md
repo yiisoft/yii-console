@@ -2,7 +2,7 @@
 
 ## 1.1.2 under development
 
-- no changes in this release.
+- Enh #157: Add config for `serve` command (@dood-)
 
 ## 1.1.1 July 04, 2022
 

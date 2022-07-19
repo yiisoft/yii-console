@@ -13,5 +13,14 @@ return [
         'commands' => [
             'serve' => Serve::class,
         ],
+        'serve' => [
+            'appRootPath' => null,
+            'options' => [
+                'address' => '127.0.0.1',
+                'port' => '8080',
+                'docroot' => 'public',
+                'router' => 'public/index.php',
+            ],
+        ],
     ],
 ];
