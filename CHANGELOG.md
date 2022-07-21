@@ -1,6 +1,6 @@
 # Yii Console Change Log
 
-## 1.1.2 under development
+## 1.2.0 July 21, 2022
 
 - Enh #157: Add config for `serve` command (@dood-)
 
