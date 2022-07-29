@@ -9,7 +9,6 @@ final class ApplicationStartup
     public function __construct(
         public array $arguments = [],
         public array $options = [],
-    )
-    {
+    ) {
     }
 }
