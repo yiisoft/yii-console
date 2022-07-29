@@ -7,8 +7,7 @@ namespace Yiisoft\Yii\Console\Event;
 final class ApplicationStartup
 {
     public function __construct(
-        public array $arguments = [],
-        public array $options = [],
+        public ?string $commandName = null,
     ) {
     }
 }

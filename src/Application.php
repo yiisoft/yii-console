@@ -39,7 +39,7 @@ final class Application extends \Symfony\Component\Console\Application
     public function start(ArgvInput $input): void
     {
         if ($this->dispatcher !== null) {
-            $this->dispatcher->dispatch(new ApplicationStartup($input->getArguments(), $input->getOptions()));
+            $this->dispatcher->dispatch(new ApplicationStartup($input->getFirstArgument()));
         }
     }
 
