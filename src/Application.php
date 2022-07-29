@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console;
 
+use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\StyleInterface;
@@ -35,10 +36,10 @@ final class Application extends \Symfony\Component\Console\Application
         parent::setDispatcher($dispatcher);
     }
 
-    public function start(): void
+    public function start(?ArgvInput $input = null): void
     {
-        if ($this->dispatcher !== null) {
-            $this->dispatcher->dispatch(new ApplicationStartup());
+        if ($this->dispatcher !== null && $input !== null) {
+            $this->dispatcher->dispatch(new ApplicationStartup($input->getFirstArgument()));
         }
     }
 

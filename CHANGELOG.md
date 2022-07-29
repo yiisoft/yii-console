@@ -2,7 +2,7 @@
 
 ## 1.2.1 under development
 
-- no changes in this release.
+- Chg: #159: Add collecting console command name to `ApplicationStartup` class (@xepozz)
 
 ## 1.2.0 July 21, 2022
 

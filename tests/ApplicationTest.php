@@ -13,7 +13,7 @@ final class ApplicationTest extends TestCase
 {
     public function testDispatcherEventApplicationStartup(): void
     {
-        $event = new ApplicationStartup();
+        $event = new ApplicationStartup(null);
 
         $result = $this
             ->getInaccessibleProperty($this->application(), 'dispatcher')
