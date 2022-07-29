@@ -1,6 +1,6 @@
 # Yii Console Change Log
 
-## 2.0.0 under development
+## 1.2.1 under development
 
 - Chg: #159: Add collecting console command name to `ApplicationStartup` class (@xepozz)
 
