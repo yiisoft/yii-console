@@ -36,9 +36,9 @@ final class Application extends \Symfony\Component\Console\Application
         parent::setDispatcher($dispatcher);
     }
 
-    public function start(ArgvInput $input): void
+    public function start(?ArgvInput $input = null): void
     {
-        if ($this->dispatcher !== null) {
+        if ($this->dispatcher !== null && $input !== null) {
             $this->dispatcher->dispatch(new ApplicationStartup($input->getFirstArgument()));
         }
     }
