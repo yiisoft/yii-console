@@ -33,9 +33,6 @@ final class ExitCodeTest extends TestCase
 
     /**
      * @dataProvider reasons
-     *
-     * @param string $errorMessage
-     * @param int $reason
      */
     public function testGetReason(string $errorMessage, int $reason): void
     {

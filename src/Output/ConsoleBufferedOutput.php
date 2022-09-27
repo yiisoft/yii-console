@@ -13,9 +13,7 @@ final class ConsoleBufferedOutput extends ConsoleOutput
     /**
      * Returns buffer content optionally clearing it.
      *
-     * @param bool $clearBuffer
      *
-     * @return string
      */
     public function fetch(bool $clearBuffer = false): string
     {

@@ -56,8 +56,6 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * Gets an inaccessible object property.
      *
-     * @param object $object
-     * @param string $propertyName
      *
      * @return mixed
      */
@@ -80,9 +78,6 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * Invokes an inaccessible method.
      *
-     * @param object $object
-     * @param string $method
-     * @param array $args
      *
      * @throws ReflectionException
      *

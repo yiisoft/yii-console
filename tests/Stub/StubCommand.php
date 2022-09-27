@@ -14,8 +14,6 @@ use Yiisoft\Yii\Console\ExitCode;
 
 final class StubCommand extends Command
 {
-    private Application $application;
-
     protected static $defaultName = 'stub';
     protected static $defaultDescription = 'Stub command tests';
 
@@ -24,10 +22,8 @@ final class StubCommand extends Command
         $this->addOption('styled', 's', InputOption::VALUE_OPTIONAL);
     }
 
-    public function __construct(Application $application)
+    public function __construct(private Application $application)
     {
-        $this->application = $application;
-
         parent::__construct();
     }
 
