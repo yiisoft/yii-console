@@ -14,11 +14,8 @@ final class ErrorCommand extends Command
     protected static $defaultName = 'error';
     protected static $defaultDescription = 'Error command tests';
 
-    private NonExistsClass $class;
-
-    public function __construct(NonExistsClass $class)
+    public function __construct(private NonExistsClass $class)
     {
-        $this->class = $class;
         parent::__construct();
     }
 
