@@ -7,7 +7,6 @@ namespace Yiisoft\Yii\Console;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 
-use function get_class;
 use function sprintf;
 
 final class ErrorListener

@@ -12,8 +12,6 @@ final class ConsoleBufferedOutput extends ConsoleOutput
 
     /**
      * Returns buffer content optionally clearing it.
-     *
-     *
      */
     public function fetch(bool $clearBuffer = false): string
     {
