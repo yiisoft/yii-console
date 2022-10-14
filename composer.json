@@ -34,6 +34,7 @@
         "yiisoft/friendly-exception": "^1.0"
     },
     "require-dev": {
+        "maglnet/composer-require-checker": "^4.2",
         "phpunit/phpunit": "^9.5",
         "roave/infection-static-analysis-plugin": "^1.16",
         "spatie/phpunit-watcher": "^1.23",
