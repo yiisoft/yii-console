@@ -6,11 +6,8 @@ namespace Yiisoft\Yii\Console\Event;
 
 final class ApplicationShutdown
 {
-    private int $exitCode;
-
-    public function __construct(int $exitCode)
+    public function __construct(private int $exitCode)
     {
-        $this->exitCode = $exitCode;
     }
 
     public function getExitCode(): int

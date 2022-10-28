@@ -125,10 +125,6 @@ final class ApplicationTest extends TestCase
 
     /**
      * @dataProvider namespaceProvider
-     *
-     * @param string $name
-     * @param int|null $limit
-     * @param string $expected
      */
     public function testExtractNamespace(string $name, ?int $limit, string $expected): void
     {
