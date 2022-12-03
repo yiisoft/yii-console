@@ -31,6 +31,7 @@ final class Serve extends Command
     private string $defaultPort;
     private string $defaultDocroot;
     private string $defaultRouter;
+    private int $defaultWorkers;
 
     protected static $defaultName = 'serve';
     protected static $defaultDescription = 'Runs PHP built-in web server';
@@ -51,6 +52,7 @@ final class Serve extends Command
         $this->defaultPort = $options['port'] ?? '8080';
         $this->defaultDocroot = $options['docroot'] ?? 'public';
         $this->defaultRouter = $options['router'] ?? 'public/index.php';
+        $this->defaultWorkers = (int) ($options['workers'] ?? 2);
 
         parent::__construct();
     }
@@ -63,6 +65,7 @@ final class Serve extends Command
             ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', $this->defaultPort)
             ->addOption('docroot', 't', InputOption::VALUE_OPTIONAL, 'Document root to serve from', $this->defaultDocroot)
             ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script', $this->defaultRouter)
+            ->addOption('workers', 'w', InputOption::VALUE_OPTIONAL, 'Workers number the server will start with', $this->defaultWorkers)
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.');
     }
 
@@ -83,6 +86,7 @@ final class Serve extends Command
 
         /** @var string $router */
         $router = $input->getOption('router');
+        $workers = (int) $input->getOption('workers');
 
         /** @var string $port */
         $port = $input->getOption('port');
@@ -132,7 +136,7 @@ final class Serve extends Command
             return ExitCode::OK;
         }
 
-        passthru('"' . PHP_BINARY . '"' . " -S $address -t \"$documentRoot\" $router");
+        passthru('PHP_CLI_SERVER_WORKERS=' . $workers . ' "' . PHP_BINARY . '"' . " -S $address -t \"$documentRoot\" $router");
 
         return ExitCode::OK;
     }
