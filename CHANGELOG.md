@@ -2,7 +2,7 @@
 
 ## 1.3.1 under development
 
-- no changes in this release.
+- Enh #163: Increase server workers number (@xepozz)
 
 ## 1.3.0 July 29, 2022
 
