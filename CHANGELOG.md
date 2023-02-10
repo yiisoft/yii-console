@@ -3,6 +3,7 @@
 ## 1.3.1 under development
 
 - Enh #163: Add `workers` option to `serve` command with default of two workers under Linux (@xepozz)
+- Enh #162: Explicitly add transitive dependencies `psr/event-dispatcher` and `psr/log` (@vjik)
 
 ## 1.3.0 July 29, 2022
 
