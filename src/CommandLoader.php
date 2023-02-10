@@ -16,8 +16,6 @@ use function explode;
 
 final class CommandLoader implements CommandLoaderInterface
 {
-    private ContainerInterface $container;
-
     /**
      * @psalm-var array<string, array{
      *     name: non-empty-string,
@@ -38,9 +36,8 @@ final class CommandLoader implements CommandLoaderInterface
      *
      * @psalm-param array<string, class-string> $commandMap
      */
-    public function __construct(ContainerInterface $container, array $commandMap)
+    public function __construct(private ContainerInterface $container, array $commandMap)
     {
-        $this->container = $container;
         $this->setCommandMap($commandMap);
     }
 

@@ -7,16 +7,12 @@ namespace Yiisoft\Yii\Console;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Event\ConsoleErrorEvent;
 
-use function get_class;
 use function sprintf;
 
 final class ErrorListener
 {
-    private LoggerInterface $logger;
-
-    public function __construct(LoggerInterface $logger)
+    public function __construct(private LoggerInterface $logger)
     {
-        $this->logger = $logger;
     }
 
     /**
@@ -31,7 +27,7 @@ final class ErrorListener
 
         $message = sprintf(
             '%s: %s in %s:%s while running console command "%s".',
-            get_class($exception),
+            $exception::class,
             $exception->getMessage(),
             $exception->getFile(),
             $exception->getLine(),
