@@ -2,7 +2,6 @@
 
 ## 1.3.1 under development
 
-- Enh: Add composer require checker into CI
 - Enh #163: Add `workers` option to `serve` command with default of two workers under Linux (@xepozz)
 
 ## 1.3.0 July 29, 2022
