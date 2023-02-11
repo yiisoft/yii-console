@@ -15,6 +15,7 @@ use Yiisoft\Yii\Console\Event\ApplicationShutdown;
 use Yiisoft\Yii\Console\Event\ApplicationStartup;
 
 use function array_slice;
+use function count;
 use function explode;
 use function implode;
 
@@ -93,5 +94,47 @@ final class Application extends \Symfony\Component\Console\Application
         $parts = explode('/', $name, -1);
 
         return implode('/', null === $limit ? $parts : array_slice($parts, 0, $limit));
+    }
+
+    public function getNamespaces(): array
+    {
+        $namespaces = [];
+        foreach ($this->all() as $command) {
+            if ($command->isHidden()) {
+                continue;
+            }
+
+            $namespaces[] = $this->extractAllNamespaces($command->getName());
+
+            /** @var string $alias */
+            foreach ($command->getAliases() as $alias) {
+                $namespaces[] = $this->extractAllNamespaces($alias);
+            }
+        }
+
+        return array_values(array_unique(array_filter(array_merge([], ...$namespaces))));
+    }
+
+    /**
+     * @return string[]
+     */
+    private function extractAllNamespaces(?string $name): array
+    {
+        if ($name === null) {
+            return [];
+        }
+
+        $parts = explode('/', $name, -1);
+        $namespaces = [];
+
+        foreach ($parts as $part) {
+            if (count($namespaces)) {
+                $namespaces[] = end($namespaces) . '/' . $part;
+            } else {
+                $namespaces[] = $part;
+            }
+        }
+
+        return $namespaces;
     }
 }
