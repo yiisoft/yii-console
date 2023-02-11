@@ -34,7 +34,7 @@ final class CommandLoader implements CommandLoaderInterface
     /**
      * @param array $commandMap An array with command names as keys and service ids as values.
      *
-     * @psalm-param array<string, class-string> $commandMap
+     * @psalm-param array<string, class-string<Command>> $commandMap
      */
     public function __construct(private ContainerInterface $container, array $commandMap)
     {
@@ -98,7 +98,7 @@ final class CommandLoader implements CommandLoaderInterface
     }
 
     /**
-     * @psalm-param array<string, class-string> $commandMap
+     * @psalm-param array<string, class-string<Command>> $commandMap
      */
     private function setCommandMap(array $commandMap): void
     {
@@ -113,6 +113,8 @@ final class CommandLoader implements CommandLoaderInterface
                 $hidden = true;
                 array_shift($aliases);
             }
+
+            /** @var string[] $aliases Fix for psalm. See {@link https://github.com/vimeo/psalm/issues/9261}. */
 
             $this->validateAliases($aliases);
 
