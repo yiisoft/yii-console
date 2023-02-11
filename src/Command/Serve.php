@@ -37,13 +37,12 @@ final class Serve extends Command
     protected static $defaultDescription = 'Runs PHP built-in web server';
 
     /**
-     * @param string|null $appRootPath
-     * @param array|null $options
      * @psalm-param array{
      *     address?:non-empty-string,
      *     port?:non-empty-string,
      *     docroot?:string,
-     *     router?:string
+     *     router?:string,
+     *     workers?:int|string
      * } $options
      */
     public function __construct(private ?string $appRootPath = null, ?array $options = [])
