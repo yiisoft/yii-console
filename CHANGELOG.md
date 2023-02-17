@@ -1,10 +1,11 @@
 # Yii Console Change Log
 
-## 1.3.1 under development
+## 2.0.0 under development
 
 - Enh #163: Add `workers` option to `serve` command with default of two workers under Linux (@xepozz)
 - Enh #162: Explicitly add transitive dependencies `psr/event-dispatcher` and `psr/log` (@vjik)
 - Bug #168: Fix executing the `list` command with namespace (@vjik)
+- Chg #171: Adapt configuration group names to Yii conventions (@vjik)
 
 ## 1.3.0 July 29, 2022
 
