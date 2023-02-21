@@ -135,7 +135,9 @@ final class Serve extends Command
             return ExitCode::OK;
         }
 
-        passthru('PHP_CLI_SERVER_WORKERS=' . $workers . ' "' . PHP_BINARY . '"' . " -S $address -t \"$documentRoot\" $router");
+        passthru(
+            "env=PHP_CLI_SERVER_WORKERS=$workers" . ' "' . PHP_BINARY . '"' . " -S $address -t \"$documentRoot\" $router"
+        );
 
         return ExitCode::OK;
     }
