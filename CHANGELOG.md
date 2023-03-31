@@ -1,6 +1,6 @@
 # Yii Console Change Log
 
-## 2.0.1 under development
+## 2.0.1 March 31, 2023
 
 - Bug #175: Fix `serve` under Windows (samdark)
 
