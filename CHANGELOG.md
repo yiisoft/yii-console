@@ -2,7 +2,7 @@
 
 ## 2.0.1 under development
 
-- no changes in this release.
+- Bug #175: Fix `serve` under Windows (samdark)
 
 ## 2.0.0 February 17, 2023
 
