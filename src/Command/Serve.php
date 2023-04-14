@@ -113,8 +113,8 @@ final class Serve extends Command
         }
 
         if ($this->isAddressTaken($address)) {
-            $io->error("http://$address is taken by another process.");
-            return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
+            $address = $this->getFreeAddress($address);
+            $io->note("http://$address is taken by another process.\n An unused port is picked by the operating system,\n and the built-in web server will be bound to that port number.");
         }
 
         if ($router !== null && !file_exists($router)) {
@@ -146,6 +146,23 @@ final class Serve extends Command
         return ExitCode::OK;
     }
 
+    /**
+     * @param string $address The server address.
+     *
+     * @return string Free address
+     */
+    private function getFreeAddress(string $address): string
+    {
+        [$hostname, $port] = explode(':', $address);
+        $address = '';
+        for($i = $port; $i < 65535; $i++){
+            $address = $hostname . ':'. $i;
+            if(!$this->isAddressTaken($address)){
+                break;
+            }
+        }
+        return $address;
+    }
     /**
      * @param string $address The server address.
      *
