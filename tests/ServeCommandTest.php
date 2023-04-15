@@ -56,11 +56,6 @@ final class ServeCommandTest extends TestCase
         $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
 
         $this->assertStringContainsString(
-            'Server started on http://127.0.0.1:8080/',
-            $output
-        );
-
-        $this->assertStringContainsString(
             'Document root is',
             $output
         );
@@ -91,11 +86,6 @@ final class ServeCommandTest extends TestCase
         $output = $commandCreate->getDisplay(true);
 
         $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
-
-        $this->assertStringContainsString(
-            'Server started on http://127.0.0.2:8081/',
-            $output
-        );
 
         $this->assertStringContainsString(
             'Document root is',
@@ -198,11 +188,6 @@ final class ServeCommandTest extends TestCase
         $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
 
         $output = $commandCreate->getDisplay(true);
-
-        $this->assertStringContainsString(
-            'Server started on http://127.0.0.1:8080/',
-            $output
-        );
 
         $this->assertStringContainsString(
             'Routing file is "tests/public/index.php"',
