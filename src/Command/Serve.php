@@ -59,13 +59,28 @@ final class Serve extends Command
     public function configure(): void
     {
         $this
-            ->setHelp('In order to access server from remote machines use 0.0.0.0:8000. That is especially useful when running server in a virtual machine.')
+            ->setHelp(
+                'In order to access server from remote machines use 0.0.0.0:8000. That is especially useful when running server in a virtual machine.'
+            )
             ->addArgument('address', InputArgument::OPTIONAL, 'Host to serve at', $this->defaultAddress)
             ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', $this->defaultPort)
-            ->addOption('docroot', 't', InputOption::VALUE_OPTIONAL, 'Document root to serve from', $this->defaultDocroot)
+            ->addOption(
+                'docroot',
+                't',
+                InputOption::VALUE_OPTIONAL,
+                'Document root to serve from',
+                $this->defaultDocroot
+            )
             ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script', $this->defaultRouter)
-            ->addOption('workers', 'w', InputOption::VALUE_OPTIONAL, 'Workers number the server will start with', $this->defaultWorkers)
-            ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.');
+            ->addOption(
+                'workers',
+                'w',
+                InputOption::VALUE_OPTIONAL,
+                'Workers number the server will start with',
+                $this->defaultWorkers
+            )
+            ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.')
+            ->addOption('xdebug', 'x', InputOption::VALUE_OPTIONAL, 'Enables XDEBUG session.');
     }
 
     public function complete(CompletionInput $input, CompletionSuggestions $suggestions): void
@@ -79,6 +94,8 @@ final class Serve extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+        $io->title('Yii 3 Development Server.');
+        $io->writeln('https://yiiframework.com');
 
         /** @var string $address */
         $address = $input->getArgument('address');
@@ -94,7 +111,9 @@ final class Serve extends Command
         $docroot = $input->getOption('docroot');
 
         if ($router === $this->defaultRouter && !file_exists($this->defaultRouter)) {
-            $io->warning('Default router "' . $this->defaultRouter . '" does not exist. Serving without router. URLs with dots may fail.');
+            $io->warning(
+                'Default router "' . $this->defaultRouter . '" does not exist. Serving without router. URLs with dots may fail.'
+            );
             $router = null;
         }
 
@@ -122,27 +141,55 @@ final class Serve extends Command
             return self::EXIT_CODE_NO_ROUTING_FILE;
         }
 
-        $output->writeLn("Document root is \"$documentRoot\"");
-
-        if ($router) {
-            $output->writeLn("Routing file is \"$router\"");
-        }
-
-        $output->writeLn('Quit the server with CTRL-C or COMMAND-C.');
-
         if ($env === 'test') {
             return ExitCode::OK;
         }
 
-        $command = '"' . PHP_BINARY . '"' . " -S $address -t \"$documentRoot\" $router";
 
-        if (DIRECTORY_SEPARATOR !== '\\') {
-            $command = 'PHP_CLI_SERVER_WORKERS=' . $workers . ' ' . $command;
+        $command = [];
+
+        $isLinux = DIRECTORY_SEPARATOR !== '\\';
+
+        if ($isLinux) {
+            $command[] = 'PHP_CLI_SERVER_WORKERS=' . $workers;
         }
 
-        passthru($command);
+        $xDebugInstalled = extension_loaded('xdebug');
+        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug');
 
-        return ExitCode::OK;
+        if ($xDebugEnabled) {
+            $command[] = 'XDEBUG_MODE=debug XDEBUG_TRIGGER=yes';
+        }
+        $outputTable = [];
+        $outputTable[] = ['PHP', PHP_VERSION];
+        $outputTable[] = [
+            'xDebug',
+            $xDebugInstalled ? sprintf(
+                '%s, %s',
+                phpversion('xdebug'),
+                $xDebugEnabled ? '<info>enabled</>' : '<error>disabled</>',
+            ) : '<error>Not installed</>',
+        ];
+        $outputTable[] = ['Workers', $isLinux ? $workers : 'Not supported'];
+        $outputTable[] = ['Address', $address];
+        $outputTable[] = ['Document root', $documentRoot];
+        $outputTable[] = ($router ? ['Routing file', $router] : []);
+
+        $io->table(['Configuration'], $outputTable);
+
+        $command[] = '"' . PHP_BINARY . '"' . " -S $address -t \"$documentRoot\" $router";
+        $command = implode(' ', $command);
+
+        $output->writeln([
+            'Executing: ',
+            sprintf('<info>%s</>', $command),
+        ], OutputInterface::VERBOSITY_VERBOSE);
+
+        $io->success('Quit the server with CTRL-C or COMMAND-C.');
+
+        passthru($command, $result);
+
+        return $result;
     }
 
     /**
@@ -153,7 +200,7 @@ final class Serve extends Command
     private function isAddressTaken(string $address): bool
     {
         [$hostname, $port] = explode(':', $address);
-        $fp = @fsockopen($hostname, (int)$port, $errno, $errstr, 3);
+        $fp = @fsockopen($hostname, (int) $port, $errno, $errstr, 3);
 
         if ($fp === false) {
             return false;
