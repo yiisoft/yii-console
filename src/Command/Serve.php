@@ -94,8 +94,8 @@ final class Serve extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $io->title('Yii 3 Development Server.');
-        $io->writeln('https://yiiframework.com');
+        $io->title('Yii3 Development Server');
+        $io->writeln('https://yiiframework.com'."\n");
 
         /** @var string $address */
         $address = $input->getArgument('address');
