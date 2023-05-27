@@ -80,7 +80,7 @@ final class Serve extends Command
                 $this->defaultWorkers
             )
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.')
-            ->addOption('xdebug', 'x', InputOption::VALUE_OPTIONAL, 'Enables XDEBUG session.');
+            ->addOption('xdebug', 'x', InputOption::VALUE_OPTIONAL, 'Enables XDEBUG session.', false);
     }
 
     public function complete(CompletionInput $input, CompletionSuggestions $suggestions): void
@@ -150,7 +150,7 @@ final class Serve extends Command
         }
 
         $xDebugInstalled = extension_loaded('xdebug');
-        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug');
+        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug') && $input->getOption('xdebug');
 
         if ($xDebugEnabled) {
             $command[] = 'XDEBUG_MODE=debug XDEBUG_TRIGGER=yes';
