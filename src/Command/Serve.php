@@ -141,11 +141,6 @@ final class Serve extends Command
             return self::EXIT_CODE_NO_ROUTING_FILE;
         }
 
-        if ($env === 'test') {
-            return ExitCode::OK;
-        }
-
-
         $command = [];
 
         $isLinux = DIRECTORY_SEPARATOR !== '\\';
@@ -186,6 +181,10 @@ final class Serve extends Command
         ], OutputInterface::VERBOSITY_VERBOSE);
 
         $io->success('Quit the server with CTRL-C or COMMAND-C.');
+
+        if ($env === 'test') {
+            return ExitCode::OK;
+        }
 
         passthru($command, $result);
 
