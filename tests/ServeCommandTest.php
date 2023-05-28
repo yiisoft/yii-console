@@ -55,8 +55,9 @@ final class ServeCommandTest extends TestCase
 
         $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
 
-        $this->assertStringContainsString(
-            'Document root is',
+        $docroot = preg_quote(getcwd() . DIRECTORY_SEPARATOR . 'tests', '/');
+        $this->assertMatchesRegularExpression(
+            "/Document root\s+{$docroot}/",
             $output
         );
 
@@ -87,8 +88,9 @@ final class ServeCommandTest extends TestCase
 
         $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
 
-        $this->assertStringContainsString(
-            'Document root is',
+        $docroot = preg_quote(getcwd() . DIRECTORY_SEPARATOR . 'tests', '/');
+        $this->assertMatchesRegularExpression(
+            "/Document root\s+{$docroot}/",
             $output
         );
 
@@ -189,8 +191,9 @@ final class ServeCommandTest extends TestCase
 
         $output = $commandCreate->getDisplay(true);
 
-        $this->assertStringContainsString(
-            'Routing file is "tests/public/index.php"',
+        $routingFile = preg_quote('tests/public/index.php', '/');
+        $this->assertMatchesRegularExpression(
+            "/Routing file\s+{$routingFile}/",
             $output
         );
     }

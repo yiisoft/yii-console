@@ -1,12 +1,13 @@
 # Yii Console Change Log
 
-## 2.0.2 under development
+## 2.1.0 under development
 
-- Bug #179: Remove duplicate message about server address (samdark)
+- Enh #180: Enhance output of `serve` command, add `--xdebug` option for `serve` (@xepozz)
+- Bug #179: Remove duplicate message about server address (@samdark)
 
 ## 2.0.1 March 31, 2023
 
-- Bug #175: Fix `serve` under Windows (samdark)
+- Bug #175: Fix `serve` under Windows (@samdark)
 
 ## 2.0.0 February 17, 2023
 
