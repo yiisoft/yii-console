@@ -115,11 +115,11 @@ final class ApplicationTest extends TestCase
     public function namespaceProvider(): array
     {
         return [
-            ['first/second/third', null, 'first/second'],
+            ['first/second/third', null, 'first:second'],
             ['first/second/third', 1, 'first'],
-            ['first/second/third', 2, 'first/second'],
-            ['first/second/third', 3, 'first/second'],
-            ['first/second/third', 4, 'first/second'],
+            ['first/second/third', 2, 'first:second'],
+            ['first/second/third', 3, 'first:second'],
+            ['first/second/third', 4, 'first:second'],
         ];
     }
 
