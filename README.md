@@ -60,7 +60,7 @@ $app->setCommandLoader(new CommandLoader(
 $app->run();
 ```
 
-Since `\Yiisoft\Yii\Console\CommandLoader` uses lazy loading of commands, it is necessary
+Since `\Yiisoft\Yii\Console\CommandLoader` uses lazy loading of commands, it's necessary
 to specify the name and description in static properties when creating a command:
 
 ```php
@@ -69,7 +69,7 @@ use Yiisoft\Yii\Console\ExitCode;
 
 final class MyCustomCommand extends Command
 {
-    protected static $defaultName = 'my/custom';
+    protected static $defaultName = 'my:custom';
     protected static $defaultDescription = 'Description of my custom command.';
     
     protected function configure(): void
@@ -91,7 +91,7 @@ Run the console entry script with your command:
 your-console-entry-script my/custom
 ```
 
-> When naming commands, a slash `/` should be used as a separator. For example: `user/create`, `user/delete`, etc.
+> When naming commands use `:` as a separator. For example: `user:create`, `user:delete`, etc.
 
 
 Since the package is based on [Symfony Console component](https://symfony.com/doc/current/components/console.html),
@@ -170,7 +170,7 @@ The code is statically analyzed with [Psalm](https://psalm.dev/). To run static 
 
 ## License
 
-The Yii Framework Console is free software. It is released under the terms of the BSD License.
+The Yii Framework Console is free software. It's released under the terms of the BSD License.
 Please see [`LICENSE`](./LICENSE.md) for more information.
 
 Maintained by [Yii Software](https://www.yiiframework.com/).

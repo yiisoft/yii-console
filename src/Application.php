@@ -14,10 +14,8 @@ use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 use Yiisoft\Yii\Console\Event\ApplicationShutdown;
 use Yiisoft\Yii\Console\Event\ApplicationStartup;
 
-use function array_slice;
 use function count;
 use function explode;
-use function implode;
 
 final class Application extends \Symfony\Component\Console\Application
 {
@@ -91,9 +89,7 @@ final class Application extends \Symfony\Component\Console\Application
 
     public function extractNamespace(string $name, int $limit = null): string
     {
-        $parts = explode('/', $name, -1);
-
-        return implode('/', null === $limit ? $parts : array_slice($parts, 0, $limit));
+        return parent::extractNamespace(str_replace('/', ':', $name), $limit);
     }
 
     public function getNamespaces(): array
