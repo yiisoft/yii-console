@@ -2,7 +2,7 @@
 
 ## 2.1.0 under development
 
-- Bug #180: Enhance output of `serve` command (@xepozz)
+- Enh #180: Enhance output of `serve` command, add `--xdebug` option for `serve` (@xepozz)
 - Bug #179: Remove duplicate message about server address (@samdark)
 
 ## 2.0.1 March 31, 2023
