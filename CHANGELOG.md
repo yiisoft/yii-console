@@ -1,5 +1,9 @@
 # Yii Console Change Log
 
+## 2.1.1 under development
+
+- no changes in this release.
+
 ## 2.1.0 May 28, 2023
 
 - Bug #172: Fix accepting `:` as command name separator, offer using it by default (samdark)
