@@ -14,10 +14,8 @@ use Yiisoft\FriendlyException\FriendlyExceptionInterface;
 use Yiisoft\Yii\Console\Event\ApplicationShutdown;
 use Yiisoft\Yii\Console\Event\ApplicationStartup;
 
-use function array_slice;
 use function count;
 use function explode;
-use function implode;
 
 final class Application extends \Symfony\Component\Console\Application
 {
