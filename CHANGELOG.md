@@ -2,7 +2,8 @@
 
 ## 2.0.2 under development
 
-- Bug #179: Remove duplicate message about server address (samdark)
+- Bug #179: Remove duplicate messages about server address (samdark)
+- Bug #172: Fix accepting `:` as command name separator, offer using it by default (samdark) 
 
 ## 2.0.1 March 31, 2023
 
