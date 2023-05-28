@@ -55,7 +55,7 @@ final class ServeCommandTest extends TestCase
 
         $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
 
-        $docroot = preg_quote(getcwd() . '/tests', '/');
+        $docroot = preg_quote(getcwd() . DIRECTORY_SEPARATOR . 'tests', '/');
         $this->assertMatchesRegularExpression(
             "/Document root\s+{$docroot}/",
             $output
@@ -88,7 +88,7 @@ final class ServeCommandTest extends TestCase
 
         $this->assertSame(ExitCode::OK, $commandCreate->getStatusCode());
 
-        $docroot = preg_quote(getcwd() . '/tests', '/');
+        $docroot = preg_quote(getcwd() . DIRECTORY_SEPARATOR . 'tests', '/');
         $this->assertMatchesRegularExpression(
             "/Document root\s+{$docroot}/",
             $output
