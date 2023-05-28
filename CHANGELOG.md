@@ -2,7 +2,6 @@
 
 ## 2.1.0 under development
 
-- Bug #179: Remove duplicate messages about server address (samdark)
 - Bug #172: Fix accepting `:` as command name separator, offer using it by default (samdark) 
 - Enh #180: Enhance output of `serve` command, add `--xdebug` option for `serve` (@xepozz)
 - Bug #179: Remove duplicate message about server address (@samdark)
