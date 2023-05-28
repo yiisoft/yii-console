@@ -120,12 +120,14 @@ final class Application extends \Symfony\Component\Console\Application
             return [];
         }
 
-        $parts = explode('/', $name, -1);
+        $name = str_replace('/', ':', $name);
+
+        $parts = explode(':', $name, -1);
         $namespaces = [];
 
         foreach ($parts as $part) {
             if (count($namespaces)) {
-                $namespaces[] = end($namespaces) . '/' . $part;
+                $namespaces[] = end($namespaces) . ':' . $part;
             } else {
                 $namespaces[] = $part;
             }
