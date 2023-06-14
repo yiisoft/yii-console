@@ -2,7 +2,7 @@
 
 ## 2.1.1 under development
 
-- Bug #185: Rename `params.php` to `params-console.php` (@terabytesoftw) 
+- Chg #185: Rename `params.php` to `params-console.php` (@terabytesoftw)  
 
 ## 2.1.0 May 28, 2023
 
