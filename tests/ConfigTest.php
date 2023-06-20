@@ -48,7 +48,8 @@ final class ConfigTest extends \PHPUnit\Framework\TestCase
     {
         return new Config(
             new ConfigPaths(dirname(__DIR__), 'config'),
-            mergePlanFile: '../tests/environment/.merge-plan.php'
+            mergePlanFile: '../tests/environment/.merge-plan.php',
+            paramsGroup: 'params-console',
         );
     }
 }

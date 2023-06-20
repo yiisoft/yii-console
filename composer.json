@@ -62,7 +62,7 @@
             "merge-plan-file": "../tests/environment/.merge-plan.php"
         },
         "config-plugin": {
-            "params": "params.php",
+            "params-console": "params-console.php",
             "di-console": "di-console.php",
             "events-console": "events-console.php"
         }
