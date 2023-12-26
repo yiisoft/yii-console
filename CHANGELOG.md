@@ -1,5 +1,9 @@
 # Yii Console Change Log
 
+## 2.1.3 under development
+
+- no changes in this release.
+
 ## 2.1.2 December 26, 2023
 
 - Enh #189: Add support for `symfony/console` of version `^7.0` (@vjik)
