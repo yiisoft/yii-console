@@ -2,7 +2,7 @@
 
 ## 2.1.2 under development
 
-- no changes in this release.
+- Enh #189: Add support for `symfony/console` of version `^7.0` (@vjik)
 
 ## 2.1.1 November 05, 2023
 
