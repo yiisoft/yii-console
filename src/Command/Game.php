@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,11 +15,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * @codeCoverageIgnore
  */
+#[AsCommand('|yii', 'A Guessing Game')]
 final class Game extends Command
 {
-    protected static $defaultName = '|yii';
-    protected static $defaultDescription = 'A Guessing Game';
-
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $steps = 1;

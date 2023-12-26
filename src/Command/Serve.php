@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Completion\CompletionInput;
 use Symfony\Component\Console\Completion\CompletionSuggestions;
@@ -21,6 +22,7 @@ use function fsockopen;
 use function is_dir;
 use function passthru;
 
+#[AsCommand('serve', 'Runs PHP built-in web server')]
 final class Serve extends Command
 {
     public const EXIT_CODE_NO_DOCUMENT_ROOT = 2;
@@ -32,9 +34,6 @@ final class Serve extends Command
     private string $defaultDocroot;
     private string $defaultRouter;
     private int $defaultWorkers;
-
-    protected static $defaultName = 'serve';
-    protected static $defaultDescription = 'Runs PHP built-in web server';
 
     /**
      * @psalm-param array{
