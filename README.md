@@ -2,7 +2,7 @@
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px">
     </a>
-    <h1 align="center">Yii Framework Console</h1>
+    <h1 align="center">Yii Console</h1>
     <br>
 </p>
 
@@ -15,7 +15,17 @@
 [![static analysis](https://github.com/yiisoft/yii-console/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/yii-console/actions?query=workflow%3A%22static+analysis%22)
 [![type-coverage](https://shepherd.dev/github/yiisoft/yii-console/coverage.svg)](https://shepherd.dev/github/yiisoft/yii-console)
 
-This Yii Framework package provides a console that could be added to an application.
+Yii Console package provides a console that could be added to an application. This console based on 
+[Symfony Console](https://github.com/symfony/console), and added extra features:
+
+- lazy command loader;
+- `SymfonyEventDispatcher` class that allow use any [PSR-14](http://www.php-fig.org/psr/psr-14/) compatible event 
+  dispatcher with Symfony console;
+- `ErrorListener` for logging console errors to any [PSR-3](https://www.php-fig.org/psr/psr-3/) compatible logger;
+- console command `serve` to runs PHP built-in web server;
+- throw events `ApplicationStartup` and `ApplicationShutdown` in console application;
+- class `ExitCode` that contain constants for defining console command exit codes;
+- `ConsoleBufferedOutput` that wrap `ConsoleOutput` and buffers console output.  
 
 ## Requirements
 
@@ -26,7 +36,7 @@ This Yii Framework package provides a console that could be added to an applicat
 The package could be installed with composer:
 
 ```shell
-composer require yiisoft/yii-console --prefer-dist
+composer require yiisoft/yii-console
 ```
 
 ## General usage
@@ -147,7 +157,7 @@ Alternatively, you can pass the settings through the console options. To see the
 
 ## License
 
-The Yii Framework Console is free software. It's released under the terms of the BSD License.
+The Yii Console is free software. It's released under the terms of the BSD License.
 Please see [`LICENSE`](./LICENSE.md) for more information.
 
 Maintained by [Yii Software](https://www.yiiframework.com/).

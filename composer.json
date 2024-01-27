@@ -1,7 +1,7 @@
 {
     "name": "yiisoft/yii-console",
     "type": "library",
-    "description": "Yii Framework Console",
+    "description": "Symfony console wrapper with additional features",
     "keywords": [
         "yii",
         "console"
