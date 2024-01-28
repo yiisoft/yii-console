@@ -24,7 +24,7 @@ Yii Console package provides a console that could be added to an application. Th
 - `ErrorListener` for logging console errors to any [PSR-3](https://www.php-fig.org/psr/psr-3/) compatible logger;
 - console command `serve` that runs PHP built-in web server;
 - raises events `ApplicationStartup` and `ApplicationShutdown` in console application;
-- class `ExitCode` that contain constants for defining console command exit codes;
+- class `ExitCode` that contains constants for defining console command exit codes;
 - `ConsoleBufferedOutput` that wrap `ConsoleOutput` and buffers console output.  
 
 ## Requirements
