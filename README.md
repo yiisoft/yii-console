@@ -25,7 +25,7 @@ Yii Console package provides a console that could be added to an application. Th
 - console command `serve` that runs PHP built-in web server;
 - raises events `ApplicationStartup` and `ApplicationShutdown` in console application;
 - class `ExitCode` that contains constants for defining console command exit codes;
-- `ConsoleBufferedOutput` that wrap `ConsoleOutput` and buffers console output.  
+- `ConsoleBufferedOutput` that wraps `ConsoleOutput` and buffers console output.  
 
 ## Requirements
 
