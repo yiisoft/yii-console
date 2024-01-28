@@ -2,7 +2,7 @@
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://yiisoft.github.io/docs/images/yii_logo.svg" height="100px">
     </a>
-    <h1 align="center">Yii Framework Console</h1>
+    <h1 align="center">Yii Console</h1>
     <br>
 </p>
 
@@ -15,7 +15,17 @@
 [![static analysis](https://github.com/yiisoft/yii-console/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/yii-console/actions?query=workflow%3A%22static+analysis%22)
 [![type-coverage](https://shepherd.dev/github/yiisoft/yii-console/coverage.svg)](https://shepherd.dev/github/yiisoft/yii-console)
 
-This Yii Framework package provides a console that could be added to an application.
+Yii Console package provides a console that could be added to an application. This console is based on 
+[Symfony Console](https://github.com/symfony/console). The following extra features are added:
+
+- lazy command loader;
+- `SymfonyEventDispatcher` class that allows to use any [PSR-14](http://www.php-fig.org/psr/psr-14/) compatible event 
+  dispatcher with Symfony console;
+- `ErrorListener` for logging console errors to any [PSR-3](https://www.php-fig.org/psr/psr-3/) compatible logger;
+- console command `serve` that runs PHP built-in web server;
+- raises events `ApplicationStartup` and `ApplicationShutdown` in console application;
+- class `ExitCode` that contains constants for defining console command exit codes;
+- `ConsoleBufferedOutput` that wraps `ConsoleOutput` and buffers console output.  
 
 ## Requirements
 
@@ -26,7 +36,7 @@ This Yii Framework package provides a console that could be added to an applicat
 The package could be installed with composer:
 
 ```shell
-composer require yiisoft/yii-console --prefer-dist
+composer require yiisoft/yii-console
 ```
 
 ## General usage
@@ -141,36 +151,13 @@ To configure default settings, set the options in `\Yiisoft\Yii\Console\CommandL
 Alternatively, you can pass the settings through the console options. To see the available options, run
 `./yii serve --help`
 
-## Testing
+## Documentation
 
-### Unit testing
-
-The package is tested with [PHPUnit](https://phpunit.de/). To run tests:
-
-```shell
-./vendor/bin/phpunit
-```
-
-### Mutation testing
-
-The package tests are checked with [Infection](https://infection.github.io/) mutation framework with
-[Infection Static Analysis Plugin](https://github.com/Roave/infection-static-analysis-plugin). To run it:
-
-```shell
-./vendor/bin/roave-infection-static-analysis-plugin
-```
-
-### Static analysis
-
-The code is statically analyzed with [Psalm](https://psalm.dev/). To run static analysis:
-
-```shell
-./vendor/bin/psalm
-```
+- [Internals](docs/internals.md)
 
 ## License
 
-The Yii Framework Console is free software. It's released under the terms of the BSD License.
+The Yii Console is free software. It's released under the terms of the BSD License.
 Please see [`LICENSE`](./LICENSE.md) for more information.
 
 Maintained by [Yii Software](https://www.yiiframework.com/).
