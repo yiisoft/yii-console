@@ -23,7 +23,7 @@ Yii Console package provides a console that could be added to an application. Th
   dispatcher with Symfony console;
 - `ErrorListener` for logging console errors to any [PSR-3](https://www.php-fig.org/psr/psr-3/) compatible logger;
 - console command `serve` that runs PHP built-in web server;
-- throw events `ApplicationStartup` and `ApplicationShutdown` in console application;
+- raises events `ApplicationStartup` and `ApplicationShutdown` in console application;
 - class `ExitCode` that contain constants for defining console command exit codes;
 - `ConsoleBufferedOutput` that wrap `ConsoleOutput` and buffers console output.  
 
