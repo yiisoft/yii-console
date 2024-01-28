@@ -15,8 +15,8 @@
 [![static analysis](https://github.com/yiisoft/yii-console/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/yii-console/actions?query=workflow%3A%22static+analysis%22)
 [![type-coverage](https://shepherd.dev/github/yiisoft/yii-console/coverage.svg)](https://shepherd.dev/github/yiisoft/yii-console)
 
-Yii Console package provides a console that could be added to an application. This console based on 
-[Symfony Console](https://github.com/symfony/console), and added extra features:
+Yii Console package provides a console that could be added to an application. This console is based on 
+[Symfony Console](https://github.com/symfony/console). The following extra features are added:
 
 - lazy command loader;
 - `SymfonyEventDispatcher` class that allow use any [PSR-14](http://www.php-fig.org/psr/psr-14/) compatible event 
