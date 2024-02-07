@@ -15,9 +15,6 @@ final class ErrorListener
     {
     }
 
-    /**
-     * @psalm-suppress PossiblyNullArgument
-     */
     public function onError(ConsoleErrorEvent $event): void
     {
         if ($this->logger === null) {
@@ -27,15 +24,13 @@ final class ErrorListener
         $exception = $event->getError();
         $command = $event->getCommand();
 
-        $commandName = ($command !== null && $command->getName() !== null) ? $command->getName() : 'unknown';
-
         $message = sprintf(
             '%s: %s in %s:%s while running console command "%s".',
             $exception::class,
             $exception->getMessage(),
             $exception->getFile(),
             $exception->getLine(),
-            $commandName,
+            $command?->getName() ?? 'unknown',
         );
 
         $this->logger->error($message, ['exception' => $exception]);
