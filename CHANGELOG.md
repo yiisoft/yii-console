@@ -2,7 +2,7 @@
 
 ## 2.1.3 under development
 
-- no changes in this release.
+- Enh #194: Allow to use `ErrorListiner` without logger (@vjik)
 
 ## 2.1.2 December 26, 2023
 
@@ -14,7 +14,7 @@
 
 ## 2.1.0 May 28, 2023
 
-- Bug #172: Fix accepting `:` as command name separator, offer using it by default (samdark)
+- Bug #172: Fix accepting `:` as command name separator, offer using it by default (@samdark)
 - Bug #179: Remove duplicate messages about server address (@samdark)
 - Enh #180: Enhance output of `serve` command, add `--xdebug` option for `serve` (@xepozz)
 

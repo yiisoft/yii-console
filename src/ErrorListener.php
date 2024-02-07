@@ -11,7 +11,7 @@ use function sprintf;
 
 final class ErrorListener
 {
-    public function __construct(private LoggerInterface $logger)
+    public function __construct(private ?LoggerInterface $logger = null)
     {
     }
 
@@ -20,6 +20,10 @@ final class ErrorListener
      */
     public function onError(ConsoleErrorEvent $event): void
     {
+        if ($this->logger === null) {
+            return;
+        }
+
         $exception = $event->getError();
         $command = $event->getCommand();
 
