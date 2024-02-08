@@ -11,19 +11,18 @@ use function sprintf;
 
 final class ErrorListener
 {
-    public function __construct(private LoggerInterface $logger)
+    public function __construct(private ?LoggerInterface $logger = null)
     {
     }
 
-    /**
-     * @psalm-suppress PossiblyNullArgument
-     */
     public function onError(ConsoleErrorEvent $event): void
     {
+        if ($this->logger === null) {
+            return;
+        }
+
         $exception = $event->getError();
         $command = $event->getCommand();
-
-        $commandName = ($command !== null && $command->getName() !== null) ? $command->getName() : 'unknown';
 
         $message = sprintf(
             '%s: %s in %s:%s while running console command "%s".',
@@ -31,7 +30,7 @@ final class ErrorListener
             $exception->getMessage(),
             $exception->getFile(),
             $exception->getLine(),
-            $commandName,
+            $command?->getName() ?? 'unknown',
         );
 
         $this->logger->error($message, ['exception' => $exception]);
