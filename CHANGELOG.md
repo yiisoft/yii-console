@@ -1,5 +1,9 @@
 # Yii Console Change Log
 
+## 2.2.1 under development
+
+- no changes in this release.
+
 ## 2.2.0 February 17, 2024
 
 - Enh #194: Allow to use `ErrorListiner` without logger (@vjik)
