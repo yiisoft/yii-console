@@ -15,11 +15,11 @@
 [![static analysis](https://github.com/yiisoft/yii-console/workflows/static%20analysis/badge.svg)](https://github.com/yiisoft/yii-console/actions?query=workflow%3A%22static+analysis%22)
 [![type-coverage](https://shepherd.dev/github/yiisoft/yii-console/coverage.svg)](https://shepherd.dev/github/yiisoft/yii-console)
 
-Yii Console package provides a console that could be added to an application. This console is based on 
+Yii Console package provides a console that could be added to an application. This console is based on
 [Symfony Console](https://github.com/symfony/console). The following extra features are added:
 
 - lazy command loader;
-- `SymfonyEventDispatcher` class that allows to use any [PSR-14](https://www.php-fig.org/psr/psr-14/) compatible event 
+- `SymfonyEventDispatcher` class that allows to use any [PSR-14](https://www.php-fig.org/psr/psr-14/) compatible event
   dispatcher with Symfony console;
 - `ErrorListener` for logging console errors to any [PSR-3](https://www.php-fig.org/psr/psr-3/) compatible logger;
 - console command `serve` that runs PHP built-in web server;
@@ -103,7 +103,6 @@ your-console-entry-script my/custom
 
 > When naming commands use `:` as a separator. For example: `user:create`, `user:delete`, etc.
 
-
 Since the package is based on [Symfony Console component](https://symfony.com/doc/current/components/console.html),
 refer to its documentation for details on how to use the binary and create your own commands.
 
@@ -113,7 +112,6 @@ To configure commands, set the names and aliases in `\Yiisoft\Yii\Console\Comman
 Names and aliases from the command class itself are always ignored.
 
 The command can be marked as hidden by prefixing its name with `|`.
-
 
 ```php
 'yiisoft/yii-console' => [
@@ -128,10 +126,12 @@ The command can be marked as hidden by prefixing its name with `|`.
 ### Runs PHP built-in web server
 
 You can start local built-in web development server using the command:
-```
+
+```shell
 ./yii serve
 ```
-Your application will be accessible in your web browser at http://localhost:8080 by default.
+
+Your application will be accessible in your web browser at <http://localhost:8080> by default.
 To configure default settings, set the options in `\Yiisoft\Yii\Console\CommandLoader` configuration.
 
 ```php
@@ -155,12 +155,10 @@ Alternatively, you can pass the settings through the console options. To see the
 
 - [Internals](docs/internals.md)
 
-## License
+## Support
 
-The Yii Console is free software. It's released under the terms of the BSD License.
-Please see [`LICENSE`](./LICENSE.md) for more information.
-
-Maintained by [Yii Software](https://www.yiiframework.com/).
+If you need help or have a question, the [Yii Forum](https://forum.yiiframework.com/c/yii-3-0/63) is a good place for that.
+You may also check out other [Yii Community Resources](https://www.yiiframework.com/community).
 
 ## Support the project
 
@@ -173,3 +171,10 @@ Maintained by [Yii Software](https://www.yiiframework.com/).
 [![Telegram](https://img.shields.io/badge/telegram-join-1DA1F2?style=flat&logo=telegram)](https://t.me/yii3en)
 [![Facebook](https://img.shields.io/badge/facebook-join-1DA1F2?style=flat&logo=facebook&logoColor=ffffff)](https://www.facebook.com/groups/yiitalk)
 [![Slack](https://img.shields.io/badge/slack-join-1DA1F2?style=flat&logo=slack)](https://yiiframework.com/go/slack)
+
+## License
+
+The Yii Console is free software. It is released under the terms of the BSD License.
+Please see [`LICENSE`](./LICENSE.md) for more information.
+
+Maintained by [Yii Software](https://www.yiiframework.com/).
