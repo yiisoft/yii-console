@@ -131,7 +131,7 @@ final class Serve extends Command
         }
 
         if ($this->isAddressTaken($address)) {
-            $io->error("https://$address is taken by another process.");
+            $io->error("http://$address is taken by another process.");
             return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
         }
 
