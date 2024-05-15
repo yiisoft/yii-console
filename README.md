@@ -46,10 +46,17 @@ In case you use one of Yii 3 standard application templates, console could be ac
 If not, then in the simplest use case in your console entry script do the following:
 
 ```php
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
 use Yiisoft\Di\Container;
 use Yiisoft\Di\ContainerConfig;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\CommandLoader;
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 $app = new Application();
 
