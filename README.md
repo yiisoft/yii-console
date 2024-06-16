@@ -74,14 +74,17 @@ Since `\Yiisoft\Yii\Console\CommandLoader` uses lazy loading of commands, it's n
 to specify the name and description in static properties when creating a command:
 
 ```php
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Yiisoft\Yii\Console\ExitCode;
 
+
+#[AsCommand(
+    name: 'my:custom',
+    description: 'Description of my custom command.'
+)]
 final class MyCustomCommand extends Command
-{
-    protected static $defaultName = 'my:custom';
-    protected static $defaultDescription = 'Description of my custom command.';
-    
+{    
     protected function configure(): void
     {
         // ...
