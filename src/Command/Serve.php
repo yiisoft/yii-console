@@ -161,7 +161,7 @@ final class Serve extends Command
             $xDebugInstalled ? sprintf(
                 '%s, %s',
                 phpversion('xdebug'),
-                $xDebugEnabled ? '<info>enabled</>' : '<error>disabled</>',
+                $xDebugEnabled ? '<info>enabled</>' : '<error>disabled. Add --xdebug 1 to enable</>',
             ) : '<error>Not installed</>',
         ];
         $outputTable[] = ['Workers', $isLinux ? $workers : 'Not supported'];
