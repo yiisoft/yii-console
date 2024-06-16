@@ -151,8 +151,11 @@ To configure default settings, set the options in `\Yiisoft\Yii\Console\CommandL
 ],
 ```
 
-Alternatively, you can pass the settings through the console options. To see the available options, run
-`./yii serve --help`
+Alternatively, you can pass the settings through the console options.
+
+> Tip: To run a web server with XDebug enabled, pass `--xdebug 1` to the command.
+
+To see the available options, run `./yii serve --help`.
 
 ## Documentation
 
