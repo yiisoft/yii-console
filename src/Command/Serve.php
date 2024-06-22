@@ -12,8 +12,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Yiisoft\Yii\Console\ExitCode;
+
+use function explode;
+use function fclose;
+use function file_exists;
+use function fsockopen;
+use function is_dir;
+use function passthru;
 
 use function explode;
 use function fclose;
@@ -79,6 +87,7 @@ final class Serve extends Command
                 $this->defaultWorkers
             )
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.')
+            ->addOption('open', 'o', InputOption::VALUE_OPTIONAL, 'Opens the serving server in the default browser.')
             ->addOption('xdebug', 'x', InputOption::VALUE_OPTIONAL, 'Enables XDEBUG session.', false);
     }
 
@@ -149,7 +158,7 @@ final class Serve extends Command
         }
 
         $xDebugInstalled = extension_loaded('xdebug');
-        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug') && $input->getOption('xdebug');
+        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug') && $input->getOption('xdebug') === null;
 
         if ($xDebugEnabled) {
             $command[] = 'XDEBUG_MODE=debug XDEBUG_TRIGGER=yes';
@@ -161,15 +170,16 @@ final class Serve extends Command
             $xDebugInstalled ? sprintf(
                 '%s, %s',
                 phpversion('xdebug'),
-                $xDebugEnabled ? '<info>enabled</>' : '<error>disabled</>',
+                $xDebugEnabled ? '<info> Enabled </>' : '<error> Disabled </>',
             ) : '<error>Not installed</>',
+            '--xdebug',
         ];
-        $outputTable[] = ['Workers', $isLinux ? $workers : 'Not supported'];
+        $outputTable[] = ['Workers', $isLinux ? $workers : 'Not supported', '--workers, -w'];
         $outputTable[] = ['Address', $address];
-        $outputTable[] = ['Document root', $documentRoot];
-        $outputTable[] = ($router ? ['Routing file', $router] : []);
+        $outputTable[] = ['Document root', $documentRoot, '--docroot, -t'];
+        $outputTable[] = ($router ? ['Routing file', $router, '--router, -r'] : []);
 
-        $io->table(['Configuration'], $outputTable);
+        $io->table(['Configuration', null, 'Options'], $outputTable);
 
         $command[] = '"' . PHP_BINARY . '"' . " -S $address -t \"$documentRoot\" $router";
         $command = implode(' ', $command);
@@ -185,6 +195,11 @@ final class Serve extends Command
             return ExitCode::OK;
         }
 
+        $openInBrowser = $input->hasOption('open') && $input->getOption('open') === null;
+
+        if ($openInBrowser) {
+            passthru('open http://' . $address);
+        }
         passthru($command, $result);
 
         return $result;
