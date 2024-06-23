@@ -132,8 +132,42 @@ final class Serve extends Command
         }
 
         if ($this->isAddressTaken($address)) {
-            $io->error("http://$address is taken by another process.");
-            return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
+            $runningCommandPIDs = shell_exec("lsof -ti :8080 -s TCP:LISTEN");
+            if (!empty($runningCommandPIDs)) {
+                $runningCommandPIDs = array_filter(explode("\n", $runningCommandPIDs));
+            }
+            sort($runningCommandPIDs);
+
+            $io->block([
+                "Port {$port} is taken by the processes:",
+                ...array_map(
+                    fn ($pid) => sprintf(
+                        '#%s: %s',
+                        $pid,
+                        shell_exec("ps {$pid} -o command="),
+                    ),
+                    $runningCommandPIDs,
+                ),
+            ],
+                'ERROR',
+                'error',
+            );
+            if (!$io->confirm('Kill the process', true)) {
+                return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
+            }
+            $io->info([
+                'Stopping the processes...',
+            ]);
+            $out = array_filter(
+                array_map(
+                    fn ($pid) => shell_exec("kill -9 {$pid}"),
+                    $runningCommandPIDs,
+                )
+            );
+            if (!empty($out)) {
+                $io->error($out);
+                return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
+            }
         }
 
         if ($router !== null && !file_exists($router)) {
@@ -189,12 +223,22 @@ final class Serve extends Command
 
         $openInBrowser = $input->hasOption('open') && $input->getOption('open') === null;
 
-        if ($openInBrowser) {
-            passthru('open http://' . $address);
-        }
+        //if ($openInBrowser) {
+        //    passthru('open http://' . $address);
+        //}
         passthru($command, $result);
+        //$descriptorspec = array(
+        //    0 => array("pipe", "r"),  // stdin - канал, из которого дочерний процесс будет читать
+        //    1 => array("pipe", "w"),  // stdout - канал, в который дочерний процесс будет записывать
+        //    2 => array("file", "/tmp/error-output.txt", "a") // stderr - файл для записи
+        //);
 
-        return $result;
+        //$cwd = dirname($documentRoot);
+        //$process = proc_open($command, $descriptorspec, $cwd);
+        //
+        //var_dump($process);
+
+        return 0;
     }
 
     /**
