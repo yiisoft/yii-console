@@ -2,6 +2,7 @@
 
 ## 2.2.1 under development
 
+- Enh #211: Add ability to terminate the processes that taken the port (@xepozz)
 - Enh #207: Add `--open` option for `serve` command (@xepozz)
 - Enh #207: Print possible options for `serve` command (@xepozz)
 
