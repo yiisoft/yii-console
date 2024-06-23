@@ -94,7 +94,7 @@ final class Serve extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $io->title('Yii3 Development Server');
-        $io->writeln('https://yiiframework.com' . "\n");
+        $io->writeln('Welcome to Yii Console' . "\n");
 
         /** @var string $address */
         $address = $input->getArgument('address');
