@@ -132,23 +132,24 @@ final class Serve extends Command
         }
 
         if ($this->isAddressTaken($address)) {
-            $runningCommandPIDs = shell_exec("lsof -ti :8080 -s TCP:LISTEN");
+            $runningCommandPIDs = shell_exec('lsof -ti :8080 -s TCP:LISTEN');
             if (!empty($runningCommandPIDs)) {
                 $runningCommandPIDs = array_filter(explode("\n", $runningCommandPIDs));
             }
             sort($runningCommandPIDs);
 
-            $io->block([
-                "Port {$port} is taken by the processes:",
-                ...array_map(
-                    fn ($pid) => sprintf(
-                        '#%s: %s',
-                        $pid,
-                        shell_exec("ps {$pid} -o command="),
+            $io->block(
+                [
+                    "Port {$port} is taken by the processes:",
+                    ...array_map(
+                        fn ($pid) => sprintf(
+                            '#%s: %s',
+                            $pid,
+                            shell_exec("ps {$pid} -o command="),
+                        ),
+                        $runningCommandPIDs,
                     ),
-                    $runningCommandPIDs,
-                ),
-            ],
+                ],
                 'ERROR',
                 'error',
             );
