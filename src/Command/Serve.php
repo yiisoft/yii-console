@@ -22,13 +22,6 @@ use function fsockopen;
 use function is_dir;
 use function passthru;
 
-use function explode;
-use function fclose;
-use function file_exists;
-use function fsockopen;
-use function is_dir;
-use function passthru;
-
 #[AsCommand('serve', 'Runs PHP built-in web server')]
 final class Serve extends Command
 {
