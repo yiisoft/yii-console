@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console\Command;
 
-use Symfony\Component\Console\Attribute\AsCommand;
+use function fclose;
+use function is_dir;
+use function explode;
+use function passthru;
+use function fsockopen;
+use function file_exists;
+use Composer\InstalledVersions;
+use Yiisoft\Yii\Console\ExitCode;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Completion\CompletionInput;
-use Symfony\Component\Console\Completion\CompletionSuggestions;
+use Symfony\Component\Console\Input\InputOption;
+
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Yiisoft\Yii\Console\ExitCode;
-
-use function explode;
-use function fclose;
-use function file_exists;
-use function fsockopen;
-use function is_dir;
-use function passthru;
+use Symfony\Component\Console\Completion\CompletionInput;
+use Symfony\Component\Console\Completion\CompletionSuggestions;
 
 #[AsCommand('serve', 'Runs PHP built-in web server')]
 final class Serve extends Command
@@ -94,7 +95,7 @@ final class Serve extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $io->title('Yii3 Development Server');
-        $io->writeln('https://yiiframework.com' . "\n");
+        $io->writeln('Welcome to Yii v' . substr(InstalledVersions::getVersion('yiisoft/yii-console'), 0, -2) . ' Console' . "\n");
 
         /** @var string $address */
         $address = $input->getArgument('address');
