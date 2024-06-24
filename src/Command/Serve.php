@@ -132,6 +132,11 @@ final class Serve extends Command
         }
 
         if ($this->isAddressTaken($address)) {
+            if ($this->isWindows()) {
+                $io->error("Port {$port} is taken by another process");
+                return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
+            }
+
             $runningCommandPIDs = trim((string) shell_exec('lsof -ti :8080 -s TCP:LISTEN'));
             if (empty($runningCommandPIDs)) {
                 $io->error("Port {$port} is taken by another process");
@@ -272,5 +277,10 @@ final class Serve extends Command
         }
 
         return getcwd();
+    }
+
+    private function isWindows(): bool
+    {
+        return stripos(PHP_OS, 'Win') === 0;
     }
 }
