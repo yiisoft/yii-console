@@ -132,10 +132,13 @@ final class Serve extends Command
         }
 
         if ($this->isAddressTaken($address)) {
-            $runningCommandPIDs = shell_exec('lsof -ti :8080 -s TCP:LISTEN');
-            if (!empty($runningCommandPIDs)) {
-                $runningCommandPIDs = array_filter(explode("\n", $runningCommandPIDs));
+            $runningCommandPIDs = trim((string) shell_exec('lsof -ti :8080 -s TCP:LISTEN'));
+            if (empty($runningCommandPIDs)) {
+                $io->error("Port {$port} is taken by another process");
+                return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
             }
+
+            $runningCommandPIDs = array_filter(explode("\n", $runningCommandPIDs));
             sort($runningCommandPIDs);
 
             $io->block(
@@ -185,7 +188,9 @@ final class Serve extends Command
         }
 
         $xDebugInstalled = extension_loaded('xdebug');
-        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug') && $input->getOption('xdebug') === null;
+        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug') && $input->getOption(
+                'xdebug'
+            ) === null;
 
         if ($xDebugEnabled) {
             $command[] = 'XDEBUG_MODE=debug XDEBUG_TRIGGER=yes';
