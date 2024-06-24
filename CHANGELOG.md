@@ -2,7 +2,8 @@
 
 ## 2.2.1 under development
 
-- no changes in this release.
+- Enh #207: Add `--open` option for `serve` command (@xepozz)
+- Enh #207: Print possible options for `serve` command (@xepozz)
 
 ## 2.2.0 February 17, 2024
 
