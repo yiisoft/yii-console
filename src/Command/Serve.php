@@ -145,7 +145,7 @@ final class Serve extends Command
                         fn ($pid) => sprintf(
                             '#%s: %s',
                             $pid,
-                            shell_exec("ps {$pid} -o command="),
+                            shell_exec("ps -o command= {$pid}"),
                         ),
                         $runningCommandPIDs,
                     ),
