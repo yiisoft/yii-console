@@ -189,8 +189,8 @@ final class Serve extends Command
 
         $xDebugInstalled = extension_loaded('xdebug');
         $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug') && $input->getOption(
-                'xdebug'
-            ) === null;
+            'xdebug'
+        ) === null;
 
         if ($xDebugEnabled) {
             $command[] = 'XDEBUG_MODE=debug XDEBUG_TRIGGER=yes';
