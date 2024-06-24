@@ -153,7 +153,7 @@ final class Serve extends Command
                 [
                     "Port {$port} is taken by the processes:",
                     ...array_map(
-                    /** @psalm-suppress ForbiddenCode, PossiblyNullArgument */
+                        /** @psalm-suppress ForbiddenCode, PossiblyNullArgument */
                         fn (string $pid) => sprintf(
                             '#%s: %s',
                             $pid,
