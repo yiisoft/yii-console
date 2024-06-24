@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console\Tests;
 
+use RuntimeException;
 use Symfony\Component\Console\Tester\CommandCompletionTester;
 use Symfony\Component\Console\Tester\CommandTester;
 use Yiisoft\Yii\Console\Command\Serve;
@@ -124,10 +125,17 @@ final class ServeCommandTest extends TestCase
                 $output
             );
         } else {
-            $socket = socket_create_listen(8080);
+            $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+
+            $address = '127.0.0.1';
+            $port = 8081;
+            socket_bind($sock, $address, $port) or throw new RuntimeException('Could not bind to address');
+
+            socket_listen($sock);
 
             $commandCreate->execute([
-                'address' => '127.0.0.1:8080',
+                'address' => '127.0.0.1',
+                '--port' => $port,
                 '--docroot' => 'tests',
                 '--env' => 'test',
             ]);
@@ -137,11 +145,10 @@ final class ServeCommandTest extends TestCase
             $this->assertSame(Serve::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS, $commandCreate->getStatusCode());
 
             $this->assertStringContainsString(
-                '[ERROR] http://127.0.0.1:8080 is taken by another process.',
+                '[ERROR] Port ' . $port . ' is taken by another process.',
                 $output
             );
-
-            socket_close($socket);
+            socket_close($sock);
         }
     }
 

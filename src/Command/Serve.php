@@ -79,7 +79,7 @@ final class Serve extends Command
                 $this->defaultWorkers
             )
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.')
-            ->addOption('open', 'o', InputOption::VALUE_OPTIONAL, 'Opens the serving server in the default browser.')
+            ->addOption('open', 'o', InputOption::VALUE_OPTIONAL, 'Opens the serving server in the default browser.', false)
             ->addOption('xdebug', 'x', InputOption::VALUE_OPTIONAL, 'Enables XDEBUG session.', false);
     }
 
@@ -133,13 +133,13 @@ final class Serve extends Command
 
         if ($this->isAddressTaken($address)) {
             if ($this->isWindows()) {
-                $io->error("Port {$port} is taken by another process");
+                $io->error("Port {$port} is taken by another process.");
                 return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
             }
 
             $runningCommandPIDs = trim((string) shell_exec('lsof -ti :8080 -s TCP:LISTEN'));
             if (empty($runningCommandPIDs)) {
-                $io->error("Port {$port} is taken by another process");
+                $io->error("Port {$port} is taken by another process.");
                 return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
             }
 
@@ -234,22 +234,12 @@ final class Serve extends Command
 
         $openInBrowser = $input->hasOption('open') && $input->getOption('open') === null;
 
-        //if ($openInBrowser) {
-        //    passthru('open http://' . $address);
-        //}
+        if ($openInBrowser) {
+            passthru('open http://' . $address);
+        }
         passthru($command, $result);
-        //$descriptorspec = array(
-        //    0 => array("pipe", "r"),  // stdin - канал, из которого дочерний процесс будет читать
-        //    1 => array("pipe", "w"),  // stdout - канал, в который дочерний процесс будет записывать
-        //    2 => array("file", "/tmp/error-output.txt", "a") // stderr - файл для записи
-        //);
 
-        //$cwd = dirname($documentRoot);
-        //$process = proc_open($command, $descriptorspec, $cwd);
-        //
-        //var_dump($process);
-
-        return 0;
+        return $result;
     }
 
     /**
