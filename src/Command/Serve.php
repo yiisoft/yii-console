@@ -124,6 +124,8 @@ final class Serve extends Command
 
         if (!str_contains($address, ':')) {
             $address .= ':' . $port;
+        } else {
+            $port = explode(':', $address)[1];
         }
 
         if (!is_dir($documentRoot)) {
