@@ -80,6 +80,7 @@ final class Serve extends Command
                 $this->defaultWorkers
             )
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.')
+            ->addOption('open', 'o', InputOption::VALUE_OPTIONAL, 'Opens the serving server in the default browser.')
             ->addOption('xdebug', 'x', InputOption::VALUE_OPTIONAL, 'Enables XDEBUG session.', false);
     }
 
@@ -150,7 +151,7 @@ final class Serve extends Command
         }
 
         $xDebugInstalled = extension_loaded('xdebug');
-        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug') && $input->getOption('xdebug');
+        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug') && $input->getOption('xdebug') === null;
 
         if ($xDebugEnabled) {
             $command[] = 'XDEBUG_MODE=debug XDEBUG_TRIGGER=yes';
@@ -162,15 +163,16 @@ final class Serve extends Command
             $xDebugInstalled ? sprintf(
                 '%s, %s',
                 phpversion('xdebug'),
-                $xDebugEnabled ? '<info>enabled</>' : '<error>disabled. Add --xdebug 1 to enable</>',
+                $xDebugEnabled ? '<info> Enabled </>' : '<error> Disabled </>',
             ) : '<error>Not installed</>',
+            '--xdebug',
         ];
-        $outputTable[] = ['Workers', $isLinux ? $workers : 'Not supported'];
+        $outputTable[] = ['Workers', $isLinux ? $workers : 'Not supported', '--workers, -w'];
         $outputTable[] = ['Address', $address];
-        $outputTable[] = ['Document root', $documentRoot];
-        $outputTable[] = ($router ? ['Routing file', $router] : []);
+        $outputTable[] = ['Document root', $documentRoot, '--docroot, -t'];
+        $outputTable[] = ($router ? ['Routing file', $router, '--router, -r'] : []);
 
-        $io->table(['Configuration'], $outputTable);
+        $io->table(['Configuration', null, 'Options'], $outputTable);
 
         $command[] = '"' . PHP_BINARY . '"' . " -S $address -t \"$documentRoot\" $router";
         $command = implode(' ', $command);
@@ -186,6 +188,11 @@ final class Serve extends Command
             return ExitCode::OK;
         }
 
+        $openInBrowser = $input->hasOption('open') && $input->getOption('open') === null;
+
+        if ($openInBrowser) {
+            passthru('open http://' . $address);
+        }
         passthru($command, $result);
 
         return $result;
