@@ -153,10 +153,10 @@ final class Serve extends Command
                 [
                     "Port {$port} is taken by the processes:",
                     ...array_map(
-                        fn ($pid) => sprintf(
+                    /** @psalm-suppress ForbiddenCode, PossiblyNullArgument */
+                        fn (string $pid) => sprintf(
                             '#%s: %s',
                             $pid,
-                            /** @psalm-suppress ForbiddenCode */
                             shell_exec("ps -o command= -p {$pid}"),
                         ),
                         $runningCommandPIDs,
@@ -174,7 +174,7 @@ final class Serve extends Command
             $out = array_filter(
                 array_map(
                     /** @psalm-suppress ForbiddenCode */
-                    fn ($pid) => shell_exec("kill -9 {$pid}"),
+                    fn (string $pid) => shell_exec("kill -9 {$pid}"),
                     $runningCommandPIDs,
                 )
             );
