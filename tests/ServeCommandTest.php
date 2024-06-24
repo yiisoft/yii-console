@@ -129,7 +129,7 @@ final class ServeCommandTest extends TestCase
 
             $address = '127.0.0.1';
             $port = 8081;
-            socket_bind($sock, $address, $port) or throw new RuntimeException('Could not bind to address');
+            socket_bind($sock, $address, $port) || throw new RuntimeException('Could not bind to address');
 
             socket_listen($sock);
 
