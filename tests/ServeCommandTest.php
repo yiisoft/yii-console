@@ -121,7 +121,7 @@ final class ServeCommandTest extends TestCase
             $output = $commandCreate->getDisplay(true);
 
             $this->assertStringContainsString(
-                '[ERROR] http://127.0.0.1:445 is taken by another process.',
+                '[ERROR] Port 8080 is taken by another process.',
                 $output
             );
         } else {

@@ -137,6 +137,7 @@ final class Serve extends Command
                 return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
             }
 
+            /** @psalm-suppress ForbiddenCode */
             $runningCommandPIDs = trim((string) shell_exec('lsof -ti :8080 -s TCP:LISTEN'));
             if (empty($runningCommandPIDs)) {
                 $io->error("Port {$port} is taken by another process.");
@@ -153,6 +154,7 @@ final class Serve extends Command
                         fn ($pid) => sprintf(
                             '#%s: %s',
                             $pid,
+                            /** @psalm-suppress ForbiddenCode */
                             shell_exec("ps -o command= -p {$pid}"),
                         ),
                         $runningCommandPIDs,
@@ -169,6 +171,7 @@ final class Serve extends Command
             ]);
             $out = array_filter(
                 array_map(
+                    /** @psalm-suppress ForbiddenCode */
                     fn ($pid) => shell_exec("kill -9 {$pid}"),
                     $runningCommandPIDs,
                 )
