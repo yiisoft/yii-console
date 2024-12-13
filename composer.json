@@ -38,7 +38,7 @@
     "require-dev": {
         "maglnet/composer-require-checker": "^3.8|^4.4",
         "phpunit/phpunit": "^9.5",
-        "rector/rector": "^1.0.0",
+        "rector/rector": "^2.0.3",
         "roave/infection-static-analysis-plugin": "^1.16",
         "vimeo/psalm": "^4.30|^5.20",
         "yiisoft/config": "^1.3",
