@@ -15,7 +15,5 @@ return RectorConfig::configure()
     ])
     ->withRules([
         InlineConstructorDefaultToPropertyRector::class,
-        ExplicitNullableParamTypeRector::class,
     ])
-    ->withPhpSets(php80: true)
-    ->withPhpVersion(PhpVersion::PHP_84);
+    ->withPhpSets(php80: true);
