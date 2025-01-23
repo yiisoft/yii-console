@@ -4,6 +4,7 @@
 
 - Enh #207: Add `--open` option for `serve` command (@xepozz)
 - Enh #207: Print possible options for `serve` command (@xepozz)
+- Enh #218: Update Application to support PHP 8.4 (@alexander-schranz)
 
 ## 2.2.0 February 17, 2024
 

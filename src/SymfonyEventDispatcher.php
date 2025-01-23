@@ -22,7 +22,7 @@ final class SymfonyEventDispatcher implements EventDispatcherInterface
      *
      * @psalm-return T
      */
-    public function dispatch(object $event, string $eventName = null): object
+    public function dispatch(object $event, ?string $eventName = null): object
     {
         /** @psalm-var T */
         return $this->dispatcher->dispatch($event);

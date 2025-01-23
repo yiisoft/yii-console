@@ -87,7 +87,7 @@ final class Application extends \Symfony\Component\Console\Application
             ->addOption($options);
     }
 
-    public function extractNamespace(string $name, int $limit = null): string
+    public function extractNamespace(string $name, ?int $limit = null): string
     {
         return parent::extractNamespace(str_replace('/', ':', $name), $limit);
     }
