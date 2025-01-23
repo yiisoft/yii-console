@@ -1,6 +1,6 @@
 # Yii Console Change Log
 
-## 2.2.1 under development
+## 2.3.0 January 23, 2025
 
 - Enh #207: Add `--open` option for `serve` command (@xepozz)
 - Enh #207: Print possible options for `serve` command (@xepozz)
