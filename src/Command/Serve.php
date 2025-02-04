@@ -79,7 +79,7 @@ final class Serve extends Command
                 $this->defaultWorkers
             )
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.')
-            ->addOption('open', 'o', InputOption::VALUE_OPTIONAL, 'Opens the serving server in the default browser.')
+            ->addOption('open', 'o', InputOption::VALUE_OPTIONAL, 'Opens the serving server in the default browser.', false)
             ->addOption('xdebug', 'x', InputOption::VALUE_OPTIONAL, 'Enables XDEBUG session.', false);
     }
 
@@ -124,6 +124,8 @@ final class Serve extends Command
 
         if (!str_contains($address, ':')) {
             $address .= ':' . $port;
+        } else {
+            $port = explode(':', $address)[1];
         }
 
         if (!is_dir($documentRoot)) {
@@ -132,8 +134,54 @@ final class Serve extends Command
         }
 
         if ($this->isAddressTaken($address)) {
-            $io->error("http://$address is taken by another process.");
-            return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
+            if ($this->isWindows()) {
+                $io->error("Port {$port} is taken by another process.");
+                return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
+            }
+
+            /** @psalm-suppress ForbiddenCode */
+            $runningCommandPIDs = trim((string) shell_exec('lsof -ti :8080 -s TCP:LISTEN'));
+            if (empty($runningCommandPIDs)) {
+                $io->error("Port {$port} is taken by another process.");
+                return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
+            }
+
+            $runningCommandPIDs = array_filter(explode("\n", $runningCommandPIDs));
+            sort($runningCommandPIDs);
+
+            $io->block(
+                [
+                    "Port {$port} is taken by the processes:",
+                    ...array_map(
+                        /** @psalm-suppress ForbiddenCode, PossiblyNullArgument */
+                        fn (string $pid) => sprintf(
+                            '#%s: %s',
+                            $pid,
+                            shell_exec("ps -o command= -p {$pid}"),
+                        ),
+                        $runningCommandPIDs,
+                    ),
+                ],
+                'ERROR',
+                'error',
+            );
+            if (!$io->confirm('Kill the process', true)) {
+                return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
+            }
+            $io->info([
+                'Stopping the processes...',
+            ]);
+            $out = array_filter(
+                array_map(
+                    /** @psalm-suppress ForbiddenCode */
+                    fn (string $pid) => shell_exec("kill -9 {$pid}"),
+                    $runningCommandPIDs,
+                )
+            );
+            if (!empty($out)) {
+                $io->error($out);
+                return self::EXIT_CODE_ADDRESS_TAKEN_BY_ANOTHER_PROCESS;
+            }
         }
 
         if ($router !== null && !file_exists($router)) {
@@ -150,7 +198,9 @@ final class Serve extends Command
         }
 
         $xDebugInstalled = extension_loaded('xdebug');
-        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug') && $input->getOption('xdebug') === null;
+        $xDebugEnabled = $isLinux && $xDebugInstalled && $input->hasOption('xdebug') && $input->getOption(
+            'xdebug'
+        ) === null;
 
         if ($xDebugEnabled) {
             $command[] = 'XDEBUG_MODE=debug XDEBUG_TRIGGER=yes';
@@ -222,5 +272,10 @@ final class Serve extends Command
         }
 
         return getcwd();
+    }
+
+    private function isWindows(): bool
+    {
+        return stripos(PHP_OS, 'Win') === 0;
     }
 }
