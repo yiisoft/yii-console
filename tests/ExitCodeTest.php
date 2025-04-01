@@ -18,7 +18,7 @@ final class ExitCodeTest extends TestCase
             ['Input file not found or unreadable', ExitCode::NOINPUT],
             ['User not found', ExitCode::NOUSER],
             ['Host not found', ExitCode::NOHOST],
-            ['A requied service is unavailable', ExitCode::UNAVAILABLE],
+            ['A required service is unavailable', ExitCode::UNAVAILABLE],
             ['Internal error', ExitCode::SOFTWARE],
             ['Error making system call or using OS service', ExitCode::OSERR],
             ['Error accessing system file', ExitCode::OSFILE],
