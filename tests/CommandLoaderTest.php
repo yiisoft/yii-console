@@ -15,7 +15,6 @@ use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\CommandLoader;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 use Yiisoft\Yii\Console\Tests\Stub\ErrorCommand;
-
 use Yiisoft\Yii\Console\Tests\Stub\StubCommand;
 
 use function class_exists;
