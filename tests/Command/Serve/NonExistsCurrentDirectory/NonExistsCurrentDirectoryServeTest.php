@@ -10,13 +10,16 @@ use Yiisoft\Yii\Console\Tests\TestCase;
 
 final class NonExistsCurrentDirectoryServeTest extends TestCase
 {
+    /**
+     * @requires OS Linux
+     */
     public function testBase(): void
     {
         $command = $this->application()->find('serve');
 
         $commandCreate = new CommandTester($command);
 
-        $directory = __DIR__ . DIRECTORY_SEPARATOR . 'test-dir';
+        $directory = __DIR__ . '/test-dir';
         if (!file_exists($directory)) {
             mkdir($directory);
         }
