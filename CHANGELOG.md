@@ -4,6 +4,7 @@
 
 - Enh #226: Check empty string as key in command map in `CommandLoader` validation (@vjik)
 - Bug #224: Fix typo in `UNAVAILABLE` exit code reason (@vjik)
+- Bug #227: Throw `RuntimeException` in `ServeCommand` when it wasn't possible to find out the current directory (@vjik)
 
 ## 2.3.0 January 23, 2025
 

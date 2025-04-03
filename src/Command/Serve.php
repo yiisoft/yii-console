@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console\Command;
 
+use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Completion\CompletionInput;
@@ -221,6 +222,11 @@ final class Serve extends Command
             return rtrim($this->appRootPath, DIRECTORY_SEPARATOR);
         }
 
-        return getcwd();
+        $currentDirectory = getcwd();
+        if ($currentDirectory === false) {
+            throw new RuntimeException('Failed to get current working directory.');
+        }
+
+        return $currentDirectory;
     }
 }
