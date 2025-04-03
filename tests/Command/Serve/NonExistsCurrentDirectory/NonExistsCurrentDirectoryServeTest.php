@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console\Tests\Command\Serve\NonExistsCurrentDirectory;
 
-
 use RuntimeException;
 use Symfony\Component\Console\Tester\CommandTester;
 use Yiisoft\Yii\Console\Tests\TestCase;
@@ -17,7 +16,7 @@ final class NonExistsCurrentDirectoryServeTest extends TestCase
 
         $commandCreate = new CommandTester($command);
 
-        $directory = __DIR__.'/test-dir';
+        $directory = __DIR__ . '/test-dir';
         if (!file_exists($directory)) {
             mkdir($directory);
         }
