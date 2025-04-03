@@ -15,6 +15,7 @@ use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\CommandLoader;
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 use Yiisoft\Yii\Console\Tests\Stub\ErrorCommand;
+use Yiisoft\Yii\Console\Tests\Stub\StubCommand;
 
 use function class_exists;
 
@@ -74,6 +75,17 @@ final class CommandLoaderTest extends TestCase
         $this->expectExceptionMessage('Do not allow empty command name or alias.');
 
         new CommandLoader(new SimpleContainer([Serve::class => new Serve()]), ['serve|' => Serve::class]);
+    }
+
+    public function testEmptyCommandAndAlias(): void
+    {
+        $container = new SimpleContainer();
+        $commandMap = ['' => StubCommand::class];
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('Do not allow empty command name or alias.');
+
+        new CommandLoader($container, $commandMap);
     }
 
     public function testConstructThrowExceptionIfItIsNotPossibleToCreateCommandObject(): void

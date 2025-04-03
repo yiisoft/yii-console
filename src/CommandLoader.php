@@ -114,8 +114,6 @@ final class CommandLoader implements CommandLoaderInterface
                 array_shift($aliases);
             }
 
-            /** @var string[] $aliases Fix for psalm. See {@link https://github.com/vimeo/psalm/issues/9261}. */
-
             $this->validateAliases($aliases);
 
             $primaryName = array_shift($aliases);
@@ -137,12 +135,15 @@ final class CommandLoader implements CommandLoaderInterface
     }
 
     /**
-     * @psalm-param string[] $aliases
+     * @psalm-param list<string> $aliases
      *
-     * @psalm-assert non-empty-string[] $aliases
+     * @psalm-assert non-empty-list<non-empty-string> $aliases
      */
     private function validateAliases(array $aliases): void
     {
+        if (empty($aliases)) {
+            throw new RuntimeException('Do not allow empty command name or alias.');
+        }
         foreach ($aliases as $alias) {
             if ($alias === '') {
                 throw new RuntimeException('Do not allow empty command name or alias.');
