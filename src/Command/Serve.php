@@ -158,15 +158,22 @@ final class Serve extends Command
         }
         $outputTable = [];
         $outputTable[] = ['PHP', PHP_VERSION];
-        $outputTable[] = [
-            'xDebug',
-            $xDebugInstalled ? sprintf(
+
+        if ($xDebugInstalled) {
+            /**
+             * @var string $xDebugVersion Here we know that xDebug is installed, so `phpversion` will not return false.
+             */
+            $xDebugVersion = phpversion('xdebug');
+            $xDebugLine = sprintf(
                 '%s, %s',
-                phpversion('xdebug'),
+                $xDebugVersion,
                 $xDebugEnabled ? '<info> Enabled </>' : '<error> Disabled </>',
-            ) : '<error>Not installed</>',
-            '--xdebug',
-        ];
+            );
+        } else {
+            $xDebugLine = '<error>Not installed</>';
+        }
+        $outputTable[] = ['xDebug', $xDebugLine, '--xdebug'];
+
         $outputTable[] = ['Workers', $isLinux ? $workers : 'Not supported', '--workers, -w'];
         $outputTable[] = ['Address', $address];
         $outputTable[] = ['Document root', $documentRoot, '--docroot, -t'];

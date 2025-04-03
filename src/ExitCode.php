@@ -26,6 +26,8 @@ namespace Yiisoft\Yii\Console;
  * ```
  *
  * @see https://man.openbsd.org/sysexits
+ *
+ * @final See https://github.com/yiisoft/yii-console/issues/225
  */
 class ExitCode
 {
