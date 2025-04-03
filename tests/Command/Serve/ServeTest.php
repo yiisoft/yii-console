@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Yiisoft\Yii\Console\Tests;
+namespace Yiisoft\Yii\Console\Tests\Command\Serve;
 
 use Symfony\Component\Console\Tester\CommandCompletionTester;
 use Symfony\Component\Console\Tester\CommandTester;
 use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\ExitCode;
+use Yiisoft\Yii\Console\Tests\TestCase;
 
-final class ServeCommandTest extends TestCase
+final class ServeTest extends TestCase
 {
     public function testServeCommandExecuteWithoutArguments(): void
     {
