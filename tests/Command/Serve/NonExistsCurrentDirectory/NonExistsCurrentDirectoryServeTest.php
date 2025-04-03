@@ -16,7 +16,7 @@ final class NonExistsCurrentDirectoryServeTest extends TestCase
 
         $commandCreate = new CommandTester($command);
 
-        $directory = __DIR__ . '/test-dir';
+        $directory = __DIR__ . DIRECTORY_SEPARATOR . 'test-dir';
         if (!file_exists($directory)) {
             mkdir($directory);
         }
