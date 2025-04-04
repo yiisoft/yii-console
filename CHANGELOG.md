@@ -2,6 +2,7 @@
 
 ## 2.3.1 under development
 
+- Chg #228: Change PHP constraint in `composer.json` to `8.0 - 8.4` (@vjik)
 - Enh #226: Check empty string as key in command map in `CommandLoader` validation (@vjik)
 - Bug #224: Fix typo in `UNAVAILABLE` exit code reason (@vjik)
 - Bug #227: Throw `RuntimeException` in `ServeCommand` when it wasn't possible to find out the current directory (@vjik)
