@@ -80,7 +80,7 @@ final class Serve extends Command
                 $this->defaultWorkers
             )
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.')
-            ->addOption('open', 'o', InputOption::VALUE_OPTIONAL, 'Opens the serving server in the default browser.')
+            ->addOption('open', 'o', InputOption::VALUE_OPTIONAL, 'Opens the serving server in the default browser.', false)
             ->addOption('xdebug', 'x', InputOption::VALUE_OPTIONAL, 'Enables XDEBUG session.', false);
     }
 
