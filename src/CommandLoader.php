@@ -52,6 +52,10 @@ final class CommandLoader implements CommandLoaderInterface
         $commandClass = $this->commandMap[$name]['class'];
         $commandHidden = $this->commandMap[$name]['hidden'];
 
+        /**
+         * @see https://github.com/yiisoft/yii-console/issues/229
+         * @psalm-suppress DeprecatedMethod
+         */
         $description = $commandClass::getDefaultDescription();
 
         if ($description === null) {
