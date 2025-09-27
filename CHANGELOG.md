@@ -1,6 +1,6 @@
 # Yii Console Change Log
 
-## 2.3.1 under development
+## 2.4.0 September 27, 2025
 
 - Chg #228: Change PHP constraint in `composer.json` to `8.0 - 8.4` (@vjik)
 - Enh #226: Check empty string as key in command map in `CommandLoader` validation (@vjik)
