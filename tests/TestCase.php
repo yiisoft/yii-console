@@ -66,29 +66,32 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         }
 
         $property = $reflection->getProperty($propertyName);
+
+        if (PHP_VERSION_ID >= 80100) {
+            return $property->getValue($object);
+        }
+
         $property->setAccessible(true);
         $result = $property->getValue($object);
         $property->setAccessible(false);
-
         return $result;
     }
 
     /**
      * Invokes an inaccessible method.
-     *
-     * @throws ReflectionException
-     *
-     * @return mixed
      */
-    protected function invokeMethod(object $object, string $method, array $args = [])
+    protected function invokeMethod(object $object, string $method, array $args = []): mixed
     {
         $reflection = new ReflectionObject($object);
-
         $method = $reflection->getMethod($method);
+
+        if (PHP_VERSION_ID >= 80100) {
+            return $method->invokeArgs($object, $args);
+        }
+
         $method->setAccessible(true);
         $result = $method->invokeArgs($object, $args);
         $method->setAccessible(false);
-
         return $result;
     }
 
