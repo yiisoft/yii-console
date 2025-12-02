@@ -1,6 +1,6 @@
 # Yii Console Change Log
 
-## 2.4.1 under development
+## 2.4.1 December 02, 2025
 
 - Eng #231: Add PHP 8.5 support (@vjik)
 
