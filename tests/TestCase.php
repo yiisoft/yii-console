@@ -6,7 +6,6 @@ namespace Yiisoft\Yii\Console\Tests;
 
 use Psr\Container\ContainerInterface;
 use ReflectionObject;
-use ReflectionException;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
