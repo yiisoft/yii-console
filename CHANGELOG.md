@@ -2,7 +2,7 @@
 
 ## 2.4.1 under development
 
-- no changes in this release.
+- Eng #231: Add PHP 8.5 support (@vjik)
 
 ## 2.4.0 September 27, 2025
 

@@ -28,7 +28,7 @@ Yii Console package provides a console that could be added to an application. Th
 
 ## Requirements
 
-- PHP 8.0 or higher.
+- PHP 8.0 - 8.5.
 
 ## Installation
 
