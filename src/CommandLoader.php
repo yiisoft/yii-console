@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Yiisoft\Yii\Console;
 
-use Composer\InstalledVersions;
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use RuntimeException;
@@ -35,6 +34,7 @@ final class CommandLoader implements CommandLoaderInterface
     private array $commandNames;
 
     private ?bool $symfonyConsoleVersionLess8 = null;
+
     /**
      * @param array $commandMap An array with command names as keys and service ids as values.
      *
