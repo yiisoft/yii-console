@@ -1,5 +1,9 @@
 # Yii Console Change Log
 
+## 2.4.3 under development
+
+- no changes in this release.
+
 ## 2.4.2 December 20, 2025
 
 - Enh #233: Add Symfony Console 8 support (@vjik)
