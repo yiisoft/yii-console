@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Yiisoft\Yii\Console;
 
 use Psr\Container\ContainerInterface;
+use ReflectionClass;
 use RuntimeException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Command\LazyCommand;
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
@@ -31,6 +33,8 @@ final class CommandLoader implements CommandLoaderInterface
      */
     private array $commandNames;
 
+    private ?bool $symfonyConsoleVersionLess8 = null;
+
     /**
      * @param array $commandMap An array with command names as keys and service ids as values.
      *
@@ -52,12 +56,7 @@ final class CommandLoader implements CommandLoaderInterface
         $commandClass = $this->commandMap[$name]['class'];
         $commandHidden = $this->commandMap[$name]['hidden'];
 
-        /**
-         * @see https://github.com/yiisoft/yii-console/issues/229
-         * @psalm-suppress DeprecatedMethod
-         */
-        $description = $commandClass::getDefaultDescription();
-
+        $description = $this->getCommandDescription($commandClass);
         if ($description === null) {
             return $this->getCommandInstance($name);
         }
@@ -153,5 +152,28 @@ final class CommandLoader implements CommandLoaderInterface
                 throw new RuntimeException('Do not allow empty command name or alias.');
             }
         }
+    }
+
+    /**
+     * @psalm-param class-string<Command> $commandClass
+     */
+    private function getCommandDescription(string $commandClass): ?string
+    {
+        $this->symfonyConsoleVersionLess8 ??= method_exists(Command::class, 'getDefaultDescription');
+
+        if ($this->symfonyConsoleVersionLess8) {
+            /**
+             * @see https://github.com/yiisoft/yii-console/issues/229
+             * @psalm-suppress DeprecatedMethod, UndefinedMethod
+             * @var string|null
+             */
+            return $commandClass::getDefaultDescription();
+        }
+
+        if ($attribute = (new ReflectionClass($commandClass))->getAttributes(AsCommand::class)) {
+            return $attribute[0]->newInstance()->description;
+        }
+
+        return null;
     }
 }
