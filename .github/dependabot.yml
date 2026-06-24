@@ -4,13 +4,13 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "daily"
-    # Too noisy. See https://github.community/t/increase-if-necessary-for-github-actions-in-dependabot/179581
-    open-pull-requests-limit: 0
-
-  # Maintain dependencies for Composer
+      interval: "weekly"
+    cooldown:
+      default-days: 7
     ignore:
       - dependency-name: "yiisoft/*"
+
+  # Maintain dependencies for Composer
   - package-ecosystem: "composer"
     directory: "/"
     schedule:
