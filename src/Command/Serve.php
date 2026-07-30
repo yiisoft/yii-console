@@ -22,6 +22,12 @@ use function file_exists;
 use function fsockopen;
 use function is_dir;
 use function passthru;
+use function extension_loaded;
+use function sprintf;
+
+use const DIRECTORY_SEPARATOR;
+use const PHP_BINARY;
+use const PHP_VERSION;
 
 #[AsCommand('serve', 'Runs PHP built-in web server')]
 final class Serve extends Command
@@ -60,7 +66,7 @@ final class Serve extends Command
     {
         $this
             ->setHelp(
-                'In order to access server from remote machines use 0.0.0.0:8000. That is especially useful when running server in a virtual machine.'
+                'In order to access server from remote machines use 0.0.0.0:8000. That is especially useful when running server in a virtual machine.',
             )
             ->addArgument('address', InputArgument::OPTIONAL, 'Host to serve at', $this->defaultAddress)
             ->addOption('port', 'p', InputOption::VALUE_OPTIONAL, 'Port to serve at', $this->defaultPort)
@@ -69,7 +75,7 @@ final class Serve extends Command
                 't',
                 InputOption::VALUE_OPTIONAL,
                 'Document root to serve from',
-                $this->defaultDocroot
+                $this->defaultDocroot,
             )
             ->addOption('router', 'r', InputOption::VALUE_OPTIONAL, 'Path to router script', $this->defaultRouter)
             ->addOption(
@@ -77,7 +83,7 @@ final class Serve extends Command
                 'w',
                 InputOption::VALUE_OPTIONAL,
                 'Workers number the server will start with',
-                $this->defaultWorkers
+                $this->defaultWorkers,
             )
             ->addOption('env', 'e', InputOption::VALUE_OPTIONAL, 'It is only used for testing.')
             ->addOption('open', 'o', InputOption::VALUE_OPTIONAL, 'Opens the serving server in the default browser.', false)
@@ -113,7 +119,7 @@ final class Serve extends Command
 
         if ($router === $this->defaultRouter && !file_exists($this->defaultRouter)) {
             $io->warning(
-                'Default router "' . $this->defaultRouter . '" does not exist. Serving without router. URLs with dots may fail.'
+                'Default router "' . $this->defaultRouter . '" does not exist. Serving without router. URLs with dots may fail.',
             );
             $router = null;
         }

@@ -9,9 +9,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class SymfonyEventDispatcher implements EventDispatcherInterface
 {
-    public function __construct(private PsrEventDispatcherInterface $dispatcher)
-    {
-    }
+    public function __construct(private PsrEventDispatcherInterface $dispatcher) {}
 
     /**
      * Dispatches an event to all registered listeners.

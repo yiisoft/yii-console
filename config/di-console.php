@@ -41,7 +41,7 @@ return [
                 'config',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Set alternative configuration name'
+                'Set alternative configuration name',
             ),
         ],
     ],

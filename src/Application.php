@@ -56,30 +56,6 @@ final class Application extends \Symfony\Component\Console\Application
         $this->doRenderThrowable($e, $output);
     }
 
-    protected function doRenderThrowable(Throwable $e, OutputInterface $output): void
-    {
-        parent::doRenderThrowable($e, $output);
-
-        // Friendly Exception support
-        if ($e instanceof FriendlyExceptionInterface) {
-            if ($output instanceof StyleInterface) {
-                $output->title($e->getName());
-                if (($solution = $e->getSolution()) !== null) {
-                    $output->note($solution);
-                }
-                $output->newLine();
-            } else {
-                $output->writeln('<fg=red>' . $e->getName() . '</>');
-                if (($solution = $e->getSolution()) !== null) {
-                    $output->writeln('<fg=yellow>' . $solution . '</>');
-                }
-                $output->writeln('');
-            }
-        }
-
-        $output->writeln($e->getTraceAsString());
-    }
-
     public function addOptions(InputOption $options): void
     {
         $this
@@ -109,6 +85,30 @@ final class Application extends \Symfony\Component\Console\Application
         }
 
         return array_values(array_unique(array_filter(array_merge([], ...$namespaces))));
+    }
+
+    protected function doRenderThrowable(Throwable $e, OutputInterface $output): void
+    {
+        parent::doRenderThrowable($e, $output);
+
+        // Friendly Exception support
+        if ($e instanceof FriendlyExceptionInterface) {
+            if ($output instanceof StyleInterface) {
+                $output->title($e->getName());
+                if (($solution = $e->getSolution()) !== null) {
+                    $output->note($solution);
+                }
+                $output->newLine();
+            } else {
+                $output->writeln('<fg=red>' . $e->getName() . '</>');
+                if (($solution = $e->getSolution()) !== null) {
+                    $output->writeln('<fg=yellow>' . $solution . '</>');
+                }
+                $output->writeln('');
+            }
+        }
+
+        $output->writeln($e->getTraceAsString());
     }
 
     /**

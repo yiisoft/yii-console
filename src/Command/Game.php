@@ -26,7 +26,6 @@ final class Game extends Command
         $io = new SymfonyStyle($input, $output);
         $io->title('Welcome to the Guessing Game!');
 
-
         /** @var QuestionHelper $helper */
         $helper = $this->getHelper('question');
         $question = new Question('Please enter a number between 0 and 100: ');

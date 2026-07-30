@@ -1,0 +1,27 @@
+name: Rector + PHP CS Fixer
+
+on:
+  pull_request:
+    paths:
+      - 'config/**'
+      - 'src/**'
+      - 'tests/**'
+      - 'composer.json'
+      - 'rector.php'
+      - '.php-cs-fixer.dist.php'
+      - '.github/workflows/rector-cs.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rector-cs:
+    permissions:
+      contents: write  # Required to commit formatting fixes back to the PR
+    uses: yiisoft/actions/.github/workflows/rector-cs.yml@master
+    with:
+      php: '8.0'

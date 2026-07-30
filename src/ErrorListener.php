@@ -11,9 +11,7 @@ use function sprintf;
 
 final class ErrorListener
 {
-    public function __construct(private ?LoggerInterface $logger = null)
-    {
-    }
+    public function __construct(private ?LoggerInterface $logger = null) {}
 
     public function onError(ConsoleErrorEvent $event): void
     {

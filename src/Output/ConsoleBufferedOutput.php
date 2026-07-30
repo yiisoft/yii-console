@@ -6,6 +6,8 @@ namespace Yiisoft\Yii\Console\Output;
 
 use Symfony\Component\Console\Output\ConsoleOutput;
 
+use const PHP_EOL;
+
 final class ConsoleBufferedOutput extends ConsoleOutput
 {
     private string $buffer = '';
