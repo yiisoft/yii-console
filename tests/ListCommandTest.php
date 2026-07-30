@@ -11,7 +11,7 @@ final class ListCommandTest extends TestCase
     public function testBase(): void
     {
         $command = new CommandTester(
-            $this->application()->find('list')
+            $this->application()->find('list'),
         );
 
         $this->assertSame(0, $command->execute([]));
@@ -26,7 +26,7 @@ final class ListCommandTest extends TestCase
     public function testNamespace(): void
     {
         $command = new CommandTester(
-            $this->application()->find('list')
+            $this->application()->find('list'),
         );
 
         $this->assertSame(0, $command->execute(['namespace' => 'stub']));

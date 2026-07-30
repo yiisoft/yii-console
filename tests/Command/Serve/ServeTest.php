@@ -10,6 +10,9 @@ use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\ExitCode;
 use Yiisoft\Yii\Console\Tests\TestCase;
 
+use const DIRECTORY_SEPARATOR;
+use const PHP_OS_FAMILY;
+
 final class ServeTest extends TestCase
 {
     public function testServeCommandExecuteWithoutArguments(): void
@@ -24,7 +27,7 @@ final class ServeTest extends TestCase
 
         $this->assertEquals(
             2,
-            $commandCreate->execute([])
+            $commandCreate->execute([]),
         );
 
         $output = $commandCreate->getDisplay(true);
@@ -33,7 +36,7 @@ final class ServeTest extends TestCase
 
         $this->assertStringContainsString(
             '[ERROR] Document root',
-            $output
+            $output,
         );
     }
 
@@ -59,12 +62,12 @@ final class ServeTest extends TestCase
         $docroot = preg_quote(getcwd() . DIRECTORY_SEPARATOR . 'tests', '/');
         $this->assertMatchesRegularExpression(
             "/Document root\s+{$docroot}/",
-            $output
+            $output,
         );
 
         $this->assertStringContainsString(
             'Quit the server with CTRL-C or COMMAND-C.',
-            $output
+            $output,
         );
     }
 
@@ -92,12 +95,12 @@ final class ServeTest extends TestCase
         $docroot = preg_quote(getcwd() . DIRECTORY_SEPARATOR . 'tests', '/');
         $this->assertMatchesRegularExpression(
             "/Document root\s+{$docroot}/",
-            $output
+            $output,
         );
 
         $this->assertStringContainsString(
             'Quit the server with CTRL-C or COMMAND-C.',
-            $output
+            $output,
         );
     }
 
@@ -122,7 +125,7 @@ final class ServeTest extends TestCase
 
             $this->assertStringContainsString(
                 '[ERROR] http://127.0.0.1:445 is taken by another process.',
-                $output
+                $output,
             );
         } else {
             $socket = socket_create_listen(8080);
@@ -139,7 +142,7 @@ final class ServeTest extends TestCase
 
             $this->assertStringContainsString(
                 '[ERROR] http://127.0.0.1:8080 is taken by another process.',
-                $output
+                $output,
             );
 
             socket_close($socket);
@@ -168,7 +171,7 @@ final class ServeTest extends TestCase
 
         $this->assertStringContainsString(
             '[ERROR] Routing file "index.php" does not exist.',
-            $output
+            $output,
         );
     }
 
@@ -195,7 +198,7 @@ final class ServeTest extends TestCase
         $routingFile = preg_quote('tests/public/index.php', '/');
         $this->assertMatchesRegularExpression(
             "/Routing file\s+{$routingFile}/",
-            $output
+            $output,
         );
     }
 

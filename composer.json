@@ -37,8 +37,10 @@
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.8.3",
+        "friendsofphp/php-cs-fixer": "^3.95",
         "phpunit/phpunit": "^9.6.22",
         "rector/rector": "^2.0.11",
+        "yiisoft/code-style": "^1.1",
         "yiisoft/config": "^1.5",
         "yiisoft/di": "^1.2.1",
         "yiisoft/test-support": "^3.0.2"
@@ -78,6 +80,8 @@
         }
     },
     "scripts": {
+        "cs-fix": "php-cs-fixer fix",
+        "rector": "rector",
         "test": "phpunit --testdox --no-interaction",
         "test-watch": "phpunit-watcher watch"
     }

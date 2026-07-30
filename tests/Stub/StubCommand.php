@@ -15,18 +15,18 @@ use Yiisoft\Yii\Console\ExitCode;
 
 #[AsCommand(
     name: 'stub',
-    description: 'Stub command tests'
+    description: 'Stub command tests',
 )]
 final class StubCommand extends Command
 {
-    public function configure(): void
-    {
-        $this->addOption('styled', 's', InputOption::VALUE_OPTIONAL);
-    }
-
     public function __construct(private Application $application)
     {
         parent::__construct();
+    }
+
+    public function configure(): void
+    {
+        $this->addOption('styled', 's', InputOption::VALUE_OPTIONAL);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -37,7 +37,7 @@ final class StubCommand extends Command
 
         $this->application->renderThrowable(
             $exception,
-            $input->getOption('styled') ? new SymfonyStyle($input, $output) : $output
+            $input->getOption('styled') ? new SymfonyStyle($input, $output) : $output,
         );
 
         $this->application->shutdown(ExitCode::OK);

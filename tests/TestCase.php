@@ -17,6 +17,8 @@ use Yiisoft\Yii\Console\CommandLoader;
 use Yiisoft\Yii\Console\SymfonyEventDispatcher;
 use Yiisoft\Yii\Console\Tests\Stub\StubCommand;
 
+use const PHP_VERSION_ID;
+
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     private ?ContainerInterface $container = null;
@@ -105,7 +107,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
             'config',
             'c',
             InputOption::VALUE_REQUIRED,
-            'Set alternative configuration name'
+            'Set alternative configuration name',
         ));
 
         $commandLoader = new CommandLoader(

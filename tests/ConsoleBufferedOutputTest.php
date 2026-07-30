@@ -6,6 +6,8 @@ namespace Yiisoft\Yii\Console\Tests;
 
 use Yiisoft\Yii\Console\Output\ConsoleBufferedOutput;
 
+use const PHP_EOL;
+
 final class ConsoleBufferedOutputTest extends TestCase
 {
     public function testFetchIsEmptyByDefault(): void

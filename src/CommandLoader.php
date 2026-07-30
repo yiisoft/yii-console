@@ -15,6 +15,7 @@ use Symfony\Component\Console\Exception\CommandNotFoundException;
 
 use function array_shift;
 use function explode;
+use function sprintf;
 
 final class CommandLoader implements CommandLoaderInterface
 {
@@ -66,7 +67,7 @@ final class CommandLoader implements CommandLoaderInterface
             $commandAliases,
             $description,
             $commandHidden,
-            fn () => $this->getCommandInstance($name),
+            fn() => $this->getCommandInstance($name),
         );
     }
 

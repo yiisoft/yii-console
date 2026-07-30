@@ -46,24 +46,24 @@ final class ApplicationTest extends TestCase
 
         $this->assertEquals(
             0,
-            $commandCreate->execute(['command' => $command->getName()])
+            $commandCreate->execute(['command' => $command->getName()]),
         );
 
         $output = $commandCreate->getDisplay(true);
 
         $this->assertStringContainsString(
             'ConsoleException',
-            $output
+            $output,
         );
 
         $this->assertStringContainsString(
             'Test solution',
-            $output
+            $output,
         );
 
         $this->assertStringContainsString(
             'StubCommand->execute(',
-            $output
+            $output,
         );
     }
 
@@ -77,24 +77,24 @@ final class ApplicationTest extends TestCase
 
         $this->assertEquals(
             0,
-            $commandCreate->execute(['command' => $command->getName(), '--styled' => true])
+            $commandCreate->execute(['command' => $command->getName(), '--styled' => true]),
         );
 
         $output = $commandCreate->getDisplay(true);
 
         $this->assertStringContainsString(
             'ConsoleException',
-            $output
+            $output,
         );
 
         $this->assertStringContainsString(
             'Test solution',
-            $output
+            $output,
         );
 
         $this->assertStringContainsString(
             'StubCommand->execute(',
-            $output
+            $output,
         );
     }
 
@@ -108,7 +108,7 @@ final class ApplicationTest extends TestCase
 
         $this->assertEquals(
             ExitCode::OK,
-            $commandCreate->execute(['command' => $command->getName()])
+            $commandCreate->execute(['command' => $command->getName()]),
         );
     }
 

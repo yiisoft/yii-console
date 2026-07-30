@@ -14,8 +14,11 @@ use Yiisoft\Test\Support\EventDispatcher\SimpleEventDispatcher;
 use Yiisoft\Yii\Console\Application;
 use Yiisoft\Yii\Console\Command\Serve;
 use Yiisoft\Yii\Console\CommandLoader;
+use PHPUnit\Framework\TestCase;
 
-final class ConfigTest extends \PHPUnit\Framework\TestCase
+use function dirname;
+
+final class ConfigTest extends TestCase
 {
     public function testContainer(): void
     {
@@ -36,11 +39,10 @@ final class ConfigTest extends \PHPUnit\Framework\TestCase
         return new Container(
             ContainerConfig::create()->withDefinitions(
                 $config->get('di-console')
-                +
-                [
+                + [
                     EventDispatcherInterface::class => new SimpleEventDispatcher(),
-                ]
-            )
+                ],
+            ),
         );
     }
 
