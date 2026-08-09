@@ -13,4 +13,6 @@ return (new Configuration())
     ->addPathToScan(__DIR__ . '/tests', isDev: true)
     // `yiisoft/definitions` is used only in `config/di-console.php`, which are loaded by
     // consumers using `yiisoft/di`, that already requires `yiisoft/definitions` itself.
-    ->ignoreErrorsOnPackageAndPath('yiisoft/definitions', __DIR__ . '/config/di-console.php', [ErrorType::SHADOW_DEPENDENCY]);
+    ->ignoreErrorsOnPackageAndPath('yiisoft/definitions', __DIR__ . '/config/di-console.php', [ErrorType::SHADOW_DEPENDENCY])
+    // `ext-sockets` is optional in test
+    ->ignoreErrorsOnExtensionAndPath('ext-sockets', __DIR__ . '/tests/Command/Serve/ServeTest.php', [ErrorType::SHADOW_DEPENDENCY]);
