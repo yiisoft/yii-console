@@ -11,8 +11,6 @@ return (new Configuration())
     ->addPathToScan(__DIR__ . '/config', isDev: false)
     ->addPathToScan(__DIR__ . '/src', isDev: false)
     ->addPathToScan(__DIR__ . '/tests', isDev: true)
-    // config/di-console.php is an optional config-plugin file that only matters to consumers who wire up
-    // yiisoft/di (or another container providing Yiisoft\Definitions\Reference) themselves; that container
-    // already requires yiisoft/definitions, so requiring it here too would only force an unrelated PHP 8.1+
-    // floor onto every consumer, even those not using this optional config.
-    ->ignoreErrorsOnPackages(['yiisoft/definitions'], [ErrorType::SHADOW_DEPENDENCY]);
+    // `yiisoft/definitions` is used only in `config/di-console.php`, which are loaded by
+    // consumers using `yiisoft/di`, that already requires `yiisoft/definitions` itself.
+    ->ignoreErrorsOnPackageAndPath('yiisoft/definitions', __DIR__ . '/config/di-console.php', [ErrorType::SHADOW_DEPENDENCY]);
