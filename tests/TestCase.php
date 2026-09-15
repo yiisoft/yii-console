@@ -39,9 +39,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     protected function container(): ContainerInterface
     {
-        if ($this->container === null) {
-            $this->container = $this->createContainer();
-        }
+        $this->container ??= $this->createContainer();
 
         return $this->container;
     }
