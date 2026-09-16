@@ -3,6 +3,7 @@
 ## 2.4.3 under development
 
 - Enh #238: Explicitly import functions and constants in "use" section (@vjik)
+- Enh #217: Linkify address in serve output (@klsoft-web)
 - Bug #212: Remove warning on run serve with one worker (@klsoft-web)
 
 ## 2.4.2 December 20, 2025

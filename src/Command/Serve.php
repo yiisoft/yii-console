@@ -181,7 +181,7 @@ final class Serve extends Command
         $outputTable[] = ['xDebug', $xDebugLine, '--xdebug'];
 
         $outputTable[] = ['Workers', $isLinux ? $workers : 'Not supported', '--workers, -w'];
-        $outputTable[] = ['Address', $address];
+        $outputTable[] = ['Address', 'http://' . $address];
         $outputTable[] = ['Document root', $documentRoot, '--docroot, -t'];
         $outputTable[] = ($router ? ['Routing file', $router, '--router, -r'] : []);
 
